@@ -1,0 +1,42 @@
+tbody tr td{
+  width:350px;
+}
+
+.dates-table,
+.months-table,
+.years-table,
+.days-table{
+  text-align: center;
+}
+
+
+.month:hover,
+.dates-table:hover, 
+.left-button:hover,
+.right-button:hover
+{
+  color: purple;
+  cursor: pointer;
+}
+
+/* .year 의 글자 크기를 크게 바꾼다 */
+.year,
+.left-button,
+.right-button{
+  font-size: 30px;
+}
+
+/* left_button은 왼쪽 */
+.left_button{
+  text-align:left;
+}
+
+/* right_button은 오른쪽 */
+.right_button{
+  text-align: right;
+}
+
+/* .year 는 가운데 정렬 */
+.year{
+  text-align: center;
+}
