@@ -87,7 +87,7 @@
     margin-left: 25px;
     padding: 35px 0;
     font-size: 15px;
-    color: var(--light) !important;
+    color: #FEA116;
     text-transform: uppercase;
     font-weight: 500;
     outline: none;
@@ -96,11 +96,6 @@
 
 .sticky-top.navbar-dark .navbar-nav .nav-link {
     padding: 20px 0;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link.active {
-    color: var(--primary) !important;
 }
 
 .navbar-dark .navbar-brand img {
