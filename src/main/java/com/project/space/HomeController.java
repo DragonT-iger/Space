@@ -45,11 +45,11 @@ public class HomeController {
 	
 
 	//Reservation
-	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
-	public String services(Model model) {
-		logger.info("connected Reservation.");
-		return "ajax/Reservation";
-	}
+//	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
+//	public String services(Model model) {
+//		logger.info("connected Reservation.");
+//		return "ajax/Reservation";
+//	}
 
 	//Services
 	@RequestMapping(value = "/Services", method = RequestMethod.GET)
