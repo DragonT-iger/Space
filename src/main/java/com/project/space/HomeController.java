@@ -46,11 +46,11 @@ public class HomeController {
 	
 
 	//Reservation
-	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
-	public String services(Model model) {
-		logger.info("connected Reservation.");
-		return "ajax/Reservation";
-	}
+//	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
+//	public String services(Model model) {
+//		logger.info("connected Reservation.");
+//		return "ajax/Reservation";
+//	}
 
 	//Services
 	@RequestMapping(value = "/Services", method = RequestMethod.GET)
@@ -73,7 +73,7 @@ public class HomeController {
 		return "ajax/Pages/MyPage";
 	}
 
-	//MyReservation mapping �븞�릱�쓬
+	//MyReservation mapping 안됐음
 	@RequestMapping(value = "/MyReservation", method = RequestMethod.GET)
 	public String myreservation(Model model) {
 		logger.info("connected myreservation.");
@@ -87,19 +87,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/Join", method=RequestMethod.GET)
-	   public String Join(Model model) {
-	      logger.info("connected Join.");
-	      return "ajax/Join";
-	   }
+	public String Join(Model model) {
+		logger.info("connected Join.");
+		return "ajax/Join";
+	}
 	
 	@GetMapping("/adminpage")
 	public String adminPage() {
-		
+      
 		return "ajax/User/AdminPage";
-	}
+    }
+	  
 	@GetMapping("/userlist")
 	public String userList() {
-		
+	      
 		return "ajax/User/UserList";
 	}
+	
 }

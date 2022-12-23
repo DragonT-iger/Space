@@ -21,3 +21,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+#merge시 충돌파일 제외
+MANIFEST.MF
+pom.properties
+#db 정보 파일 제외
+db.propertise
