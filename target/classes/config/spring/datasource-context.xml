@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- context,mybatis-spring 네임스페이스 추가함 -->
+
+	<!-- [1]db정보 프로퍼티 경로설정 -->
+	<context:property-placeholder
+		location="classpath:/config/props/db.properties" />
+
+	<!-- [2]DataSource alias(별칭) 등록 -->
+	<alias name="dataSource-${Global.DbType}" alias="dataSource" />
+
+	<!-- [3]DataSource빈 등록 (DBCP, HikariCP) -->
+	<!-- Oracle -->
+	<bean id="dataSource-oracle"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<!-- org.apache.commons.dbcp2.BasicDataSource 클래스의 빈을 만들고 
+			destroy-method="close"는 종료할때 close라는 메서드를 실행하겟다는 의미 -->
+		<property name="driverClassName" value="${Global.DriverClassName}"/>
+		<!-- BasicDataSource 가 가지고있는 프로퍼티명이라 오타내면 안됨 value는 프로퍼티 키값-->
+		<property name="url" value="${Global.Url}"></property>
+		<property name="username" value="${Global.Username}"></property>
+		<property name="password" value="${Global.Password}"></property>
+	</bean>
+	
+	<!-- [4]SqlsessionFactoryBean 등록 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml"></property>
+	</bean>
+	<!-- [5]SqlsessionTemplateBean 등록 -->
+	<bean id="sqlSessionTemplateBean" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- [6] mybatis-spring:scan 설정 
+			여기에 설정된 패키지의 인터페이스들은 scan해서 해당 인터페이스를 구현한
+			객체(Proxy)를 스프링이 대신 만들어준다(생성해줌)
+	-->
+	<mybatis-spring:scan base-package="com.project.space.user.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.spaceinfo.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.review.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.reservation.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.qna.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.payment.mapper"/>
+	<!-- HikariCP 커넥션풀 빈 등록 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${Global.DriverClassName}"/>
+		<property name="jdbcUrl" value="${Global.Url}"/>
+		<property name="username" value="${Global.Username}"/>
+		<property name="password" value="${Global.Password}"/>
+	</bean>
+	
+	<bean id="dataSource-hikari" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>
+</beans>
