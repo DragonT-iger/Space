@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.space.reservation.Schedule;
 
 @Controller
-public class ReservationController {
+public class JYController {
 	
 	@RequestMapping(value = "/Reservation", method=RequestMethod.GET)
 	public String calendar(Model m, HttpServletRequest req, Schedule sch) {

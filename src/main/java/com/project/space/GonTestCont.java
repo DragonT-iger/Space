@@ -11,6 +11,7 @@ public class GonTestCont {
 	}
 	@GetMapping("/ReviewList")
 	public String myReviewList() {
+		
 		return "ajax/ilgon/MyReviewList";
 	}
 }
