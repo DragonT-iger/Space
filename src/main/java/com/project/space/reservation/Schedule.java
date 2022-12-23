@@ -119,7 +119,7 @@ public class Schedule {
 		System.out.println(today);
 		System.out.println("search_month: "+search_month);
 		
-		value="today";
+//		value="today";
 		
 		today_data.put("start", start);
 		today_data.put("startDay", startDay);
