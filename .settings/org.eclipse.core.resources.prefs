@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/ajax/Contact.jsp=UTF-8
+<<<<<<< HEAD
+=======
 encoding//src/main/webapp/WEB-INF/views/ajax/Reservation.jsp=UTF-8
+>>>>>>> origin/main
 encoding//src/main/webapp/WEB-INF/views/ajax/Services.jsp=UTF-8
+encoding/<project>=UTF-8

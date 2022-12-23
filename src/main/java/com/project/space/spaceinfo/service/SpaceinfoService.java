@@ -21,7 +21,7 @@ public interface SpaceinfoService {
 	//공간번호로 공간정보 가져오기
 	public Space_InfoVO selectBySnum(int snum);
 	//찜많은순 조회
-	public List<Space_InfoVO> selectBySnum(Space_InfoVO sivo);
+	public List<Space_InfoVO> selectBySnum(Space_InfoVO sivo); 
 	
 	
 	/* 등록자or관리자 정보 관리 */
