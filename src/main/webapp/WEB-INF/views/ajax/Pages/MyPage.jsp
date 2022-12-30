@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
 	#mypage_wrap{
 		width:50%;
@@ -17,33 +19,39 @@
 	<table class="table table-borderless mt-5 mb-5" id="mypage_table">
 		<tr>
 			<td><h5>이름</h5></td>
-			<td><b>홍길동</b></td>
+			<td><b>${loginUser.mname }</b></td>
 			<%-- ${loginUser.uname} --%>
 		</tr>
 		<tr>
-			<td><h5>아이디</h5></td>
-			<td><b>hong</b></td>
+			<td><h5>닉네임</h5></td>
+			<td><b>${loginUser.nickname }</b></td>
 			<%-- ${loginUser.userid} --%>
 		</tr>
 		<tr>
 			<td><h5>연락처</h5></td>
-			<td><b>010-0000-0000</b></td>
+			<td><b>${loginUser.hp }</b></td>
 			<%-- ${loginUser.hp} --%>
 		</tr>
 		<tr>
 			<td><h5>나의 회원상태</h5></td>
-			<td><b>일반회원</b></td>
+			<td><b><c:out value="${loginUser.statusstr}"/></b></td>
 			<%-- ${loginUser.status} --%>
 		</tr>
 		<tr>
 			<td><h5>가입일</h5></td>
-			<td><b>2022-12-19</b></td>
+			<td><b><fmt:formatDate value="${loginUser.mdate}" pattern="yyyy-MM-dd" /></b></td>
+			
 			<%-- ${loginUser.wdate} --%>
 		</tr>
 		<tr>
 			<td><h5>나의 마일리지</h5></td>
-			<td><b>1000</b></td>
+			<td><b>${loginUser.point }</b></td>
 			<%-- ${loginUser.mileage} --%>
+		</tr>
+		<tr>
+			<td><h5>계좌정보</h5></td>
+			<td><b>${loginUser.account }</b></td>
+			<%-- ${loginUser.account} --%>
 		</tr>
 	</table>
 		<div class="text-center">
@@ -65,7 +73,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger">탈퇴</button>
+        <button type="button" onClick="javascript:location.href='NaverDelete?code=${oauth_code }&state=${oauth_state}'" class="btn btn-danger">탈퇴</button>
       </div>
     </div>
   </div>

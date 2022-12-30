@@ -1,38 +1,36 @@
-<head>
-<meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <style>
-      ul{
-      text-align:left;
-      }
-      
-   </style>
-</head>
 
-<main>                                                                                                                
+<style>
+   ul{
+   text-align:left;
+   }
    
-      
-            <div class="text-table "><div><center><h4>Information</h4></center><p><br></p><p><center><b>깔끔하고 밝은 느낌으로 추억에 남을 파티 혹은 스튜디오 촬영등 다양한 공간활용등이 가능합니다 </center></b></p><p><br></p><blockquote></blockquote><p><center><img src="https://naverbooking-phinf.pstatic.net/20220327_79/1648383331430Px3RO_JPEG/KakaoTalk_20220325_205623101_03.jpg?type=f804_408_60_sharpen" class="fr-fin fr-dib"></center></p><p><br></p><p><br></p><p></p><p> &nbsp;</p>
-            
-            
-            <div class="line_box holder" style="width:100%; ">
-      <hr style="" />   </div>
-            
-            <p><br></p><h1><font color="#6495ED"><center>시설안내</center></font></h1><p><br></p><h4><font color="skyblue">Basic offer</font></h4><br><ul><li>블루투스 스피커</li><li>무료 주차 1대 제공 (2대 이상 유료 주차장 이용)</li><li>T5 유선 색조명, 보라색 5대</li><li>천장 상부 RGB 간접등</li><li>테이블 2대, 의자 4개, 바테이블 의자 3개</li><li>대형 거울 2대, 이동식 행거, 이동식 가림막</li><li>미니 농구공, 스케이트보드, 락카, 피자박스, LED 전등 등 다양한 소품 구비</li><li>이동식 듀라 2대, 간이 의자 30대 (필요 시 미리 요청)</li><li>릴선 2대</li><li>5G wifi</li></ul><p><br></p><p><br></p>
-            
-            <div class="line_box holder" style="width:100%; ">
-            <hr style="" />   </div>
-            
-            
-            <br>
-            <h4><font color="skyblue"><text align="center;">Location</text></font></h4><br><p>서울특별시 관악구 호암로 24길 66, 지하 1층</p><p>(히포커피, 홍콩반점 건물 지하 1층)</p></div></div>      
-   </div>
+</style>
+
+
+<div class="text-table "><div>
+<center><h4>Information</h4></center>
+<p><center><b>깔끔하고 밝은 느낌으로 추억에 남을 파티 혹은 스튜디오 촬영등 다양한 공간활용등이 가능합니다 </center></b></p>
+<p><br></p><blockquote></blockquote>
+<p><center><img src="https://naverbooking-phinf.pstatic.net/20220327_79/1648383331430Px3RO_JPEG/KakaoTalk_20220325_205623101_03.jpg?type=f804_408_60_sharpen" class="fr-fin fr-dib"></center>
+</p><p><br></p><p><br></p><p></p><p>&nbsp;</p>
+<div class="line_box holder" style="width:100%; ">
+<hr style="" />
+</div>
+
+<p><br></p><h1><font color="#6495ED"><center>시설안내</center></font></h1><p><br></p><h4><font color="skyblue">Basic offer</font></h4><br><ul><li>블루투스 스피커</li><li>무료 주차 1대 제공 (2대 이상 유료 주차장 이용)</li><li>T5 유선 색조명, 보라색 5대</li><li>천장 상부 RGB 간접등</li><li>테이블 2대, 의자 4개, 바테이블 의자 3개</li><li>대형 거울 2대, 이동식 행거, 이동식 가림막</li><li>미니 농구공, 스케이트보드, 락카, 피자박스, LED 전등 등 다양한 소품 구비</li><li>이동식 듀라 2대, 간이 의자 30대 (필요 시 미리 요청)</li><li>릴선 2대</li><li>5G wifi</li></ul><p><br></p><p><br></p>
+
+<div class="line_box holder" style="width:100%; ">
+<hr style="" />   </div>
+         
+         
+         <br>
+         <h4><font color="skyblue"><text align="center;">Location</text></font></h4><br><p>서울특별시 관악구 호암로 24길 66, 지하 1층</p><p>(히포커피, 홍콩반점 건물 지하 1층)</p></div></div>      
+</div>
    
 </div>
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=d5kg3rvwc0"></script>
-</head>
+
 <body>
 <div id="map" style="width:100%;height:400px;"></div>
 

@@ -1,20 +1,7 @@
 <!-- Login Start -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script>
-
-const sel_menu = function(m_name){
-	fetch(m_name).then(function(response){
-              response.text().then(function(text){
-              $('tab').html(text);
-              $('#selmenu').html(m_name);
-              $('li[id$="Tab"]').removeClass('active');
-              $('#'+m_name+'Tab').addClass('active');
-              })
-          })
-	}
-</script>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -48,6 +35,11 @@ const sel_menu = function(m_name){
                             <div class="col-12">
                                 <button class="btn btn-primary w-40 py-2" id="btn1">Login</button>
                                 <a href="javascript:sel_menu('Join')" class="btn btn-primary w-40 py-2">Join</a>
+                                <div id="naver_id_login">
+                                	<a href="${url}">
+										<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+									</a>
+                                </div>
                             </div>
                         </div>
                     </form>

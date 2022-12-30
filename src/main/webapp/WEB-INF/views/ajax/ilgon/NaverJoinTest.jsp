@@ -1,7 +1,5 @@
-<!-- Login Start -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-
 <style>
 * {
   margin: 0px;
@@ -49,12 +47,11 @@ body {
   background: none;
 }
 </style>
-
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h5 class="section-title ff-secondary text-center text-primary fw-normal">Join Us!</h5>
-            <h1 class="mb-5">Sign Up</h1>
+            <h1 class="mb-5">NAVER JOIN</h1>
         </div>
         <div class="row g-4">
           <form>
@@ -62,13 +59,13 @@ body {
                 <div class="row tf_wrap" id="">
                 
                	  <div class="textForm">
-			        <input name="name" type="text" class="name tf-input" placeholder="NAME">
+			        <input id="mname" name="mname" type="text" class="name tf-input" value="" placeholder="NAME">
 			      </div>
 			      <div class="textForm">
 			        <input name="nickname" type="text" class="nickname tf-input" placeholder="NICKNAME">
 			      </div>
                   	  <div class="textForm">
-			        <input name="loginId" type="text" class="id tf-input" placeholder="ID">
+			        <input id="userid" name="userid" type="text" class="id tf-input" value="" placeholder="ID">
 			      </div>
 			      <div class="textForm">
 			        <input name="loginPw" type="password" class="pw tf-input" placeholder="PASSWORD">
@@ -77,13 +74,13 @@ body {
 			        <input name="loginPwConfirm" type="password" class="pw tf-input" placeholder="PASSWORD CHECK">
 			      </div>
 			      <div class="textForm">
-			        <input name="cellphoneNo" type="text" class="cellphoneNo tf-input" placeholder="TEL">
+			        <input id="hp" name="hp" type="text" class="cellphoneNo tf-input" value="" placeholder="TEL">
 			      </div>
 			      <div class="textForm">
-			        <input name="birth" type="text" class="birth tf-input" placeholder="BIRTH DATE">
+			        <input id="birth" name="birth" type="text" class="birth tf-input" value="" placeholder="BIRTH DATE">
 			      </div>
 			       <div class="textForm">
-			        <input name="email" type="email" class="email tf-input" placeholder="EMAIL">
+			        <input id="email" name="email" type="email" class="email tf-input" placeholder="EMAIL">
 			      </div>
                 </div>
             </div>
