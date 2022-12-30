@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.project.space.domain.Space_InfoVO;
 
-public interface SpaceinfoService {
+public interface SpaceInfoService {
 
 	//지역으로 공간검색
     public List<Space_InfoVO> selectByLoc(String keyword);

@@ -34,7 +34,7 @@ public class HomeController {
 	@RequestMapping(value = "/MainHome", method = RequestMethod.GET)
 	public String MainHome(Model model) {
 		logger.info("connected MainHome.");
-		return "MainHome";
+		return "MainHome2";
 	}
 	
 	// Home
@@ -95,7 +95,7 @@ public class HomeController {
 	@GetMapping("/adminpage")
 	public String adminPage() {
       
-		return "ajax/User/AdminPage";
+		return "ajax/Pages/AdminPage";
     }
 	  
 	@GetMapping("/userlist")
@@ -103,5 +103,21 @@ public class HomeController {
 	      
 		return "ajax/User/UserList";
 	}
+	@GetMapping("/userbooking")
+	public String userBooking() {
+	      
+		return "ajax/User/UserBooking";
+	}
+	@GetMapping("/hostlist")
+	public String hostList() {
+	      
+		return "ajax/Host/HostList";
+	}
+	@GetMapping("/hostupload")
+	public String hostUpload() {
+	      
+		return "ajax/Host/HostUpload";
+	}
+
 	
 }

@@ -1,0 +1,129 @@
+
+
+.bookingCalendar {
+	width: 1000px;
+	margin: auto;
+}
+
+.time_title{
+	font-size:20px;
+	padding-left: 3px;
+	padding-top: 5px;
+}
+
+.Title_Calendar {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.before_after_month {
+	margin: 10px;
+	font-weight: bold;
+}
+
+.before_after_year {
+	font-weight: bold;
+}
+
+.this_month {
+	margin: 10px;
+}
+
+.Body_Calendar {
+	width: 800px;
+	background-color: #FFe4b5;
+	border: 1px solid white;
+	margin-bottom: 30px;
+	border-collapse: collapse;
+}
+
+.tb_header .week{
+	border-collapse: collapse;
+	background-color: #FFe4b5;
+	border: 1px solid white;
+	text-align: center;
+}
+
+div.date, div.sat, div.sun{
+	width:90%;
+	height:90%;
+	margin:auto;
+}
+
+.day {
+	width: 50px;
+	height: 20px;
+	font-weight: bold;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.sat {
+	color: #1e90ff;
+}
+
+.sun {
+	color: #ff4646;
+}
+
+.Body_Calendar .today {
+	border: 1px solid white;
+	height: 50px;
+	background-color: #ffdead;
+	text-align: left;
+	vertical-align: center;
+}
+
+.Body_Calendar .date {
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 3px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.Body_Calendar .saturday {
+	border: 1px solid white;
+	height: 50px;
+	background-color: #ffe4c4;
+	text-align: left;
+	vertical-align: center;
+}
+
+.Body_Calendar .saturday .sat {
+	color: #1e90ff;
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 3px;
+	padding-top: 5px;
+}
+
+.Body_Calendar .sunday {
+	border: 1px solid white;
+	height: 50px;
+	background-color: #ffe4c4;
+	text-align: left;
+	vertical-align: center;
+}
+
+.Body_Calendar .sunday .sun {
+	color: #ff4646;
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 3px;
+	padding-top: 5px;
+}
+
+.Body_Calendar .normal_day {
+	border: 1px solid white;
+	height: 50px;
+	background-color: #ffe4c4;
+	vertical-align: top;
+	text-align: center;
+}
+
+

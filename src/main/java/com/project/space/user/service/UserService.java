@@ -25,5 +25,6 @@ public interface UserService {
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
 	Mem_InfoVO loginCheck(String userid, String pwd) throws NotUserException;
+	
 
 }

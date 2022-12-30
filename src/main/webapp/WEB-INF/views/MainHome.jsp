@@ -76,7 +76,8 @@
                         <!-- Home Reservation Services Contact Pages MyPage MyReservation -->
                         <li class="nav-item nav-link" id="HomeTab" onclick = "sel_menu('Home')">Home</li>
                         
-                        <li class="nav-item nav-link" id="ReservationTab" onclick = "sel_menu('Reservation')">Reservation</li>
+                        <!-- <li class="nav-item nav-link" id="ReservationTab" onclick = "sel_menu('Reservation')">Reservation</li> -->
+                        <a href="./Reservation" class="nav-item nav-link" id="ReservationTab">Reservation</a>
 
                         <li class="nav-item nav-link" id="ServicesTab" onclick = "sel_menu('Services')">Services</li>
 
@@ -87,6 +88,13 @@
                             <div class="dropdown-menu m-0">
                                 <a href="javascript:sel_menu('MyPage')" class="dropdown-item">MyPage</a>
                                 <a href="javascript:sel_menu('MyReservation')" class="dropdown-item">MyReservation</a>
+                                <a href="javascript:sel_menu('MyZimm')" class="dropdown-item">MyZimm</a>
+                                <a href="javascript:sel_menu('MyReviewList')" class="dropdown-item">MyReviewList</a>
+                                <a href="javascript:sel_menu('MyReservationCheck')" class="dropdown-item">MyReservationCheck</a>
+                                <a href="javascript:sel_menu('MySpaceEdit')" class="dropdown-item">MySpaceEdit</a>
+                                <a href="javascript:sel_menu('MySpaceInsert')" class="dropdown-item">MySpaceInsert</a>
+                                <a href="javascript:sel_menu('MySpaceList')" class="dropdown-item">MySpaceList</a>
+                                <a href="javascript:sel_menu('AdminPage')" class="dropdown-item">AdminPage</a>
                             </div>
                         </div>
                     </div>
@@ -199,7 +207,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+	
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>

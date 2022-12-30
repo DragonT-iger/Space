@@ -15,6 +15,7 @@ public class Mem_InfoVO {
 	private Date mdate; /* 가입일자 */
 	private int status; /* 회원상태 */
 	private int point; /* 포인트 */
+	private int addpoint; /* 누적포인트 */
 	private int mrank; /* 회원등급 (mem_rank_fk) */
 	private int account; /* 계좌정보 */
 	

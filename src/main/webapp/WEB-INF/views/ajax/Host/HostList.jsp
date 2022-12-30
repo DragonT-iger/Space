@@ -5,7 +5,7 @@
 <c:import url="/adminpage"/>
 
 	<div class="container" id="userlist" style="width:600px; overflow: auto;">
-	<h1 class="text-center">회원목록</h1>
+	<h1 class="text-center">호스트목록</h1>
 	<div>
 		<%-- ${userArr} --%>
 		<table class="table table-bordered mt-3">
