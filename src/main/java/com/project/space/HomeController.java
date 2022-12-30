@@ -22,19 +22,22 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test1(Model model) {
+		return "NewFile";
+	}
 	// MainHome
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Mainhome(Model model) {
-		logger.info("connected Mainhome.");
-		return "MainHome";
+		logger.info("connected Mainhome2.");
+		return "MainHome2";
 	}
 
 	// MainHome
-	@RequestMapping(value = "/MainHome", method = RequestMethod.GET)
+	@RequestMapping(value = "/MainHome2", method = RequestMethod.GET)
 	public String MainHome(Model model) {
-		logger.info("connected MainHome.");
-		return "MainHome";
+		logger.info("connected MainHome2.");
+		return "MainHome2";
 	}
 	
 	// Home
@@ -80,6 +83,17 @@ public class HomeController {
 		return "ajax/Pages/MyReservation";
 	}
 	
+	
+	@RequestMapping(value = "/naverMap")
+	public String naverMap() {
+		
+		return "naverMap";
+	}
+  
+
+  
+
+	
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
 	public String mylogin(Model model) {
 		logger.info("connected Login.");
@@ -103,5 +117,7 @@ public class HomeController {
 	      
 		return "ajax/User/UserList";
 	}
+	
+	
 	
 }

@@ -1,96 +1,113 @@
-<!-- Menu Start -->
+<style>
+* {
+	box-sizing: border-box;
+}
 
-<div class="container-xxl py-5">
-	<div class="container">
-		<!-- 이용안내 ----------------------------------- -->
-		<h4 class="h_intro" data-v-7f60aa2e="">이용 안내</h4>
-		<p class="p_intro" data-v-7f60aa2e="">
-			<br>[가격]<br>낮타임: 11시30분~16시30분<br>- 주중(월-금): 5만9천원(2인
-			제한)<br>- 주말(토,일,공휴일): 9만9천원<br> <br>저녁타임: 19시~23시까지<br>-
-			주중(일-목): 9만9천원<br>- 주말(금,토,공휴일 전일): 11만9천원<br> <br>올나잇타임:
-			19시~익일 8시<br>- 주중(일-목): 11만 9천원<br>- 주말(금, 토, 공휴일 전일):
-			13만9천원<br> <br>* 여름, 겨울 성수기 기간 가격 변동<br>* 2인 특가 진행
-			중(저녁 또는 올나잇 한정_별도 문의)<br>* 기준 인원 4인(최대 6인) / 4인 초과 시 인당 2만원 추가<br>*
-			청소보증금: 5만원(이용 후 문제 없을 시 24시간 내 반환)<br> <br>
-		</p>
-		<!-- ---------------------------------------------- -->
+ul {
+	list-style-type: none;
+}
 
-		<!-- 환불규정안내 ----------------------------------- -->
-		<div id="s_refund" class="text_box refund" data-v-7f60aa2e="">
-			<h4 class="h_intro" data-v-7f60aa2e="">환불규정 안내</h4><br>
-			<p class="txt_notice refund" style="padding-bottom: 20px"
-				data-v-7f60aa2e="">
-				<em class="warn" style="color: #ff3a48" data-v-7f60aa2e="">이용당일(첫
-					날) 이후에 환불 관련 사항은 호스트에게 직접 문의하셔야 합니다.</em><br data-v-7f60aa2e=""> 결제
-				후 2시간 이내에는 100% 환불이 가능합니다.(단, 이용시간 전까지만 가능)
-			</p>
-			<ol class="info_list" data-v-7f60aa2e="">
-				<li data-v-7f60aa2e=""><strong class="tit"
-					style="color: #656565; font-weight: 400;" data-v-7f60aa2e="">
-						이용 8일 전 </strong> <span class="data" style="color: #000" data-v-7f60aa2e="">총
-						금액의 100% 환불</span> <!----></li>
-				<li data-v-7f60aa2e=""><strong class="tit"
-					style="color: #656565; font-weight: 400;" data-v-7f60aa2e="">
-						이용 7일 전부터 환불불가 </strong> <!----> <span class="data" style="color: #000"
-					data-v-7f60aa2e="">환불 불가</span></li>
-				
-			</ol>
+input, button {
+	padding: 5px 10px;
+}
+
+#list {
+	border: 1px solid #ccc;
+	padding: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#list>li {
+	flex-basis: 48%;
+	margin-bottom: 20px;
+}
+
+#list>li>img {
+	width: 80%;
+}
+</style>
+
+<body>
+	<section class="container">
+		<h1>room Search List</h1>
+		<form action="" id="search-form">
+			<input type="text" id="search">
+			<button id="searchBtn">search</button>
+		</form>
+		<ul id="list">
+				<div class="searchbox">
+		<div class="header">
+			<h1>Search</h1>
+			<input onkeyup="filter()" type="text" id="value"
+				placeholder="Type to Search">
 		</div>
-		<br>
-		<!-- ---------------------------------------------- -->
-		<!-- 게시판 ----------------------------------------- -->
-		<div class="container mt-3" style="height: 600px; overflow: auto;">
-			<h4>Q&A</h4>
-			<br>
-			<!-- 검색 폼 시작---------------------------- -->
-			<table class="table table-condensed table-striped">
-				<thead>
-					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody id="boardBody">
-
-				</tbody>
-				<tfoot>
-
-				</tfoot>
-			</table>
-		</div>
-		<!-- ---------------------------------------------- -->
-		<!-- 댓글창 ----------------------------------- -->
-		<div class="postmeta comment-comment">
-			<!--댓글에 댓글을 입력할 경우-->
-			<div class="non-member">
-				<input title="nick" type="text" id="comment_nink" name="nick"
-					placeholder="이름"><input title="password" type="password"
-					name="secret_pass" placeholder="비밀번호">
-			</div>
-			<div class="textarea_block">
-				<textarea title="댓글을 남겨주세요" placeholder="댓글을 남겨주세요" rows="1"
-					name="body" id="comment_body"
-					data-action="btn_c_m20200311c3358c6c69fe5" data-autosize-on="true"
-					style="overflow: hidden; overflow-wrap: break-word; height: 62px;"></textarea>
-				<div class="file-add-block" style="display: none"
-					id="comment_image_box"></div>
-				<button class="btn btn-primary btn-sm"
-					onclick="POST_COMMENT.mapAdd(); return false;">작성</button>
-				<div class="inline-blocked holder">
-					<i class="icon-picture icon vertical-middle"></i> <input
-						title="comment image upload" type="file"
-						class="comment_image_upload" multiple="" name="comment_images"
-						id="comment_image_upload_btn">
-				</div>
-				<!--<i class="zmdi zmdi-play-circle"></i>-->
-			</div>
-		</div>
-
-
 
 	</div>
-</div>
-<!-- Menu End -->
+			
+		</ul>
+	</section>
+	<script>
+	const room=[
+		{
+			id:	1,
+			name: '이상해씨',
+			type: '풀',
+			url:'https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480'
+		},
+		{
+			id:	2,
+			name: '파이리',
+			type: '불꽃',
+			url:'https://a0.muscache.com/im/pictures/ce6814ba-ed53-4d6e-b8f8-c0bbcf821011.jpg?im_w=480'
+		},
+		{
+			id:	3,
+			name: '피카츄',
+			type: '전기',
+			url:'https://a0.muscache.com/im/pictures/ff69ac49-64e7-4f4a-ae2b-ee01163d0790.jpg?im_w=480'
+		},
+		{
+			id:	4,
+			name: '삐삐',
+			type: '페어리',
+			url:'https://a0.muscache.com/im/pictures/34b9d53a-8952-47f8-876d-bb927ea487b2.jpg?im_w=480'
+		}
+		
+		
+		
+	]
+	
+	const list =document.getElementById('list');
+	
+	function showList(val){
+		list.innerHTML='';
+		const res = room.forEach(room	 =>{
+			if(room.name.includes(val)){
+				const li = document.createElement('li');
+				var str = '<img src="'+room.url+'" />';
+				str+='<p>이름: '+room.name+'</p>';
+				str+='<p>속성: '+room.type+'</p>';
+				li.innerHTML=str;
+				list.appendChild(li);
+			}
+		})	//end showList
+	}
+
+	showList('');
+	
+	
+	const searchInuput=document.getElementById('search');
+	const searchBtn=document.getElementById('searchBtn')
+
+	searchBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const val = searchInuput.value;
+		console.log(val);
+		showList(val);
+
+	})
+	
+</script>
+</body>
