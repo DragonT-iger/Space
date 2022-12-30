@@ -14,13 +14,13 @@ public interface UserService {
 
 	List<Mem_InfoVO> listUser(PagingVO pvo);  //페이지 유저 리스트
 
-	boolean idCheck(String userid);
+	int idCheck(String userid);
 
 	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
 	int updateUser(Mem_InfoVO user);
 
-	Mem_InfoVO getUser(Integer midx);
+	Mem_InfoVO getUser(String userid);
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 

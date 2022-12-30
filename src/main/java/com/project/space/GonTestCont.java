@@ -158,7 +158,7 @@ public class GonTestCont {
 			return "redirect:ajax/ilgon/NaverJoin";
 		}
 		
-		int n=userService.insertUser(vo);
+		int n=userService.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
 		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
 		

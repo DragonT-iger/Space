@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int createUser(Mem_InfoVO user) {
 		
-		return userDao.createUser(user);
+		return userDao.insertUser(user);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean idCheck(String userid) {
+	public int idCheck(String userid) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Mem_InfoVO getUser(Integer midx) {
+	public Mem_InfoVO getUser(String userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
