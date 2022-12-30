@@ -15,13 +15,17 @@ public interface UserMapper {
 
 	Integer idCheck(String userid);
 
-	int deleteUser(Integer midx);
+	int deleteUser(Mem_InfoVO vo);
 
 	int updateUser(Mem_InfoVO user);
+	
+	Mem_InfoVO selectUserByUserid(String userid);
 
 	Mem_InfoVO getUser(String userid);
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
-	Mem_InfoVO loginCheck(String userid, String pwd) throws NotUserException;
+	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
+	
+	
 }

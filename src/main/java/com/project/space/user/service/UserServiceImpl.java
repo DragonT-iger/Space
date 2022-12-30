@@ -2,6 +2,7 @@ package com.project.space.user.service;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -11,15 +12,18 @@ import com.project.space.domain.NotUserException;
 import com.project.space.domain.PagingVO;
 import com.project.space.user.mapper.UserMapper;
 
-@Service
+
+@Service("userService")
 public class UserServiceImpl implements UserService {
+
+	
 	@Inject
-	private UserMapper usermapper;
+	private UserMapper userDao;
 	
 	@Override
-	public int insertUser(Mem_InfoVO vo) {
-		System.out.println("insert memberVO ==>>");
-		return usermapper.insertUser(vo);
+	public int createUser(Mem_InfoVO user) {
+		
+		return userDao.createUser(user);
 	}
 
 	@Override
@@ -30,20 +34,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Mem_InfoVO> listUser(PagingVO pvo) {
-		return usermapper.listUser(pvo);
+		return userDao.listUser(pvo);
 	}
 
 	@Override
-	public Integer idCheck(String userid) {
-		System.out.println("userid="+userid);
-		System.out.println("idcheck=="+usermapper.idCheck(userid));
-		return usermapper.idCheck(userid);
-	}
-
-	@Override
-	public int deleteUser(Integer midx) {
+	public boolean idCheck(String userid) {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
+	}
+
+	@Override
+	public int deleteUser(Mem_InfoVO vo) {
+		return userDao.deleteUser(vo);
 	}
 
 	@Override
@@ -53,22 +55,34 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Mem_InfoVO getUser(String userid) {
+	public Mem_InfoVO getUser(Integer midx) {
 		// TODO Auto-generated method stub
-		return usermapper.getUser(userid);
+		return null;
 	}
 
 	@Override
 	public Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException {
-		// TODO Auto-generated method stub
-		return null;
+		Mem_InfoVO user=userDao.findUser(findUser);
+		if(user==null) {
+			throw new NotUserException("존재하지 않는 아이디입니다");
+		}
+		return user;
 	}
 
 	@Override
-	public Mem_InfoVO loginCheck(String userid, String pwd) throws NotUserException {
-		// TODO Auto-generated method stub
-		return null;
+	public Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException {
+		Mem_InfoVO tmpVo=new Mem_InfoVO();
+		tmpVo.setUserid(userid);
+		
+		Mem_InfoVO user=this.findUser(tmpVo);
+		if(user==null) {
+			throw new NotUserException("존재하지 않는 아이디입니다");
+		}
+		if(!user.getMpwd().equals(mpwd)) { 
+			throw new NotUserException("비밀번호가 일치하지 않습니다");
+		}
+		
+		return user;
 	}
-
 
 }
