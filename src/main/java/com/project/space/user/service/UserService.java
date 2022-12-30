@@ -3,8 +3,8 @@ package com.project.space.user.service;
 import java.util.List;
 
 import com.project.space.domain.Mem_InfoVO;
-import com.project.space.domain.PagingVO;
 import com.project.space.domain.NotUserException;
+import com.project.space.domain.PagingVO;
 
 public interface UserService {
 	
@@ -16,7 +16,7 @@ public interface UserService {
 
 	boolean idCheck(String userid);
 
-	int deleteUser(Integer midx);
+	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
 	int updateUser(Mem_InfoVO user);
 
@@ -24,6 +24,6 @@ public interface UserService {
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
-	Mem_InfoVO loginCheck(String userid, String pwd) throws NotUserException;
+	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
 
 }

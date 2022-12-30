@@ -91,17 +91,44 @@ public class HomeController {
 		logger.info("connected Join.");
 		return "ajax/Join";
 	}
+	@RequestMapping(value="/AdminPage", method=RequestMethod.GET)
+	public String AdminPage(Model model) {
+		logger.info("connected AdminPage.");
+		return "ajax/Pages/AdminPage";
+	}
+	
+	
+	/*
+	 * @RequestMapping(value="/UserList", method=RequestMethod.GET) public String
+	 * UserList(Model model) { logger.info("connected UserList."); return
+	 * "ajax/User/UserList"; }
+	 */
 	
 	@GetMapping("/adminpage")
 	public String adminPage() {
-      
-		return "ajax/User/AdminPage";
-    }
+	      
+		return "ajax/AdminPage2";
+	}
 	  
 	@GetMapping("/userlist")
 	public String userList() {
 	      
 		return "ajax/User/UserList";
+	}
+	@GetMapping("/userbooking")
+	public String userBooking() {
+	      
+		return "ajax/User/UserBooking";
+	}
+	@GetMapping("/hostlist")
+	public String hostList() {
+	      
+		return "ajax/Host/HostList";
+	}
+	@GetMapping("/hostupload")
+	public String hostUpload() {
+	      
+		return "ajax/Host/HostUpload";
 	}
 	
 }

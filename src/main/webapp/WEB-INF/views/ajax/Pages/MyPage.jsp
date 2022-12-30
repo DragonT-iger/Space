@@ -13,36 +13,37 @@
 	}
 </style>
 <div class="container text-center" id="mypage_wrap">
+
 	<h2 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h2>
 	<table class="table table-borderless mt-5 mb-5" id="mypage_table">
 		<tr>
 			<td><h5>이름</h5></td>
-			<td><b>홍길동</b></td>
+			<td><b>${loginUser.mname}</b></td>
 			<%-- ${loginUser.uname} --%>
 		</tr>
 		<tr>
 			<td><h5>아이디</h5></td>
-			<td><b>hong</b></td>
+			<td><b>${loginUser.userid}</b></td>
 			<%-- ${loginUser.userid} --%>
 		</tr>
 		<tr>
 			<td><h5>연락처</h5></td>
-			<td><b>010-0000-0000</b></td>
+			<td><b>${loginUser.hp}</b></td>
 			<%-- ${loginUser.hp} --%>
 		</tr>
 		<tr>
 			<td><h5>나의 회원상태</h5></td>
-			<td><b>일반회원</b></td>
+			<td><b>${loginUser.status}</b></td>
 			<%-- ${loginUser.status} --%>
 		</tr>
 		<tr>
 			<td><h5>가입일</h5></td>
-			<td><b>2022-12-19</b></td>
+			<td><b>${loginUser.mdate}</b></td>
 			<%-- ${loginUser.wdate} --%>
 		</tr>
 		<tr>
-			<td><h5>나의 마일리지</h5></td>
-			<td><b>1000</b></td>
+			<td><h5>나의 포인트</h5></td>
+			<td><b>${loginUser.point}</b></td>
 			<%-- ${loginUser.mileage} --%>
 		</tr>
 	</table>
@@ -52,6 +53,8 @@
 			<button type="button" class="btn btn-primary py-2" onclick="javascript:sel_menu('Home')">돌아가기</button>
 		</div>
 </div>
+<%-- <input type="hidden" name="userid" value="${loginUser.userid }"> --%>
+<form class="frm1" action="deleteUser" method="post">
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -61,12 +64,21 @@
       </div>
       <div class="modal-body">
       	<h3 class="text-center">::비밀번호 입력 후 탈퇴처리::</h3>
-        <input type="password" class="form-control border-primary py-3 ps-4" id="pwdCheck" name="pwdCheck" placeholder="비밀번호확인"/>
+        <input type="password" class="form-control border-primary py-3 ps-4" id="mpwd" name="mpwd" placeholder="비밀번호확인"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger">탈퇴</button>
+        <button type="button" class="btn btn-danger" onclick="return test()">탈퇴</button>
       </div>
     </div>
   </div>
 </div>
+</form>
+
+<script type="text/javascript">
+	function test(){
+		//alert('test');
+		$('.frm1').submit();
+	}
+	
+</script>
