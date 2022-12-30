@@ -13,9 +13,10 @@ public class Mem_InfoVO {
 	private String hp; /* 연락처 */
 	private int birth;  /* 생년월일 */
 	private Date mdate; /* 가입일자 */
-	private int status; /* 회원상태 */
+	private int status; /* 회원상태코드 */
+	private String statusstr; /* 회원상태 */
 	private int point; /* 포인트 */
 	private int mrank; /* 회원등급 (mem_rank_fk) */
-	private int account; /* 계좌정보 */
+	private long account; /* 계좌정보 */
 	
 }

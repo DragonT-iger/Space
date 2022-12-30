@@ -11,6 +11,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/img/**" location="/img/" />
@@ -20,10 +21,6 @@
 	<resources mapping='/lib/**' location='/lib/' />
 	<resources mapping='/css_Reservation/**' location='/css_Reservation/' />
 
-
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -32,6 +29,11 @@
 	
 	<context:component-scan base-package="com.project.space" />
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+		<beans:property name="maxUploadSize" value="-1"/>
+		<!-- -1로 주면 무제한 업로드 가능 -->
+	</beans:bean>
 	
 	
 </beans:beans>
