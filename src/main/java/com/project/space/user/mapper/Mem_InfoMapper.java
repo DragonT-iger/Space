@@ -1,4 +1,4 @@
-package com.project.space.user.service;
+package com.project.space.user.mapper;
 
 import java.util.List;
 
@@ -6,24 +6,24 @@ import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PagingVO;
 import com.project.space.domain.NotUserException;
 
-public interface UserService {
-	
+public interface Mem_InfoMapper {
 	int createUser(Mem_InfoVO memvo);  //유저등록
 
 	int getUserCount(PagingVO pvo);  //페이지
 
 	List<Mem_InfoVO> listUser(PagingVO pvo);  //페이지 유저 리스트
 
-	boolean idCheck(String userid);
+	int idCheck(String userid);
 
-	int deleteUser(Integer midx);
+	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
 	int updateUser(Mem_InfoVO user);
 
-	Mem_InfoVO getUser(Integer midx);
+	Mem_InfoVO getUser(String userid);
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
-	Mem_InfoVO loginCheck(String userid, String pwd) throws NotUserException;
-
+	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
+	
+	
 }

@@ -1,20 +1,8 @@
-<!-- Login Start -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script>
-const sel_menu = function(m_name){
-	fetch(m_name).then(function(response){
-        response.text().then(function(text){
-        $('tab').html(text);
-        $('#selmenu').html(m_name);
-        $('li[id$="Tab"]').removeClass('active');
-        $('#'+m_name+'Tab').addClass('active');
-        })
-    })
-}
-
-</script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
 * {
   margin: 0px;
@@ -44,74 +32,15 @@ body {
   text-align: center;
   margin: 30px;
 }
-
+.tf_wrap{
+	width:50%;
+}
 .textForm {
   border-bottom: 2px solid #adadad;
   margin: 30px;
   padding: 10px 10px;
 }
-
-.id {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.pw {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.name {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.email {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.nickname {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.cellphoneNo {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.birth {
+.tf-input {
   width: 100%;
   border:none;
   outline:none;
@@ -130,32 +59,32 @@ body {
         </div>
         <div class="row g-4">
           <form>
-            <div class="col-12">
-                <div class="row gy-4" id="">
+            <div class="text-center">
+                <div class="row tf_wrap" id="">
                 
                	  <div class="textForm">
-			        <input name="name" type="text" class="name" placeholder="NAME">
+			        <input name="name" type="text" class="name tf-input" placeholder="NAME">
 			      </div>
 			      <div class="textForm">
-			        <input name="nickname" type="text" class="nickname" placeholder="NICKNAME">
+			        <input name="nickname" type="text" class="nickname tf-input" placeholder="NICKNAME">
 			      </div>
                   	  <div class="textForm">
-			        <input name="loginId" type="text" class="id" placeholder="ID">
+			        <input name="loginId" type="text" class="id tf-input" placeholder="ID">
 			      </div>
 			      <div class="textForm">
-			        <input name="loginPw" type="password" class="pw" placeholder="PASSWORD">
+			        <input name="loginPw" type="password" class="pw tf-input" placeholder="PASSWORD">
 			      </div>
 			       <div class="textForm">
-			        <input name="loginPwConfirm" type="password" class="pw" placeholder="PASSWORD CHECK">
+			        <input name="loginPwConfirm" type="password" class="pw tf-input" placeholder="PASSWORD CHECK">
 			      </div>
 			      <div class="textForm">
-			        <input name="cellphoneNo" type="text" class="cellphoneNo" placeholder="TEL">
+			        <input name="cellphoneNo" type="text" class="cellphoneNo tf-input" placeholder="TEL">
 			      </div>
 			      <div class="textForm">
-			        <input name="birth" type="text" class="birth" placeholder="BIRTH DATE">
+			        <input name="birth" type="text" class="birth tf-input" placeholder="BIRTH DATE">
 			      </div>
 			       <div class="textForm">
-			        <input name="email" type="email" class="email" placeholder="EMAIL">
+			        <input name="email" type="email" class="email tf-input" placeholder="EMAIL">
 			      </div>
                 </div>
             </div>
@@ -165,13 +94,14 @@ body {
                        <div class="col-12">
                        	<a href="javascript:sel_menu('Join')" class="btn btn-primary w-40 py-2">Join</a>
                            <button class="btn btn-primary w-40 py-2" type="reset">Reset</button>
-                           <a href="javascript:sel_menu('Login')" class="btn btn-primary w-40 py-2">Cancel</a>
+                           <a href="javascript:histroy.back()" class="btn btn-primary w-40 py-2">Cancel</a>
                        </div>
                    </div>
                 </div>
             </div>
-           </form>
+          </form>
         </div>
     </div>
 </div>
 <!-- Contact End -->
+<c:import url="/Spacefoot" charEncoding="utf-8" />

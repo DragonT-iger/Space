@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<c:import url="/User/AdminPage"/>
+<c:import url="/adminpage"/>
 
-	<div class="container mt-3" id="userlist" style="height:600px; overflow: auto;">
+	<div class="container" id="userlist" style="width:600px; overflow: auto;">
 	<h1 class="text-center">회원목록</h1>
 	<div>
 		<%-- ${userArr} --%>
