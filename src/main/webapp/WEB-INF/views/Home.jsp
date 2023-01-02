@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%-- <%@ include file="/WEB-INF/views/Spacetop.jsp" %> --%>
+<%@ include file="/WEB-INF/views/Spacetop.jsp" %>
 
 <script type="text/javascript">
       function filter(){
@@ -95,7 +94,7 @@
 }
 </style>
 
-<c:import url="/Spacetop"/>
+
 
 	<div class="tag"
 		class="section-title ff-secondary text-start text-primary fw-normal mb-4">
@@ -179,5 +178,4 @@
       }
 </script>
 
-<c:import url="/Spacefoot"/>
-<%-- <%@ include file="/WEB-INF/views/Spacefoot.jsp" %> --%>
+<%@ include file="/WEB-INF/views/Spacefoot.jsp" %>

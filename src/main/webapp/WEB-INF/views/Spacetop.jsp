@@ -51,7 +51,7 @@
 		<!-- Navbar & Hero Start -->
 		<div class="container-xxl position-relative p-0">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
-				<a href="" class="navbar-brand p-0">
+				<a href="${myctx}/" class="navbar-brand p-0">
 					<h1 class="text-primary m-0">
 						<i class="fa-solid fa-meteor"></i> Space
 					</h1> <!-- <img src="img/logo.png" alt="Logo"> -->
@@ -67,24 +67,34 @@
 							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
 
 							<div class="dropdown-menu m-0">
-								<a href="javascript:sel_menu('MyPage')" class="dropdown-item">MyPage</a>
-								<a href="javascript:sel_menu('MyReservation')" class="dropdown-item">MyReservation</a> 
-								<a href="javascript:sel_menu('AdminPage')" class="dropdown-item">AdminPage</a>
+								<a href="${myctx}/MyPage" class="dropdown-item">MyPage</a>
+								<!-- 일반유저 -->
+								<c:if test="${loginUser.status eq 0 }">
+								<a href="${myctx}/MyReservation" class="dropdown-item">MyReservation</a>
+								<a href="${myctx}/MyZimm" class="dropdown-item">MyZimm</a>
+                                <a href="${myctx}/MyReviewList" class="dropdown-item">MyReviewList</a> 
+								</c:if>
+								<c:if test="${loginUser.status eq 1 }">
+                                <a href="${myctx}/MyReservationCheck" class="dropdown-item">MyReservationCheck</a>
+                                <a href="${myctx}/MySpaceEdit" class="dropdown-item">MySpaceEdit</a>
+                                <a href="${myctx}/MySpaceInsert" class="dropdown-item">MySpaceInsert</a>
+                                <a href="${myctx}/MySpaceList" class="dropdown-item">MySpaceList</a>
+                                </c:if>
+                                <c:if test="${loginUser.status eq 9 }">
+                                <a href="${myctx}/MyPageAdminPage" class="dropdown-item">AdminPage</a>
+                                </c:if>
 							</div>
 
 						</div>
-						<c:if test="${loginUser ne null }">
-							<li class="nav-item bg-primary">
-								<a class="nav-link text-white" href="#">${loginUser.userid }님 로그인중...</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="${myctx}/logout">Logout</a>
-							</li>
-						</c:if>
 					</div>
+					<!-- 세션에 user정보가있으면 로그아웃버튼으로 변경 -->
 					<c:if test="${loginUser eq null }">
-					<a href="javascript:sel_menu('Login')"
+					<a href="${myctx}/Login"
 						class="btn btn-primary py-2 px-4">로그인</a>
+					</c:if>
+					<c:if test="${loginUser ne null }">
+						<a href="${myctx}/logout"
+						 class="btn btn-primary py-2 px-4">로그아웃</a>
 					</c:if>
 				</div>
 			</nav>

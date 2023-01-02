@@ -56,7 +56,4 @@
 		</interceptor>
 	</interceptors>
 	
-	<!-- 상품명을 쓰는 리뷰폼 매핑(단순히 보여주기만하는 기능)======= -->
-	<view-controller path="/reviewForm" view-name="review/reviewForm"/>
-	
 </beans:beans>

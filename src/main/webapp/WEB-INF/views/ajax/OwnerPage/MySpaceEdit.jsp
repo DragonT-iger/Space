@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/Spacetop" charEncoding="utf-8" />
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -131,3 +133,4 @@
 	</form>
 
 </div>
+<c:import url="/Spacefoot" charEncoding="utf-8" />
