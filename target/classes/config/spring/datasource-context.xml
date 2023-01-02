@@ -46,7 +46,8 @@
 	<mybatis-spring:scan base-package="com.project.space.user.mapper"/>
 	<mybatis-spring:scan base-package="com.project.space.spaceinfo.mapper"/>
 	<mybatis-spring:scan base-package="com.project.space.review.mapper"/>
-	<mybatis-spring:scan base-package="com.project.space.reservation.mapper"/>
+	<mybatis-spring:scan base-package="com.project.space.reservation.mapper"/>		
+									
 	<mybatis-spring:scan base-package="com.project.space.qna.mapper"/>
 	<mybatis-spring:scan base-package="com.project.space.payment.mapper"/>
 	<!-- HikariCP 커넥션풀 빈 등록 -->

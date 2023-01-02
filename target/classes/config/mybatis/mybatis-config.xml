@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- memo -->
+	<!-- typeAlias 별칭 설정 === -->
+	<typeAliases>
+		<typeAlias type="com.project.space.domain.Space_InfoVO" alias="SpaceInfo"/>
+		<typeAlias type="com.project.space.domain.Mem_InfoVO" alias="MemberInfo"/>
+		<typeAlias type="com.project.space.domain.ReservationVO" alias="Reservation"/>
+	</typeAliases>
+	<!-- mapper 정의 -->
+	<mappers>
+		<mapper resource="config/mybatis/mapper/SpaceInfoMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/ReservationMapper.xml"/>
+	</mappers>
+</configuration>

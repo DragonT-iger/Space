@@ -2,10 +2,15 @@ package com.project.space.domain;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor 
+@AllArgsConstructor 
 public class Mem_InfoVO {
+	private int midx;
 	private String mname; /* 이름 */
 	private String nickname; /* 닉네임 */  //unique
 	private String userid; /* 회원아이디 */  //pk
@@ -17,5 +22,6 @@ public class Mem_InfoVO {
 	private int point; /* 포인트 */
 	private int mrank; /* 회원등급 (mem_rank_fk) */
 	private int account; /* 계좌정보 */
+	private String statusStr;
 	
 }
