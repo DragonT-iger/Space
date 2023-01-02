@@ -128,7 +128,7 @@
     }
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
     .navbar-dark {
         position: absolute;
         width: 100%;
@@ -142,7 +142,7 @@
         position: fixed;
         background: var(--dark) !important;
     }
-}
+} */
 
 
 /*** Hero Header ***/

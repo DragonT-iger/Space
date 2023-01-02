@@ -3,38 +3,33 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.space.user.mapper.UserMapper">
-	<insert id="createUser" parameterType="MemInfo">
-		<selectKey keyProperty="midx" resultType="int" order="BEFORE">
-			select mem_info_seq.nextval from dual		
-		</selectKey>
-		insert into mem_info(mname,nickname,userid,mpwd,hp,birth,mdate,status,
-		point,mrank,account)
-		values(#{midx},#{mname},#{nickname},#{userid},#{mpwd},#{hp},
-		#{birth:VARCHAR},sysdate,#{status},1000,#{mrank:VARCHAR},#{account:VARCHAR})
-		
+<mapper namespace="com.project.space.user.mapper.Mem_InfoMapper">
+	<!-- 회원가입 -->
+	<insert id="createUser" parameterType="MemberInfo">
+		insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,ACCOUNT,ADDPOINT)
+		values(#{mname},#{nickname},#{userid},#{mpwd},#{hp},#{birth:VARCHAR},#{status},0,1,#{account:VARCHAR},0)
 	</insert>
-	
+	<!-- userid와 일치하는 회원체크 -->
 	<select id="idCheck" resultType="int" parameterType="string">
-		select idx from mem_info where userid=#{value}
+		select count(*) from mem_info where userid=#{value}
 	</select>
 	
-	<select id="selectUserByUserid" parameterType="string" resultType="MemInfo">
+	<!-- userid 검색 -->
+	<select id="getUser" resultType="MemberInfo" parameterType="string">
 		select * from mem_info where userid=#{value} <!-- 파라미터로들어오 value값 -->
 	</select>
 	
-	<select id="findUser" parameterType="MemInfo" resultType="MemInfo">
-		select * from mem_info where userid=#{userid} <!-- 파라미터로들어오 value값 -->
-	</select>
+	<!-- <select id="findUser" resultType="MemberInfo" parameterType="MemberInfo">
+		select * from mem_info where userid=#{userid} 파라미터로들어오 value값
+	</select> -->
 	
-	<select id="listUser" resultType="MemInfo" parameterType="com.project.space.domain.PagingVO">
-		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-1,'정지회원',-2,'탈퇴회원') statusStr
-		from mem_info order by midx desc
+	<select id="listUser" resultType="MemberInfo" parameterType="com.project.space.domain.PagingVO">
+		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr
+		from mem_info order by mdate asc
 	</select>
-	
 	
 	<!-- 회원탈퇴 -->
-	<delete id="deleteUser" parameterType="MemInfo" > 
+	<delete id="deleteUser" parameterType="MemberInfo" > 
 		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}
 	</delete>
 </mapper>

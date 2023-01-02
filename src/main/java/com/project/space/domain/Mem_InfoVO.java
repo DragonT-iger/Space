@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @AllArgsConstructor 
 public class Mem_InfoVO {
-	private int midx;
 	private String mname; /* 이름 */
 	private String nickname; /* 닉네임 */  //unique
 	private String userid; /* 회원아이디 */  //pk
@@ -21,7 +20,7 @@ public class Mem_InfoVO {
 	private int status; /* 회원상태 */
 	private int point; /* 포인트 */
 	private int mrank; /* 회원등급 (mem_rank_fk) */
-	private int account; /* 계좌정보 */
+	private long account; /* 계좌정보 */
 	private String statusStr;
 	
 }

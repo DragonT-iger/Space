@@ -20,7 +20,7 @@ import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
-import com.project.space.user.service.UserService;
+import com.project.space.user.service.Mem_InfoService;
 
 import lombok.extern.log4j.Log4j;
 @Controller
@@ -31,7 +31,7 @@ public class GonTestCont {
 	private NaverLoginBO naverLoginBO;
 	
 	@Inject
-	private UserService userService;
+	private Mem_InfoService memberService;
 	
 	@GetMapping("/MyZimm")
 	public String zimmList() {
@@ -68,7 +68,7 @@ public class GonTestCont {
 	
 	/*네로아 테스트*/
 	//네로아 인증요청 url 반환
-	@GetMapping("/NaverLogin")
+	@GetMapping("/Login")
 	public ModelAndView naverLogin(HttpSession session) {
 		log.info("NaverLogin connect");
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -97,11 +97,12 @@ public class GonTestCont {
 		NaverLoginVO nlVO = nlcVO.getResponse();
 		log.info("네이버 로그인 API 프로필정보 ===> "+nlVO);
 		
-		int result = userService.idCheck(nlVO.getId());
+		int result = memberService.idCheck(nlVO.getId());
 		if(result>0) {
-			Mem_InfoVO memInfoVO = userService.getUser(nlVO.getId());
+			Mem_InfoVO memInfoVO = memberService.getUser(nlVO.getId());
 			log.info("id일치"+memInfoVO.getUserid()+"////"+memInfoVO);
 			session.setAttribute("loginUser", memInfoVO);
+			session.setAttribute("snsLoginState", true);
 			return new ModelAndView("redirect:/");
 		}else{
 			//회원가입을위해 Naver Profile 정보를 넘겨준다.
@@ -158,7 +159,7 @@ public class GonTestCont {
 			return "redirect:ajax/ilgon/NaverJoin";
 		}
 		
-		int n=userService.createUser(vo);
+		int n=memberService.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
 		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
 		

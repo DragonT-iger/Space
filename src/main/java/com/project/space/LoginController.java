@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NotUserException;
-import com.project.space.user.service.UserService;
+import com.project.space.user.service.Mem_InfoService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,7 +26,7 @@ public class LoginController {
 	
 	
 	@Inject
-	private UserService userService;
+	private Mem_InfoService memberService;
 	
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session, @ModelAttribute("user") Mem_InfoVO user) 
@@ -37,7 +37,7 @@ public class LoginController {
 			return "redirect:/";
 		}
 		//반환타입 UserVO
-		Mem_InfoVO loginUser=userService.loginCheck(user.getUserid(), user.getMpwd());
+		Mem_InfoVO loginUser=memberService.loginCheck(user.getUserid(), user.getMpwd());
 		if(loginUser!=null) {
 			//로그인 인증을 받았다면
 			session.setAttribute("loginUser",loginUser);
@@ -72,7 +72,7 @@ public class LoginController {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/";
 		}
-		userService.deleteUser(vo); 
+		memberService.deleteUser(vo); 
 		session.invalidate();
 		return "redirect:/";
 	}

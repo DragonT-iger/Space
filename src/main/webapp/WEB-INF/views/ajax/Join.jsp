@@ -1,7 +1,8 @@
-<!-- Login Start -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
 * {
   margin: 0px;
@@ -93,7 +94,7 @@ body {
                        <div class="col-12">
                        	<a href="javascript:sel_menu('Join')" class="btn btn-primary w-40 py-2">Join</a>
                            <button class="btn btn-primary w-40 py-2" type="reset">Reset</button>
-                           <a href="javascript:sel_menu('Login')" class="btn btn-primary w-40 py-2">Cancel</a>
+                           <a href="javascript:histroy.back()" class="btn btn-primary w-40 py-2">Cancel</a>
                        </div>
                    </div>
                 </div>
@@ -103,3 +104,4 @@ body {
     </div>
 </div>
 <!-- Contact End -->
+<c:import url="/Spacefoot" charEncoding="utf-8" />

@@ -29,8 +29,8 @@ public class HomeController {
 	// MainHome
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Mainhome(Model model) {
-		logger.info("connected Mainhome2.");
-		return "MainHome";
+		logger.info("connected Home");
+		return "Home";
 	}
 
 	// MainHome
@@ -93,13 +93,13 @@ public class HomeController {
 
   
 
-	
+	/*
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
 	public String mylogin(Model model) {
 		logger.info("connected Login.");
 		return "ajax/Login";
 	}
-	
+	*/
 	@RequestMapping(value="/Join", method=RequestMethod.GET)
 	public String Join(Model model) {
 		logger.info("connected Join.");
