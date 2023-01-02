@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.space.user.mapper.UserMapper">
+	<insert id="createUser" parameterType="MemInfo">
+		<selectKey keyProperty="midx" resultType="int" order="BEFORE">
+			select mem_info_seq.nextval from dual		
+		</selectKey>
+		insert into mem_info(mname,nickname,userid,mpwd,hp,birth,mdate,status,
+		point,mrank,account)
+		values(#{midx},#{mname},#{nickname},#{userid},#{mpwd},#{hp},
+		#{birth:VARCHAR},sysdate,#{status},1000,#{mrank:VARCHAR},#{account:VARCHAR})
+		
+	</insert>
+	
+	<select id="idCheck" resultType="int" parameterType="string">
+		select idx from mem_info where userid=#{value}
+	</select>
+	
+	<select id="selectUserByUserid" parameterType="string" resultType="MemInfo">
+		select * from mem_info where userid=#{value} <!-- 파라미터로들어오 value값 -->
+	</select>
+	
+	<select id="findUser" parameterType="MemInfo" resultType="MemInfo">
+		select * from mem_info where userid=#{userid} <!-- 파라미터로들어오 value값 -->
+	</select>
+	
+	<select id="listUser" resultType="MemInfo" parameterType="com.project.space.domain.PagingVO">
+		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-1,'정지회원',-2,'탈퇴회원') statusStr
+		from mem_info order by midx desc
+	</select>
+	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteUser" parameterType="MemInfo" > 
+		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}
+	</delete>
+</mapper>
