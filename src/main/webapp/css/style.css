@@ -112,11 +112,11 @@
         position: relative;
     }
 
-    .navbar-dark .navbar-collapse {
+    /* .navbar-dark .navbar-collapse {
         margin-top: 15px;
         border-top: 1px solid rgba(255, 255, 255, .1)
     }
-
+ */
     .navbar-dark .navbar-nav .nav-link,
     .sticky-top.navbar-dark .navbar-nav .nav-link {
         padding: 10px 0;

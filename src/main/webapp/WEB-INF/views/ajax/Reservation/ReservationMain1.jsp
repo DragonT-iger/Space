@@ -5,7 +5,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -20,7 +21,10 @@
 <script src="${pageContext.request.contextPath}/js_Reservation/Reservation_script.js"></script>
 <!-- 달력 css -->
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
-    
+
+<%-- <%@ include file="/WEB-INF/views/Spacetop.jsp" %> --%>
+
+<c:import url="/Spacetop"/>
 <div class="wrap">
 	<div class="bookingStep">
 	
@@ -109,3 +113,6 @@ function payment(){
 	})
 }) */
 </script>
+
+<c:import url="/Spacefoot"/>
+<%-- <%@ include file="/WEB-INF/views/Spacefoot.jsp" %> --%>
