@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
 	.myspace_list{
 		width:100%;
@@ -54,7 +56,7 @@
 	}
 </style>
 		<h1 class="text-center"> 나의 공간 관리</h1>
-		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:sel_menu('MySpaceInsert')">공간등록</button>
+		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">공간등록</button>
         <div class="myspacelist-wrap mt-5">
         	<!-- 리뷰내역 필요리스트 (로그인한 회원번호로 select) 사진 장소이름 장소주소 별점 리뷰제목 리뷰내용 리뷰 답변 -->
         		<!-- 내가등록한 리뷰들 반복출력 forEach start -->
@@ -101,4 +103,5 @@
         			</div>
         		</div>
         		<!-- foreach End -->
-        </div>    
+        </div>
+<c:import url="/Spacefoot" charEncoding="utf-8" />

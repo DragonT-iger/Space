@@ -6,7 +6,7 @@ import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NotUserException;
 import com.project.space.domain.PagingVO;
 
-public interface UserService {
+public interface Mem_InfoService {
 	
 	int createUser(Mem_InfoVO memvo);  //유저등록
 

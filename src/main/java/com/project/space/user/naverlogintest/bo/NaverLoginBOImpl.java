@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
@@ -19,12 +21,25 @@ import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
+@PropertySource("classpath:/config/props/NaverLoginAPI.properties")
 public class NaverLoginBOImpl implements NaverLoginBO{
-	private final static String CLIENT_ID = "7ionCSwLhg04IxATNWZ8";
-	private final static String CLIENT_SECRET = "OWKvWrJXGL";
+	
+	private final String clientid;
+	private final String clientsecret;
+	public NaverLoginBOImpl(@Value("${naver.login.api.ClientID}") String clientid,
+			@Value("${naver.login.api.ClientSecret}") String clientsecret) {
+		this.clientid = clientid;
+		this.clientsecret = clientsecret;
+		log.info(clientid);
+		log.info(clientsecret);
+	}
+	
+	//private final static String CLIENT_ID=clientid;
+	//private final static String CLIENT_SECRET=clientsecret;
 	private final static String REDIRECT_URI = "http://localhost:9090/space/NaverCallback";
 	private final static String SESSION_STATE = "oauth_state";
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
+	
 	// 네아로 인증  URL 생성
 	@Override
 	public String getAuthorizationUrl(HttpSession session) {
@@ -35,8 +50,8 @@ public class NaverLoginBOImpl implements NaverLoginBO{
 		setSession(session,state);
 		// Scribe 라이브러리에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성
 		OAuth20Service oauthService = new ServiceBuilder()
-				.apiKey(CLIENT_ID)
-				.apiSecret(CLIENT_SECRET)
+				.apiKey(clientid)
+				.apiSecret(clientsecret)
 				.callback(REDIRECT_URI)
 				.state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
 				.build(NaverLoginAPI.instance());
@@ -58,8 +73,8 @@ public class NaverLoginBOImpl implements NaverLoginBO{
 		if(sessionState.equals(state)){
 		
 			OAuth20Service oauthService = new ServiceBuilder()
-					.apiKey(CLIENT_ID)
-					.apiSecret(CLIENT_SECRET)
+					.apiKey(clientid)
+					.apiSecret(clientsecret)
 					.callback(REDIRECT_URI)
 					.state(state)
 					.build(NaverLoginAPI.instance());
@@ -83,8 +98,8 @@ public class NaverLoginBOImpl implements NaverLoginBO{
 	public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
 
 		OAuth20Service oauthService =new ServiceBuilder()
-    			.apiKey(CLIENT_ID)
-    			.apiSecret(CLIENT_SECRET)
+    			.apiKey(clientid)
+    			.apiSecret(clientsecret)
     			.callback(REDIRECT_URI).build(NaverLoginAPI.instance());
     	
     	OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
@@ -94,8 +109,8 @@ public class NaverLoginBOImpl implements NaverLoginBO{
 	}
 	public String NaverDeleteToken(String access_token) {
 		
-		String NaverDeleteTokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID
-				+"&client_secret="+CLIENT_SECRET+"&access_token="+access_token+"&service_provider=NAVER";
+		String NaverDeleteTokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+clientid
+				+"&client_secret="+clientsecret+"&access_token="+access_token+"&service_provider=NAVER";
 		//https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=&client_secret=&access_token=&service_provider=NAVER
 		return NaverDeleteTokenUrl;
 	}

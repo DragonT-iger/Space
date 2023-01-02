@@ -1,5 +1,9 @@
 package com.project.space;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,10 +21,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestClientException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.reservation.MessageDTO;
 import com.project.space.reservation.Schedule;
+import com.project.space.reservation.SmsResponseDTO;
+import com.project.space.reservation.SmsService;
 import com.project.space.reservation.service.ReservationService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
 
@@ -35,6 +44,9 @@ public class JYController {
 	
 	@Inject
 	private ReservationService reservationService;
+	
+	@Inject
+	private SmsService smsService;
 	
 	@GetMapping(value="/Reservation")
 	public String resSpace(Model m, @RequestParam(defaultValue="0") int snum, HttpSession ses) {
@@ -180,6 +192,21 @@ public class JYController {
 		return null;
 	}
 	
+	
+	@GetMapping("/send")
+	public String getSmsPage() {
+		return "ajax/Reservation/sendSms";
+	}
+	
+	@PostMapping(value = "/sms/send")
+	public String sendSms(MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, 
+		URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+		
+		SmsResponseDTO response = smsService.sendSms(messageDto);
+		model.addAttribute("response", response);
+		return "ajax/Reservation/result";
+	}
+ 
 	
 	
 	
