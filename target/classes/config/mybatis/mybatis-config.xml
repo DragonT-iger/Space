@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- mapper 정의 -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/SpaceInfoMapper.xml"/>
-		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/Mem_InfoMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ReservationMapper.xml"/>
 	</mappers>
 </configuration>

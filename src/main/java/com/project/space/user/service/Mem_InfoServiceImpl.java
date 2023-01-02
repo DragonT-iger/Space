@@ -1,7 +1,7 @@
 package com.project.space.user.service;
 
-import java.util.List;
 
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -10,20 +10,22 @@ import org.springframework.stereotype.Service;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NotUserException;
 import com.project.space.domain.PagingVO;
-import com.project.space.user.mapper.UserMapper;
+import com.project.space.user.mapper.Mem_InfoMapper;
+
+import lombok.extern.log4j.Log4j;
 
 
-@Service("userService")
-public class UserServiceImpl implements UserService {
+@Service
+@Log4j
+public class Mem_InfoServiceImpl implements Mem_InfoService {
 
-	
 	@Inject
-	private UserMapper userDao;
+	private Mem_InfoMapper memberMapper;
 	
 	@Override
 	public int createUser(Mem_InfoVO user) {
 		
-		return userDao.insertUser(user);
+		return memberMapper.createUser(user);
 	}
 
 	@Override
@@ -34,18 +36,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Mem_InfoVO> listUser(PagingVO pvo) {
-		return userDao.listUser(pvo);
+		return memberMapper.listUser(pvo);
 	}
 
 	@Override
 	public int idCheck(String userid) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberMapper.idCheck(userid);
 	}
 
 	@Override
 	public int deleteUser(Mem_InfoVO vo) {
-		return userDao.deleteUser(vo);
+		return memberMapper.deleteUser(vo);
 	}
 
 	@Override
@@ -57,12 +59,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Mem_InfoVO getUser(String userid) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberMapper.getUser(userid);
 	}
 
 	@Override
 	public Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException {
-		Mem_InfoVO user=userDao.findUser(findUser);
+		Mem_InfoVO user=memberMapper.findUser(findUser);
 		if(user==null) {
 			throw new NotUserException("존재하지 않는 아이디입니다");
 		}
@@ -71,10 +73,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException {
-		Mem_InfoVO tmpVo=new Mem_InfoVO();
-		tmpVo.setUserid(userid);
-		
-		Mem_InfoVO user=this.findUser(tmpVo);
+		Mem_InfoVO user=this.getUser(userid);
+		log.info("mem_infoservice logincheck user==>"+user);
 		if(user==null) {
 			throw new NotUserException("존재하지 않는 아이디입니다");
 		}

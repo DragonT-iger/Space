@@ -1,7 +1,8 @@
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ include file="/WEB-INF/views/Spacetop.jsp" %> --%>
+<c:import url="/Spacetop" charEncoding="utf-8"/>
 <style>
 ul {
 	text-align: left;
@@ -141,12 +142,11 @@ nav ul li {
 }
 </style>
 <script type="text/javascript"
-	src="http://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=d5kg3rvwc0"></script>
-</head>
-<body>
-	<main>
+	src="http://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=d5kg3rvwc0">
+</script>
 
-		<div class="text-table ">
+<main>
+	<div class="text-table ">
 			<div>
 				<center>
 					<h4>Information</h4>
@@ -295,12 +295,13 @@ nav ul li {
 				<div id="map" style="width: 50%; height: 500px;"></div>
 
 				<script>
+				window.onload = function() {
                     var map = new naver.maps.Map('map', {
                         center: new naver.maps.LatLng(37.5112, 127.0981), // 잠실 롯데월드를 중심으로 하는 지도
                         zoom: 15
                     });
-                    
-                    </script>
+				}
+               </script>
 
 
 
@@ -309,12 +310,15 @@ nav ul li {
 					<div class="line_box holder" style="width: 100%;">
 						<hr style="" />
 					<br>
+					</div>
+				</div>
 				<h4 class="plaform">
 					<font color="skyblue">자주 묻는 질문</font>
 				</h4>
 				
 				<br>
-				<fag-container>
+			<fag-container>
+			<div class="faq">
 				<p class="faq-text">대답 1</p>
 
 				<button class="faq-toggle">
@@ -347,7 +351,8 @@ nav ul li {
 				<button class="faq-toggle">
 					<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
 				</button>
-
+			</div>
+			</fag-container>
 
 
 				<script>
@@ -359,4 +364,5 @@ nav ul li {
                       });
                     });
                   </script>
-</body>
+            
+<c:import url="/Spacefoot" charEncoding="utf-8"/>

@@ -109,24 +109,21 @@
 
 							<div class="dropdown-menu m-0">
 								<a href="javascript:sel_menu('MyPage')" class="dropdown-item">MyPage</a>
-								<a href="javascript:sel_menu('MyReservation')"
-									class="dropdown-item">MyReservation</a> <a
-									href="javascript:sel_menu('AdminPage')" class="dropdown-item">AdminPage</a>
+								<a href="javascript:sel_menu('MyReservation')" class="dropdown-item">MyReservation</a>
+								<a href="javascript:sel_menu('AdminPage')" class="dropdown-item">AdminPage</a>
 
 							</div>
 
 						</div>
-						<c:if test="${loginUser ne null }">
-							<li class="nav-item bg-primary">
-								<a class="nav-link text-white" href="#">${loginUser.userid }님
-									로그인중...</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="${myctx}/logout">Logout</a></li>
-						</c:if>
 					</div>
+					<!-- 세션에 user정보가있으면 로그아웃버튼으로 변경 -->
 					<c:if test="${loginUser eq null }">
-					<a href="javascript:sel_menu('Login')"
+					<a href="${myctx}/Login"
 						class="btn btn-primary py-2 px-4">로그인</a>
+					</c:if>
+					<c:if test="${loginUser ne null }">
+						<a href="${myctx}/logout"
+						 class="btn btn-primary py-2 px-4">로그아웃</a>
 					</c:if>
 				</div>
 			</nav>
