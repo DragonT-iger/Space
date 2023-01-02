@@ -30,7 +30,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Mainhome(Model model) {
 		logger.info("connected Mainhome2.");
-		return "MainHome";
+		return "Home";
 	}
 
 	// MainHome

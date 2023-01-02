@@ -2,9 +2,15 @@ package com.project.space.reservation;
 
 public class Payment {
 	
+	private int snum; //공간정보
+	private String userid; //유저 아이디
+	private String mname;  //유저 성함
+	private String userHP;  //유저 연락처
 	
+	private String rtdate; //예약 날짜
 	private String rtstartTime;  //예약시작시간
 	private String rtendTime;  //예약종료시간
+	private int rtCount;  //예약 인원
 	
 	//예약시간
 	private int TotalTime;  //rtend-rtstart ==> 총 대여 시간

@@ -35,6 +35,10 @@
 		<!-- -1로 주면 무제한 업로드 가능 -->
 	</beans:bean>
 	
+	<!-- top, foot 매핑 -->
+	<view-controller path="/Spacetop" view-name="/Spacetop"/>
+	<view-controller path="/Spacefoot" view-name="/Spacefoot"/>
+	
 	
 </beans:beans>
 

@@ -2,12 +2,12 @@ package com.project.space.payment.mapper;
 
 import java.util.List;
 
-import com.project.space.domain.PaymentVO;
+import com.project.space.domain.PointVO;
 
 public interface PaymentMapper {
-	public PaymentVO getPayMent(int paynum);
-    public List<PaymentVO> getPayMentList();
-    public int insertPayMent(PaymentVO payment);
-    public int updatePayMent(PaymentVO payment);
+	public PointVO getPayMent(int paynum);
+    public List<PointVO> getPayMentList();
+    public int insertPayMent(PointVO payment);
+    public int updatePayMent(PointVO payment);
     public int deletePayMent(int paynum);
 }
