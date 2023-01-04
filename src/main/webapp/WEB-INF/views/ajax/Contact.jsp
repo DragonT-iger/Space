@@ -25,7 +25,6 @@ nav ul {
 	cursor: pointer;
 }
 
-/* li 는 블록요소인데 inline-block 으로 인라인속성 부여해서 나란히 배치 */
 nav ul li {
 	display: inline-block;
 	text-align: center;
