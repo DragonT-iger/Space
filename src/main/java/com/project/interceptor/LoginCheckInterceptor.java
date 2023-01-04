@@ -1,4 +1,4 @@
-package com.project.space.user.service;
+package com.project.interceptor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -39,28 +39,16 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest req,HttpServletResponse res,Object handler) throws Exception{
 		log.info("preHandle()");
 		
-		String header=req.getHeader("Ajax");
-		
-		String mode=req.getParameter("mode");
-		log.info("mode========="+mode);
-		
 		HttpSession ses=req.getSession();
-		Mem_InfoVO user=(Mem_InfoVO)ses.getAttribute("loginUser");
-		if(user==null) {
-			
-			if("true".equals(header)) {
-				res.sendError(400);
-			}else {
-			
+		Mem_InfoVO user=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션키값
+		if(user==null) { //로그인 안했을경우		
 			String view="/WEB-INF/views/msg.jsp";
 			
 			req.setAttribute("message", "로그인해야 이용 가능합니다.");
-			req.setAttribute("loc", req.getContextPath()+"/index");
+			req.setAttribute("loc", req.getContextPath()+"/Login");
 			
 			RequestDispatcher disp=req.getRequestDispatcher(view);
 			disp.forward(req, res);
-			}
-			return false;
 		}
 		
 		return true;

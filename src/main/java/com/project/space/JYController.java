@@ -203,6 +203,7 @@ public class JYController {
 		URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		
 		SmsResponseDTO response = smsService.sendSms(messageDto);
+		log.info(response);
 		model.addAttribute("response", response);
 		return "ajax/Reservation/result";
 	}
