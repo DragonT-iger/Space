@@ -32,4 +32,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUser" parameterType="MemberInfo" > 
 		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}
 	</delete>
+	
 </mapper>

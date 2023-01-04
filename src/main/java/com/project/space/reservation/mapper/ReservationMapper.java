@@ -23,6 +23,8 @@ public interface ReservationMapper {
 	
 	//일반유저가 예약신청
 	int insertBooking(ReservationVO rtvo);
+	int updateUserRes(ReservationVO rtvo);  //예약할때 포인트 빠져나가기
+	
 	//예약 추가 관련=> 기존에 담긴 상품이면 인원만 수정하기
 	int updateBooking(ReservationVO rtvo); 
 	//일반유저가 본인의 예약 내역을 변경

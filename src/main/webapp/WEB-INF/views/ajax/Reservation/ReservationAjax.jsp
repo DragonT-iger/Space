@@ -76,7 +76,7 @@
 								</c:forEach>
 							</div>	
 							</div>
-							
+						<!-- vo의 특정값을 있다없다 -->	
 					</td>
 				</c:forEach>			
 				</tr>

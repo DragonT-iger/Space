@@ -4,8 +4,19 @@
 <mapper namespace="com.project.space.reservation.mapper.ReservationMapper">
 			      
 	<select id="CalbookingInfo" resultType="Reservation" parameterType="_int">
-		select * from Reservation where snum=#{snum}
+		select * from reservation where snum=#{snum}
 	</select>
 	
+	<insert id="insertBooking" parameterType="Reservation">
+	<selectKey keyProperty="rtnum" resultType="int" order="BEFORE">
+		select reservation_seq.nextval from dual
+	</selectKey>
+		insert into reservation(rtnum,snum,userid,rtstartdate,rtstart,rtend,rtnumber,totalprice,rtstatus,rdate)
+		values(#{rtnum},#{snum},#{userid},#{rtstartdate},#{rtstart},#{rtend},#{rtnumber},#{totalprice},0,sysdate)
+	</insert>
+	
+	<update id="updateUserRes" parameterType="Reservation">
+		update mem_info set point=(point-#{totalprice}) where userid=#{userid}
+	</update>
 	
 </mapper>

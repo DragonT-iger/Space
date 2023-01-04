@@ -70,14 +70,14 @@ public class HomeController {
 	}
 
 	
-	@RequestMapping(value = "/MyPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/MyPage", method = RequestMethod.GET)
 	public String mypage(Model model) {
 		logger.info("connected mypage.");
 		return "ajax/Pages/MyPage";
 	}
 
 	//MyReservation mapping 안됐음
-	@RequestMapping(value = "/MyReservation", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/MyReservation", method = RequestMethod.GET)
 	public String myreservation(Model model) {
 		logger.info("connected myreservation.");
 		return "ajax/Pages/MyReservation";
@@ -105,7 +105,7 @@ public class HomeController {
 		logger.info("connected Join.");
 		return "ajax/Join";
 	}
-	@RequestMapping(value="/AdminPage", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/AdminPage", method=RequestMethod.GET)
 	public String AdminPage(Model model) {
 		logger.info("connected AdminPage.");
 		return "ajax/Pages/AdminPage";

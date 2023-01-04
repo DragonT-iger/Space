@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -8,7 +8,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
-
+<c:set var="myctx" value="${pageContext.request.contextPath }"/> 
 <!-- Favicon -->
 <link href="img/favicon.ico" rel="icon">
 
@@ -22,13 +22,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="lib/animate/animate.min.css" rel="stylesheet">
-<link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-<link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+<link href="${myctx }/lib/animate/animate.min.css" rel="stylesheet">
+<%-- <link href="${myctx }/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="${myctx }/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" /> --%>
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="${myctx }/css/bootstrap.min.css" rel="stylesheet">
+<link href="${myctx }/css/style.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
 
@@ -36,10 +36,8 @@
 
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/ce9db0be33.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
-	<c:set var="myctx" value="${pageContext.request.contextPath }"/>
 	<div class="container-xxl bg-white p-0">
 		<!-- Spinner Start -->
 		<!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -64,24 +62,30 @@
 						
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
+							<c:if test="${loginUser.status ne null}">
 							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-
+							</c:if>
+							<c:if test="${loginUser.status eq null}">
+								<a href="#" class="nav-link dropdown-toggle">로그인해주세요</a>
+							</c:if>
 							<div class="dropdown-menu m-0">
-								<a href="${myctx}/MyPage" class="dropdown-item">MyPage</a>
+								
+								<a href="${myctx}/user/MyPage" class="dropdown-item">MyPage</a>
+								
 								<!-- 일반유저 -->
 								<c:if test="${loginUser.status eq 0 }">
-								<a href="${myctx}/MyReservation" class="dropdown-item">MyReservation</a>
-								<a href="${myctx}/MyZimm" class="dropdown-item">MyZimm</a>
-                                <a href="${myctx}/MyReviewList" class="dropdown-item">MyReviewList</a> 
+								<a href="${myctx}/user/MyReservation" class="dropdown-item">MyReservation</a>
+								<a href="${myctx}/user/MyZimm" class="dropdown-item">MyZimm</a>
+                                <a href="${myctx}/user/MyReviewList" class="dropdown-item">MyReviewList</a> 
 								</c:if>
 								<c:if test="${loginUser.status eq 1 }">
-                                <a href="${myctx}/MyReservationCheck" class="dropdown-item">MyReservationCheck</a>
-                                <a href="${myctx}/MySpaceEdit" class="dropdown-item">MySpaceEdit</a>
-                                <a href="${myctx}/MySpaceInsert" class="dropdown-item">MySpaceInsert</a>
-                                <a href="${myctx}/MySpaceList" class="dropdown-item">MySpaceList</a>
+                                <a href="${myctx}/owner/MyReservationCheck" class="dropdown-item">MyReservationCheck</a>
+                                <a href="${myctx}/owner/MySpaceEdit" class="dropdown-item">MySpaceEdit</a>
+                                <a href="${myctx}/owner/MySpaceInsert" class="dropdown-item">MySpaceInsert</a>
+                                <a href="${myctx}/owner/MySpaceList" class="dropdown-item">MySpaceList</a>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
-                                <a href="${myctx}/MyPageAdminPage" class="dropdown-item">AdminPage</a>
+                                <a href="${myctx}/admin/MyPageAdminPage" class="dropdown-item">AdminPage</a>
                                 </c:if>
 							</div>
 
