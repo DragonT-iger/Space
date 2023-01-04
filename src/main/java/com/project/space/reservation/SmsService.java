@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,7 +46,7 @@ public class SmsService {
 	 private String phone;
 	 
 	 public SmsResponseDTO sendSms(MessageDTO messageDto) throws JsonProcessingException, RestClientException,
-	 	URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+	 	URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException, HttpClientErrorException {
 		 //현재 시간 
 		 Long time = System.currentTimeMillis(); 
 		 List<MessageDTO> messages = new ArrayList<>(); 
@@ -66,19 +67,22 @@ public class SmsService {
 				 .countryCode("82") 
 				 .from(phone) 
 				 .content(messageDto.getContent()) 
-				 .message(messages) 
+				 .messages(messages) 
 				 .build();
 		 
 		 //request를 json형태로 body로 변환 
 		 ObjectMapper objectMapper = new ObjectMapper();
 		 String body = objectMapper.writeValueAsString(request); //body와 header를 합친다
+		 System.out.println("===body=====================");
+		 System.out.println(body);
 		 HttpEntity<String> httpBody = new HttpEntity<>(body, headers);
 		 
 		 RestTemplate restTemplate = new RestTemplate();
 		 restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 		 //restTemplate를 통해 외부 api와 통신
 		 
-		 SmsResponseDTO response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ this.serviceId +"/messages"), httpBody, SmsResponseDTO.class);
+		 SmsResponseDTO response = restTemplate.postForObject(
+				 new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ this.serviceId +"/messages"), httpBody, SmsResponseDTO.class);
 		 
 		 return response; 
 	 }

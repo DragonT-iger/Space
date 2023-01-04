@@ -15,12 +15,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -184,31 +188,47 @@ public class JYController {
 	
 	
 	
-	@PostMapping("/ReservationPayment")
-	public String ReservationPayment(Model m, @ModelAttribute("reservation") ReservationVO rvo) {
+	@PostMapping(value="/ReservationModal", produces="application/json")
+	@ResponseBody
+	public ModelMap ReservationModal(@RequestBody Map<String,String> pay) {
+		log.info(pay);
+		ReservationVO rvo=new ReservationVO();
+		rvo.setSnum(Integer.parseInt(pay.get("rtspace")));  //공간번호
+		rvo.setUserid(pay.get("rtuser")); //회원아이디
+		rvo.setRtstartdate(pay.get("rtyear"), pay.get("rtmonth"), pay.get("rtdate"));  //날짜합치기
+		rvo.setRtstart(pay.get("rtstartTime")); //시작시간
+		rvo.setRtend(pay.get("rtendTime"));  //종료시간
+		rvo.setTotalTime(pay.get("rtstartTime"), pay.get("rtendTime")); //대여시간
+		rvo.setRtnumber(Integer.parseInt(pay.get("rtcount")));  //예약인원
+		rvo.setCountprice(Integer.parseInt(pay.get("rtcount")), Integer.parseInt(pay.get("rtminn")), Integer.parseInt(pay.get("rtecost"))); //인원추가금
+		rvo.setTimePrice(rvo.getTotalTime(), Integer.parseInt(pay.get("rtbcost"))); //시간당금액
+		rvo.setTotalPrice(rvo.getCountPrice(), rvo.getTimePrice()); //총 예약금액
 		
-		
-		
-		return null;
+		ModelMap m=new ModelMap();
+		m.addAttribute("result", rvo);
+		return m;
 	}
 	
-	
-	@GetMapping("/send")
-	public String getSmsPage() {
-		return "ajax/Reservation/sendSms";
-	}
-	
-	@PostMapping(value = "/sms/send")
-	public String sendSms(MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, 
-		URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+	@PostMapping(value="/ReservationPayment")
+	public String ReservationPayment(Model m, @ModelAttribute ReservationVO rtvo, @ModelAttribute("messageDto") MessageDTO messageDto) 
+			throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, 
+			UnsupportedEncodingException, HttpClientErrorException {
+		log.info("rtvo insert=="+rtvo);
+		log.info("message: "+messageDto);
+		messageDto.setContent(rtvo.getUserid()+"님 예약이 완료되었습니다");
 		
-		SmsResponseDTO response = smsService.sendSms(messageDto);
-		log.info(response);
-		model.addAttribute("response", response);
-		return "ajax/Reservation/result";
+		int res=this.reservationService.insertBooking(rtvo);
+		String str=(res>0)? "예약이 완료되었습니다":"예약 실패";
+		String loc=(res>0)? "/space/":"/space/Reservation";
+		
+		if(res>0) {
+			SmsResponseDTO response = smsService.sendSms(messageDto);
+		}
+		
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
 	}
- 
-	
 	
 	
 }
