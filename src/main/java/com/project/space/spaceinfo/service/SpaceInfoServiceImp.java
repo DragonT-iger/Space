@@ -1,7 +1,6 @@
 package com.project.space.spaceinfo.service;
 
 import java.util.List;
-
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -12,8 +11,7 @@ import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 
 @Service
-public class SpaceInfoServiceImp implements SpaceInfoService {
-	
+public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Inject
 	private SpaceInfoMapper spaceinfoMapper;
 
@@ -37,14 +35,12 @@ public class SpaceInfoServiceImp implements SpaceInfoService {
 
 	@Override
 	public List<Space_InfoVO> selectByHashTag(String hashTag) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.selectByHashTag(hashTag);
 	}
 
 	@Override
 	public List<Space_InfoVO> getSpaceInfoAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.getSpaceInfoAll();
 	}
 
 	@Override
@@ -60,14 +56,12 @@ public class SpaceInfoServiceImp implements SpaceInfoService {
 
 	@Override
 	public int SpaceInfoInsert(Space_InfoVO sivo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.spaceinfoMapper.SpaceInfoInsert(sivo);
 	}
 
 	@Override
 	public int SpaceInfoUpdate(Space_InfoVO sivo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.spaceinfoMapper.SpaceInfoUpdate(sivo);
 	}
 
 	@Override
@@ -82,4 +76,13 @@ public class SpaceInfoServiceImp implements SpaceInfoService {
 		return null;
 	}
 
+	@Override
+	public Space_InfoVO selectByUserid(String userid) {
+		return this.spaceinfoMapper.selectByUserid(userid);
+	}
+
+	@Override
+	public String selectByh_code(int h_code) {
+		return this.spaceinfoMapper.selectByh_code(h_code);
+	}
 }

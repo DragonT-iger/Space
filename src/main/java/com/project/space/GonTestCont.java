@@ -33,34 +33,30 @@ public class GonTestCont {
 	@Inject
 	private Mem_InfoService memberService;
 	
-	@GetMapping("/MyZimm")
+	@GetMapping("/user/MyZimm")
 	public String zimmList() {
 		return "ajax/ilgon/MyZimm";
 	}
-	@GetMapping("/MyReviewList")
+	@GetMapping("/user/MyReviewList")
 	public String myReviewList() {
 		
 		return "ajax/ilgon/MyReviewList";
 	}
-	@GetMapping("/MyModify")
+	@GetMapping("/user/MyModify")
 	public String mymodify() {
 		return "ajax/Pages/MyModify";
 	}
-	@GetMapping("/MyReservationCheck")
+	/* ----등록유저------ */
+	@GetMapping("/owner/MyReservationCheck")
 	public String myReservationCheck() {
 		return "ajax/OwnerPage/MyReservationCheck";
 	}
-	@GetMapping("/MySpaceEdit")
+	@GetMapping("/owner/MySpaceEdit")
 	public String mySpaceEdit() {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
 	}
-	@GetMapping("/MySpaceInsert")
-	public String mySpaceInsert() {
-		
-		return "ajax/OwnerPage/MySpaceInsert";
-	}
-	@GetMapping("/MySpaceList")
+	@GetMapping("/owner/MySpaceList")
 	public String mySpaceList() {
 		
 		return "ajax/OwnerPage/MySpaceList";
