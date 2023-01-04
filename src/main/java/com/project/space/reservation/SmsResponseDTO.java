@@ -18,7 +18,7 @@ import lombok.Setter;
 //(access=AccessLevel.PROTECTED)
 public class SmsResponseDTO {
 	private String requestId;
-	private LocalDateTime requestTime;
+	private String requestTime;
 	private String statusCode;
 	private String statusName;
 }

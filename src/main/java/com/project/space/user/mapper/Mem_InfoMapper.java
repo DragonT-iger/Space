@@ -24,6 +24,6 @@ public interface Mem_InfoMapper {
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
-	
+
 	
 }

@@ -28,6 +28,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.space" />
+	<context:component-scan base-package="com.project.interceptor" />
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="UTF-8"/>
