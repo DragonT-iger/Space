@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:import url="/Spacetop" charEncoding="utf-8" />
+
+<script type="text/javascript" src="js_user/userCheck.js"></script>
+
 <style>
 * {
   margin: 0px;
@@ -51,14 +54,18 @@ body {
 }
 </style>
 
+
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h5 class="section-title ff-secondary text-center text-primary fw-normal">Join Us!</h5>
             <h1 class="mb-5">Sign Up</h1>
         </div>
+        <form name="mf" action="join" method="post">
+        <input type="hidden" name="id_flag" id="id_flag" value="N">
+        
         <div class="row g-4">
-          <form>
+          
             <div class="text-center">
                 <div class="row tf_wrap" id="">
                 
@@ -69,7 +76,9 @@ body {
 			        <input name="nickname" type="text" class="nickname tf-input" placeholder="NICKNAME">
 			      </div>
                   	  <div class="textForm">
-			        <input name="loginId" type="text" class="id tf-input" placeholder="ID">
+			        <input id="loginId" name="loginId" type="text" class="id tf-input" onkeyup="ajax_idcheck(this.value)" placeholder="ID">
+			        <span id="id_result"></span>
+			      	<!-- <button type="button" onclick="ajax_idcheck()">아이디 중복 체크</button> -->
 			      </div>
 			      <div class="textForm">
 			        <input name="loginPw" type="password" class="pw tf-input" placeholder="PASSWORD">
@@ -84,7 +93,7 @@ body {
 			        <input name="birth" type="text" class="birth tf-input" placeholder="BIRTH DATE">
 			      </div>
 			       <div class="textForm">
-			        <input name="email" type="email" class="email tf-input" placeholder="EMAIL">
+			        <input name="account" type="text" class="account tf-input" placeholder="ACCOUNT">
 			      </div>
                 </div>
             </div>
@@ -92,15 +101,16 @@ body {
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
                    <div class="row g-3">
                        <div class="col-12">
-                       	<a href="javascript:sel_menu('Join')" class="btn btn-primary w-40 py-2">Join</a>
-                           <button class="btn btn-primary w-40 py-2" type="reset">Reset</button>
-                           <a href="javascript:histroy.back()" class="btn btn-primary w-40 py-2">Cancel</a>
+                 	 		<button class="btn btn-primary w-40 py-2" type="button" onclick="member_check()">Join</button>
+                        	<button class="btn btn-primary w-40 py-2" type="reset">Reset</button>
+                        	<a href="javascript:histroy.back()" class="btn btn-primary w-40 py-2">Cancel</a>
                        </div>
                    </div>
                 </div>
             </div>
-          </form>
+         
         </div>
+        </form>
     </div>
 </div>
 <!-- Contact End -->
