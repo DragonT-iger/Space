@@ -56,11 +56,6 @@ public class GonTestCont {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
 	}
-	@GetMapping("/owner/MySpaceInsert")
-	public String mySpaceInsert() {
-		
-		return "ajax/OwnerPage/MySpaceInsert";
-	}
 	@GetMapping("/owner/MySpaceList")
 	public String mySpaceList() {
 		
