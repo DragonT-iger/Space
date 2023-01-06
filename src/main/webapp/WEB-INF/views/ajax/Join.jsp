@@ -138,7 +138,17 @@ body {
 							
 							<div id=sub>숫자만 입력해주세요</div>
 						</div>
-					</div>
+						<div class="textForm">
+							<div class="dropdown">
+								<button id="member_sel_btn"type="button" class="btn btn-primary dropdown-toggle"
+									data-toggle="dropdown">회원종류?</button>
+				  				<div class="dropdown-menu">
+									<a class="dropdown-item" href="javascript:member_sel('0','일반회원')">일반회원</a> 
+									<a class="dropdown-item" href="javascript:member_sel('1','등록회원')">등록회원</a> 
+								</div>
+								<input type="hidden" id="status" name="status" value=""/>
+		  					</div>
+		  				</div>
 				</div>
 				<div class="col-md-6">
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
@@ -158,5 +168,18 @@ body {
 		</form>
 	</div>
 </div>
+<!--  -->
+<script>
+	function member_sel(i,text){
+		if(i==0||i==1){
+			console.log(i);
+			$('#status').val(i);
+			$('#member_sel_btn').text(text);
+		}else{
+			alert("잘못된 접근입니다");
+			location.reload();
+		}
+	}
+</script>
 <!-- Contact End -->
 <c:import url="/Spacefoot" charEncoding="utf-8" />

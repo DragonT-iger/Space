@@ -29,7 +29,7 @@
 </style>
 <div class="container mt-5 text-center" id="modify_wrap">
 	<h2 class="section-title ff-secondary text-center text-primary fw-normal">Modify</h2>
-	<form name="mf" id="updateUser" method="POST">
+	<form name="mf" id="../updateUser" method="POST">
 	    <input type="hidden" id="userid" name="userid">
 	    <!-- 업데이트 idx 값 저장-->
 	  	<table class="table table-borderless mt-5 mb-5" id="edit_table">
@@ -92,8 +92,8 @@
 	  	</table>
 	
 	<div class="modify-btn text-center" >
-          <button type="button" class="btn btn-primary" onclick="">수정완료</button>
-          <button type="button" class="btn btn-danger" onclick="sel_menu('MyPage')">취소</button>
+          <button class="btn btn-primary">수정완료</button>
+          <button type="button" class="btn btn-danger" onclick="javascript:history.back()">취소</button>
     </div>
     </form>
 </div>
