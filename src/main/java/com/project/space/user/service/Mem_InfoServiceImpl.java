@@ -61,6 +61,8 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 
 	@Override
 	public int updateUser(Mem_InfoVO user) {
+		String afterEncording = pwencoder.encode(user.getMpwd());
+		user.setMpwd(afterEncording);
 		return memberMapper.updateUser(user);
 	}
 

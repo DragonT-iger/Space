@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,9 @@ public class LoginController {
 	
 	@Inject
 	private Mem_InfoMapper memberMapper;
+	
+	@Autowired
+	private PasswordEncoder pwencoder; //암호화 객체
 	
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session, @ModelAttribute("user") Mem_InfoVO user) 
@@ -79,8 +84,9 @@ public class LoginController {
 		
 		// vo로 들어오는 비밀번호
 		String voPass = vo.getMpwd();
-		
-		if(!(sessionPass.equals(voPass))) {
+		log.info("voPass===============>"+voPass);
+		log.info(pwencoder.matches(voPass, sessionPass));
+		if(!pwencoder.matches(voPass, sessionPass)) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/";
 		}

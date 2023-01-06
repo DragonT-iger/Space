@@ -45,10 +45,10 @@ public class joinsecuTest {
 		vo.setHp("00001234");
 		int i = mapper.createUser(vo);
 		*/
-		Mem_InfoVO vo2 = mapper.getUser("test123");
+		Mem_InfoVO vo2 = mapper.getUser("test11");
 		log.info("test==>"+vo2);
 		
-		boolean test = pwencoder.matches("test123",vo2.getMpwd() );
+		boolean test = pwencoder.matches("test11",vo2.getMpwd() );
 		log.info("비밀번호 복호화 후 일치하는지?? ==>"+test);
 		
 
