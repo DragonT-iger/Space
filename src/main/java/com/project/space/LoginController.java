@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NotUserException;
+import com.project.space.user.mapper.Mem_InfoMapper;
 import com.project.space.user.service.Mem_InfoService;
 
 
@@ -34,6 +36,9 @@ public class LoginController {
 	
 	@Inject
 	private Mem_InfoService memberService;
+	
+	@Inject
+	private Mem_InfoMapper memberMapper;
 	
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session, @ModelAttribute("user") Mem_InfoVO user) 
@@ -93,16 +98,18 @@ public class LoginController {
 	
 	//회원가입
 	@PostMapping("/join")
-	public String joinEnd(Model m, @ModelAttribute("user") Mem_InfoVO user) {
+	public String joinEnd(Model m, @ModelAttribute("user") Mem_InfoVO user, BindingResult b) {
+		b.getFieldError();
 		log.info("join ===user: "+user);
 		if(user.getMname()==null||user.getUserid()==null||user.getMpwd()==null||
 				user.getMname().trim().isEmpty()||user.getUserid().trim().isEmpty()
 				||user.getMpwd().trim().isEmpty()) {
-			return "redirect:join";
+			return "redirect:/";
 		}
 		int n=memberService.createUser(user);
+		log.info(n);
 		String str=(n>0)?"회원가입 완료":"가입 실패";
-		String loc=(n>0)?"javascript:history.back()":"javascript:history.back()";
+		String loc=(n>0)?"Login":"javascript:history.back()";
 		
 		
 		m.addAttribute("message",str);
@@ -114,7 +121,7 @@ public class LoginController {
 	
 	 @GetMapping(value = "/idcheck",produces="application/json")
 	 public @ResponseBody Map<String, String>
-	 idCheck(@RequestParam("loginId")String userid){ log.info("user==="+userid);
+	 idCheck(@RequestParam("userid")String userid){ log.info("user==="+userid);
 	 int isUse=memberService.idCheck(userid); 
 		/* String result=(isUse)?"ok":"no"; */
 	 
@@ -130,7 +137,12 @@ public class LoginController {
 	 
 	 return map; 
 	 
-	 }
+	 }//--------------------------------------
+	 @RequestMapping(value = "/updateUser" , method = RequestMethod.POST)
+		public String updateUser(Mem_InfoVO user) {
+		 	memberMapper.updateUser(user);
+			return "redirect:/space";
+	 }//--------------------------------
 	 
 }
 

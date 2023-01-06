@@ -36,7 +36,18 @@
 
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/ce9db0be33.js" crossorigin="anonymous"></script>
-
+<script>
+	const sel_menu = function(m_name) {
+		fetch(m_name).then(function(response) {
+			response.text().then(function(text) {
+				$('tab').html(text);
+				$('#selmenu').html(m_name);
+				$('li[id$="Tab"]').removeClass('active');
+				$('#' + m_name + 'Tab').addClass('active');
+			})
+		})
+	}
+</script>
 </head>
 <body>
 	<c:set var="myctx" value="${pageContext.request.contextPath }"/>
@@ -64,7 +75,8 @@
 						
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+							<a href="#" class="nav-link dropdown-toggle" 
+							data-bs-toggle="dropdown">Pages</a>
 
 							<div class="dropdown-menu m-0">
 								<a href="${myctx}/MyPage" class="dropdown-item">MyPage</a>

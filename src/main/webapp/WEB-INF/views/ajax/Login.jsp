@@ -6,21 +6,6 @@
 <c:import url="/Spacetop" charEncoding="utf-8"/>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script>
-
-const sel_menu = function(m_name){
-	fetch(m_name).then(function(response){
-              response.text().then(function(text){
-              $('tab').html(text);
-              $('#selmenu').html(m_name);
-              $('li[id$="Tab"]').removeClass('active');
-              $('#'+m_name+'Tab').addClass('active');
-              })
-          })
-	}
-
-
-</script>
 
 <div class="container-xxl py-5">
     <div class="container">

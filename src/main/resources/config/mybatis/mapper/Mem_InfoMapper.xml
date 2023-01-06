@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.project.space.user.mapper.Mem_InfoMapper">
 	<!-- 회원가입 -->
 	<insert id="createUser" parameterType="MemberInfo">
-		insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,ACCOUNT,ADDPOINT)
+		insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,ACCOUNT,POINTADD)
 		values(#{mname},#{nickname},#{userid},#{mpwd},#{hp},#{birth:VARCHAR},#{status},0,1,#{account:VARCHAR},0)
 	</insert>
 	<!-- userid와 일치하는 회원체크 -->
@@ -27,7 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr
 		from mem_info order by mdate asc
 	</select>
-	
+	<!-- 회원수정 -->
+	<update id="updateUser" parameterType="MemberInfo">
+		update mem_info set nickname=#{nickname:VARCHAR},
+		mpwd=#{mpwd},hp=#{hp},account=#{account} where userid=#{userid}
+	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser" parameterType="MemberInfo" > 
 		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}

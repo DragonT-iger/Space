@@ -7,22 +7,22 @@ function ajax_idcheck(uid){
 		//alert(uid);
 
 	if(!uid){
-		uid=$('#loginId').val();
-		alert($('#loginId').val());
+		uid=$('#userid').val();
+		alert($('#userid').val());
 		if(!uid){
 			alert('아이디를 입력하세요');
-			$('#loginId').focus();
+			$('#userid').focus();
 			return;
 		}
-		if(!isUserid(mf.loginId)){
+		if(!isUserid(mf.userid)){
 			alert('아이디는 영문자로 시작하고 영문, 숫자_! 포함 4~8자리여야 해요');
-			mf.loginId.select();
+			mf.userid.select();
 			return;
 		}
 	}
 	$.ajax({
 		type:'GET',
-		url:'idcheck?loginId='+uid,
+		url:'idcheck?userid='+uid,
 		dataType:'json',
 		cache:false,
 		success:function(res){
@@ -70,41 +70,42 @@ function id_check(){
  function member_check(){
 	
 	
-	if(!isKor(mf.name)){
+	if(!isKor(mf.mname)){
 		alert('이름은 한글이름만 가능합니다');
-		mf.name.select();
+		mf.mname.select();
 		return;
 	}
-	if(!isUserid(mf.loginId)){
+	if(!isUserid(mf.userid)){
 		alert('아이디는 영문자,숫자,_,!로 4~8자까지 가능해요');
 		mf.id_flag.value="N";
-		mf.loginId.select();
+		mf.userid.select();
 		return;
 	}
 	
-	if(!isPasswd(mf.loginPw)){
+	if(!isPasswd(mf.mpwd1)){
 		alert('비밀번호는 영문자,숫자,!,. 로 4~8자리까지 가능해요');
-		mf.loginPw.select();
+		mf.mpwd1.select();
 		return;
 	}
 	
-	if(mf.loginPw.value!=mf.loginPwConfirm.value){
+	if(mf.mpwd1.value!=mf.mpwd.value){
 		alert('비밀번호와 비밀번호 확인이 달라요');
-		mf.loginPwConfirm.select();
+		mf.mpwd.select();
 		return;
 	}
 	
 	if(mf.id_flag.value=="N"){
 		alert('아이디 중복체크를 해야합니다');
-		mf.loginId.focus();
+		mf.userid.focus();
 		return;
 	}
-	
-	if(!isMobile(mf.cellphoneNo)){
+/*	
+	if(!isMobile(mf.hp)){
 		alert('핸드폰 형식에 맞지 않아요. (010|011)(숫자7~8자리)');
-		mf.cellphoneNo.select();
+		mf.hp.select();
 		return;
 	}	
+	
 	
 	if(!isEmail(mf.email)){
 		alert('이메일 형식에 맞아야 합니다');
@@ -112,21 +113,20 @@ function id_check(){
 		return;
 	}
 	
-	
 	if(!isDate(mf.birth)){
 		alert('날짜 형식에 맞아야 합니다.');
 		mf.birth.select();
 		return;
 	}
-	
-	
+*/		
+
 	mf.submit();
 }//-----------------------
 /** 
 	asdf-12cd@naver.com
 	adff.my@daum.net
 	asdf12@google.co.kr
-*/
+
 function isEmail(input){
 	let val=input.value;
 	let pattern=/^[\w-_]+(\.[\w]+)*@([a-zA-Z]+\.)+[a-z]{2,3}$/;
@@ -143,13 +143,13 @@ function isDate(input){
 	//alert(b);
 	return b;
 }//------------------------
-
+*/
 /** 
 	\b : 단어의 경계를 나타내며, 해당 패턴이 정확하게 일치해야 함을 의미
 	(010|011) : 010 또는 011이 와야 함을 의미
 	\d{3,4} : 숫자가 3개이상 4개 이하 나와야 함을 의미
 	\d{4}: 숫자가 4자 나와야 함을 의미
-*/
+
 function isMobile(input){
 	let val=input1.value;
 	//alert(val);
@@ -158,6 +158,7 @@ function isMobile(input){
 	//alert('hp '+b);
 	return b;
 }
+*/
 
 /*
 \w : 알파벳대소문자,숫자 
