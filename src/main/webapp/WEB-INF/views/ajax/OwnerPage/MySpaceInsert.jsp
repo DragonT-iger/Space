@@ -6,24 +6,46 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <c:import url="/Spacetop" charEncoding="utf-8" />
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
 <script>
 	function postfind() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	        	if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 					addr = data.roadAddress;
 				} else { // 사용자가 지번 주소를 선택했을 경우(J)
 					addr = data.jibunAddress;
 				}
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				document.getElementById('spost').value = data.zonecode; //우편 번호
+	        	document.getElementById('spost').value = data.zonecode; //우편 번호
 				document.getElementById('saddr1').value = addr; //도로명 주소
-			}
-		}).open();
+	            Promise.resolve(data).then(o => {
+	                const { address } = data;
+
+	                return new Promise((resolve, reject) => {
+	                    const geocoder = new daum.maps.services.Geocoder();
+
+	                    geocoder.addressSearch(address, (result, status) =>{
+	                        if(status === daum.maps.services.Status.OK){ //다음map api service가 정상호출됫을대
+	                            const { x, y } = result[0];
+								//alert(result[0].x);
+								//alert(result[0].y);
+	                            resolve({ lat: y, lon: x }) //성공시 object객체에 lat에 y값담기고 lon에 x값담김
+	                        }else{
+	                            reject(); //실패
+	                        }
+	                    });
+	                })
+	            }).then(result => {
+	                //alert( JSON.stringify(result)); //오브젝트값확인
+	                document.getElementById('slong').value = result.lon;
+	                document.getElementById('slat').value = result.lat;
+	            }).catch(function(err) {
+	            	  console.log(err); //reject 실패시 에러코드 콘솔에 출력
+	           	});
+	        }
+	    }).open();
 	}
-	
 </script>
 
 <script>
@@ -88,7 +110,7 @@
 				<td style="width: 20%"><b>공간명칭</b></td>
 				<td style="width: 80%">
 				<!-- <input class="form-control" list="hashlist" name="sname" id="sname" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.sname}"> -->
-					<input class="form-control" list="hashlist" name="sname" id="sname" onkeyup ="ex_info()">
+					<input class="form-control" list="hashlist" name="sname" id="sname" onchange ="ex_info()">
 					<datalist id="hashlist">
 						<!-- for문으로 생성 해시태그등록한거 차례대로 -->
 						<!-- ex option) -->
@@ -164,7 +186,9 @@
 				<td width="20%"><b>주소</b></td>
 				<td width="80%">
 					<input type="text" class="form-control" name="saddr1" id="saddr1" placeholder="Address" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.saddr1}"><br> 
-					<input type="text" class="form-control" name="saddr2" id="saddr2" placeholder="상세주소" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.saddr2}"></td>
+					<input type="text" class="form-control" name="saddr2" id="saddr2" placeholder="상세주소" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.saddr2}"><br>
+					<input type="hidden" class="form-control" name="slong" id="slong" placeholder="좌표값Y" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.slong}"><br>
+					<input type="hidden" class="form-control" name="slat" id="slat" placeholder="좌표값X" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.slat}"></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>메인사진</b></td>
@@ -204,6 +228,6 @@
 
 
 	</form>
-
+	<div id="postcode"></div>
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />
