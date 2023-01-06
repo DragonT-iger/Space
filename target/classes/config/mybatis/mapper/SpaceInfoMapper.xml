@@ -7,9 +7,36 @@
 		select * from space_info where snum=#{value}
 	</select>
 	
-	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
-		select * from space_info where userid=#{value}
+	<select id="selectByUserid" resultType="SpaceInfo" parameterType="String">
+		select * from space_info where userid=#{userid}
 	</select>
-	
+	<select id="selectByh_code" resultType="String" parameterType="int">
+		select h_name from hashtag where h_code = #{h_code}
+	</select>
+
+	<insert id="SpaceInfoInsert" parameterType="SpaceInfo">
+		insert into space_info(snum, sname, userid, minn, maxn, bcost, ecost, spost, saddr1, saddr2, slong, slat, sdate, h_code, simage1, simage2, simage3, simage4, scontents,srule)
+		values(space_info_seq.nextval, #{sname}, #{userid}, #{minn}, #{maxn}, #{bcost}, #{ecost}, #{spost:VARCHAR}, #{saddr1:VARCHAR}, #{saddr2:VARCHAR}, #{slong:VARCHAR}, #{slat:VARCHAR}, sysdate, #{h_code}, #{simage1:VARCHAR}, #{simage2:VARCHAR}, #{simage3:VARCHAR}, #{simage4:VARCHAR}, #{scontents:VARCHAR}, #{srule:VARCHAR})
+	</insert>
+
+	<update id="SpaceInfoUpdate" parameterType="SpaceInfo">
+		update space_info set sname=#{sname}, minn=#{minn}, maxn=#{maxn}, bcost=#{bcost}, ecost=#{ecost}, spost=#{spost:VARCHAR}, saddr1=#{saddr1:VARCHAR}, saddr2=#{saddr2:VARCHAR}, slong=#{slong:VARCHAR}, slat=#{slat:VARCHAR}, h_code=#{h_code}, simage1=#{simage1:VARCHAR}, simage2=#{simage2:VARCHAR}, simage3=#{simage3:VARCHAR}, simage4=#{simage4:VARCHAR}, scontents=#{scontents:VARCHAR}, srule=#{srule:VARCHAR} where userid=#{userid} and sname=#{sname}
+	</update>
+	<select id="selectByHashTag" parameterType="int" resultType="SpaceInfo">
+		select * from space_info where h_code = #{h_code}
+	</select>
+
+	<select id="getSpaceInfoAll" resultType="SpaceInfo">
+		select * from space_info
+	</select>
+
+	<select id="GetAllSpaceNameByUserid" resultType="String" parameterType="String">
+		select sname from space_info where userid = #{userid}
+	</select>
+
+	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
+		select * from space_info where userid = #{userid} and sname = #{sname}
+	</select>
+		
 	
 </mapper>

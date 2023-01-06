@@ -91,34 +91,38 @@
         </div>
         <!-- Navbar & Hero End -->
 
+
+
+		
+		
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <div class="row g-3">
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="img/about-${id}-1.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="resources/SpaceInfoImg/${spaceinfo.simage1}">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/about-${id}-2.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="resources/SpaceInfoImg/${spaceinfo.simage2}" style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/about-${id}-3.jpg">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="resources/SpaceInfoImg/${spaceinfo.simage3}">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/about-${id}-4.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="resources/SpaceInfoImg/${spaceinfo.simage4}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
-                        <h1 class="mb-4">Welcome to ${sname}</h1>
-                        <p class="mb-4">${scontent}</p>
+                        <h1 class="mb-4">Welcome to ${spaceinfo.sname}</h1>
+                        <p class="mb-4">${spaceinfo.scontents}</p>
                         
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">${minn}</h1>
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">${spaceinfo.minn}</h1>
                                     <div class="ps-4">
                                         <h6 class="text-uppercase mb-0">최소 인원</h6>
                                     </div>
@@ -126,7 +130,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">${maxn}</h1>
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">${spaceinfo.maxn}</h1>
                                     <div class="ps-4">
                                         <h6 class="text-uppercase mb-0">최대 인원</h6>
                                     </div>
@@ -140,48 +144,24 @@
         <!-- About End -->
 
 
-        <h1>기본 요금 : ${bcost}</h1>
-        <h1>인원 추가금 : ${ecost}</h1>
-
-        <input type="text" id="count_people">
-
-        <script>
-            var count_people = document.getElementById("count_people");
-            var total_cost = document.getElementById("total_cost");
-            var bcost = "${bcost}";
-            var ecost = "${ecost}";
-
-            count_people.addEventListener("click", function(){
-                alert("asdf"+bcost);
-                if(count_people.value <= "${minn}"){
-                    total_cost.value = bcost;
-                }else{
-                    total_cost.value = bcost + (count_people.value - "${minn}") * ecost;
-                }
-            });
-        </script>
-
-        <input type="text" id="total_cost">
-
-
-		
-        <input class="form-control" list="hashlist" name="h_code" id="h_code">
-        <datalist id="hashlist">
-            <!-- for문으로 생성 해시태그등록한거 차례대로 -->
-            <!-- ex option) -->
-            <option value="크리스마스">
-            <option value="마블">
-            <option value="로맨스">
-            <option value="생일">
-            <option value="게임">
-            <!-- for end -->
-      	</datalist>
-          <!-- input에 있는 값을 가지고 자동으로 값을 계산함.  -->
+        <h1>기본 요금 : ${spaceinfo.bcost}</h1>
+        <h1>인원 추가금 : ${spaceinfo.ecost}</h1>
+        <h1>해시태그 : ${spaceinfo.h_code} ${hashtag}</h1>
 
 
 
-        <h1>주소 : ${spost}</h1>
-        <h1>상세주소 : ${saddr1} ${saddr2} </h1>
+
+		<c:forEach var="Space" items="${spaceArr}">
+		    <h1>${Space.sname } , ${Space.simage1 }</h1>
+	    </c:forEach>
+         
+
+
+
+        <h1>주소 : ${spaceinfo.saddr1} </h1>
+        <h1>상세주소 : ${spaceinfo.saddr2}</h1>
+        <h1>우편변호 : ${spaceinfo.spost}</h1>
+        <h1>규칙 : ${spaceinfo.srule}</h1>
         
 
 

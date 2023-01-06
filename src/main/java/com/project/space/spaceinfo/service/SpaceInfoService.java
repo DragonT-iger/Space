@@ -33,5 +33,13 @@ public interface SpaceInfoService {
 	public int SpaceInfoDelete(int pnum);
 	//등록자별 공간가져오기
 	public List<Space_InfoVO> selectBySpaceInfo(String userid);
+
+	public List<Space_InfoVO> selectByUserid(String userid);
+
+	public String selectByh_code(int h_code);
+	
+	public List<String> GetAllSpaceNameByUserid(String userid);
+
+	public Space_InfoVO selectByuseridSname(String userid , String sname);
 		
 }
