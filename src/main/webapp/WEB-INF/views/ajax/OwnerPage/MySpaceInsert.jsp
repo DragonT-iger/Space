@@ -88,7 +88,7 @@
 				<td style="width: 20%"><b>공간명칭</b></td>
 				<td style="width: 80%">
 				<!-- <input class="form-control" list="hashlist" name="sname" id="sname" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.sname}"> -->
-					<input class="form-control" list="hashlist" name="sname" id="sname" onkeyup ="ex_info()">
+					<input class="form-control" list="hashlist" name="sname" id="sname" onchange ="ex_info()">
 					<datalist id="hashlist">
 						<!-- for문으로 생성 해시태그등록한거 차례대로 -->
 						<!-- ex option) -->
@@ -120,10 +120,10 @@
 				<td style="width:80%">
 					<div class="row">
 						<div class="col">
-					      	<input type="number" name="bcost" id="bcost" class="form-control" placeholder="기본비용" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.bcost}">
+					      	<input type="number" name="bcost" id="bcost" class="form-control" placeholder="기본비용">
 					    </div>
 					    <div class="col">
-							<input type="number" name="ecost" id="ecost" class="form-control" placeholder="인원추가금" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.ecost}">
+							<input type="number" name="ecost" id="ecost" class="form-control" placeholder="인원추가금">
 					    </div>
 				    </div>
 				</td>
@@ -135,10 +135,10 @@
 				<td style="width:80%">
 					<div class="row">
 						<div class="col">
-					      	<input type="number" name="minn" id="minn" class="form-control" placeholder="최소 인원수" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.minn}">
+					      	<input type="number" name="minn" id="minn" class="form-control" placeholder="최소 인원수">
 					    </div>
 					    <div class="col">
-							<input type="number" name="maxn" id="maxn" class="form-control" placeholder="최대 인원수" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.maxn}">
+							<input type="number" name="maxn" id="maxn" class="form-control" placeholder="최대 인원수">
 					    </div>
 				    </div>
 				</td>
@@ -146,16 +146,16 @@
 			<tr>
 				<td style="width: 20%"><b>공간 규칙</b></td>
 				<td style="width: 80%"><textarea name="scontents" id="scontents"
-						rows="10" cols="50" class="form-control"><c:set var="space" value="${ex_spaceinfo[0]}"/>${space.scontents}</textarea></td>
+						rows="10" cols="50" class="form-control"></textarea></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>공간 규칙</b></td>
 				<td style="width: 80%"><textarea name="srule" id="srule"
-						rows="10" cols="50" class="form-control"><c:set var="space" value="${ex_spaceinfo[0]}"/>${space.srule}</textarea></td>
+						rows="10" cols="50" class="form-control"></textarea></td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1"><b>우편번호</b></td>
-				<td width="80%" class="m2"><input type="text" name="spost" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.spost}"
+				<td width="80%" class="m2"><input type="text" name="spost"
 					id="spost" placeholder="Post" maxlength="5" >
 					<button type="button" class="btn btn-success" onclick="postfind()">우편번호
 						찾기</button></td>
@@ -163,8 +163,8 @@
 			<tr>
 				<td width="20%"><b>주소</b></td>
 				<td width="80%">
-					<input type="text" class="form-control" name="saddr1" id="saddr1" placeholder="Address" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.saddr1}"><br> 
-					<input type="text" class="form-control" name="saddr2" id="saddr2" placeholder="상세주소" value="<c:set var="space" value="${ex_spaceinfo[0]}"/> ${space.saddr2}"></td>
+					<input type="text" class="form-control" name="saddr1" id="saddr1" placeholder="Address"><br> 
+					<input type="text" class="form-control" name="saddr2" id="saddr2" placeholder="상세주소"></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>메인사진</b></td>
