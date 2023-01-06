@@ -29,7 +29,7 @@ public class SpaceInfoController {
     private SpaceInfoService spaceinfoservice;
 
 
-
+    //httpservlet 객체받아서 login한 사용자의 id를 받는다
     private static final Logger logger = LoggerFactory.getLogger(SpaceInfoController.class);
     @PostMapping("/spaceInsert")
     public String spaceInfo(Model m, @ModelAttribute Space_InfoVO vo, BindingResult br, @RequestParam("simage") List<MultipartFile> simage , HttpServletRequest req) throws IOException{        
@@ -39,7 +39,7 @@ public class SpaceInfoController {
         // 유효성 검사 (SNAME)
         if(vo.getSname()==null||vo.getSname().trim().isEmpty()) {
             logger.info("공간명 입력안함");
-            return "redirect:ajax/OwnerPage/MySpaceInsert";
+            return "Home";
         }
 		ServletContext app=req.getServletContext();
 
@@ -97,7 +97,9 @@ public class SpaceInfoController {
         
 
         
+		
 
+        
 
         //for test
         vo.setUserid("2");
@@ -117,14 +119,14 @@ public class SpaceInfoController {
 
             
             //return "redirect:ajax/OwnerPage/MySpaceInsert";
-            return "MainHome";
+            return "Home";
         }else {
             int n = spaceinfoservice.SpaceInfoInsert(vo);
             logger.info("공간등록 성공여부:"+n);
 
             
             //return "redirect:ajax/OwnerPage/MySpaceInsert";
-            return "MainHome";
+            return "Home";
         }
         
     }
@@ -134,6 +136,10 @@ public class SpaceInfoController {
     @GetMapping(value = "/MySpaceInfoView")
     public String SpaceInfoView(Model m , @RequestParam int snum) {
         logger.info("connected MySpaceInfoView.");
+
+        List<Space_InfoVO> sivolist = spaceinfoservice.getSpaceInfoAll();
+		
+        m.addAttribute("spaceArr", sivolist);
 
         m.addAttribute("hashtag",spaceinfoservice.selectByh_code(spaceinfoservice.selectBySnum(snum).getH_code()));
 

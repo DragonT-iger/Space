@@ -29,6 +29,9 @@
 	<select id="getSpaceInfoAll" resultType="SpaceInfo">
 		select * from space_info
 	</select>
-		
+
+	<select id="SelectBySpaceName" resultType="String">
+		select sname from space_info where userid = #{userid}
+	</select>
 	
 </mapper>
