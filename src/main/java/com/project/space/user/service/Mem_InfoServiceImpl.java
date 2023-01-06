@@ -23,9 +23,9 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	private Mem_InfoMapper memberMapper;
 	
 	@Override
-	public int createUser(Mem_InfoVO user) {
+	public int createUser(Mem_InfoVO memvo) {
 		
-		return memberMapper.createUser(user);
+		return memberMapper.createUser(memvo);
 	}
 
 	@Override
@@ -52,8 +52,7 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 
 	@Override
 	public int updateUser(Mem_InfoVO user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return memberMapper.updateUser(user);
 	}
 
 	@Override

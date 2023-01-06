@@ -23,5 +23,5 @@ public class Mem_InfoVO {
 	private long account; /* 계좌정보 */
 	private String statusStr;
 	//여기 적었던 회원 포인트 누적계산 날라갔거든요 이거 추가해야되요
-	private int ADDPOINT; //누적포인트
+	private int pointadd; //누적포인트
 }
