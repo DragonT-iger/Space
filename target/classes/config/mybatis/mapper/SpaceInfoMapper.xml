@@ -20,9 +20,9 @@
 	</insert>
 
 	<update id="SpaceInfoUpdate" parameterType="SpaceInfo">
-		update space_info set sname=#{sname}, minn=#{minn}, maxn=#{maxn}, bcost=#{bcost}, ecost=#{ecost}, spost=#{spost:VARCHAR}, saddr1=#{saddr1:VARCHAR}, saddr2=#{saddr2:VARCHAR}, slong=#{slong:VARCHAR}, slat=#{slat:VARCHAR}, h_code=#{h_code}, simage1=#{simage1:VARCHAR}, simage2=#{simage2:VARCHAR}, simage3=#{simage3:VARCHAR}, simage4=#{simage4:VARCHAR}, scontents=#{scontents:VARCHAR}, srule=#{srule:VARCHAR} where userid=#{userid}
+		update space_info set sname=#{sname}, minn=#{minn}, maxn=#{maxn}, bcost=#{bcost}, ecost=#{ecost}, spost=#{spost:VARCHAR}, saddr1=#{saddr1:VARCHAR}, saddr2=#{saddr2:VARCHAR}, slong=#{slong:VARCHAR}, slat=#{slat:VARCHAR}, h_code=#{h_code}, simage1=#{simage1:VARCHAR}, simage2=#{simage2:VARCHAR}, simage3=#{simage3:VARCHAR}, simage4=#{simage4:VARCHAR}, scontents=#{scontents:VARCHAR}, srule=#{srule:VARCHAR} where userid=#{userid} and sname=#{sname}
 	</update>
-		<select id="selectByHashTag" parameterType="int" resultType="SpaceInfo">
+	<select id="selectByHashTag" parameterType="int" resultType="SpaceInfo">
 		select * from space_info where h_code = #{h_code}
 	</select>
 
@@ -30,8 +30,13 @@
 		select * from space_info
 	</select>
 
-	<select id="SelectBySpaceName" resultType="String">
+	<select id="GetAllSpaceNameByUserid" resultType="String" parameterType="String">
 		select sname from space_info where userid = #{userid}
 	</select>
+
+	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
+		select * from space_info where userid = #{userid} and sname = #{sname}
+	</select>
+		
 	
 </mapper>

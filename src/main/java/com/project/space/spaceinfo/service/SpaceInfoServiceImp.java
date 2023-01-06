@@ -1,5 +1,6 @@
 package com.project.space.spaceinfo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,12 +78,26 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	}
 
 	@Override
-	public Space_InfoVO selectByUserid(String userid) {
+	public List<Space_InfoVO> selectByUserid(String userid) {
 		return this.spaceinfoMapper.selectByUserid(userid);
 	}
 
 	@Override
 	public String selectByh_code(int h_code) {
 		return this.spaceinfoMapper.selectByh_code(h_code);
+	}
+
+	@Override
+	public List<String> GetAllSpaceNameByUserid(String userid) {
+		return this.spaceinfoMapper.GetAllSpaceNameByUserid(userid);
+	}
+
+	@Override
+	public Space_InfoVO selectByuseridSname(String userid, String sname) {
+		Map<String,String> map=new HashMap<>();
+		map.put("userid", userid);
+		map.put("sname", sname);
+		
+		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
 }

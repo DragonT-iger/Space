@@ -153,7 +153,6 @@
 
 		<c:forEach var="Space" items="${spaceArr}">
 		    <h1>${Space.sname } , ${Space.simage1 }</h1>
-            <img src="resources/SpaceInfoImg/${Space.simage1}">
 	    </c:forEach>
          
 

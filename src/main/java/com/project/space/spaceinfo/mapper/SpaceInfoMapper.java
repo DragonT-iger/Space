@@ -31,9 +31,14 @@ public interface SpaceInfoMapper {
 	//등록자별 공간가져오기
 	public List<Space_InfoVO> selectBySpaceInfo(int mnum);
 
-	public Space_InfoVO selectByUserid(String userid);
+	public List<Space_InfoVO> selectByUserid(String userid);
 
 	public String selectByh_code(int h_code);
+	
+	public List<String> GetAllSpaceNameByUserid(String userid);
+	
+	public Space_InfoVO selectByuseridSname(Map<String, String> map);
+
 		
 		
 }
