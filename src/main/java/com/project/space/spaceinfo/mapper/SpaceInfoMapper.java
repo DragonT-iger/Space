@@ -29,7 +29,7 @@ public interface SpaceInfoMapper {
 	//공간삭제
 	public int SpaceInfoDelete(int pnum);
 	//등록자별 공간가져오기
-	public List<Space_InfoVO> selectBySpaceInfo(int mnum);
+	public List<Space_InfoVO> selectBySpaceInfo(String userid);
 		
 		
 }

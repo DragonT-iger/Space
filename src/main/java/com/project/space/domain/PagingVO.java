@@ -11,6 +11,8 @@ import lombok.Data;
 
 @Data
 public class PagingVO {
+	private int snum; //공간번호
+	
 	//페이징 처리 관련 프로퍼티
 	private int cpage;  //현재 보여줄 페이지 번호
 	private int pageSize=5;  //한 페이지 당 보여줄 목록 개수

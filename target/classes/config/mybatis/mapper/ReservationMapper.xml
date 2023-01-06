@@ -16,7 +16,7 @@
 	</insert>
 	
 	<update id="updateUserRes" parameterType="Reservation">
-		update mem_info set point=(point-#{totalprice}) where userid=#{userid}
+		update mem_info set point=(point-#{totalprice}) where userid=#{userid} and point>#{totalprice}
 	</update>
 	
 </mapper>

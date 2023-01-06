@@ -28,15 +28,11 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.space" />
-<<<<<<< HEAD
-	<context:component-scan base-package="com.project.interceptor" />
-=======
 	<!-- 인터셉터패키지 컴포넌트스캔 등록 -->
 	<context:component-scan base-package="com.project.interceptor" />
 	<!-- AOP패키지 컴포넌트스캔 등록 -->
 	<context:component-scan base-package="com.project.aop" />
->>>>>>> origin/SPACE-12
-	
+
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 		<beans:property name="maxUploadSize" value="-1"/>

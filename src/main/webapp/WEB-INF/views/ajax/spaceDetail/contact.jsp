@@ -7,15 +7,12 @@
 ul {
 	text-align: left;
 }
-
 .list {
 	font-size: 12px;
 }
-
 .plaform {
 	text-align: center;
 }
-
 nav ul {
 	width: 100%;
 	list-style-type: none;
@@ -24,13 +21,11 @@ nav ul {
 	text-align: center;
 	cursor: pointer;
 }
-
 /* li 는 블록요소인데 inline-block 으로 인라인속성 부여해서 나란히 배치 */
 nav ul li {
 	display: inline-block;
 	text-align: center;
 }
-
 .home {
 	background-color: darkorange;
 	width: 100px;
@@ -38,20 +33,16 @@ nav ul li {
 	font-weight: bold;
 	cursor: pointer;
 }
-
 .home>a {
 	display: block;
 	text-decoration: none;
 	color: white;
 }
-
 .home, .home>a {
 	position: relative;
 	z-index: 5;
 	margin-top: 10%;
 }
-
-
 .faq {
 	background-color: transparent;
 	border: 1px solid #9fa4a8;
@@ -62,15 +53,11 @@ nav ul li {
 	overflow: hidden;
 	transition: 0.3s ease;
 	width:50%;
-
-
 }
-
 .faq.active {
 	background-color: #fff;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-
 .faq.active::before, .faq.active::after {
 	content: '\f075';
 	font-family: 'Font Awesome 5 Free';
@@ -82,27 +69,22 @@ nav ul li {
 	left: 20px;
 	z-index: 0;
 }
-
 .faq.active::before {
 	color: #3498db;
 	top: -10px;
 	left: -30px;
 	transform: rotateY(180deg);
 }
-
 .faq-title {
 	margin: 0 35px 0 0;
 }
-
 .faq-text {
 	display: none;
 	margin: 30px 0 0;
 }
-
 .faq.active .faq-text {
 	display: block;
 }
-
 .faq-toggle {
 	background-color: transparent;
 	border: 0;
@@ -119,24 +101,19 @@ nav ul li {
 	height: 30px;
 	width: 30px;
 }
-
 .faq-toggle:focus {
 	outline: 0;
 }
-
 .faq-toggle .fa-times {
 	display: none;
 }
-
 .faq.active .faq-toggle .fa-times {
 	color: #fff;
 	display: block;
 }
-
 .faq.active .faq-toggle .fa-chevron-down {
 	display: none;
 }
-
 .faq.active .faq-toggle {
 	background-color: #9fa4a8;
 }
@@ -304,60 +281,8 @@ nav ul li {
                </script>
 
 
-
-				<div id='tag5'>
-					<br> <br>
-					<div class="line_box holder" style="width: 100%;">
-						<hr style="" />
-					<br>
-					</div>
-				</div>
-				<h4 class="plaform">
-					<font color="skyblue">자주 묻는 질문</font>
-				</h4>
-				
-				<br>
-			<fag-container>
-			<div class="faq">
-				<p class="faq-text">대답 1</p>
-
-				<button class="faq-toggle">
-					<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
-				</button>
-			</div>
-			<div class="faq">
-				<h6 class="faq-title">자주 묻는 질문 2</h6>
-
-				<p class="faq-text">대답 2</p>
-
-				<button class="faq-toggle">
-					<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
-				</button>
-			</div>
-			<div class="faq">
-				<h6 class="faq-title">자주 묻는 질문 3</h6>
-
-				<p class="faq-text">대답 3</p>
-
-				<button class="faq-toggle">
-					<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
-				</button>
-			</div>
-			<div class="faq">
-				<h6 class="faq-title">자주 묻는 질문 4</h6>
-
-				<p class="faq-text">대답 4</p>
-
-				<button class="faq-toggle">
-					<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
-				</button>
-			</div>
-			</fag-container>
-
-
 				<script>
                     const toggles = document.querySelectorAll(".faq-toggle");
-
                     toggles.forEach((toggle) => {
                       toggle.addEventListener("click", () => {
                         toggle.parentNode.classList.toggle("active");

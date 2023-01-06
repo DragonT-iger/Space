@@ -28,15 +28,21 @@
 <!-- Modal body -->
 
 <div class="modal-body">
+<div id="userpoint_add">
+	${loginUser.mname}님의 잔여 포인트: ${loginUser.point}
+</div>
+<a id="pointAddGo" href="pointAdd">포인트 충전</a>
+<hr>
+
 <div class="form-group">
 <label for="res_snum">선택하신 대여 공간: </label>
-<input type="text" name="snum" id="snum" readonly class="form-control">
+<input type="hidden" name="snum" id="snum" readonly class="form-control">
 <input type="text" name="res_snum" id="res_snum" readonly class="form-control" value="${svo.sname}">
 </div>
 
 <div class="form-group">
 <label for="res_user">예약자 성함: </label>
-<input type="text" name="userid" id="userid" readonly class="form-control">
+<input type="hidden" name="userid" id="userid" readonly class="form-control">
 <input type="text" name="res_user" id="res_user" readonly class="form-control" value="${loginUser.mname}" >
 </div>
 

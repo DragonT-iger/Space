@@ -78,8 +78,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService {
 
 	@Override
 	public List<Space_InfoVO> selectBySpaceInfo(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.selectBySpaceInfo(userid);
 	}
 
 }

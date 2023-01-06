@@ -62,13 +62,6 @@ public class HomeController {
 		return "ajax/Services";
 	}
 
-	//Contact
-	@RequestMapping(value = "/Contact", method = RequestMethod.GET)
-	public String contact(Model model) {
-		logger.info("connected contact.");
-		return "ajax/Contact";
-	}
-
 	
 	@RequestMapping(value = "/user/MyPage", method = RequestMethod.GET)
 	public String mypage(Model model) {
