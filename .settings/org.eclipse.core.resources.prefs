@@ -3,7 +3,6 @@
 >>>>>>>=origin/main
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/ajax/Login.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/ajax/OwnerPage/MySpaceInsert.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/ajax/Reservation/result.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/ajax/Reservation/sendSms.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/ajax/Services.jsp=UTF-8
