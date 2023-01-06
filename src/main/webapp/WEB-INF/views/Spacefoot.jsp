@@ -104,20 +104,20 @@
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 	</div>
 
-<!-- JavaScript Libraries -->
-   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-   <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="lib/wow/wow.min.js"></script>
-   <script src="lib/easing/easing.min.js"></script>
-   <script src="lib/waypoints/waypoints.min.js"></script>
-   <script src="lib/counterup/counterup.min.js"></script>
-   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-   <script src="lib/tempusdominus/js/moment.min.js"></script>
-   <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-   <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- JavaScript Libraries -->
+	<c:set var="myctx" value="${pageContext.request.contextPath }"/> 
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="${myctx }/lib/wow/wow.min.js"></script>
+	<script src="${myctx }/lib/easing/easing.min.js"></script>
+	<script src="${myctx }/lib/waypoints/waypoints.min.js"></script>
+	<script src="${myctx }/lib/counterup/counterup.min.js"></script>
+	<script src="${myctx }/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="${myctx }/lib/tempusdominus/js/moment.min.js"></script>
+	<script src="${myctx }/lib/tempusdominus/js/moment-timezone.min.js"></script>
+	<script src="${myctx }/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- Template Javascript -->
+	<script src="${myctx }/js/main.js"></script>
 </body>
 
 </html>

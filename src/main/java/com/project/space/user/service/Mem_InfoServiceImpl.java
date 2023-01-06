@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.space.domain.Mem_InfoVO;
@@ -18,13 +20,20 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 public class Mem_InfoServiceImpl implements Mem_InfoService {
-
+	
+	@Autowired
+	private PasswordEncoder pwencoder; //암호화 객체
+	
 	@Inject
 	private Mem_InfoMapper memberMapper;
 	
 	@Override
 	public int createUser(Mem_InfoVO memvo) {
-		
+		String beforeEncording = memvo.getMpwd();
+		log.info("암호화하기 전 비밀번호 확인==>"+memvo.getMpwd());
+		String afterEncording = pwencoder.encode(beforeEncording);
+		memvo.setMpwd(afterEncording);
+		log.info("암호화된지 비밀번호 확인==>"+memvo.getMpwd());
 		return memberMapper.createUser(memvo);
 	}
 
@@ -77,7 +86,8 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		if(user==null) {
 			throw new NotUserException("존재하지 않는 아이디입니다");
 		}
-		if(!user.getMpwd().equals(mpwd)) { 
+		if(!pwencoder.matches(mpwd,user.getMpwd() )) {
+		//if(!user.getMpwd().equals(mpwd)) { 
 			throw new NotUserException("비밀번호가 일치하지 않습니다");
 		}
 		
