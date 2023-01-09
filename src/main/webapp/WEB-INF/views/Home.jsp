@@ -1,30 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/Spacetop.jsp" %>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 
 <script type="text/javascript">
-      function filter(){
+	  var currentPage = 1;
+	  var keyword = "";
+	  /* function filter(){
 
-        var value, name, item, i;
+	        var value, name, item, i;
 
-        value = document.getElementById("value").value.toUpperCase();
-        item = document.getElementsByClassName("item");
+	        value = document.getElementById("value").value.toUpperCase();
+	        item = document.getElementsByClassName("item");
 
-        for(i=0;i<item.length;i++){
-          name = item[i].getElementsByClassName("name");
-          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-            item[i].style.display = "flex";
-          }else{
-            item[i].style.display = "none";
-          }
-        }
+	        for(i=0;i<item.length;i++){
+	          name = item[i].getElementsByClassName("name");
+	          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+	            item[i].style.display = "flex";
+	          }else{
+	            item[i].style.display = "none";
+	          }
+	        }
+	      } */
+
+      const listPaging= function(pagingType){
+    	  if(currentPage=="" || currentPage==null){
+    		  alert("값없음에 들어옴")
+    		  currentPage = 1;
+    	  }
+    	  $.ajax({
+			type:'get',
+			url:'home',
+			contentType:'application/json',
+			data:{
+				currentPage : currentPage,
+				pagingType : pagingType,
+				keyword : keyword
+			},
+    	  cache:false,
+    	  success :function (res){
+    		  currentPage = res.currentPage;
+    	  },
+    	  error: function (err){
+    		  alert("error"+err.status)
+    	  }
+    	  });
+      }
+	  
+      const searchSpace= function(){
+    	  keyword=$('#keyword').val();
+    	  //alert(keyword);
+    	  $.ajax({
+    		  type:'get',
+    		  data:"keyword="+keyword,
+    		  url:'search',
+    		  contentType:'json',
+    		  cache:false,
+    		  success:function(res){
+    			  alert(JSON.stringify(res));
+    		  },err:function(err){
+    			  alert(err.status);
+    		  }
+    	  });
+      }
+      
+      const showSpace = function(){
+    	  
       }
 </script>
-
+</head>
 
 <style>
 
+.text{
+text-align:center;
+font-family:'Heebo';
 
+}
+
+
+.img{
+width:300px;
+height:200px;
+padding: 10px;
+margin: auto;
+
+text-align:center;
+}
 .padding80 {
 	padding: 10px;
 }
@@ -96,7 +161,7 @@
 
 
 
-	<div class="tag"
+	<div class="tag" 
 		class="section-title ff-secondary text-start text-primary fw-normal mb-4">
 		<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
 
@@ -107,75 +172,41 @@
 
 
 
-	<div class="searchbox">
-		<div class="header">
-			<h1>Search</h1>
-			<input onkeyup="filter()" type="text" id="value"
-				placeholder="Type to Search">
-		</div>
+<div class="search_wrap">
+        <div class="search_area">
+            <input type="text" id="keyword" name="keyword" value="">
+            <button onclick="searchSpace()">Search</button>
+        </div>
+    </div>  
 
-	</div>
 
-	<section class="padding80 margin50">
-		<ul class="items quarter">
-			<table>
-				<tr>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480"
-						width="90%" /></td>&nbsp;
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/ce6814ba-ed53-4d6e-b8f8-c0bbcf821011.jpg?im_w=480"
-						width="90%" /></td>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/ff69ac49-64e7-4f4a-ae2b-ee01163d0790.jpg?im_w=480"
-						width="90%" /></td>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/34b9d53a-8952-47f8-876d-bb927ea487b2.jpg?im_w=480"
-						width="90%" /></td>
-				<tr>
-			</table>
+<section class="padding80 margin50">
+		<ul id="spacelist" class="items quarter">
 
 			<br>
 			<br>
-
+			<span><button onclick="listPaging('prev')">이전</button></span>
+			
 			<table>
 				<tr>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480"
-						width="90%" /></td>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/ce6814ba-ed53-4d6e-b8f8-c0bbcf821011.jpg?im_w=480"
-						width="90%" /></td>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/ff69ac49-64e7-4f4a-ae2b-ee01163d0790.jpg?im_w=480"
-						width="90%" /></td>
-					<td><img class="img" alt=""
-						src="https://a0.muscache.com/im/pictures/34b9d53a-8952-47f8-876d-bb927ea487b2.jpg?im_w=480"
-						width="90%" /></td>
+					<c:forEach var="Space" items="${spaceArr}">
+					<td>
+					<a href="/spacedetail?snum=${Space.snum}">
+					<img class="img" alt=""
+						src="resources/SpaceInfoImg/${Space.simage1}"
+						  /></a>
+						<p class="text">${Space.sname}</p>
+						</td>
+					</c:forEach>
 				<tr>
 			</table>
-
+		<span><button onclick="listPaging('next')">다음</button></span>
 		</ul>
 	</section>
 	<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
+	<form>
+		<input type="hidden" id="currentPage"/>
+	</form>
 
-<script type="text/javascript">
-      function filter(){
-
-        var value, name, item, i;
-
-        value = document.getElementById("value").value.toUpperCase();
-        item = document.getElementsByClassName("item");
-
-        for(i=0;i<item.length;i++){
-          name = item[i].getElementsByClassName("name");
-          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-            item[i].style.display = "flex";
-          }else{
-            item[i].style.display = "none";
-          }
-        }
-      }
-</script>
 
 <%@ include file="/WEB-INF/views/Spacefoot.jsp" %>

@@ -17,14 +17,12 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 
 	@Override
 	public List<Space_InfoVO> selectByLoc(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.selectByLoc(keyword);
 	}
 
 	@Override
 	public List<Space_InfoVO> selectByPname(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.selectByPname(keyword);
 	}
 
 	@Override
@@ -39,8 +37,8 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	}
 
 	@Override
-	public List<Space_InfoVO> getSpaceInfoAll() {
-		return this.spaceinfoMapper.getSpaceInfoAll();
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String,Integer> map) {
+		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
 	}
 
 	@Override

@@ -26,9 +26,24 @@
 		select * from space_info where h_code = #{h_code}
 	</select>
 
-	<select id="getSpaceInfoAll" resultType="SpaceInfo">
-		select * from space_info
+	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
+		 select snum, SIMAGE1, SNAME  from (select snum, SIMAGE1, SNAME, rownum as r from SPACE_INFO ORDER BY SNUM desc)
+		 WHERE
+		 <![CDATA[
+		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
+		 ]]>
+         
 	</select>
 		
-	
+	<!-- select * from(
+        
+                select  /*+INDEX_DESC(SPACE_INFO PK_BOARD)*/rownum  as rn,snum, SIMAGE1, SNAME
+                  
+                from SPACE_INFO where(SNAME LIKE '%휴가%' ) AND rownum <= 20)
+                
+        where rn > 0;
+     ; -->
+     <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
+     		select rownum as rn,snum, simage1, sname from space_info where sname like '%'||#{value}||'%'
+     </select>
 </mapper>

@@ -17,7 +17,7 @@ public interface SpaceInfoService {
 	//해시태그별로 공간정보가져오기
 	public List<Space_InfoVO> selectByHashTag(String hashTag);
 	//공간정보 전체출력
-	public List<Space_InfoVO> getSpaceInfoAll();
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, Integer> map);
 	//공간번호로 공간정보 가져오기
 	public Space_InfoVO selectBySnum(int snum);
 	//찜많은순 조회

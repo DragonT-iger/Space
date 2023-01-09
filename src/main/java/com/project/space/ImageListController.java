@@ -1,5 +1,5 @@
 package com.project.space;
-
+/*
 
 import javax.inject.Inject;
 
@@ -64,3 +64,4 @@ return "/shop/prodDetail";
 
 }
 [출처] SpringMVC(상품진열 홈, 상품상세페이지)|작성자 JAY
+*/

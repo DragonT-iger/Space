@@ -102,7 +102,7 @@ public class SpaceInfoController {
         //for test
         vo.setUserid("2");
         vo.setH_code(1);
-        
+  
         // if(spaceinfoservice.selectByUserid(vo.getUserid())==null) {
         // }else 
             
@@ -149,5 +149,7 @@ public class SpaceInfoController {
 
         m.addAttribute("ex_spaceinfo",spaceinfoservice.selectByUserid(userid));
 		return "ajax/OwnerPage/MySpaceInsert";
+		
 	}
+    
 }
