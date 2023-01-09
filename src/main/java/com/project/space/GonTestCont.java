@@ -56,11 +56,6 @@ public class GonTestCont {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
 	}
-	@GetMapping("/owner/MySpaceList")
-	public String mySpaceList() {
-		
-		return "ajax/OwnerPage/MySpaceList";
-	}
 	
 	/*네로아 테스트*/
 	//네로아 인증요청 url 반환

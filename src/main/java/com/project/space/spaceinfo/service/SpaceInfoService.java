@@ -41,5 +41,7 @@ public interface SpaceInfoService {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
+
+	public int deleteBySname(String userid, String sname);
 		
 }

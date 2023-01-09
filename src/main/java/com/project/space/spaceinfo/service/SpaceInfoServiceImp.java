@@ -99,4 +99,13 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		
 		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
+
+	@Override
+	public int deleteBySname(String userid, String sname) {
+		Map<String,String> map=new HashMap<>();
+		map.put("userid", userid);
+		map.put("sname", sname);
+
+		return this.spaceinfoMapper.deleteBySname(map);
+	}
 }
