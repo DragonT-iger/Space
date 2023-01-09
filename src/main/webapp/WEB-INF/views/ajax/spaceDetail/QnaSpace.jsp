@@ -29,14 +29,16 @@
 		<c:forEach var="qna" items="${qnaArr}">
 			<li class="qlist">
 				<div class="box">
-					<p>${qna.qnum}</p>
+					<div id="qna_qnum">${qna.qnum}</div>
+					<span onclick="delete_qnum()">x</span>
+					<input id="check_qpwd" type="text" value="${qna.qpwd}">
 					<!-- 답변레벨에 따라 들여쓰기 -->
 					<c:if test="${qna.qlevel>0}">
 					<c:forEach var="k" begin="0" end="${qna.qlevel}">
 						&nbsp;&nbsp;
 					</c:forEach>
 					</c:if>
-					<strong class="user_name">${qna.userid}</strong>
+					<div class="user_name">${qna.userid}</div>
 					<p>${qna.qtitle}</p>
 					<p>${qna.qcontent}</p>
 					<p>${qna.qdate}</p>
@@ -91,5 +93,43 @@ const qna_write=function(){
 			alert('err: '+err.status);
 		}
 	})
+}
+
+const delete_qnum=function(){
+	let qn=$('#qna_qnum').html();
+	//alert(qn);
+	var qp=$('#check_qpwd').val()
+	//alert(qp);
+	var text=prompt('비밀번호를 입력해주세요');
+	document.write("</h4>"+text+"</h4>");
+	//alert(text);
+
+	data={
+		qnum:qn,
+		qpwd:text
+	}
+	
+	if(text==qp){
+		$.ajax({
+			type:'post',
+			url:'/space/spaceDetail/qnadelete',
+			data:data,
+			cache:false,
+			suceess:function(res){
+				if(res.result>0){
+					console.log('success');
+					console.log(res);
+				}else{
+					alert('Fail');
+				}
+			},
+			error:function(err){
+				alert('err: '+err.status);
+			}
+		});
+	}else{
+		alert('Fail');
+	}
+	qna_write();
 }
 </script>

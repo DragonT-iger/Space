@@ -85,7 +85,7 @@
                                 <a href="${myctx}/owner/MySpaceList" class="dropdown-item">MySpaceList</a>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
-                                <a href="${myctx}/admin/MyPageAdminPage" class="dropdown-item">AdminPage</a>
+                                <a href="${myctx}/admin/AdminPage" class="dropdown-item">AdminPage</a>
                                 </c:if>
 							</div>
 

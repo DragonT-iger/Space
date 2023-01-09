@@ -45,7 +45,7 @@ public class SpacedetailController {
 	public String contact(Model m, @RequestParam(defaultValue = "0") int snum, HttpSession ses) {
 		log.info("snum: " + snum);
 		
-		Space_InfoVO sdvo = this.spaceinfoService.selectBySnum(1);
+		Space_InfoVO sdvo = this.spaceinfoService.selectBySnum(snum);
 		int reviewCount=this.reviewService.getReviewCount(snum);
 		List<Space_InfoVO> svoArr=this.spaceinfoService.selectBySpaceInfo(sdvo.getUserid());
 		

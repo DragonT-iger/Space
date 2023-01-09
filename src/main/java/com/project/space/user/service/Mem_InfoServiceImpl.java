@@ -29,10 +29,10 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	
 	@Override
 	public int createUser(Mem_InfoVO memvo) {
-		String beforeEncording = memvo.getMpwd();
+		String beforeEncoding = memvo.getMpwd();
 		log.info("암호화하기 전 비밀번호 확인==>"+memvo.getMpwd());
-		String afterEncording = pwencoder.encode(beforeEncording);
-		memvo.setMpwd(afterEncording);
+		String afterEncoding = pwencoder.encode(beforeEncoding);
+		memvo.setMpwd(afterEncoding);
 		log.info("암호화된지 비밀번호 확인==>"+memvo.getMpwd());
 		return memberMapper.createUser(memvo);
 	}
@@ -61,8 +61,8 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 
 	@Override
 	public int updateUser(Mem_InfoVO user) {
-		String afterEncording = pwencoder.encode(user.getMpwd());
-		user.setMpwd(afterEncording);
+		String afterEncoding = pwencoder.encode(user.getMpwd());
+		user.setMpwd(afterEncoding);
 		return memberMapper.updateUser(user);
 	}
 

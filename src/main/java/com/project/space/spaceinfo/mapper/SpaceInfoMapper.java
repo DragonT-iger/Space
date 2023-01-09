@@ -20,7 +20,8 @@ public interface SpaceInfoMapper {
 	public List<Space_InfoVO> selectByPname(String keyword);
 	//공간금액으로 검색 최소금액과 최대금액사이 || 왼쪽 null값이면 오른쪽값 이하금액 || 오른쪽이 null값이면 왼쪽금액 이상
 	public List<Space_InfoVO> selectBy(Map<Integer,Integer> cost);
-	
+	//
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);
 	/* 등록자or관리자 정보 관리 */
 	//공간추가
 	public int SpaceInfoInsert(Space_InfoVO prod);
@@ -34,6 +35,7 @@ public interface SpaceInfoMapper {
 	public String selectByh_code(int h_code);
 	public List<String> GetAllSpaceNameByUserid(String userid);
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
+	public int getCountAny(String keyword);
 		
 		
 }

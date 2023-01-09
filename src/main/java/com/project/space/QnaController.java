@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.interceptor.CommonUtil;
 import com.project.space.domain.PagingVO;
@@ -108,6 +109,7 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qnadelete")
+	@ResponseBody
 	public String qnaDelete(Model m, HttpServletRequest req, 
 			@RequestParam(defaultValue="0") int qnum, @RequestParam(defaultValue="") String qpwd) {
 		log.info("num: "+qnum+", passwd: "+qpwd);
@@ -130,7 +132,7 @@ public class QnaController {
 		int n=this.qnaService.deleteQna(qnum);
 		
 		String str=(n>0)? "삭제되었습니다":"삭제 실패";
-		String loc=(n>0)? "qnalist":"qnalist";
+		String loc=(n>0)? "qnalist":"/";
 		return util.addMsgLoc(m, str, loc);
 	}
 	
