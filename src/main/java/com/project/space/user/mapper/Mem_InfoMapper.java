@@ -17,7 +17,7 @@ public interface Mem_InfoMapper {
 
 	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
-	int updateUser(Mem_InfoVO user);
+	int updateUser(Mem_InfoVO user);//회원수정
 
 	Mem_InfoVO getUser(String userid);
 

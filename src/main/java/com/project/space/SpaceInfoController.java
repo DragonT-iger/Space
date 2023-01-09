@@ -3,10 +3,12 @@ package com.project.space;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +18,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.service.SpaceInfoService;
+
 
 @Controller
 public class SpaceInfoController {
@@ -29,24 +35,26 @@ public class SpaceInfoController {
     private SpaceInfoService spaceinfoservice;
 
 
-
+    //httpservlet 객체받아서 login한 사용자의 id를 받아옴
     private static final Logger logger = LoggerFactory.getLogger(SpaceInfoController.class);
-    @PostMapping("/spaceInsert")
-    public String spaceInfo(Model m, @ModelAttribute Space_InfoVO vo, BindingResult br, @RequestParam("simage") List<MultipartFile> simage , HttpServletRequest req) throws IOException{        
-        logger.info("spaceInsert:"+vo);
+    @PostMapping("/owner/spaceInsert")
+    public String spaceInfo(Model m, HttpSession session ,@ModelAttribute Space_InfoVO vo, BindingResult br,@RequestParam("simage") List<MultipartFile> simage , HttpServletRequest req) throws IOException{        
+        logger.info("spaceInsert:sdfgsdfg"+vo);
         br.getFieldError();
 
+
+        
         // 유효성 검사 (SNAME)
         if(vo.getSname()==null||vo.getSname().trim().isEmpty()) {
             logger.info("공간명 입력안함");
-            return "redirect:ajax/OwnerPage/MySpaceInsert";
+            return "/owner/MySpaceInsert";
         }
 		ServletContext app=req.getServletContext();
 
 		String upDir=app.getRealPath("/resources/SpaceInfoImg");  //context를 기준으로 절대경로 구하기
 		logger.info("upDir: "+upDir);
 
-        
+   
 		
 		File dir=new File(upDir);
 		if(!dir.exists()) {  //업로드 디렉토리 생성
@@ -94,38 +102,45 @@ public class SpaceInfoController {
 				}//if
 			}//for
 		}
-        
 
         
-
-
-        //for test
-        vo.setUserid("2");
-        vo.setH_code(1);
-  
-        // if(spaceinfoservice.selectByUserid(vo.getUserid())==null) {
-        // }else 
+        //session에서 id값 받아오기
+        String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+        vo.setUserid(userid);
             
         
         logger.info("업로드 이후 product: "+vo);
+        
 
-        if(spaceinfoservice.selectByUserid(vo.getUserid())!=null) {
+        // if(spaceinfoservice.selectByUserid(vo.getUserid())!=null) {
+        //     logger.info("이미 등록된 공간이 있습니다.");
+        //     logger.info("기존 공간을 덮어 씁니다");
+        //     int n = spaceinfoservice.SpaceInfoUpdate(vo);
+        //     logger.info("공간등록 성공여부:"+n);
+        //     return "Home";
+        // }else {
+        //     int n = spaceinfoservice.SpaceInfoInsert(vo);
+        //     logger.info("공간등록 성공여부:"+n);
+        //     return "Home";
+        // }
+        //공간 이름이 중복되는지 확인하고 중복된다면 update, 중복되지 않는다면 insert
+
+        if(spaceinfoservice.GetAllSpaceNameByUserid(userid).contains(vo.getSname())) {
             logger.info("이미 등록된 공간이 있습니다.");
             logger.info("기존 공간을 덮어 씁니다");
             int n = spaceinfoservice.SpaceInfoUpdate(vo);
             logger.info("공간등록 성공여부:"+n);
-
-            
-            //return "redirect:ajax/OwnerPage/MySpaceInsert";
-            return "MainHome";
+            return "Home";
         }else {
             int n = spaceinfoservice.SpaceInfoInsert(vo);
             logger.info("공간등록 성공여부:"+n);
-
-            
-            //return "redirect:ajax/OwnerPage/MySpaceInsert";
-            return "MainHome";
+            return "Home";
         }
+
+
+        
+
+        
         
     }
     
@@ -133,7 +148,14 @@ public class SpaceInfoController {
 
     @GetMapping(value = "/MySpaceInfoView")
     public String SpaceInfoView(Model m , @RequestParam int snum) {
+
+        
+
         logger.info("connected MySpaceInfoView.");
+
+        List<Space_InfoVO> sivolist = spaceinfoservice.getSpaceInfoAll();
+		
+        m.addAttribute("spaceArr", sivolist);
 
         m.addAttribute("hashtag",spaceinfoservice.selectByh_code(spaceinfoservice.selectBySnum(snum).getH_code()));
 
@@ -141,15 +163,27 @@ public class SpaceInfoController {
         return "ajax/OwnerPage/MySpaceInfoView";
     }
 
-    @GetMapping("/MySpaceInsert")
-	public String mySpaceEdit(Model m /* ,  @RequestParam String userid */) {
-    	
-        //for test
-        String userid = "1";
+    @GetMapping("/owner/MySpaceInsert")
+	public String mySpaceEdit(Model m , HttpSession session) {
+        
+
+        String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+        
 
         m.addAttribute("ex_spaceinfo",spaceinfoservice.selectByUserid(userid));
 		return "ajax/OwnerPage/MySpaceInsert";
-		
 	}
+
+
+
+
+    @RequestMapping("/owner/spaceInsertAjax")
+    @ResponseBody
+    public Space_InfoVO spaceInsertAjax(@RequestParam String userid, @RequestParam String sname) {
+        logger.info("sname:"+sname);
+        Space_InfoVO vo = spaceinfoservice.selectByuseridSname(userid, sname);
+        return vo;
+    }
+
     
 }

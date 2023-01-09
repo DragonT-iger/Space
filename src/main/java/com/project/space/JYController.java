@@ -28,6 +28,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.reservation.MessageDTO;
@@ -36,6 +37,7 @@ import com.project.space.reservation.SmsResponseDTO;
 import com.project.space.reservation.SmsService;
 import com.project.space.reservation.service.ReservationService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
+import com.project.space.user.service.Mem_InfoService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -48,6 +50,9 @@ public class JYController {
 	
 	@Inject
 	private ReservationService reservationService;
+	
+	@Inject
+	private Mem_InfoService meminfoService;
 	
 	@Inject
 	private SmsService smsService;
@@ -217,18 +222,31 @@ public class JYController {
 		log.info("message: "+messageDto);
 		messageDto.setContent(rtvo.getUserid()+"님 예약이 완료되었습니다");
 		
+		
 		int res=this.reservationService.insertBooking(rtvo);
-		String str=(res>0)? "예약이 완료되었습니다":"예약 실패";
+		String str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
 		String loc=(res>0)? "/space/":"/space/Reservation";
 		
 		if(res>0) {
-			SmsResponseDTO response = smsService.sendSms(messageDto);
+			//SmsResponseDTO response = smsService.sendSms(messageDto);
 		}
 		
 		m.addAttribute("message", str);
 		m.addAttribute("loc", loc);
 		return "msg";
 	}
+	
+	@GetMapping(value="/pointAdd")
+	public String pointAdd(Model m, HttpSession ses) {
+		Mem_InfoVO mvo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 로그인 정보
+		String mvoId=mvo.getUserid();  //로그인된 유저 꺼내오기
+		
+		Mem_InfoVO mivo=this.meminfoService.getUser(mvoId);
+		
+		m.addAttribute("mivo", mivo);
+		return "ajax/Reservation/pointAdd";
+	}
+	
 	
 	
 }

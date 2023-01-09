@@ -1,5 +1,6 @@
 package com.project.space.spaceinfo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,14 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 
 	@Override
 	public List<Space_InfoVO> selectByLoc(String keyword) {
-		return this.spaceinfoMapper.selectByLoc(keyword);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Space_InfoVO> selectByPname(String keyword) {
-		return this.spaceinfoMapper.selectByPname(keyword);
+		// TODO Auto-generated method stub
+		return spaceinfoMapper.selectByPname(keyword);
 	}
 
 	@Override
@@ -37,10 +40,13 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	}
 
 	@Override
-	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String,Integer> map) {
+	public List<Space_InfoVO> getSpaceInfoAll() {
+		return this.spaceinfoMapper.getSpaceInfoAll();
+	}
+	@Override
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map){
 		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
 	}
-
 	@Override
 	public Space_InfoVO selectBySnum(int snum) {
 		return this.spaceinfoMapper.selectBySnum(snum);
@@ -70,12 +76,11 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 
 	@Override
 	public List<Space_InfoVO> selectBySpaceInfo(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.spaceinfoMapper.selectBySpaceInfo(userid);
 	}
 
 	@Override
-	public Space_InfoVO selectByUserid(String userid) {
+	public List<Space_InfoVO> selectByUserid(String userid) {
 		return this.spaceinfoMapper.selectByUserid(userid);
 	}
 
@@ -83,4 +88,23 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	public String selectByh_code(int h_code) {
 		return this.spaceinfoMapper.selectByh_code(h_code);
 	}
+
+	@Override
+	public List<String> GetAllSpaceNameByUserid(String userid) {
+		return this.spaceinfoMapper.GetAllSpaceNameByUserid(userid);
+	}
+
+	@Override
+	public Space_InfoVO selectByuseridSname(String userid, String sname) {
+		Map<String,String> map=new HashMap<>();
+		map.put("userid", userid);
+		map.put("sname", sname);
+		
+		return this.spaceinfoMapper.selectByuseridSname(map);
+	}
+	@Override
+	public int getCountAny(String keyword) {
+		return this.spaceinfoMapper.getCountAny(keyword);
+	}
+
 }

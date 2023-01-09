@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
@@ -125,7 +126,7 @@ public class GonTestCont {
 		return "ajax/Pages/MyPage";
 	}
 	*/
-	@GetMapping("/NaverDelete")
+	@GetMapping("user/NaverDelete")
 	public String naverDelete(HttpSession session) throws Exception{
 		OAuth2AccessToken ReadSessionToken = (OAuth2AccessToken) session.getAttribute("naver_oauthToken");
 		//log.info("NaverDelete // access_token ===>"+ReadSessionToken.getParameter("access_token"));
@@ -141,14 +142,14 @@ public class GonTestCont {
 		return "redirect:/";
 	}
 	@PostMapping("/NaverJoin")
-	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo) {
+	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
 		log.info("NaverJoin post value VO===>"+vo);
-		m.addAttribute("MemInfo",vo);
-		m.addAttribute("flag","NAVER");
-		return "ajax/ilgon/NaverJoin";
+		rttr.addFlashAttribute("MemInfo",vo);
+		rttr.addFlashAttribute("flag","NAVER");
+		return "redirect:Join";
 	}
-	@PostMapping("/Join")
-	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo) {
+	@PostMapping("/Naverjoin")
+	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo ) {
 		log.info("join === user :"+vo);
 		if(vo.getMname()==null||vo.getUserid()==null||vo.getMpwd()==null||
 				vo.getMname().trim().isEmpty()||vo.getUserid().trim().isEmpty()

@@ -20,30 +20,42 @@
 	</insert>
 
 	<update id="SpaceInfoUpdate" parameterType="SpaceInfo">
-		update space_info set sname=#{sname}, minn=#{minn}, maxn=#{maxn}, bcost=#{bcost}, ecost=#{ecost}, spost=#{spost:VARCHAR}, saddr1=#{saddr1:VARCHAR}, saddr2=#{saddr2:VARCHAR}, slong=#{slong:VARCHAR}, slat=#{slat:VARCHAR}, h_code=#{h_code}, simage1=#{simage1:VARCHAR}, simage2=#{simage2:VARCHAR}, simage3=#{simage3:VARCHAR}, simage4=#{simage4:VARCHAR}, scontents=#{scontents:VARCHAR}, srule=#{srule:VARCHAR} where userid=#{userid}
+		update space_info set sname=#{sname}, minn=#{minn}, maxn=#{maxn}, bcost=#{bcost}, ecost=#{ecost}, spost=#{spost:VARCHAR}, saddr1=#{saddr1:VARCHAR}, saddr2=#{saddr2:VARCHAR}, slong=#{slong:VARCHAR}, slat=#{slat:VARCHAR}, h_code=#{h_code}, simage1=#{simage1:VARCHAR}, simage2=#{simage2:VARCHAR}, simage3=#{simage3:VARCHAR}, simage4=#{simage4:VARCHAR}, scontents=#{scontents:VARCHAR}, srule=#{srule:VARCHAR} where userid=#{userid} and sname=#{sname}
 	</update>
-		<select id="selectByHashTag" parameterType="int" resultType="SpaceInfo">
+	<select id="selectByHashTag" parameterType="int" resultType="SpaceInfo">
 		select * from space_info where h_code = #{h_code}
 	</select>
 
+	<select id="getSpaceInfoAll" resultType="SpaceInfo">
+		select * from space_info
+	</select>
+
+	<select id="GetAllSpaceNameByUserid" resultType="String" parameterType="String">
+		select sname from space_info where userid = #{userid}
+	</select>
+
+	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
+		select * from space_info where userid = #{userid} and sname = #{sname}
+	</select>
+	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
+      select * from space_info where userid=#{userid}
+    </select>
 	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
-		 select snum, SIMAGE1, SNAME  from (select snum, SIMAGE1, SNAME, rownum as r from SPACE_INFO ORDER BY SNUM desc)
+		 select * from (select space_info.* , rownum as r from SPACE_INFO
+		 <if test="findkeyword!=null and findkeyword!=''">
+		 WHERE sname like '%'||#{findkeyword}||'%'
+		 </if>
+		  ORDER BY SNUM asc)
 		 WHERE
 		 <![CDATA[
 		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
 		 ]]>
          
 	</select>
-		
-	<!-- select * from(
-        
-                select  /*+INDEX_DESC(SPACE_INFO PK_BOARD)*/rownum  as rn,snum, SIMAGE1, SNAME
-                  
-                from SPACE_INFO where(SNAME LIKE '%휴가%' ) AND rownum <= 20)
-                
-        where rn > 0;
-     ; -->
      <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
-     		select rownum as rn,snum, simage1, sname from space_info where sname like '%'||#{value}||'%'
+     		select * from space_info where sname like '%'||#{value}||'%'
+     </select>
+     <select id="getCountAny" resultType="_int" parameterType="string">
+     		select count(*) from space_info where sname like '%'||#{value}||'%'
      </select>
 </mapper>

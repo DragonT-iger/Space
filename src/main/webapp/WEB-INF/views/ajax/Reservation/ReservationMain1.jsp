@@ -63,15 +63,15 @@
 			<span id="check_year2">${today_info.search_year}</span>년
 			<span id="check_month2">${today_info.search_month}</span>월
 			<span id="check_date2">${today_info.today}</span>일
-			<span id="check_Time">오전</span>~ (
-			<span id="total_time">12</span>시간 )
+			<!-- <span id="check_Time">오전</span>~ (
+			<span id="total_time">12</span>시간 ) -->
 		</div>
 		
-		<div class="time_controller_pay">
+		<%-- <div class="time_controller_pay">
 			<div class="price_time">
 				Total: <span id="basic_cost">${svo.bcost}</span>원
 			</div>
-		</div>
+		</div> --%>
 		
 		<div class="time_controller slick_slider">
 			<div class="time_controller_inner">
@@ -180,7 +180,7 @@ $(function(){
 			dataType:'json',
 			cache:false,
 			success:function(res){
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				$('#paymentModal').modal();
 				$('#snum').val(res.result.snum);
 				$('#userid').val(res.result.userid);

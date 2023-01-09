@@ -54,7 +54,7 @@
 						<i class="fa-solid fa-meteor"></i> Space
 					</h1> <!-- <img src="img/logo.png" alt="Logo"> -->
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
 					<span class="fa fa-bars"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -63,7 +63,7 @@
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
 							<c:if test="${loginUser.status ne null}">
-							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
 							</c:if>
 							<c:if test="${loginUser.status eq null}">
 								<a href="#" class="nav-link dropdown-toggle">로그인해주세요</a>
@@ -85,7 +85,7 @@
                                 <a href="${myctx}/owner/MySpaceList" class="dropdown-item">MySpaceList</a>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
-                                <a href="${myctx}/admin/MyPageAdminPage" class="dropdown-item">AdminPage</a>
+                                <a href="${myctx}/admin/AdminPage" class="dropdown-item">AdminPage</a>
                                 </c:if>
 							</div>
 

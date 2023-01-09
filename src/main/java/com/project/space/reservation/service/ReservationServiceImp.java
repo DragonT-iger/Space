@@ -53,8 +53,9 @@ public class ReservationServiceImp implements ReservationService {
 		if(n>0) {
 			int m=reservationMapper.updateUserRes(rtvo);
 			return m;
+		}else {
+			return 0;
 		}
-		return n;
 	}
 
 	@Override

@@ -1,91 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/Spacetop.jsp" %>
-<head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
-
-<script type="text/javascript">
-	  var currentPage = 1;
-	  var keyword = "";
-	  /* function filter(){
-
-	        var value, name, item, i;
-
-	        value = document.getElementById("value").value.toUpperCase();
-	        item = document.getElementsByClassName("item");
-
-	        for(i=0;i<item.length;i++){
-	          name = item[i].getElementsByClassName("name");
-	          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-	            item[i].style.display = "flex";
-	          }else{
-	            item[i].style.display = "none";
-	          }
-	        }
-	      } */
-
-      const listPaging= function(pagingType){
-    	  if(currentPage=="" || currentPage==null){
-    		  alert("값없음에 들어옴")
-    		  currentPage = 1;
-    	  }
-    	  $.ajax({
-			type:'get',
-			url:'home',
-			contentType:'application/json',
-			data:{
-				currentPage : currentPage,
-				pagingType : pagingType,
-				keyword : keyword
-			},
-    	  cache:false,
-    	  success :function (res){
-    		  currentPage = res.currentPage;
-    	  },
-    	  error: function (err){
-    		  alert("error"+err.status)
-    	  }
-    	  });
-      }
-	  
-      const searchSpace= function(){
-    	  keyword=$('#keyword').val();
-    	  //alert(keyword);
-    	  $.ajax({
-    		  type:'get',
-    		  data:"keyword="+keyword,
-    		  url:'search',
-    		  contentType:'json',
-    		  cache:false,
-    		  success:function(res){
-    			  alert(JSON.stringify(res));
-    		  },err:function(err){
-    			  alert(err.status);
-    		  }
-    	  });
-      }
-      
-      const showSpace = function(){
-    	  
-      }
-</script>
-</head>
 
 <style>
-
 .text{
 text-align:center;
 font-family:'Heebo';
-
+}
+.flex-container{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: flex-start;
+}
+.flex-item{
+	background-color:lightgray;
+	width:21%; 
+	margin:2%;
 }
 
-
 .img{
-width:300px;
+width:100%;
 height:200px;
-padding: 10px;
 margin: auto;
 
 text-align:center;
@@ -157,56 +92,122 @@ text-align:center;
 	font-weight: 470;
 	color: #333;
 }
+
 </style>
 
 
 
-	<div class="tag" 
-		class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-		<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
-
-
-		<a href="#" class="tag">#Travel</a> <a href="#" class="tag">#New
-			Year</a>
-	</div>
+<div class="tag"
+	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+	<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
+	<a href="#" class="tag">#Travel</a> <a href="#" class="tag">#New
+		Year</a>
+</div>
 
 
 
 <div class="search_wrap">
-        <div class="search_area">
-            <input type="text" id="keyword" name="keyword" value="">
-            <button onclick="searchSpace()">Search</button>
-        </div>
-    </div>  
+    <div class="search_area text-center">
+        <input type="text" id="keyword" name="keyword" value="" style="width:25%">
+        <button class="btn btn-primary" onclick="listPaging('search')">Search</button>
+    </div>
+</div>  
 
 
 <section class="padding80 margin50">
-		<ul id="spacelist" class="items quarter">
-
-			<br>
-			<br>
-			<span><button onclick="listPaging('prev')">이전</button></span>
-			
-			<table>
-				<tr>
-					<c:forEach var="Space" items="${spaceArr}">
-					<td>
-					<a href="/spacedetail?snum=${Space.snum}">
-					<img class="img" alt=""
-						src="resources/SpaceInfoImg/${Space.simage1}"
-						  /></a>
-						<p class="text">${Space.sname}</p>
-						</td>
-					</c:forEach>
-				<tr>
-			</table>
-		<span><button onclick="listPaging('next')">다음</button></span>
-		</ul>
-	</section>
-	<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
-	<form>
-		<input type="hidden" id="currentPage"/>
-	</form>
+		<div id="space-list" class="flex-container">
+				<c:forEach var="Space" items="${spaceArr}">
+				<div id="space-item" class="flex-item">
+					<a href="spaceDetail?snum=${Space.snum}">
+						<img class="img" alt="" src="resources/SpaceInfoImg/${Space.simage1}"/>
+					</a>
+					<p class="text">${Space.sname}</p>
+					<p class="text">${Space.saddr1}</p>
+					<p class="text">${Space.saddr2}</p>
+				</div>
+				</c:forEach>
+		</div>
+		<div class="text-center">
+			<span><button class="btn btn-primary" onclick="listPaging('prev')">이전</button></span>
+			<span><button class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
+		</div>
+</section>
+<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
+<form>
+	<input type="hidden" id="currentPage"/>
+</form>
 
 
+<script>
+	  //초기값 (전역변수) 세팅
+	  var currentPage = 1;
+	  var keyword = "";
+	  /* function filter(){
+
+	        var value, name, item, i;
+
+	        value = document.getElementById("value").value.toUpperCase();
+	        item = document.getElementsByClassName("item");
+
+	        for(i=0;i<item.length;i++){
+	          name = item[i].getElementsByClassName("name");
+	          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+	            item[i].style.display = "flex";
+	          }else{
+	            item[i].style.display = "none";
+	          }
+	        }
+	      } */
+      const listPaging= function(pagingType){
+    	  if(currentPage=="" || currentPage==null){
+    		  alert("값없음에 들어옴")
+    		  currentPage = 1;
+    	  }
+    	  keyword=$('#keyword').val();
+    	  $.ajax({
+			type:'get',
+			url:'home',
+			contentType:'application/json',
+			data:{ //get파라미터로 넘어가는 key:value 값 
+					//home?currentPage=value&pagingType=value&keyword=value (url+data)
+				currentPage : currentPage,
+				pagingType : pagingType,
+				keyword : keyword
+			},
+    	  cache:false,
+    	  success :function (res){
+    		  currentPage = res.currentPage;
+    		  alert(currentPage);
+    		  alert(res.spaceArr);
+    		  if(res.spaceArr==""||res.spaceArr==null){ //res값이 없을시
+    			  alert("검색결과가 없습니다.");
+    		  }else{
+    		  	showSpace(res.spaceArr);
+    		  }
+    	  },
+    	  error: function (err){
+    		  alert("error"+err.status) //
+    	  }
+    	  });
+	  }
+      
+      const showSpace = function(res){
+    	  if(res==null){
+    		  $('#space-list').html("결과가 없습니다");
+    	  }else{
+    		  let str="";
+	    	  $.each(res,function(i,spacevo){
+	    		  	str+='<div id="space-item" class="flex-item">';
+	    		  	str+='<a href="spaceDetail?snum='+spacevo.snum+'">';
+	    		  	str+='<img class="img" alt="" src="resources/SpaceInfoImg/'+spacevo.simage1+'"/>';
+	    		  	str+='<p class="text">'+spacevo.sname+'</p>';
+	    		  	str+='<p class="text">'+spacevo.saddr1+'</p>';
+	    		  	str+='<p class="text">'+spacevo.saddr2+'</p>';
+	    		  	str+='</a>';
+	    		  	str+='</div>';
+      	  	});
+    	  $('#space-list').html(str);
+      	}
+    }
+</script>
 <%@ include file="/WEB-INF/views/Spacefoot.jsp" %>

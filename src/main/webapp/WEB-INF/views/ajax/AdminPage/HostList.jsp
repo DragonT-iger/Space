@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<c:import url="/adminpage"/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<c:import url="/Spacetop" charEncoding="utf-8" />
+<c:import url="/admin/adminpage"/>
 	<div class="container" id="userlist" style="width:600px; overflow: auto;">
-	<h1 class="text-center">회원목록</h1>
+	<h1 class="text-center">호스트목록</h1>
 	<div>
 		<%-- ${userArr} --%>
 		<table class="table table-bordered mt-3">
@@ -35,3 +35,4 @@
 		</table>
 	</div>
 	</div>
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
