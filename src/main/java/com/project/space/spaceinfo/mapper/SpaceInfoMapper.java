@@ -36,7 +36,10 @@ public interface SpaceInfoMapper {
 	public String selectByh_code(int h_code);
 	public List<String> GetAllSpaceNameByUserid(String userid);
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> SPACE-10-예약
 	
 	public int selectSpaceLike(int snum);
 	public int insertSpaceLike(Heart_LikeVO hlvo);
@@ -44,6 +47,11 @@ public interface SpaceInfoMapper {
 	public List<Space_Like> selectUserLikeSpace(String userid);
 	public int deleteLike(int hnum);
 	
+<<<<<<< HEAD
 		
+=======
+
+	public int deleteBySname(Map<String, String> map);		
+>>>>>>> SPACE-10-예약
 		
 }

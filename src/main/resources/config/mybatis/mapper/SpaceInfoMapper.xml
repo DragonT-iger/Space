@@ -37,6 +37,10 @@
 	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
 		select * from space_info where userid = #{userid} and sname = #{sname}
 	</select>
+<<<<<<< HEAD
+=======
+	
+>>>>>>> SPACE-10-예약
 	
 	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
 		select * from space_info where userid=#{userid}
@@ -63,4 +67,11 @@
 		delete heart_like where hnum=#{value}
 	</delete>
 	
+<<<<<<< HEAD
+=======
+
+	<delete id="deleteBySname" parameterType="map">
+		delete from space_info where userid = #{userid} and sname = #{sname}
+	</delete>
+>>>>>>> SPACE-10-예약
 </mapper>

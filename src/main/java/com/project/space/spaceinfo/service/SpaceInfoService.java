@@ -43,7 +43,10 @@ public interface SpaceInfoService {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> SPACE-10-예약
 	
 	public int insertSpaceLike(Heart_LikeVO hlvo); //좋아요 누르기
 	//유저별 공간 가져오기(현재 보고있는 공간 제외)
@@ -51,5 +54,9 @@ public interface SpaceInfoService {
 	public List<Space_Like> selectUserLikeSpace(String userid); //유저 아이디로 좋아요 목록 가져오기
 	public int deleteLike(int hnum);
 	
+<<<<<<< HEAD
+=======
+	public int deleteBySname(String userid, String sname);
+>>>>>>> SPACE-10-예약
 		
 }
