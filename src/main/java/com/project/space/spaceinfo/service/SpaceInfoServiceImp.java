@@ -125,8 +125,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public int deleteLike(int hnum) {
 		return this.spaceinfoMapper.deleteLike(hnum);
-<<<<<<< HEAD
-=======
+
 	}
 	
 	@Override
@@ -136,6 +135,18 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		map.put("sname", sname);
 
 		return this.spaceinfoMapper.deleteBySname(map);
->>>>>>> SPACE-10-예약
 	}
+
+	@Override
+	public int getCountAny(String keyword) {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getCountAny(keyword);
+	}
+
+	@Override
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
+	}
+	
 }
