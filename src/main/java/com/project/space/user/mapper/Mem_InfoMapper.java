@@ -25,5 +25,5 @@ public interface Mem_InfoMapper {
 
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
 
-	
+	int getStatusByUserid(String userid);
 }

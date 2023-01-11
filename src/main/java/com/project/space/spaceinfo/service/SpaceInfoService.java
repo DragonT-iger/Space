@@ -1,6 +1,5 @@
 package com.project.space.spaceinfo.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +22,7 @@ public interface SpaceInfoService {
 	public Space_InfoVO selectBySnum(int snum);
 	//찜많은순 조회
 	public List<Space_InfoVO> selectBySnum(Space_InfoVO sivo); 
-	//
-	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> pagingMap);
+	
 	
 	/* 등록자or관리자 정보 관리 */
 	//공간추가
@@ -43,8 +41,7 @@ public interface SpaceInfoService {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
-	
-	public int getCountAny(String keyword);
-	
+
+	public int deleteBySname(String userid, String sname);
 		
 }

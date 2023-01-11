@@ -37,25 +37,8 @@
 	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
 		select * from space_info where userid = #{userid} and sname = #{sname}
 	</select>
-	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
-      select * from space_info where userid=#{userid}
-    </select>
-	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
-		 select * from (select space_info.* , rownum as r from SPACE_INFO
-		 <if test="findkeyword!=null and findkeyword!=''">
-		 WHERE sname like '%'||#{findkeyword}||'%'
-		 </if>
-		  ORDER BY SNUM asc)
-		 WHERE
-		 <![CDATA[
-		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
-		 ]]>
-         
-	</select>
-     <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
-     		select * from space_info where sname like '%'||#{value}||'%'
-     </select>
-     <select id="getCountAny" resultType="_int" parameterType="string">
-     		select count(*) from space_info where sname like '%'||#{value}||'%'
-     </select>
+
+	<delete id="deleteBySname" parameterType="map">
+		delete from space_info where userid = #{userid} and sname = #{sname}
+	</delete>
 </mapper>

@@ -25,7 +25,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public List<Space_InfoVO> selectByPname(String keyword) {
 		// TODO Auto-generated method stub
-		return spaceinfoMapper.selectByPname(keyword);
+		return null;
 	}
 
 	@Override
@@ -43,10 +43,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	public List<Space_InfoVO> getSpaceInfoAll() {
 		return this.spaceinfoMapper.getSpaceInfoAll();
 	}
-	@Override
-	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map){
-		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
-	}
+
 	@Override
 	public Space_InfoVO selectBySnum(int snum) {
 		return this.spaceinfoMapper.selectBySnum(snum);
@@ -102,9 +99,13 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		
 		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
-	@Override
-	public int getCountAny(String keyword) {
-		return this.spaceinfoMapper.getCountAny(keyword);
-	}
 
+	@Override
+	public int deleteBySname(String userid, String sname) {
+		Map<String,String> map=new HashMap<>();
+		map.put("userid", userid);
+		map.put("sname", sname);
+
+		return this.spaceinfoMapper.deleteBySname(map);
+	}
 }
