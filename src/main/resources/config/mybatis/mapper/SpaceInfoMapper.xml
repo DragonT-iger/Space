@@ -37,6 +37,30 @@
 	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
 		select * from space_info where userid = #{userid} and sname = #{sname}
 	</select>
+	
+	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
+		select * from space_info where userid=#{userid}
+	</select>
+	
+	<select id="selectSpaceLike" parameterType="int" resultType="int">
+		select count(#{value}) from heart_like where snum=#{value}
+	</select>
 		
+	<insert id="insertSpaceLike" parameterType="Like">
+		insert into heart_like(hnum,snum,userid,hdate)
+		values(heart_like_seq.nextval, #{snum}, #{userid}, sysdate)
+	</insert>
+	
+	<select id="selectBySpaceInfoExcept" parameterType="SpaceInfo" resultType="SpaceInfo">
+		select * from  space_info where userid=#{userid} and snum not in(#{snum})
+	</select>
+	
+	<select id="selectUserLikeSpace" parameterType="string" resultType="SL">
+		select * from space_like where userid=#{value}
+	</select>
+	
+	<delete id="deleteLike" parameterType="int">
+		delete heart_like where hnum=#{value}
+	</delete>
 	
 </mapper>

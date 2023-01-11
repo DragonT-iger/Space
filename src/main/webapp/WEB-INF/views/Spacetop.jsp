@@ -77,6 +77,7 @@
 								<a href="${myctx}/user/MyReservation" class="dropdown-item">MyReservation</a>
 								<a href="${myctx}/user/MyZimm" class="dropdown-item">MyZimm</a>
                                 <a href="${myctx}/user/MyReviewList" class="dropdown-item">MyReviewList</a> 
+                                <a href="${myctx}/user/pointAdd" class="dropdown-item">MyPoint</a> 
 								</c:if>
 								<c:if test="${loginUser.status eq 1 }">
                                 <a href="${myctx}/owner/MyReservationCheck" class="dropdown-item">MyReservationCheck</a>
@@ -85,7 +86,7 @@
                                 <a href="${myctx}/owner/MySpaceList" class="dropdown-item">MySpaceList</a>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
-                                <a href="${myctx}/admin/MyPageAdminPage" class="dropdown-item">AdminPage</a>
+                                <a href="${myctx}/admin/AdminPage" class="dropdown-item">AdminPage</a>
                                 </c:if>
 							</div>
 

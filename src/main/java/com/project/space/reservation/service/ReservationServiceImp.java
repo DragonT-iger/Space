@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.mapper.ReservationMapper;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
@@ -95,6 +96,16 @@ public class ReservationServiceImp implements ReservationService {
 	@Override
 	public ReservationVO getTotalPrice(int snum) {
 		return this.reservationMapper.getTotalPrice(snum);
+	}
+
+	@Override
+	public int userBookingTotalprice(String userid) {
+		return this.reservationMapper.userBookingTotalprice(userid);
+	}
+
+	@Override
+	public List<mem_space_res_view> BookingView(String userid) {
+		return this.reservationMapper.BookingView(userid);
 	}
 
 	
