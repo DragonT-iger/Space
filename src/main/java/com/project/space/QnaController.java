@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.interceptor.CommonUtil;
 import com.project.space.domain.PagingVO;
@@ -78,6 +77,9 @@ public class QnaController {
 	
 	@PostMapping("/qnawriteEnd")
 	public String qnaInsert(Model m, HttpServletRequest req, @ModelAttribute Qna_BoardVO qna) {
+		HttpSession ses=req.getSession();
+		int snum=(int)ses.getAttribute("snum");
+		log.info(snum);
 		
 		//유효성 체크 (subject, name, passwd) ==> redirect "write"
 		if(qna.getQtitle()==null || qna.getQcontent()==null || qna.getQpwd()==null ||
@@ -101,7 +103,7 @@ public class QnaController {
 		}
 		
 		str+=(n>0)? "성공":"실패";
-		loc=(n>0)? "/space/spaceDetail":"/space/spaceDetail";
+		loc=(n>0)? "/space/spaceDetail?snum="+snum:"/space/spaceDetail?snum="+snum;
 		
 		m.addAttribute("message",str);
 		m.addAttribute("loc",loc);
@@ -109,31 +111,17 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qnadelete")
-	@ResponseBody
-	public String qnaDelete(Model m, HttpServletRequest req, 
+	public int qnaDelete(Model m, HttpServletRequest req, 
 			@RequestParam(defaultValue="0") int qnum, @RequestParam(defaultValue="") String qpwd) {
 		log.info("num: "+qnum+", passwd: "+qpwd);
 		
 		if(qnum==0 || qpwd.isEmpty()) {
-			return "redirect:qnalist";
-		}
-		
-		//해당글을 db에서 가져오기
-		Qna_BoardVO qvo=this.qnaService.getQna(qnum);
-		if(qvo==null) {
-			return util.addMsgBack(m, "존재하지 않는 글입니다");
-		}
-		//비밀번호 일치여부 체크
-		String dbPwd=qvo.getQpwd();
-		if(!dbPwd.equals(qpwd)) {  //일치하지 않는다면
-			return util.addMsgBack(m, "비밀번호가 일치하지 않습니다");
+			return 0;
 		}
 		//db에서 글 삭제 처리
 		int n=this.qnaService.deleteQna(qnum);
 		
-		String str=(n>0)? "삭제되었습니다":"삭제 실패";
-		String loc=(n>0)? "qnalist":"/";
-		return util.addMsgLoc(m, str, loc);
+		return n;
 	}
 	
 	@PostMapping("/qnaedit")

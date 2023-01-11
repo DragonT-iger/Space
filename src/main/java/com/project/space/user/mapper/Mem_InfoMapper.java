@@ -27,5 +27,7 @@ public interface Mem_InfoMapper {
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
 	
 	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
-	
+
+	int getStatusByUserid(String userid);
+
 }

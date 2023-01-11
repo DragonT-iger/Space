@@ -37,7 +37,7 @@
 	                    });
 	                })
 	            }).then(result => {
-	                //alert( JSON.stringify(result)); //오브젝트값확인
+	                //alert( JSON.stringify(result)); 
 	                document.getElementById('slong').value = result.lon;
 	                document.getElementById('slat').value = result.lat;
 	            }).catch(function(err) {
@@ -61,7 +61,16 @@
 			},
 			success : function(data) {
 				alert(JSON.stringify(data));
+
+				
+				// h_code 값에 해당하는 option 요소 찾기
+				var $option = $('#h_code option[value=' + data.h_code + ']');
+				// 찾은 option 요소에 selected 속성 추가
+				$option.attr('selected', true);
+
 				$("#srule").val(data.srule);
+				$("#scontents").val(data.scontents);
+				$("#spost").val(data.spost);
 				$("#minn").val(data.minn);
 				$("#maxn").val(data.maxn);
 				$("#bcost").val(data.bcost);
@@ -72,16 +81,9 @@
 				$("#simage2").val(data.simage2);
 				$("#simage3").val(data.simage3);
 				$("#simage4").val(data.simage4);
-				$("#scontents").val(data.scontents);
-				$("#srule").val(data.srule);
-				$("#spost").val(data.spost);
 				$("#slong").val(data.slong);
 				$("#slat").val(data.slat);
 				
-				// h_code 값에 해당하는 option 요소 찾기
-				var $option = $('#h_code option[value=' + data.h_code + ']');
-				// 찾은 option 요소에 selected 속성 추가
-				$option.attr('selected', true);
 
 			},
 			error : function() {
@@ -89,6 +91,8 @@
 			}
 		})
 	}
+
+	
 </script>
 
 
@@ -100,7 +104,7 @@
 
 
 
-
+	
 	<form name="sf" id="sf" role="form" action="spaceInsert" method="POST"
 		enctype="multipart/form-data">
 		<!-- 등록유저 누군지 확인  -->
@@ -110,7 +114,7 @@
 				<td style="width: 20%"><b>공간명칭</b></td>
 				<td style="width: 80%">
 				<!-- <input class="form-control" list="hashlist" name="sname" id="sname" value="<c:set var="space" value="${ex_spaceinfo[0]}"/>${space.sname}"> -->
-					<input class="form-control" list="hashlist" name="sname" id="sname" onchange ="ex_info()">
+					<input class="form-control" list="hashlist" name="sname" id="sname" onchange ="ex_info()" placeholder="공간명칭을 입력해주세요">
 					<datalist id="hashlist">
 						<!-- for문으로 생성 해시태그등록한거 차례대로 -->
 						<!-- ex option) -->
@@ -166,26 +170,26 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="width: 20%"><b>공간 규칙</b></td>
-				<td style="width: 80%"><textarea name="scontents" id="scontents"
+				<td style="width: 20%"><b>공간 설명</b></td>
+				<td style="width: 80%"><textarea name="scontents" id="scontents" placeholder="공간설명을 입력해주세요 ex) 무료주차가 가능합니다."
 						rows="10" cols="50" class="form-control"></textarea></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>공간 규칙</b></td>
-				<td style="width: 80%"><textarea name="srule" id="srule"
+				<td style="width: 80%"><textarea name="srule" id="srule" placeholder="공간규칙을 입력해주세요 ex) 흡연금지, 애완동물 불가"
 						rows="10" cols="50" class="form-control"></textarea></td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1"><b>우편번호</b></td>
 				<td width="80%" class="m2"><input type="text" name="spost"
-					id="spost" placeholder="Post" maxlength="5" >
+					id="spost" maxlength="5" >
 					<button type="button" class="btn btn-success" onclick="postfind()">우편번호
 						찾기</button></td>
 			</tr>
 			<tr>
 				<td width="20%"><b>주소</b></td>
 				<td width="80%">
-					<input type="text" class="form-control" name="saddr1" id="saddr1" placeholder="Address"><br> 
+					<input type="text" class="form-control" name="saddr1" id="saddr1" placeholder="주소"><br> 
 					<input type="text" class="form-control" name="saddr2" id="saddr2" placeholder="상세주소"><br>
 					<input type="hidden" class="form-control" name="slong" id="slong" placeholder="좌표값Y"><br>
 					<input type="hidden" class="form-control" name="slat" id="slat" placeholder="좌표값X"></td>
@@ -217,6 +221,8 @@
 			<tr>
 				<td colspan="2" class="text-center">
 					<button type="submit" id="btnWrite" class="btn btn-success">등록</button>
+        			<button type="button" class="myspacelist_btn btn btn-danger" id="myBtn">삭제</button>
+					
 					<button type="reset" id="btnReset" class="btn btn-warning"
 						onclick="javascript:CKEDITOR.instances.content.setData('')">다시쓰기</button>
 				</td>
@@ -229,5 +235,76 @@
 
 	</form>
 	<div id="postcode"></div>
+
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<p>정말로 삭제하시겠습니까? 공간 이름을 다시 적어주세요</p>
+			<form action="spaceinfodelete" method="post">
+				<input type="text" name="sname" id="sname" placeholder="공간 이름을 적어주세요">
+				<input type="submit" value="삭제">
+				<input type="button" value="취소" class="cancel">
+				<span class="close">&times;</span>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		// Get the modal
+	var modal = document.getElementById("myModal");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	var cancel = document.getElementsByClassName("cancel")[0];
+
+	// When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+		}
+	}
+
+	cancel.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	</script>
+
+	<style>
+				/* The Modal (background) */
+		.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content/Box */
+		.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		}
+	</style>
+
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />

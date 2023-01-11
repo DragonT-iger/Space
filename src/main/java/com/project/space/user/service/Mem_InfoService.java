@@ -29,4 +29,5 @@ public interface Mem_InfoService {
 	
 	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
 
+	int getStatusByUserid(String userid);
 }
