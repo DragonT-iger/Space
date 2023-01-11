@@ -39,6 +39,8 @@ public interface SpaceInfoMapper {
 
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
 
-	public int deleteBySname(Map<String, String> map);		
+	public int deleteBySname(Map<String, String> map);
+
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 		
 }

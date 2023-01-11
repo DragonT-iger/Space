@@ -43,5 +43,7 @@ public interface SpaceInfoService {
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
 
 	public int deleteBySname(String userid, String sname);
+
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 		
 }

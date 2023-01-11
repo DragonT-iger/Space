@@ -108,4 +108,9 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 
 		return this.spaceinfoMapper.deleteBySname(map);
 	}
+
+	@Override
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
+		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
 }
