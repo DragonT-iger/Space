@@ -101,6 +101,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		
 		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public int insertSpaceLike(Heart_LikeVO hlvo) {
@@ -125,5 +126,15 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public int deleteLike(int hnum) {
 		return this.spaceinfoMapper.deleteLike(hnum);
+=======
+
+	@Override
+	public int deleteBySname(String userid, String sname) {
+		Map<String,String> map=new HashMap<>();
+		map.put("userid", userid);
+		map.put("sname", sname);
+
+		return this.spaceinfoMapper.deleteBySname(map);
+>>>>>>> origin/SPACE-7
 	}
 }
