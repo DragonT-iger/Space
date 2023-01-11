@@ -1,10 +1,11 @@
 package com.project.space.spaceinfo.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
 
 public interface SpaceInfoService {
 
@@ -23,8 +24,7 @@ public interface SpaceInfoService {
 	public Space_InfoVO selectBySnum(int snum);
 	//찜많은순 조회
 	public List<Space_InfoVO> selectBySnum(Space_InfoVO sivo); 
-	//
-	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> pagingMap);
+	
 	
 	/* 등록자or관리자 정보 관리 */
 	//공간추가
@@ -43,9 +43,25 @@ public interface SpaceInfoService {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
+<<<<<<< HEAD
 	
-	public int getCountAny(String keyword);
+=======
+>>>>>>> SPACE-10-예약
 	
+<<<<<<< HEAD
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 
+=======
+	public int insertSpaceLike(Heart_LikeVO hlvo); //좋아요 누르기
+	//유저별 공간 가져오기(현재 보고있는 공간 제외)
+	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo);
+	public List<Space_Like> selectUserLikeSpace(String userid); //유저 아이디로 좋아요 목록 가져오기
+	public int deleteLike(int hnum);
+	
+<<<<<<< HEAD
+=======
+	public int deleteBySname(String userid, String sname);
+>>>>>>> SPACE-10-예약
+		
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 }

@@ -151,10 +151,14 @@ nav ul li {
     .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
+<<<<<<< HEAD
 <!-- 슬라이드 이미지 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 <!--  -->
+=======
+
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 <script>
 	window.onload = function() {
 		let lat = "<c:out value='${sdvo.slat}'/>";
@@ -208,7 +212,11 @@ nav ul li {
 				if(res>0){
 					alert('공간이 찜 되었습니다');	
 				}else{
+<<<<<<< HEAD
 					alert('실패');				
+=======
+					alert('이미 찜한 공간입니다');				
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 				}
 			},
 			error:function(err){
@@ -218,6 +226,7 @@ nav ul li {
 		});
 	};
 	
+<<<<<<< HEAD
 	$('.slider-2 .page-nav > div').click(function() {
 	    
 	    var $this = $(this);
@@ -263,9 +272,11 @@ nav ul li {
 	    
 	    $post.click();
 	});
+=======
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 </script>
-<!--  -->
-<c:import url="/Spacetop"/>
+
+<c:import url="/Spacetop" charEncoding="utf-8"/>
 
 
 <div class="wrap main detail meetspace">
@@ -275,14 +286,21 @@ nav ul li {
 		<div class="h_space">
 			<h6 class="loc_space">${sdvo.saddr1}</h6>
 			<h2 class="space_name">${sdvo.sname}</h2>
+<<<<<<< HEAD
 			<p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p>
 			
 			<a id="goReservation" href="/space/Reservation">예약하기</a>
+=======
+			<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
+			
+			<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 		</div>
 		<a id="kakao-link-btn" href="javascript:sendLink()">공유</a>
 		<a id="love_btn" onclick="love_btn(${sdvo.snum},'${loginUser.userid}')">찜</a>
 		</div>
 	
+<<<<<<< HEAD
 		<div class="slider-2">
 		    <div class="side-btns">
 		        <div><span><i class="fas fa-caret-left"></i></span></div>
@@ -307,6 +325,11 @@ nav ul li {
 		    </div>
 		</div>
 		
+=======
+		<div>
+			<c:import url="/spaceDetail/spaceImage"/>
+		</div>
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 		<!-- <div class="photo_box_wrap type9">
 			<ul class="swiper-wrapper slides">
 				<li class="swiper-slide1">이미지1</li>
@@ -347,6 +370,7 @@ nav ul li {
 		</div>
 		
 		<section id="one">
+<<<<<<< HEAD
 		<div id="nav1">
 			<h4>장소 소개</h4>
 			<div>${sdvo.scontents}</div>
@@ -368,22 +392,58 @@ nav ul li {
 			<h4>장소 이용 규칙</h4>
 			<div>${sdvo.srule}</div>
 		</div>
+=======
+			<div id="nav1">
+				<h4>장소 소개</h4>
+				<div>${sdvo.scontents}</div>
+				<!-- 지도 -->
+				<div class="map_wrap">
+				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				    <div id="map_tag" class="hAddr">
+				        <span class="title"> ${sdvo.saddr1 } </span>
+				        <span id="centerAddr"></span>
+				    </div>
+				</div>	
+				<!--  -->
+			</div>
+		</section>
+		
+		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
+		
+		<section id="two">
+			<div id="nav2">
+				<h4>장소 이용 규칙</h4>
+				<div>${sdvo.srule}</div>
+			</div>
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 		</section>
 		
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 		
 		<section id="three">
+<<<<<<< HEAD
 		<div id="nav3">
 			<c:import url="/spaceDetail/reviewlist"/>
 		</div>
+=======
+			<div id="nav3">
+				<c:import url="/spaceDetail/reviewlist"/>
+			</div>
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 		</section>
 		
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 		
 		<section id="four">
+<<<<<<< HEAD
 		<div id="nav4">
 			<c:import url="/spaceDetail/qnalist"/>
 		</div>
+=======
+			<div id="nav4">
+				<c:import url="/spaceDetail/qnalist"/>
+			</div>
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 		</section>
 		
 		<hr>
@@ -402,8 +462,13 @@ nav ul li {
 				<c:forEach var="otherspace" items="${svoArr}">
 					<div class="ospace">
 						<div class="box">
-							<p>${otherspace.sname}</p>
-							<strong class="user_name">${otherspace.simage1}</strong>
+							<c:if test="${otherspace.simage1 eq null}">
+								<img src="./img/noSpaceImage.jpg"/>
+							</c:if>
+							<c:if test="${otherspace.simage1 ne null}">
+								<img src="./resources/SpaceInfoImg/${otherspace.simage1})"/>
+							</c:if>
+							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
 						</div>
 					</div>
 				</c:forEach>
@@ -415,12 +480,22 @@ nav ul li {
 	</div>
 
             
+<<<<<<< HEAD
 <c:import url="/Spacefoot"/>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
   // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
   Kakao.init('2046abd15b422dc649ffdf9b8c7adf98');
 
+=======
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('2046abd15b422dc649ffdf9b8c7adf98');
+
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
   // SDK 초기화 여부를 판단합니다.
   console.log(Kakao.isInitialized());
 

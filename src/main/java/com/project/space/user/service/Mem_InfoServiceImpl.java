@@ -96,4 +96,9 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		return user;
 	}
 
+	@Override
+	public int getStatusByUserid(String userid) {
+		return memberMapper.getStatusByUserid(userid);
+	}
+
 }

@@ -19,4 +19,16 @@
 		update mem_info set point=(point-#{totalprice}) where userid=#{userid} and point>#{totalprice}
 	</update>
 	
+	<select id="userBookingInfo" parameterType="string" resultType="Reservation">
+		select * from reservation where userid=#{value}
+	</select>
+	
+	<select id="userBookingTotalprice" parameterType="string" resultType="int">
+		select sum(totalprice) from reservation where userid=#{value}
+	</select>
+	
+	<select id="BookingView" parameterType="string" resultType="MSRV">
+		select * from mem_space_res_view where userid=#{value}
+	</select>
+	
 </mapper>

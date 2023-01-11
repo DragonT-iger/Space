@@ -168,12 +168,15 @@ public class HomeController {
 		return "ajax/Pages/MyPage";
 	}
 
+<<<<<<< HEAD
 	// MyReservation mapping 안됐음
 	@RequestMapping(value = "/user/MyReservation", method = RequestMethod.GET)
 	public String myreservation(Model model) {
 		logger.info("connected myreservation.");
 		return "ajax/Pages/MyReservation";
 	}
+=======
+>>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
 
 	@RequestMapping(value = "/naverMap")
 	public String naverMap() {

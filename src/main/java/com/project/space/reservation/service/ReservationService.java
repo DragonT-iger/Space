@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
 import com.project.space.reservation.Schedule;
 
 public interface ReservationService {
@@ -15,6 +16,8 @@ public interface ReservationService {
 	List<ReservationVO> bookingTimeInfo(String rtstartdate);
 	//일반유저가 본인의 예약내역 열람
 	List<ReservationVO> userBookingInfo(String userid);
+	//유저가 예약한 전체 예약 금액
+	int userBookingTotalprice(String userid);
 	
 	//공간번호로 특정 공간 정보 가져오기
 	public Space_InfoVO selectBySnum(int snum);
@@ -36,6 +39,8 @@ public interface ReservationService {
 	ReservationVO getTimePrice(int snum); //특정 공간의 시간별 금액 구하기
 	ReservationVO getCountPrice(int snum); //특정 공간의 인원 추가 금액 구하기
 	ReservationVO getTotalPrice(int snum); //특정 공간의 총액
+	
+	List<mem_space_res_view> BookingView(String userid);
 	
 	
 }

@@ -100,6 +100,8 @@ text-align:center;
 <div class="tag" 
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
 
+
+		
 		<input type="hidden" id="hashTag" name="hashTag" value="" style="width:25%">
 		<button class="btn btn-primary" onclick="gethashTag(1)" >하이틴</button>
 		<button class="btn btn-primary" onclick="gethashTag(2)" >느와르</button>

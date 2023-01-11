@@ -5,7 +5,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 
-<c:import url="/Spacetop"/>
+<c:import url="/Spacetop" charEncoding="utf-8"/>
 
 <%-- <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
@@ -39,18 +39,7 @@
 		</div>
 		
 		<div class="spaceVisual">
-			<c:if test="${svo.simage1 ne null}">
-				<img src="파일경로/${svo.simage1}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage2 ne null}">
-				<img src="파일경로/${svo.simage2}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage3 ne null}">
-				<img src="파일경로/${svo.simage3}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage4 ne null}">
-				<img src="파일경로/${svo.simage4}" class="img img-fluid">
-			</c:if>
+			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
 	</div>
 	<hr>
@@ -105,7 +94,7 @@
 	</div>
 </div>
 
-<c:import url="/Spacefoot"/>
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
 <!-- 플러그인 javascript 로딩 -->
 <script src="${pageContext.request.contextPath}/js_Reservation/jquery.timepicker.min.js"></script>
 <!-- 플러그인에서 제공해주는 css 로딩 -->
