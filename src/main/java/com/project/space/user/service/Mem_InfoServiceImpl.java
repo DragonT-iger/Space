@@ -2,6 +2,7 @@ package com.project.space.user.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -94,6 +95,12 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		}
 		
 		return user;
+	}
+
+	@Override
+	public List<Mem_InfoVO> searchUserByFilter(Map<String, String> filter) {
+		// TODO Auto-generated method stub
+		return memberMapper.searchUserByFilter(filter);
 	}
 
 }

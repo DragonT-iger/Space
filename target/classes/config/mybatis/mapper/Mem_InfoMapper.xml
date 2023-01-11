@@ -37,4 +37,117 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}
 	</delete>
 	
+	<select id="searchUserByFilter" resultType="MemberInfo" parameterType="map">
+		select * from (
+		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr,
+		TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE from mem_info)
+		<include refid="findsearch"/>
+		<include refid="findfilter"/>
+	</select>
+	<sql id="findsearch">
+			<where>
+				<if test="FkeywordOption=='Fname'">
+					mname like '%'||#{keyword}||'%'
+				</if>
+				<if test="FkeywordOption=='Fuserid'">
+					userid like '%'||#{keyword}||'%'
+				</if>
+			</where>
+	</sql>
+	<sql id="findfilter">
+	<!-- minFmage=, maxFmage=, minFmrank=, maxFmrank=, minFmdate=, maxFmdate=, 
+	minFpointAdd=, maxFpointAdd=, minFrcount=, maxFrcount=, FkeywordOption=Fname, keyword=asd -->
+		<!-- age 필터 -->
+		<if test="minFmage!='' and maxFmage==''">
+			 <![CDATA[
+			   and #{minFmage} <= AGE
+			 ]]>
+		</if>
+		<if test="maxFmage!='' and minFmage==''">
+			 <![CDATA[
+			   and #{maxFmage} >= AGE
+			 ]]>
+		</if>
+		<if test="maxFmage!='' and minFmage!=''">
+			 <![CDATA[
+			   and #{minFmage} <= AGE
+			   and #{maxFmage} >= AGE
+			 ]]>
+		</if>
+		<!-- mrank 필터 -->
+		<if test="minFmrank!='' and maxFmrank==''">
+			 <![CDATA[
+			   and #{minFmrank} <= mrank
+			 ]]>
+		</if>
+		<if test="maxFmrank!='' and minFmrank==''">
+			 <![CDATA[
+			   and #{maxFmrank} >= mrank
+			 ]]>
+		</if>
+		<if test="maxFmrank!='' and minFmrank!=''">
+			 <![CDATA[
+			   and #{minFmrank} <= mrank
+			   and #{maxFmrank} >= mrank
+			 ]]>
+		</if>
+		<!-- 회원가입일자 minFmdate , maxFmdate -->
+		<if test="minFmdate!='' and maxFmdate==''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			 ]]>
+		</if>
+		<if test="maxFmdate!='' and minFmdate==''">
+			 <![CDATA[
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if>
+		<if test="maxFmdate!='' and minFmdate!=''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if>
+		<!--  포인트충전량 minFpointAdd, maxFpointAdd -->
+		<if test="minFpointAdd!='' and maxFpointAdd==''">
+			 <![CDATA[
+			   and #{minFpointAdd} <= pointAdd
+			 ]]>
+		</if>
+		<if test="maxFpointAdd!='' and minFpointAdd==''">
+			 <![CDATA[
+			   and #{maxFmdate} >= pointAdd
+			 ]]>
+		</if>
+		<if test="maxFpointAdd!='' and minFpointAdd!=''">
+			 <![CDATA[
+			   and #{minFpointAdd} <= pointAdd
+			   and #{maxFpointAdd} >= pointAdd
+			 ]]>
+		</if>
+		<!-- 예약횟수 minFrcount, maxFrcount -->
+		<!-- <if test="minFrcount!='' and maxFrcount==''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount==''">
+			 <![CDATA[
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount!=''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if> -->
+	</sql>
+	<!-- 
+	select * from (
+		select mem_info.*, 
+		decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') as statusStr ,
+		TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE from mem_info)
+		where mname like '%%';
+	 -->
 </mapper>
