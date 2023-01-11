@@ -40,8 +40,6 @@ public interface SpaceInfoMapper {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
-<<<<<<< HEAD
-	
 	
 	public int selectSpaceLike(int snum);
 	public int insertSpaceLike(Heart_LikeVO hlvo);
@@ -49,10 +47,7 @@ public interface SpaceInfoMapper {
 	public List<Space_Like> selectUserLikeSpace(String userid);
 	public int deleteLike(int hnum);
 	
-		
-=======
 
 	public int deleteBySname(Map<String, String> map);		
->>>>>>> origin/SPACE-7
 		
 }
