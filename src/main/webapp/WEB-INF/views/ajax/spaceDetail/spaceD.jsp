@@ -45,7 +45,48 @@ nav ul li {
 	margin-top: 10%;
 }
 </style>
-
+<!-- 지도 관련 -->
+<style>
+    .map_wrap {position:relative;width:900px;height:400px; margin:auto;}
+    .title {font-weight:bold;display:block;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+</style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
+<script>
+	window.onload = function() {
+		let lat = "<c:out value='${sdvo.slat}'/>";
+		let lon = "<c:out value='${sdvo.slong}'/>";
+		if(lat != "" || lon != "" ){
+			let slat = lat.substr(0,9);
+			let slon = lon.substr(0,10);
+			//alert(slat+slon);
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(slat,slon), // 지도의 중심좌표
+		        level: 3, // 지도의 확대 레벨
+			    marker: 
+			    	[{
+			    	position: new kakao.maps.LatLng(slat, slon), 
+			        text: "<c:out value='${sdvo.sname}'/>" // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
+		        	}]
+		    };  
+			var latlng = new kakao.maps.LatLng(slat, slon);
+			//alert(latlng);
+			var marker = new kakao.maps.Marker();
+			marker.setPosition(new kakao.maps.LatLng(latlng));
+			// 지도를 생성합니다    
+			var map = new kakao.maps.StaticMap(mapContainer, mapOption);
+			marker.setMap(map);
+			marker.getMap();
+		}else{
+			$('#map').css({"background":"url(img/nocoord.png)"});
+			$("#map_tag").hide();
+		}
+	}
+</script>
+<!--  -->
 <c:import url="/Spacetop"/>
 
 
@@ -97,10 +138,18 @@ nav ul li {
 				</nav>
 		    </div>
 		</div>
-		
 		<div id="nav1">
 			<h4>장소 소개</h4>
 			<div>${sdvo.scontents}</div>
+			<!-- 지도 -->
+			<div class="map_wrap">
+			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+			    <div id="map_tag" class="hAddr">
+			        <span class="title"> ${sdvo.saddr1 } </span>
+			        <span id="centerAddr"></span>
+			    </div>
+			</div>	
+			<!--  -->
 		</div>
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 		<div id="nav2">
