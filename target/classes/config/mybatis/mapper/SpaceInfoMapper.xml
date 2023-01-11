@@ -42,9 +42,15 @@
     </select>
 	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
 		 select * from (select space_info.* , rownum as r from SPACE_INFO
-		 <if test="findkeyword!=null and findkeyword!=''">
-		 WHERE sname like '%'||#{findkeyword}||'%'
-		 </if>
+		<where>
+			 <if test="findkeyword!=null and findkeyword!=''">
+			 	and sname like '%'||#{findkeyword}||'%'
+			 </if>
+		 
+			 <if test="hashtag!=null and hashtag!=''">
+			 	and h_code = #{hashtag}
+			 </if>
+		 </where>
 		  ORDER BY SNUM asc)
 		 WHERE
 		 <![CDATA[
@@ -58,4 +64,9 @@
      <select id="getCountAny" resultType="_int" parameterType="string">
      		select count(*) from space_info where sname like '%'||#{value}||'%'
      </select>
+     
+     <select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
+		select * from space_info where h_code = #{h_code}
+	</select>
+     
 </mapper>

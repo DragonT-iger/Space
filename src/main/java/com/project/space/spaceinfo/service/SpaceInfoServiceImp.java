@@ -35,8 +35,8 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	}
 
 	@Override
-	public List<Space_InfoVO> selectByHashTag(String hashTag) {
-		return this.spaceinfoMapper.selectByHashTag(hashTag);
+	public List<Space_InfoVO> selectByHashTag(int h_code) {
+		return this.spaceinfoMapper.selectByHashTag(h_code);
 	}
 
 	@Override
@@ -106,5 +106,11 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	public int getCountAny(String keyword) {
 		return this.spaceinfoMapper.getCountAny(keyword);
 	}
+	
+	@Override
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
+		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
+
 
 }

@@ -97,11 +97,17 @@ text-align:center;
 
 
 
-<div class="tag"
+<div class="tag" 
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-	<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
-	<a href="#" class="tag">#Travel</a> <a href="#" class="tag">#New
-		Year</a>
+
+		<input type="hidden" id="hashTag" name="hashTag" value="" style="width:25%">
+		<button class="btn btn-primary" onclick="gethashTag(1)" >하이틴</button>
+		<button class="btn btn-primary" onclick="gethashTag(2)" >느와르</button>
+		<button class="btn btn-primary" onclick="gethashTag(3)" >클래식</button>
+		<button class="btn btn-primary" onclick="gethashTag(4)" >빈티지엔틱</button>
+		<button class="btn btn-primary" onclick="gethashTag(5)" >동양풍</button>
+
+		
 </div>
 
 
@@ -142,6 +148,7 @@ text-align:center;
 	  //초기값 (전역변수) 세팅
 	  var currentPage = 1;
 	  var keyword = "";
+	  var HashTag = "";
 	  /* function filter(){
 
 	        var value, name, item, i;
@@ -163,7 +170,9 @@ text-align:center;
     		  alert("값없음에 들어옴")
     		  currentPage = 1;
     	  }
+    	  alert("해시태그 확인==>"+HashTag);
     	  keyword=$('#keyword').val();
+    	  alert(keyword);
     	  $.ajax({
 			type:'get',
 			url:'home',
@@ -172,7 +181,8 @@ text-align:center;
 					//home?currentPage=value&pagingType=value&keyword=value (url+data)
 				currentPage : currentPage,
 				pagingType : pagingType,
-				keyword : keyword
+				keyword : keyword,
+				HashTag : HashTag
 			},
     	  cache:false,
     	  success :function (res){
@@ -190,6 +200,32 @@ text-align:center;
     	  }
     	  });
 	  }
+	      
+	      
+	    
+	      const gethashTag= function(hashTag2){
+	    	  HashTag = hashTag2;
+	    	  $.ajax({
+				type:'get',
+				url:'hashTag', //control 주소
+				contentType:'application/json',
+				data:{ //get파라미터로 넘어가는 key:value 값 
+						//home?currentPage=value&pagingType=value&keyword=value (url+data)
+					hashTag : hashTag2
+				},
+	    	  cache:false,
+	    	  success :function (res){
+	    		  
+	    		  alert(JSON.stringify(res));
+					showSpace(res);
+	    	  },
+	    	  error: function (err){
+	    		  alert("error"+err.status) //
+	    	  }
+	    	  });
+		  }
+	      
+	      
       
       const showSpace = function(res){
     	  if(res==null){
@@ -209,5 +245,7 @@ text-align:center;
     	  $('#space-list').html(str);
       	}
     }
+      
+      
 </script>
 <%@ include file="/WEB-INF/views/Spacefoot.jsp" %>
