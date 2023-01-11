@@ -31,7 +31,7 @@
 <div id="userpoint_add">
 	${loginUser.mname}님의 잔여 포인트: ${loginUser.point}
 </div>
-<a id="pointAddGo" href="pointAdd">포인트 충전</a>
+<a id="pointAddGo" href="user/pointAdd">포인트 충전</a>
 <hr>
 
 <div class="form-group">

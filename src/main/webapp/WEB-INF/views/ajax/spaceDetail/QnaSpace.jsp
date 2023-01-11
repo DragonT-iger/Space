@@ -20,9 +20,9 @@
 		<ul class="qna_list">
 		
 		<c:if test="${qnaArr eq null or empty qnaArr}">
-			<tr>
-				<td colspan="3"><b>아직 등록된 질문이 없습니다.</b></td>
-			</tr>
+			<div>
+				<span><b>아직 등록된 질문이 없습니다.</b></span>
+			</div>
 		</c:if>
 		
 		<c:if test="${qnaArr ne null or not empty qnaArr}">
@@ -30,14 +30,15 @@
 			<li class="qlist">
 				<div class="box">
 					<div id="qna_qnum">${qna.qnum}</div>
-					<span onclick="delete_qnum()">x</span>
-					<input id="check_qpwd" type="text" value="${qna.qpwd}">
+					<span onclick="delete_qnum(${snum})">x</span>
+					<input id="check_qpwd" type="hidden" value="${qna.qpwd}">
 					<!-- 답변레벨에 따라 들여쓰기 -->
 					<c:if test="${qna.qlevel>0}">
 					<c:forEach var="k" begin="0" end="${qna.qlevel}">
 						&nbsp;&nbsp;
 					</c:forEach>
 					</c:if>
+					
 					<div class="user_name">${qna.userid}</div>
 					<p>${qna.qtitle}</p>
 					<p>${qna.qcontent}</p>
@@ -95,7 +96,8 @@ const qna_write=function(){
 	})
 }
 
-const delete_qnum=function(){
+const delete_qnum=function(ss){
+	//alert(snum);
 	let qn=$('#qna_qnum').html();
 	//alert(qn);
 	var qp=$('#check_qpwd').val()
@@ -116,20 +118,26 @@ const delete_qnum=function(){
 			data:data,
 			cache:false,
 			suceess:function(res){
-				if(res.result>0){
-					console.log('success');
-					console.log(res);
+				//alert(res);
+				if(res>0){
+					alert('글이 삭제되었습니다')
+					window.location.reload('/space/spaceDetail?snum='+ss);
 				}else{
-					alert('Fail');
+					alert('비밀번호가 일치하지 않습니다')
+					window.location.replace('/space/spaceDetail?snum='+ss);
 				}
 			},
 			error:function(err){
 				alert('err: '+err.status);
+				window.location.replace('/space/spaceDetail?snum='+ss);
 			}
 		});
-	}else{
-		alert('Fail');
+	}else if(text==null){
+		alert('비밀번호를 입력해주세요');
+		window.location.replace('/space/spaceDetail?snum='+ss);
+	}else if(text!=qp){
+		alert('비밀번호가 일치하지 않습니다');
+		window.location.replace('/space/spaceDetail?snum='+ss);
 	}
-	qna_write();
 }
 </script>

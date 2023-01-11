@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 
 @Service
@@ -99,13 +101,29 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		
 		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
+	
+	@Override
+	public int insertSpaceLike(Heart_LikeVO hlvo) {
+		int res=spaceinfoMapper.selectSpaceLike(hlvo.getSnum());
+		if(res>0) {
+			return 0;
+		}else {
+			return this.spaceinfoMapper.insertSpaceLike(hlvo);
+		}
+	}
 
 	@Override
-	public int deleteBySname(String userid, String sname) {
-		Map<String,String> map=new HashMap<>();
-		map.put("userid", userid);
-		map.put("sname", sname);
+	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo) {
+		return this.spaceinfoMapper.selectBySpaceInfoExcept(sivo);
+	}
 
-		return this.spaceinfoMapper.deleteBySname(map);
+	@Override
+	public List<Space_Like> selectUserLikeSpace(String userid) {
+		return this.spaceinfoMapper.selectUserLikeSpace(userid);
+	}
+
+	@Override
+	public int deleteLike(int hnum) {
+		return this.spaceinfoMapper.deleteLike(hnum);
 	}
 }
