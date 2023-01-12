@@ -63,20 +63,38 @@ body {
 .result {
 	text-align: left;
 }
-
-.dropdown {
+.dropdown{
 	text-align: left;
 }
 </style>
-
+<script>
+	$(function(){
+		if(${flag=='NAVER'}){
+			//alert(${flag});
+			$('#mf[action^="join"]').prop('action','Naverjoin');
+			$('#jointitle').html('SNS 연동 추가정보 입력!!');
+			$('#mname').val(${MemInfo.mname});
+			$('#userid').val(${MemInfo.userid});
+			$('#hp').val(${MemInfo.hp});
+			$('#birth').val(${MemInfo.birth});
+		}
+	})
+</script>
 
 <div class="container-xxl py-5">
 	<div class="container">
 		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			<h5	class="section-title ff-secondary text-center text-primary fw-normal">Join Us!</h5>
-			<h1 class="mb-5">Sign Up</h1>
+			<h5
+				class="section-title ff-secondary text-center text-primary fw-normal">Join
+				Us!</h5>
+			<h1 id="jointitle" class="mb-5">Sign Up</h1>
 		</div>
-		<form name="mf" action="join" method="post">
+		<c:if test="${flag eq 'NAVER'}">
+		<form name="mf" action="Naverjoin" method="post">
+		</c:if>
+		<c:if test="${flag ne 'NAVER'}">
+		<form id="mf" name="mf" action="join" method="post">
+		</c:if>
 			<input type="hidden" name="id_flag" id="id_flag" value="N">
 
 			<div class="row g-4">
@@ -85,8 +103,8 @@ body {
 					<div class="row tf_wrap" id="">
 
 						<div class="textForm">
-							<input name="mname" type="text" class="name tf-input"
-								placeholder="NAME">
+							<input id="mname" name="mname" type="text" class="name tf-input"
+								placeholder="NAME" value="">
 							<div id=sub>이름은 한글이름만 가능합니다</div>
 						</div>
 
@@ -121,23 +139,33 @@ body {
 								placeholder="BIRTH DATE">
 							<div id=sub>생년월일을 8자리로 입력해주세요</div>
 						</div>
-
+						
 						<div class="textForm">
 							<div class="dropdown">
-								<select name="bank_code" id="bankCode">
-									<option value="">은행</option>
-									<c:forEach var="bank" items="${bankcode}">
-										<option value="${bank.bank_code}">${bank.bank_name}</option>
-									</c:forEach>
-								</select>
+								<button type="button" class="btn btn-primary dropdown-toggle"
+									data-toggle="dropdown">은행</button>
 								<input name="account" type="text" class="account tf-input"
-									placeholder="ACCOUNT"> 
-								
+								placeholder="ACCOUNT">
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">농협</a> 
+									<a class="dropdown-item" href="#">국민</a> 
+									<a class="dropdown-item" href="#">신한</a>
+								</div>
 							</div>
-
+							
 							<div id=sub>숫자만 입력해주세요</div>
 						</div>
-					</div>
+						<div class="textForm">
+							<div class="dropdown">
+								<button id="member_sel_btn"type="button" class="btn btn-primary dropdown-toggle"
+									data-toggle="dropdown">회원종류?</button>
+				  				<div class="dropdown-menu">
+									<a class="dropdown-item" href="javascript:member_sel('0','일반회원')">일반회원</a> 
+									<a class="dropdown-item" href="javascript:member_sel('1','등록회원')">등록회원</a> 
+								</div>
+								<input type="hidden" id="status" name="status" value=""/>
+		  					</div>
+		  				</div>
 				</div>
 				<div class="col-md-6">
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
@@ -157,5 +185,18 @@ body {
 		</form>
 	</div>
 </div>
+<!--  -->
+<script>
+	function member_sel(i,text){
+		if(i==0||i==1){
+			console.log(i);
+			$('#status').val(i);
+			$('#member_sel_btn').text(text);
+		}else{
+			alert("잘못된 접근입니다");
+			location.reload();
+		}
+	}
+</script>
 <!-- Contact End -->
 <c:import url="/Spacefoot" charEncoding="utf-8" />

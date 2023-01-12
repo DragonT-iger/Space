@@ -9,11 +9,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.project.space.domain.Space_InfoVO" alias="SpaceInfo"/>
 		<typeAlias type="com.project.space.domain.Mem_InfoVO" alias="MemberInfo"/>
 		<typeAlias type="com.project.space.domain.ReservationVO" alias="Reservation"/>
+		<typeAlias type="com.project.space.domain.ReviewVO" alias="Review"/>
+		<typeAlias type="com.project.space.domain.Qna_BoardVO" alias="Qna"/>
+		<typeAlias type="com.project.space.domain.PagingVO" alias="Paging"/>
+		<typeAlias type="com.project.space.domain.PointVO" alias="Point"/>
+		<typeAlias type="com.project.space.domain.Heart_LikeVO" alias="Like"/>
+		<typeAlias type="com.project.space.domain.Space_Like" alias="SL"/>
+		<typeAlias type="com.project.space.domain.mem_space_res_view" alias="MSRV"/>
 	</typeAliases>
 	<!-- mapper 정의 -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/SpaceInfoMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/Mem_InfoMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ReservationMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/ReviewMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/QnaMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/PointMapper.xml"/>
 	</mappers>
 </configuration>

@@ -27,7 +27,7 @@
 	
 	<!-- 객체를 자동으로 만들 기본 패키지 지정 : 기본패키지 아래의 특정하게 정의해놓은 클래스를 자동으로 생성된다 -->
 	<context:component-scan base-package="com.project.space" />
-
+	<context:component-scan base-package="com.project.interceptor" />
 	
 	<!-- 파일 업로드 위한 MultipartResolver 설정======================== -->
 	<!--주의: 빈의 id는 반드시 multipartResolver로 등록해야 한다.
@@ -43,17 +43,23 @@
 	</beans:bean>
 	<!-- String upDir=new Stirng("C:/myjava/Upload"); -->
 	
-	<!-- Interceptor 설정=============================== -->
-	<interceptors>
-		<interceptor>
-			<mapping path="/user/**"/>
-			<mapping path="/admin/**"/>
-			<beans:bean class="com.project.space.service.LoginCheckInterceptor"/>
-		</interceptor>
-		<interceptor>
-			<mapping path="/admin/**"/>
-			<beans:bean class="com.project.space.service.AdminCheckInterceptor"/>
-		</interceptor>
-	</interceptors>
+	<!-- Interceptor설정 =========================================================== -->
+   <interceptors>
+         <interceptor>
+            <mapping path="/user/**"/>
+            <mapping path="/owner/**"/>
+            <mapping path="/admin/**"/>
+            <beans:bean class="com.project.interceptor.LoginCheckInterceptor"/>
+         </interceptor>
+         <interceptor>
+            <mapping path="/owner/**"/>
+            <mapping path="/admin/**"/>
+            <beans:bean class="com.project.interceptor.OwnerCheckInterceptor"/>
+         </interceptor>
+         <interceptor>
+            <mapping path="/admin/**"/>
+            <beans:bean class="com.project.interceptor.AdminCheckInterceptor"/>
+         </interceptor>
+   </interceptors>
 	
 </beans:beans>

@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class Qna_BoardVO {
+	private String mode; //
+	
 	private int qnum;  //문의글번호
 	private String userid; //회원아이디 (mem_info)
 	private int snum; //공간번호 fk

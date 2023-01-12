@@ -2,14 +2,17 @@ package com.project.space.reservation.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.mapper.ReservationMapper;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
+import com.project.space.user.mapper.Mem_InfoMapper;
 
 @Service
 public class ReservationServiceImp implements ReservationService {
@@ -20,7 +23,6 @@ public class ReservationServiceImp implements ReservationService {
 	@Autowired
 	private ReservationMapper reservationMapper;
 	
-
 	@Override
 	public Space_InfoVO selectBySnum(int snum) {
 		return this.spaceinfoMapper.selectBySnum(snum);
@@ -48,13 +50,12 @@ public class ReservationServiceImp implements ReservationService {
 
 	@Override
 	public int insertBooking(ReservationVO rtvo) {
-		Integer cnt=reservationMapper.selectBookingBySnum(rtvo);
-		if(cnt!=null) {
-			int n=reservationMapper.updateBooking(rtvo);
-			return n;
+		int n=reservationMapper.insertBooking(rtvo);
+		if(n>0) {
+			int m=reservationMapper.updateUserRes(rtvo);
+			return m;
 		}else {
-			int n=reservationMapper.insertBooking(rtvo);
-			return n;
+			return 0;
 		}
 	}
 
@@ -95,6 +96,16 @@ public class ReservationServiceImp implements ReservationService {
 	@Override
 	public ReservationVO getTotalPrice(int snum) {
 		return this.reservationMapper.getTotalPrice(snum);
+	}
+
+	@Override
+	public int userBookingTotalprice(String userid) {
+		return this.reservationMapper.userBookingTotalprice(userid);
+	}
+
+	@Override
+	public List<mem_space_res_view> BookingView(String userid) {
+		return this.reservationMapper.BookingView(userid);
 	}
 
 	

@@ -37,7 +37,7 @@
 		<c:forEach var="resArr" items="${resArr}">
 		<tr>
 			<td style="color:red;">${resArr.rtnum}</td>
-			<td colspan="3" style="color:blue;">결제 시간: <fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
+			<td colspan="3" style="color:blue;"><fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
 		</tr>
 		<tr>
 			<td rowspan="5" style="width:100px;">
@@ -87,11 +87,8 @@
 		</tr>
 		<tr>
 			<td colspan="4">
-				<c:if test="${resArr.rtstartdate < now}">
-					<button type="button" id="done" class="btn btn-danger">리뷰쓰기</button>
-				</c:if>
 				<c:if test="${resArr.rtstartdate > now}">
-					<button type="button" id="cancel" class="btn btn-primary">예약취소</button>
+					<button type="button" class="btn btn-primary">예약취소</button>
 				</c:if>
 			</td>
 		</tr>
@@ -100,11 +97,3 @@
 	</table>
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />
-<script>
-$('#done').click(function(){
-	alert('이용이 완료된 예약으로 취소하실 수 없습니다');
-});
-$('#cancel').click(function(){
-	
-})
-</script>
