@@ -67,7 +67,7 @@
 						<i class="fa-solid fa-meteor"></i> Space
 					</h1> <!-- <img src="img/logo.png" alt="Logo"> -->
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
 					<span class="fa fa-bars"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -76,7 +76,7 @@
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle" 
-							data-bs-toggle="dropdown">Pages</a>
+							data-toggle="dropdown">Pages</a>
 
 							<div class="dropdown-menu m-0">
 								<a href="${myctx}/MyPage" class="dropdown-item">MyPage</a>
