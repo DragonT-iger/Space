@@ -2,7 +2,10 @@ package com.project.space;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.project.space.domain.Mem_InfoVO;
+import com.project.space.user.service.Mem_InfoService;
 
 
 /**
@@ -100,11 +106,7 @@ public class HomeController {
 		return "ajax/Login";
 	}
 	*/
-	@RequestMapping(value="/Join", method=RequestMethod.GET)
-	public String Join(Model model) {
-		logger.info("connected Join.");
-		return "ajax/Join";
-	}
+	
 	@RequestMapping(value="/AdminPage", method=RequestMethod.GET)
 	public String AdminPage(Model model) {
 		logger.info("connected AdminPage.");

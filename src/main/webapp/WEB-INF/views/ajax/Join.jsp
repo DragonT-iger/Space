@@ -63,7 +63,8 @@ body {
 .result {
 	text-align: left;
 }
-.dropdown{
+
+.dropdown {
 	text-align: left;
 }
 </style>
@@ -72,9 +73,7 @@ body {
 <div class="container-xxl py-5">
 	<div class="container">
 		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-			<h5
-				class="section-title ff-secondary text-center text-primary fw-normal">Join
-				Us!</h5>
+			<h5	class="section-title ff-secondary text-center text-primary fw-normal">Join Us!</h5>
 			<h1 class="mb-5">Sign Up</h1>
 		</div>
 		<form name="mf" action="join" method="post">
@@ -122,20 +121,20 @@ body {
 								placeholder="BIRTH DATE">
 							<div id=sub>생년월일을 8자리로 입력해주세요</div>
 						</div>
-						
+
 						<div class="textForm">
 							<div class="dropdown">
-								<button type="button" class="btn btn-primary dropdown-toggle"
-									data-toggle="dropdown">은행</button>
+								<select name="bank_code" id="bankCode">
+									<option value="">은행</option>
+									<c:forEach var="bank" items="${bankcode}">
+										<option value="${bank.bank_code}">${bank.bank_name}</option>
+									</c:forEach>
+								</select>
 								<input name="account" type="text" class="account tf-input"
-								placeholder="ACCOUNT">
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">농협</a> 
-									<a class="dropdown-item" href="#">국민</a> 
-									<a class="dropdown-item" href="#">신한</a>
-								</div>
+									placeholder="ACCOUNT"> 
+								
 							</div>
-							
+
 							<div id=sub>숫자만 입력해주세요</div>
 						</div>
 					</div>

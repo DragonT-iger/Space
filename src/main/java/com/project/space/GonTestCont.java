@@ -2,6 +2,7 @@ package com.project.space;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
+import com.project.space.domain.NotUserException;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
 import com.project.space.user.service.Mem_InfoService;
 
@@ -42,10 +44,8 @@ public class GonTestCont {
 		
 		return "ajax/ilgon/MyReviewList";
 	}
-	@GetMapping("/MyModify")
-	public String mymodify() {
-		return "ajax/Pages/MyModify";
-	}
+	
+	
 	@GetMapping("/MyReservationCheck")
 	public String myReservationCheck() {
 		return "ajax/OwnerPage/MyReservationCheck";
