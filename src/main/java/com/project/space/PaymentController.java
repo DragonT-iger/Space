@@ -130,7 +130,7 @@ public class PaymentController {
         m.addAttribute("refundHolder", refundHolder);
         m.addAttribute("refundBank", refundBank);
         m.addAttribute("refundAccount", refundAccount);
-        m.addAttribute("checksum", paymentService.getpaymentbyuseridandmerchant_uid(userid, merchant_uid).getAmount());
+        m.addAttribute("checksum", paymentService.getpaymentbyuseridandmerchant_uid("test", merchant_uid).getAmount());
 
         log.info("asdasdasdasdasdasdasdwaefefawfadfdsfadfasdf");
         return "ajax/pay/test2";

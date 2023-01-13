@@ -3,11 +3,13 @@ package com.project.space.spaceinfo.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
 
 public interface SpaceInfoMapper {
 	//해시태그별로 공간정보가져오기
-	public List<Space_InfoVO> selectByHashTag(String hashTag);
+	public List<Space_InfoVO> selectByHashTag(int h_code);
 	//공간정보 전체출력
 	public List<Space_InfoVO> getSpaceInfoAll();
 	//공간번호로 공간정보 가져오기
@@ -38,9 +40,34 @@ public interface SpaceInfoMapper {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
+<<<<<<< HEAD
+	public int getCountAny(String keyword);
+	
+	//해시태그
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+		
+
+	
+=======
+<<<<<<< HEAD
+	
+=======
+>>>>>>> SPACE-10-예약
+	
+	public int selectSpaceLike(int snum);
+	public int insertSpaceLike(Heart_LikeVO hlvo);
+	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo);
+	public List<Space_Like> selectUserLikeSpace(String userid);
+	public int deleteLike(int hnum);
+	
+<<<<<<< HEAD
+		
+=======
 
 	public int deleteBySname(Map<String, String> map);
 
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+
+	
 		
 }

@@ -67,7 +67,19 @@ body {
 	text-align: left;
 }
 </style>
-
+<script>
+	$(function(){
+		if(${flag=='NAVER'}){
+			//alert(${flag});
+			$('#mf[action^="join"]').prop('action','Naverjoin');
+			$('#jointitle').html('SNS 연동 추가정보 입력!!');
+			$('#mname').val(${MemInfo.mname});
+			$('#userid').val(${MemInfo.userid});
+			$('#hp').val(${MemInfo.hp});
+			$('#birth').val(${MemInfo.birth});
+		}
+	})
+</script>
 
 <div class="container-xxl py-5">
 	<div class="container">
@@ -75,9 +87,14 @@ body {
 			<h5
 				class="section-title ff-secondary text-center text-primary fw-normal">Join
 				Us!</h5>
-			<h1 class="mb-5">Sign Up</h1>
+			<h1 id="jointitle" class="mb-5">Sign Up</h1>
 		</div>
-		<form name="mf" action="join" method="post">
+		<c:if test="${flag eq 'NAVER'}">
+		<form name="mf" action="Naverjoin" method="post">
+		</c:if>
+		<c:if test="${flag ne 'NAVER'}">
+		<form id="mf" name="mf" action="join" method="post">
+		</c:if>
 			<input type="hidden" name="id_flag" id="id_flag" value="N">
 
 			<div class="row g-4">
@@ -86,8 +103,8 @@ body {
 					<div class="row tf_wrap" id="">
 
 						<div class="textForm">
-							<input name="mname" type="text" class="name tf-input"
-								placeholder="NAME">
+							<input id="mname" name="mname" type="text" class="name tf-input"
+								placeholder="NAME" value="">
 							<div id=sub>이름은 한글이름만 가능합니다</div>
 						</div>
 

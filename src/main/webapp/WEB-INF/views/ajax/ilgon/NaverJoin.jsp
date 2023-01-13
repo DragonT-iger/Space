@@ -86,7 +86,7 @@
 			        <select id="status" name="status" class="status tf-input">
 			        	<option value="">회원선택</option>
 			        	<option value="0">일반유저</option>
-			        	<option value="-1">등록유저</option>
+			        	<option value="1">등록유저</option>
 			        </select>
 			      </div>
 			      <div class="textForm">

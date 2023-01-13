@@ -5,100 +5,96 @@
 
 <c:import url="/Spacetop" />
 
-<div class="py-5">
+<div class="point_total">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="text-center">1. 회원아이디로 예약 내역 가져오기(언제 어디에 포인트 사용했는지)
-					2. 회원아이디로 포인트 충전 내역 가져오기 3. 포인트 충전 - 포인트테이블</h1>
+		
+		<div class="point_header">
+			<div class="point_user">
+				<h1 class="havePoint">${mivo.mname}님의 현재 잔여 포인트</h1>
+				<h2 class="havePoint"><fmt:formatNumber value="${mivo.point}" pattern="###,###"/></h2>
+				<button class="btn-primary btn">충전하기</button>
 			</div>
 		</div>
 
 
-		<div class="row">
-			<div class="col-md-12">
-				<form name="orderF" id="orderF" action="order">
-					<table class="table table-striped">
-						<thead>
-							<tr class="info text-center">
-								<th>상품번호</th>
-								<th>상품명</th>
-								<th>수량</th>
-								<th>단가</th>
-								<th>금액</th>
-								<th>삭제</th>
-							</tr>
-						</thead>
-
-						<c:choose>
-							<c:when test="${cartArr eq null or empty cartArr}">
-								<tr>
-									<td colspan="6"><b>장바구니에 담긴 상품이 없습니다</b></td>
-								</tr>
-							</c:when>
-
-							<c:otherwise>
-								<c:forEach var="cvo" items="${cartArr}" varStatus="state">
-									<tr>
-										<td><label> <input type="checkbox" name="pnum"
-												id="pnum${state.index}" value="${cvo.pnum_fk}">
-												${cvo.pnum_fk}
-										</label></td>
-
-										<td>
-											<h4>${cvo.pname}</h4> <br> <a
-											href="../prodDetail?pnum=${cvo.pnum_fk}" target="_blank">
-												<img src="../resources/product_images/${cvo.pimage1}"
-												class="img-thumbnail" style="width: 140px">
-										</a>
-										</td>
-
-										<td><input type="number" name="oqty"
-											id="oqty${state.index}" value="${cvo.oqty}" min="1" max="50"
-											size="3">
-											<button type="button" class="btn btn-success"
-												onclick="cartEdit('${cvo.cartNum}','${state.index}')">수정</button>
-										</td>
-
-										<td><fmt:formatNumber value="${cvo.saleprice}"
-												pattern="###,###" />원<br> <span
-											class="badge badge-danger">${cvo.point}</span>POINT</td>
-
-										<td><fmt:formatNumber value="${cvo.totalPrice}"
-												pattern="###,###" />원<br> <span
-											class="badge badge-danger">${cvo.totalPoint}</span>POINT</td>
-
-										<td><a href="#" onclick="cartDel('${cvo.cartNum}')">삭제</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-						</tbody>
-
-						<tr>
-							<td colspan="3">
-								<h5>
-									장바구니 총 액: <span class="text-danger"> <fmt:formatNumber
-											value="${cartTotal.cartTotalPrice}" pattern="###,###" /> 원
-									</span>
-								</h5>
-								<h5>
-									장바구니 총포인트: <span class="text-success">
-										${cartTotal.cartTotalPoint} POINT</span>
-								</h5>
-							</td>
-
-							<td colspan="3">
-								<button type="button" onclick="goOrder()"
-									class="btn btn-outline-info">주문하기</button> <!-- form tag안에 버튼이 있으면 default 로 submit ==> order.jsp -->
-								<button type="button" class="btn btn-outline-warning"
-									onclick="location.href='../index'">계속쇼핑</button>
-							</td>
-						</tr>
-					</table>
-				</form>
+		<div class="point_body">
+			<div class="point_inner">
+				<div class="point_1" >
+					<h5>포인트 충전 내역</h5>
+					<span>충전된 총 포인트: <fmt:formatNumber value="${mivo.pointadd}" pattern="###,###"/></span>
+					<ul class="point_list">
+					<c:if test="${pvoArr eq null or empty pvoArr}">
+						<div>
+							<span><b>포인트 충전 내역이 없습니다.</b></span>
+						</div>
+					</c:if>
+					
+					<c:if test="${pvoArr ne null or not empty pvoArr}">
+					<c:forEach var="pp" items="${pvoArr}">
+						<li class="pointaddlist">
+							<div class="box">
+								<p>충전처 : ${pp.paykind}</p>
+								<p>충전된 포인트 : <fmt:formatNumber value="${pp.plusPoint}" pattern="###,###,###"/></p>
+								<p><fmt:formatDate value="${pp.paydate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
+							</div>
+						</li>
+					</c:forEach>
+					</c:if>
+					</ul>
+				</div>
+				
+				<div class="point_1">
+					<h5>포인트 사용 내역</h5>
+					<span>사용된 총 포인트: <fmt:formatNumber value="${resPrice}" pattern="###,###,###"/></span>
+					<ul class="point_list">
+					<c:if test="${resArr eq null or empty resArr}">
+						<div>
+							<span><b>포인트 사용 내역이 없습니다.</b></span>
+						</div>
+					</c:if>
+					
+					<c:if test="${resArr ne null or not empty resArr}">
+					<c:forEach var="pu" items="${resArr}">
+						<li class="pointuselist">
+							<div class="box">
+								<p><a href="/space/user/MyReservation">사용처 : ${pu.snum}</a></p>
+								<p>사용된 포인트 : <fmt:formatNumber value="${pu.totalprice}" pattern="###,###"/></p>
+								<p><fmt:formatDate value="${pu.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
+							</div>
+						</li>
+					</c:forEach>
+					</c:if>
+					</ul>
+				</div>
+				
 			</div>
-		</div>
 
-		<c:import url="/Spacefoot" />
+						
+		</div>
+		
+		
+	</div>
+</div>
+<c:import url="/Spacefoot" />
+
+<style>
+.btn{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.havePoint{
+	margin-top:20px;
+	margin-bottom:20px;
+	text-align:center;
+}
+
+.point_total{
+	width:100%;
+	height:800px;
+}
+.point_1{
+	width:48%;
+	height:500px;
+	float:left;
+}	
+</style>
