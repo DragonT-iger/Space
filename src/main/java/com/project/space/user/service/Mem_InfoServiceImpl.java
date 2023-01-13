@@ -129,9 +129,4 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		return memberMapper.listBankcode();
 	}
 
-	@Override
-	public List<Mem_InfoVO> searchUserByFilter(Map<String, String> filter) {
-		// TODO Auto-generated method stub
-		return memberMapper.searchUserByFilter(filter);
-	}
 }

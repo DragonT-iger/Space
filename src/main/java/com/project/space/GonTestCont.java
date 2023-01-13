@@ -45,10 +45,6 @@ public class GonTestCont {
 	private Mem_InfoService memberService;
 
 	
-	@GetMapping("/user/MyModify")
-	public String mymodify() {
-		return "ajax/Pages/MyModify";
-	}
 	/* ----등록유저------ */
 	@GetMapping("/owner/MyReservationCheck")
 	public String myReservationCheck() {

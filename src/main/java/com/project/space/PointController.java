@@ -40,7 +40,8 @@ public class PointController {
 		Mem_InfoVO mivo=this.meminfoService.getUser(mvoId); //회원정보
 		List<PointVO> pvoArr=this.pointService.getPointUser(mvoId); //포인트 충전내역
 		List<ReservationVO> resArr=this.reservationService.userBookingInfo(mvoId); //예약한 공간정보(포인트 사용처)
-		int resPrice=this.reservationService.userBookingTotalprice(mvoId); //총 예약 포인트 합계
+		String resPrice=this.reservationService.userBookingTotalprice(mvoId); //총 예약 포인트 합계
+		//log.info("resPrice--->"+resPrice);
 		
 		m.addAttribute("mivo", mivo);
 		m.addAttribute("pvoArr", pvoArr);

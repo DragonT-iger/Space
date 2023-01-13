@@ -42,7 +42,7 @@ public interface ReservationMapper {
 	ReservationVO getCountPrice(int snum); //특정 공간의 인원 추가 금액 구하기
 	ReservationVO getTotalPrice(int snum); //특정 공간의 총액
 
-	int userBookingTotalprice(String userid);
+	String userBookingTotalprice(String userid);
 
 	List<mem_space_res_view> BookingView(String userid);
 

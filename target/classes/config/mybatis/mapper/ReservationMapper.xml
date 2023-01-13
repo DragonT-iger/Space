@@ -23,7 +23,7 @@
 		select * from reservation where userid=#{value}
 	</select>
 	
-	<select id="userBookingTotalprice" parameterType="string" resultType="int">
+	<select id="userBookingTotalprice" parameterType="string" resultType="string">
 		select sum(totalprice) from reservation where userid=#{value}
 	</select>
 	

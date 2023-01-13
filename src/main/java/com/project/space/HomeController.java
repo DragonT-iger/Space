@@ -213,11 +213,6 @@ public class HomeController {
 		return "ajax/Login";
 	}
 	*/
-	@RequestMapping(value="/Join", method=RequestMethod.GET)
-	public String Join(Model model) {
-		logger.info("connected Join.");
-		return "ajax/Join";
-	}
 	
 	
 	/*
