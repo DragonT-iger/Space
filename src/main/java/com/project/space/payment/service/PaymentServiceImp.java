@@ -1,6 +1,8 @@
 package com.project.space.payment.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,5 +22,23 @@ public class PaymentServiceImp implements PaymentService {
     @Override
     public int insertPayment(PaymentVO pvo){
         return this.paymentmapper.insertPayment(pvo);
+    }
+
+    @Override
+    public int getPaynum() {
+        return this.paymentmapper.getPaynum();
+    }
+
+    @Override
+    public int getpaymentcount(){
+        return this.paymentmapper.getpaymentcount();
+    }
+
+    @Override
+    public PaymentVO getpaymentbyuseridandmerchant_uid(String userid, String merchant_uid) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("userid", userid);
+        map.put("merchant_uid", merchant_uid);
+        return this.paymentmapper.getpaymentbyuseridandmerchant_uid(map);
     }
 }

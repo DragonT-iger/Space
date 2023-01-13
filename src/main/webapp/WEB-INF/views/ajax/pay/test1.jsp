@@ -26,21 +26,28 @@ pageEncoding="UTF-8"%>
     function requestPay() {
       // IMP.request_pay(param, callback) 결제창 호출
       IMP.request_pay({ // param
-          pg: "html5_inicis",
-          pay_method: "card",
-          merchant_uid: "ORD20180131-0000019",
-          name: "테스트테스트",
-          amount: 100, //100원 미만은 결제 불가능
-          buyer_email: "gildong@gmail.com",
-          buyer_name: "홍길동",
-          buyer_tel: "010-4242-4242",
-          buyer_addr: "서울특별시 강남구 신사동",
-          buyer_postcode: "01181"
+          pg: "html5_inicis", // 상수
+          pay_method: "card", // 상수
+          merchant_uid: "${merchant_uid}",
+          name: "${sname}",  // space_info(sname)
+          amount: "${amount}", //100원 미만은 결제 불가능 // model requestparam
+          buyer_email: "gildong@gmail.com", // 이메일이 없으므로 고정값을 넣거나 해야됨
+          buyer_name: "${mname}", // mname
+          buyer_tel: "${hp}", //hp
+          buyer_addr: "서울특별시 강남구 신사동", //addr 정보도 없음 --> 임의값
+          buyer_postcode: "01181" // 마찬가지로 정보 없음. --> 임의값
+          
+          
+          //즉 model에서 가져와야 하는 정보
+          //1. mearchant_uid , 2.sname, 3.param(amount), 4.mname, 5.hp
+          
+          
+          
       }, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
         // jQuery로 HTTP 요청
         jQuery.ajax({
-            url: "complete", // 예: https://www.myservice.com/payments/complete
+            url: "complete", // 예: localhost:9090/payments/complete
             method: "POST",
             headers: { "Content-Type": "application/json" },
             data: JSON.stringify({
