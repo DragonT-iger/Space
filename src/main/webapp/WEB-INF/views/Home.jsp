@@ -1,30 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/Spacetop.jsp" %>
+<%@ include file="/WEB-INF/views/Spacetop.jsp"%>
+
+
+
+
 
 <style>
-.text{
-text-align:center;
-font-family:'Heebo';
+.text {
+	text-align: center;
+	font-family: 'Heebo';
 }
-.flex-container{
-	display:flex;
-	flex-wrap:wrap;
+
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-.flex-item{
-	background-color:lightgray;
-	width:21%; 
-	margin:2%;
+
+.flex-item {
+	background-color: lightgray;
+	width: 21%;
+	margin: 2%;
 }
 
-.img{
-width:100%;
-height:200px;
-margin: auto;
-
-text-align:center;
+.img {
+	width: 100%;
+	height: 200px;
+	margin: auto;
+	text-align: center;
 }
+
 .padding80 {
 	padding: 10px;
 }
@@ -75,7 +82,7 @@ text-align:center;
 	width: 80%;
 	border-radius: 6px;
 	color: white;
-	text-align:center;
+	text-align: center;
 }
 
 #value:focus {
@@ -92,49 +99,61 @@ text-align:center;
 	font-weight: 470;
 	color: #333;
 }
-
 </style>
 
 
 
 <div class="tag"
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-	<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
-	<a href="#" class="tag">#Travel</a> <a href="#" class="tag">#New
-		Year</a>
+		<c:forEach var="hashtag" items="${hashtag}">
+	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
+		style="width: 25%">
+	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
+	</c:forEach>
+
+
+
+
+
 </div>
 
 
 
+
+
+
 <div class="search_wrap">
-    <div class="search_area text-center">
-        <input type="text" id="keyword" name="keyword" value="" style="width:25%">
-        <button class="btn btn-primary" onclick="listPaging('search')">Search</button>
-    </div>
-</div>  
+	<div class="search_area text-center">
+		<input type="text" id="keyword" name="keyword" value=""
+			style="width: 25%">
+		<button onclick="listPaging('search')">Search</button>
+		<button type="button" onclick="location.href='http://localhost:8080/space/'">초기화</button>
+	</div>
+</div>
 
 
 <section class="padding80 margin50">
-		<div id="space-list" class="flex-container">
-				<c:forEach var="Space" items="${spaceArr}">
-				<div id="space-item" class="flex-item">
-					<a href="spaceDetail?snum=${Space.snum}">
-						<img class="img" alt="" src="resources/SpaceInfoImg/${Space.simage1}"/>
-					</a>
-					<p class="text">${Space.sname}</p>
-					<p class="text">${Space.saddr1}</p>
-					<p class="text">${Space.saddr2}</p>
-				</div>
-				</c:forEach>
-		</div>
-		<div class="text-center">
-			<span><button class="btn btn-primary" onclick="listPaging('prev')">이전</button></span>
-			<span><button class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
-		</div>
+	<div id="space-list" class="flex-container">
+		<c:forEach var="Space" items="${spaceArr}">
+			<div id="space-item" class="flex-item">
+				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
+					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
+				</a>
+				<p class="text">${Space.sname}</p>
+				<p class="text">${Space.saddr1}</p>
+				<p class="text">${Space.saddr2}</p>
+			</div>
+		</c:forEach>
+	</div>
+	<div class="text-center">
+		<span><button class="btn btn-primary"
+				onclick="listPaging('prev')">이전</button></span> <span><button
+				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
+	</div>
 </section>
 <a href="http://pf.kakao.com/_xnHWixj">카톡</a>
 <form>
-	<input type="hidden" id="currentPage"/>
+	<input type="hidden" id="currentPage" />
 </form>
 
 
@@ -142,6 +161,8 @@ text-align:center;
 	  //초기값 (전역변수) 세팅
 	  var currentPage = 1;
 	  var keyword = "";
+	  var HashTag = "";
+	 
 	  /* function filter(){
 
 	        var value, name, item, i;
@@ -158,12 +179,17 @@ text-align:center;
 	          }
 	        }
 	      } */
+	      
+	   
+	      
       const listPaging= function(pagingType){
     	  if(currentPage=="" || currentPage==null){
     		  alert("값없음에 들어옴")
     		  currentPage = 1;
     	  }
+    	  alert("해시태그 확인==>"+HashTag);
     	  keyword=$('#keyword').val();
+    	  alert(keyword);
     	  $.ajax({
 			type:'get',
 			url:'home',
@@ -172,7 +198,8 @@ text-align:center;
 					//home?currentPage=value&pagingType=value&keyword=value (url+data)
 				currentPage : currentPage,
 				pagingType : pagingType,
-				keyword : keyword
+				keyword : keyword,
+				HashTag : HashTag
 			},
     	  cache:false,
     	  success :function (res){
@@ -190,6 +217,47 @@ text-align:center;
     	  }
     	  });
 	  }
+	      
+	      const flag = "";//flag 현재 해시태그가 놀려있는 여부
+	      const target="";//target 직전에 눌린 해시태그의 primary key
+	    
+	      
+	     
+	    		 
+	    	
+	    
+	      
+	 
+	 	     
+	      
+	    
+	      
+	      const gethashTag= function(hashTag2){
+	    	  HashTag = hashTag2;
+	    	  $.ajax({
+				type:'get',
+				url:'hashTag', //control 주소
+				contentType:'application/json',
+				data:{ //get파라미터로 넘어가는 key:value 값 
+						//home?currentPage=value&pagingType=value&keyword=value (url+data)
+					hashTag : hashTag2
+				},
+	    	  cache:false,
+	    	  success :function (res){
+	    		  
+	    		  alert(JSON.stringify(res));
+					showSpace(res);
+	    	  },
+	    	  error: function (err){
+	    		  alert("error"+err.status) //
+	    	  }
+	    	  });
+	    	  
+	    	  
+	    	
+		  }
+	      
+	      
       
       const showSpace = function(res){
     	  if(res==null){
@@ -209,5 +277,8 @@ text-align:center;
     	  $('#space-list').html(str);
       	}
     }
+      
+
+      
 </script>
-<%@ include file="/WEB-INF/views/Spacefoot.jsp" %>
+<%@ include file="/WEB-INF/views/Spacefoot.jsp"%>
