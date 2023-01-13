@@ -127,7 +127,7 @@
 		<input type="text" id="keyword" name="keyword" value=""
 			style="width: 25%">
 		<button onclick="listPaging('search')">Search</button>
-		<button type="button" onclick="location.href='http://localhost:8080/space/'">초기화</button>
+		<button type="button" onclick="location.href='http://localhost:9090/space/'">초기화</button>
 	</div>
 </div>
 
