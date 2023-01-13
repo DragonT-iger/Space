@@ -8,26 +8,29 @@ import com.project.space.domain.NotUserException;
 import com.project.space.domain.PagingVO;
 
 public interface Mem_InfoMapper {
-	int createUser(Mem_InfoVO memvo);  //�쑀���벑濡�
+	int createUser(Mem_InfoVO memvo);  //유저등록
 
-	int getUserCount(PagingVO pvo);  //�럹�씠吏�
+	int getUserCount(PagingVO pvo);  //페이지
 
-	List<Mem_InfoVO> listUser(PagingVO pvo);  //�럹�씠吏� �쑀�� 由ъ뒪�듃
+	List<Mem_InfoVO> listUser(PagingVO pvo);  //페이지 유저 리스트
 
 	int idCheck(String userid);
 
-	int deleteUser(Mem_InfoVO mpwd);//�쉶�썝�깉�눜
+	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
-	int updateUser(Mem_InfoVO user);//�쉶�썝�닔�젙
+	int updateUser(Mem_InfoVO user);//회원수정
 
 	Mem_InfoVO getUser(String userid);
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
-	
-	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
 
 	int getStatusByUserid(String userid);
-
+	
+	Mem_InfoVO pwCheck(String userid, String mpwd)throws NotUserException;
+	
+	List<Mem_InfoVO> listBankcode();
+	
+	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
 }

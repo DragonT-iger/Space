@@ -99,8 +99,12 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public int userBookingTotalprice(String userid) {
-		return this.reservationMapper.userBookingTotalprice(userid);
+	public String userBookingTotalprice(String userid) {
+		String u=this.reservationMapper.userBookingTotalprice(userid);
+		if(u==null) {
+			return "0";
+		}
+		return u;
 	}
 
 	@Override

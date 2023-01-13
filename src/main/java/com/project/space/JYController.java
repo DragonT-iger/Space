@@ -131,10 +131,12 @@ public class JYController {
 		List<Schedule> dateList=new ArrayList<>();
 		
 		//스케줄
+
 		HttpSession ses=req.getSession();
 		Space_InfoVO svo=(Space_InfoVO)ses.getAttribute("svo"); //세션에 저장된 공간 넘버
 		log.info("svo: "+svo);
 		sch.setSnum(svo.getSnum());
+
 		List<ReservationVO> sch_list=reservationService.CalbookingInfo(sch);
 
 		ReservationVO[][] schedule_data_arr=new ReservationVO[32][4];

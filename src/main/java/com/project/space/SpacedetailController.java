@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,10 +26,6 @@ import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PagingVO;
 import com.project.space.domain.Qna_BoardVO;
-=======
-import org.springframework.web.bind.annotation.RequestParam;
-
->>>>>>> origin/SPACE-7
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
 import com.project.space.qna.service.QnaService;

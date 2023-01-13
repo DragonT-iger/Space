@@ -17,7 +17,7 @@ public interface ReservationService {
 	//일반유저가 본인의 예약내역 열람
 	List<ReservationVO> userBookingInfo(String userid);
 	//유저가 예약한 전체 예약 금액
-	int userBookingTotalprice(String userid);
+	String userBookingTotalprice(String userid);
 	
 	//공간번호로 특정 공간 정보 가져오기
 	public Space_InfoVO selectBySnum(int snum);

@@ -37,22 +37,6 @@ public interface SpaceInfoMapper {
 	public String selectByh_code(int h_code);
 	public List<String> GetAllSpaceNameByUserid(String userid);
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public int getCountAny(String keyword);
-	
-	//해시태그
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
-		
-
-	
-=======
-<<<<<<< HEAD
-	
-=======
->>>>>>> SPACE-10-예약
-=======
->>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 	
 	public int selectSpaceLike(int snum);
 	public int insertSpaceLike(Heart_LikeVO hlvo);
@@ -61,30 +45,8 @@ public interface SpaceInfoMapper {
 	public int deleteLike(int hnum);
 
 	public int deleteBySname(Map<String, String> map);
-<<<<<<< HEAD
 	
 	public int getCountAny(String keyword);
-<<<<<<< HEAD
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
-<<<<<<< HEAD
-=======
-
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
->>>>>>> origin/SPACE-7
-		
-<<<<<<< HEAD
->>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
-=======
-=======
-	
-	//해시태그
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
-		
-
-	
->>>>>>> origin/space11
-=======
 	public List<HashtagVO> getHashTagAll();	
->>>>>>> origin/SPACE-14-관리자페이지
->>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 }

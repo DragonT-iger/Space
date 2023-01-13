@@ -57,6 +57,7 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 
 	@Override
 	public int deleteUser(Mem_InfoVO vo) {
+		log.info(vo.getUserid());
 		return memberMapper.deleteUser(vo);
 	}
 
@@ -106,6 +107,26 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	@Override
 	public int getStatusByUserid(String userid) {
 		return memberMapper.getStatusByUserid(userid);
+	}
+	
+	@Override
+	public Mem_InfoVO pwCheck(String userid, String mpwd) throws NotUserException {
+		Mem_InfoVO user=memberMapper.getUser(userid);
+		if(user==null) {
+			throw new NotUserException("회원이 아닙니다");
+		}
+		
+		if(!pwencoder.matches(mpwd, user.getMpwd())) {
+		
+			throw new NotUserException("비밀번호가 일치하지 않습니다");
+		}
+		
+		return user;
+	}
+
+	@Override
+	public List<Mem_InfoVO> listBankcode() {
+		return memberMapper.listBankcode();
 	}
 
 }
