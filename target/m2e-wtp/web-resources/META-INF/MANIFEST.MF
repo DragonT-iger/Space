@@ -1,17 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: kwan1
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 Built-By: TanOS
-=======
-Built-By: kwan1
->>>>>>> origin/space11
-=======
-Built-By: DT
->>>>>>> origin/SPACE-7
->>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 Build-Jdk: 11
 Created-By: Maven Integration for Eclipse
 

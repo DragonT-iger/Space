@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-=======
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -31,24 +29,8 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
->>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
-	<classpathentry kind="src" path="target/generated-sources/annotations">
-		<attributes>
-			<attribute name="optional" value="true"/>
-		</attributes>
-	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry kind="output" path="bin"/>
-=======
-	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="optional" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -58,27 +40,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<classpathentry kind="src" path="target/generated-sources/annotations">
-		<attributes>
-			<attribute name="optional" value="true"/>
-=======
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="test" value="true"/>
->>>>>>> origin/SPACE-7
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="optional" value="true"/>
-		</attributes>
-	</classpathentry>
-=======
->>>>>>> origin/space11
 	<classpathentry kind="output" path="target/classes"/>
->>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 </classpath>
