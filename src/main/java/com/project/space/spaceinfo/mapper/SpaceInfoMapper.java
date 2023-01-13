@@ -10,7 +10,7 @@ import com.project.space.domain.Space_Like;
 
 public interface SpaceInfoMapper {
 	//해시태그별로 공간정보가져오기
-	public List<Space_InfoVO> selectByHashTag(String hashTag);
+	public List<Space_InfoVO> selectByHashTag(int h_code);
 	//공간정보 전체출력
 	public List<Space_InfoVO> getSpaceInfoAll();
 	//공간번호로 공간정보 가져오기
