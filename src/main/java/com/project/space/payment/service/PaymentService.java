@@ -1,13 +1,17 @@
 package com.project.space.payment.service;
 
-import java.util.List;
 
-import com.project.space.domain.PointVO;
+import com.project.space.domain.PaymentVO;
+
+
 
 public interface PaymentService {
-    public PointVO getPayMent(int paynum);
-    public List<PointVO> getPayMentList();
-    public int insertPayMent(PointVO payment);
-    public int updatePayMent(PointVO payment);
-    public int deletePayMent(int paynum);
+
+    public int insertPayment(PaymentVO pvo);
+
+    public int getPaynum();
+
+    public int getpaymentcount();
+
+    public PaymentVO getpaymentbyuseridandmerchant_uid(String userid, String merchant_uid);
 }
