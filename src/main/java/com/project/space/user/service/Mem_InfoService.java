@@ -1,6 +1,7 @@
 package com.project.space.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NotUserException;
@@ -27,4 +28,10 @@ public interface Mem_InfoService {
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
 
 	int getStatusByUserid(String userid);
+	
+	Mem_InfoVO pwCheck(String userid, String mpwd) throws NotUserException;
+	
+	List<Mem_InfoVO> listBankcode();
+	
+	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
 }

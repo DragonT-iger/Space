@@ -39,8 +39,6 @@ public class LoginController {
 	@Inject
 	private Mem_InfoService memberService;
 	
-	@Inject
-	private Mem_InfoMapper memberMapper;
 	
 	@Autowired
 	private PasswordEncoder pwencoder; //암호화 객체
@@ -72,7 +70,7 @@ public class LoginController {
 	}
 	
 	// 회원 탈퇴 post
-	@RequestMapping(value="/deleteUser", method = RequestMethod.POST)
+	@RequestMapping(value="/user/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(Mem_InfoVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
 		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
@@ -84,6 +82,7 @@ public class LoginController {
 		
 		// vo로 들어오는 비밀번호
 		String voPass = vo.getMpwd();
+		log.info(vo);
 		log.info("voPass===============>"+voPass);
 		log.info(pwencoder.matches(voPass, sessionPass));
 		if(!pwencoder.matches(voPass, sessionPass)) {
@@ -146,7 +145,7 @@ public class LoginController {
 	 }//--------------------------------------
 	
 	 //회원정보수정
-	 @GetMapping("/MyModify")
+	 @GetMapping("/user/MyModify")
 		public String mymodify(Model m) {
 			List<Mem_InfoVO> bankcode=memberService.listBankcode();
 			log.info("bankcode=="+bankcode);
@@ -155,7 +154,7 @@ public class LoginController {
 		}
 		
 		 //회원정보수정
-		 @PostMapping("/updateUser")
+		 @PostMapping("/user/updateUser")
 			public String updateUser(Model m, @ModelAttribute("user") Mem_InfoVO user) 
 					throws NotUserException 
 		 	{
@@ -176,7 +175,7 @@ public class LoginController {
 				int n=memberService.updateUser(user);
 				log.info(n);
 				String str=(n>0)?"회원정보 수정 완료":"수정 실패";
-				String loc=(n>0)?"Login":"javascript:history.back()";
+				String loc=(n>0)?"../Login":"javascript:history.back()";
 				
 				log.info("update1 ===user: "+user);
 				m.addAttribute("message",str);
