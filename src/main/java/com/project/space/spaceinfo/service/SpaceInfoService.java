@@ -52,6 +52,7 @@ public interface SpaceInfoService {
 	
 <<<<<<< HEAD
 	public int deleteBySname(String userid, String sname);
+<<<<<<< HEAD
 	
 	public int getCountAny(String keyword);
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
@@ -59,4 +60,10 @@ public interface SpaceInfoService {
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 
 >>>>>>> origin/space11
+=======
+
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+	
+	
+>>>>>>> origin/SPACE-7
 }

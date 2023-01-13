@@ -138,6 +138,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int getCountAny(String keyword) {
 		// TODO Auto-generated method stub
 		return this.spaceinfoMapper.getCountAny(keyword);
@@ -155,4 +156,9 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
 	}
 	
+=======
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
+		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
+>>>>>>> origin/SPACE-7
 }

@@ -44,10 +44,15 @@ public interface SpaceInfoMapper {
 	public int deleteLike(int hnum);
 
 	public int deleteBySname(Map<String, String> map);
+<<<<<<< HEAD
 	
 	public int getCountAny(String keyword);
 <<<<<<< HEAD
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
+=======
+
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+>>>>>>> origin/SPACE-7
 		
 =======
 	

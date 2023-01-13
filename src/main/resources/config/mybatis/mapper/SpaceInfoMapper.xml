@@ -67,6 +67,7 @@
 	<delete id="deleteBySname" parameterType="map">
 		delete from space_info where userid = #{userid} and sname = #{sname}
 	</delete>
+<<<<<<< HEAD
 	
 	
 	<select parameterType="map" resultType="SpaceInfo" id="getSpaceInfoPageAll">
@@ -119,4 +120,10 @@
 	</select>
      
 >>>>>>> origin/space11
+=======
+
+	<select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
+		select * from space_info where h_code = #{h_code}
+	</select>
+>>>>>>> origin/SPACE-7
 </mapper>

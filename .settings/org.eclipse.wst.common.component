@@ -1,59 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     	
 =======
                         	
     
 >>>>>>> origin/space11
+=======
+                            	
+    
+    
+>>>>>>> origin/SPACE-7
     
     
     
     
     <wb-module deploy-name="space-1.0.0-BUILD-SNAPSHOT">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 
 =======
                                                         
         
 >>>>>>> origin/space11
+=======
+                                                                
+        
+        
+>>>>>>> origin/SPACE-7
         
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         		
 =======
                                                 		
         
 >>>>>>> origin/space11
+=======
+                                                        		
+        
+        
+>>>>>>> origin/SPACE-7
         
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
 <<<<<<< HEAD
-                                        		
-=======
-                                                		
-        
->>>>>>> origin/space11
-        
-        
-        
-        
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 <<<<<<< HEAD
                                         		
 =======
                                                 		
         
 >>>>>>> origin/space11
+=======
+                                                        		
+        
+        
+>>>>>>> origin/SPACE-7
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                        		
+=======
+                                                		
+        
+>>>>>>> origin/space11
+=======
+                                                        		
+        
+        
+>>>>>>> origin/SPACE-7
         
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
                                         		
@@ -64,11 +95,24 @@
                                                 		
         
 >>>>>>> origin/space11
+=======
+                                
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
+                                                        		
+        
+        
+>>>>>>> origin/SPACE-7
         
         
         
         
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                         
         
@@ -79,17 +123,29 @@
                                                 	
     
 >>>>>>> origin/space11
+=======
+        <property name="context-root" value="space"/>
+                                                        	
+    
+    
+>>>>>>> origin/SPACE-7
     
     
     
     
     </wb-module>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     
 =======
                         
 
 >>>>>>> origin/space11
+=======
+                            
+
+
+>>>>>>> origin/SPACE-7
 
 
 
