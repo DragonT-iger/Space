@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.interceptor.CommonUtil;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PagingVO;
 import com.project.space.domain.Qna_BoardVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
 import com.project.space.qna.service.QnaService;
 import com.project.space.review.service.ReviewService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
@@ -47,6 +49,8 @@ public class SpacedetailController {
 	@Inject
 	private Mem_InfoService meminfoService;
 
+	@Inject
+	private CommonUtil util;
 
 	@GetMapping(value = "/spaceDetail")
 	public String contact(Model m, @RequestParam(defaultValue = "0") int snum, HttpSession ses) {
@@ -80,6 +84,7 @@ public class SpacedetailController {
 	
 	@GetMapping("/spaceDetail/spaceImage")
 	public String spaceImageForm() {
+		System.out.println("sdfsdfs");
 		return "ajax/spaceDetail/SpaceImage";
 	}
 	
@@ -99,5 +104,32 @@ public class SpacedetailController {
 		return spaceLike;
 	}
 
+
+	@GetMapping("/user/MyZimm")
+	public String zimmList(Model m, HttpServletRequest req) {
+		HttpSession ses=req.getSession();
+		Mem_InfoVO mivo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 유저 정보
+		
+		List<Space_Like> hlArr=this.spaceinfoService.selectUserLikeSpace(mivo.getUserid());
+		
+		log.info("hlArr: "+hlArr);
+		m.addAttribute("hlArr", hlArr);
+		
+		return "ajax/ilgon/MyZimm";
+	}
+	
+	@GetMapping("/user/MyZimmdelete")
+	public String zimmDelete(Model m, HttpServletRequest req, @RequestParam int hnum) {
+		log.info("hnum: "+hnum);
+
+		//db에서 글 삭제 처리
+		int n=this.spaceinfoService.deleteLike(hnum);
+		
+		String str=(n>0)? "삭제되었습니다":"삭제 실패";
+		String loc=(n>0)? "/space/user/MyZimm":"/space/user/MyZimm";
+		return util.addMsgLoc(m, str, loc);
+	}
+	
+	
 
 }

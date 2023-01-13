@@ -28,21 +28,33 @@
 		<c:if test="${qnaArr ne null or not empty qnaArr}">
 		<c:forEach var="qna" items="${qnaArr}">
 			<li class="qlist">
+			<!-- 답변레벨에 따라 색상 변경 -->
+			<c:if test="${qna.qgorder>0}">
+				<li class="qrlist">
+			</c:if>
+		
 				<div class="box">
-					<div id="qna_qnum">${qna.qnum}</div>
-					<span onclick="delete_qnum(${snum})">x</span>
-					<input id="check_qpwd" type="hidden" value="${qna.qpwd}">
-					<!-- 답변레벨에 따라 들여쓰기 -->
-					<c:if test="${qna.qlevel>0}">
-					<c:forEach var="k" begin="0" end="${qna.qlevel}">
-						&nbsp;&nbsp;
-					</c:forEach>
+					<div id="qna_qnum">${qna.qnum}
+					
+					<c:if test="${sdvo.userid eq loginUser.userid}">
+						<c:if test="${qna.qgorder eq 0}">
+							<span class="leftq" onclick="qna_rewrite('${qna.qnum}')">답변 작성하기</span>
+						</c:if>
+						<%-- <c:if test="${qna.qgorder>0}">
+							<div onclick="qna_UpdateRewrite()">답변 수정하기</div>
+						</c:if> --%>
 					</c:if>
 					
-					<div class="user_name">${qna.userid}</div>
-					<p>${qna.qtitle}</p>
+					</div>
+					
+					<input id="check_qpwd" type="hidden" value="${qna.qpwd}">
+					
+					<div class="user_name">${qna.userid}
+						<span class="leftq" onclick="delete_qnum(${snum})">x</span>
+					</div>
+					<p id="qna_title">${qna.qtitle}</p>
 					<p>${qna.qcontent}</p>
-					<p>${qna.qdate}</p>
+					<p class="qd">${qna.qdate}</p>
 				</div>
 			</li>
 		</c:forEach>
@@ -78,6 +90,27 @@
 
 </div>
 
+<style>
+.qlist{
+	background-color:#fdf5e6;
+}
+.qrlist{
+	background-color:#FFEFD5;
+}
+#qna_qnum{
+	font-size:1px;
+}
+.qd{
+	font-size:10px;
+}
+#qna_title{
+	font-weight:bold;
+}
+.leftq{
+	padding-left:70px;
+}
+</style>
+
 
 <script>
 const qna_write=function(){
@@ -96,10 +129,27 @@ const qna_write=function(){
 	})
 }
 
+const qna_rewrite=function(qnum){
+	$.ajax({
+		type:'post',
+		url:'/space/spaceDetail/qnarewrite',
+		data:qnum,
+		cache:false,
+		success:function(res){
+			$('#s_qna').html("");
+			$('#s_qna').html(res);
+			$('#qnum').val(qnum);
+		},
+		error:function(err){
+			alert('err: '+err.status);
+		}
+	})
+}
+
 const delete_qnum=function(ss){
 	//alert(snum);
 	let qn=$('#qna_qnum').html();
-	//alert(qn);
+	alert(qn);
 	var qp=$('#check_qpwd').val()
 	//alert(qp);
 	var text=prompt('비밀번호를 입력해주세요');

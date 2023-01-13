@@ -81,7 +81,7 @@
 					
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
-						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#loginModal">예약</button>
+						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#paymentModal">예약</button>
 					</div>
 				</form>
 			</div>
@@ -104,15 +104,14 @@
 <!-- 달력 css -->
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
 <!-- modal -->
-
 <%@include file="/WEB-INF/views/ajax/Reservation/ReservationPayment.jsp" %> 
 
 <script>
-$("#startTime").on("change", function() {
+/* $("#startTime").on("change", function() {
     let pickedTime = $("#startTime").val();
     $("#check_Time").text(
     `You picked this ${pickedTime} Date`);
-});
+}); */
 /* function payment(){
 	const rtyear3=$('#check_year2').html();
 	const rtmonth3=$('#check_month2').html();

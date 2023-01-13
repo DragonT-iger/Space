@@ -21,4 +21,8 @@ public interface ReviewService {
 	public int deleteReview(int review_num);     //리뷰 삭제
 	
 	public int rewriteReview(ReviewVO rvo);  //답변
+
+	public int getReviewRtnum(int rtnum); //예약번호로 이미 남긴 리뷰 있는지 없는지 확인
+
+	public List<ReviewVO> getReviewUserid(String userid); //아이디로 리뷰내역 불러오기
 }
