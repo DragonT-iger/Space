@@ -39,6 +39,7 @@
 	</select>
 	
 	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
+<<<<<<< HEAD
 		select * from space_info where userid=#{userid}
 	</select>
 	
@@ -75,9 +76,28 @@
 		</if>
 		ORDER BY SNUM asc)WHERE 
 		<![CDATA[
+=======
+      select * from space_info where userid=#{userid}
+    </select>
+	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
+		 select * from (select space_info.* , rownum as r from SPACE_INFO
+		<where>
+			 <if test="findkeyword!=null and findkeyword!=''">
+			 	and sname like '%'||#{findkeyword}||'%'
+			 </if>
+		 
+			 <if test="hashtag!=null and hashtag!=''">
+			 	and h_code = #{hashtag}
+			 </if>
+		 </where>
+		  ORDER BY SNUM asc)
+		 WHERE
+		 <![CDATA[
+>>>>>>> origin/space11
 		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
 		 ]]>
 	</select>
+<<<<<<< HEAD
 	
 	<select parameterType="string" resultType="SpaceInfo" id="selectByPname">
 		select * from space_info where sname like '%'||#{value}||'%' 
@@ -86,4 +106,17 @@
 	<select parameterType="string" resultType="_int" id="getCountAny">
 		select count(*) from space_info where sname like '%'||#{value}||'%' 
 	</select>
+=======
+     <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
+     		select * from space_info where sname like '%'||#{value}||'%'
+     </select>
+     <select id="getCountAny" resultType="_int" parameterType="string">
+     		select count(*) from space_info where sname like '%'||#{value}||'%'
+     </select>
+     
+     <select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
+		select * from space_info where h_code = #{h_code}
+	</select>
+     
+>>>>>>> origin/space11
 </mapper>

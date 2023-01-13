@@ -26,4 +26,6 @@ public class Space_InfoVO {
 	private String simage4;
 	private String scontents;
 	private String srule;
+	
+	
 }

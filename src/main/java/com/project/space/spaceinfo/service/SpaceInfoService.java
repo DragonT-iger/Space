@@ -17,7 +17,7 @@ public interface SpaceInfoService {
     public List<Space_InfoVO> selectBy(Map<Integer,Integer> cost);
 	
 	//해시태그별로 공간정보가져오기
-	public List<Space_InfoVO> selectByHashTag(String hashTag);
+	public List<Space_InfoVO> selectByHashTag(int h_code);
 	//공간정보 전체출력
 	public List<Space_InfoVO> getSpaceInfoAll();
 	//공간번호로 공간정보 가져오기
@@ -50,8 +50,13 @@ public interface SpaceInfoService {
 	public List<Space_Like> selectUserLikeSpace(String userid); //유저 아이디로 좋아요 목록 가져오기
 	public int deleteLike(int hnum);
 	
+<<<<<<< HEAD
 	public int deleteBySname(String userid, String sname);
 	
 	public int getCountAny(String keyword);
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
+=======
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+
+>>>>>>> origin/space11
 }
