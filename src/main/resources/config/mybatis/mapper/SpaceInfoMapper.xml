@@ -86,4 +86,8 @@
 	<select parameterType="string" resultType="_int" id="getCountAny">
 		select count(*) from space_info where sname like '%'||#{value}||'%' 
 	</select>
+	
+	<select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+	</select>
 </mapper>

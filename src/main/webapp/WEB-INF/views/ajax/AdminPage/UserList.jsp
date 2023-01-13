@@ -105,7 +105,7 @@
 			contentType:'application/json',
 	    	cache:false,
 	    	success :function (res){
-	    		alert(JSON.stringify(res));
+	    		//alert(JSON.stringify(res));
 	    		if(res==""||res==null){ //res값이 없을시
 	    			alert("검색결과가 없습니다.");
 	    		}else{
@@ -119,21 +119,21 @@
 	}
 	const userlist_search_btn = function(){
 		let param = $('#searchf').serializeArray();
-		console.log(JSON.stringify(param));
-		alert(JSON.stringify(param));
+		//console.log(JSON.stringify(param));
+		//alert(JSON.stringify(param));
 		var data={};
 		for (var i in param) {
 		    data[param[i].name] = param[i].value;
 		}
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		$.ajax({
 			type:'post',
-			url:'search',
+			url:'searchUser',
 			contentType:'application/json',
 			data: JSON.stringify(data),
 			dataType:'json',
 			success : function(res){
-				alert(res);
+				//alert(res);
 				showUserList(res);
 			},
 			error: function(err){
@@ -155,9 +155,10 @@
 				<th>누적포인트</th>
 				<th>현재포인트</th>
 				<th>회원등급</th>
+				<th>예약횟수</th>
 			</tr>`
 			$.each(res,function(i,member){
-			str+=`<tr>
+			str+=`<tr onclick="test('\${member.userid}')">
 					<td>\${member.mname}</td>
 					<td>\${member.nickname}</td>
 					<td>\${member.userid}</td>
@@ -168,17 +169,20 @@
 					<td>\${member.pointadd}</td>
 					<td>\${member.point}</td>
 					<td>\${member.mrank}</td>
+					<td>\${member.rcount}</td>
 				</tr>`
 			});
 			str+=`</table>`;
 		$("#container-userlist").html(str);
 	}
 	const btntextSet = function(sel){
-		console.log(sel);
+		//console.log(sel);
 		str = $('#min'+sel).val()+"~"+$('#max'+sel).val();
-		console.log(str);
+		//console.log(str);
 		$('#'+sel+'Setbtn').html(str);
 	}
-	
+	const test = function(userid){
+		//alert("userid===>"+userid);
+	}
 </script>
 <%@ include file="/WEB-INF/views/ajax/AdminPage/AdminPageFoot.jsp" %>

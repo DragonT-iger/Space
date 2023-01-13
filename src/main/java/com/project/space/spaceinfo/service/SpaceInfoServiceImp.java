@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -148,5 +149,8 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		// TODO Auto-generated method stub
 		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
 	}
-	
+	@Override
+	public List<HashtagVO> getHashTagAll(){
+		return this.spaceinfoMapper.getHashTagAll();
+	}
 }
