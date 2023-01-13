@@ -3,6 +3,7 @@ package com.project.space.spaceinfo.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -55,6 +56,7 @@ public interface SpaceInfoService {
 <<<<<<< HEAD
 	
 	public int getCountAny(String keyword);
+<<<<<<< HEAD
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
 =======
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
@@ -66,4 +68,10 @@ public interface SpaceInfoService {
 	
 	
 >>>>>>> origin/SPACE-7
+=======
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);
+	
+	//해시태그 목록가져오기
+	public List<HashtagVO> getHashTagAll();
+>>>>>>> origin/SPACE-14-관리자페이지
 }

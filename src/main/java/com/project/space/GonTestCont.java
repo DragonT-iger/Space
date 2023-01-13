@@ -42,7 +42,33 @@ public class GonTestCont {
 	private NaverLoginBO naverLoginBO;
 	
 	@Inject
+<<<<<<< HEAD
 	private Mem_InfoService memberService;
+=======
+	private Mem_InfoService mem_Infoservice;
+	
+	@Inject
+	private SpaceInfoService spaceinfoService;
+	
+	@Inject
+	private CommonUtil util;
+	
+	@GetMapping("/user/MyZimm")
+	public String zimmList(Model m, HttpServletRequest req) {
+		HttpSession ses=req.getSession();
+		Mem_InfoVO mivo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 유저 정보
+		
+		List<Space_Like> hlArr=this.spaceinfoService.selectUserLikeSpace(mivo.getUserid());
+		
+		log.info("hlArr: "+hlArr);
+		m.addAttribute("hlArr", hlArr);
+		
+		return "ajax/ilgon/MyZimm";
+	}
+	@GetMapping("/user/MyZimmdelete")
+	public String zimmDelete(Model m, HttpServletRequest req, @RequestParam int hnum) {
+		log.info("hnum: "+hnum);
+>>>>>>> origin/SPACE-14-관리자페이지
 
 	
 	@GetMapping("/user/MyModify")
@@ -91,9 +117,9 @@ public class GonTestCont {
 		NaverLoginVO nlVO = nlcVO.getResponse();
 		log.info("네이버 로그인 API 프로필정보 ===> "+nlVO);
 		
-		int result = memberService.idCheck(nlVO.getId());
+		int result = mem_Infoservice.idCheck(nlVO.getId());
 		if(result>0) {
-			Mem_InfoVO memInfoVO = memberService.getUser(nlVO.getId());
+			Mem_InfoVO memInfoVO = mem_Infoservice.getUser(nlVO.getId());
 			log.info("id일치"+memInfoVO.getUserid()+"////"+memInfoVO);
 			session.setAttribute("loginUser", memInfoVO);
 			session.setAttribute("snsLoginState", true);
@@ -153,7 +179,7 @@ public class GonTestCont {
 			return "redirect:ajax/ilgon/NaverJoin";
 		}
 		
-		int n=memberService.createUser(vo);
+		int n=mem_Infoservice.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
 		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
 		

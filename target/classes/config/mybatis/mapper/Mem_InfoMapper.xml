@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- minFmage=, maxFmage=, minFmrank=, maxFmrank=, minFmdate=, maxFmdate=, 
 	minFpointAdd=, maxFpointAdd=, minFrcount=, maxFrcount=, FkeywordOption=Fname, keyword=asd -->
 		<!-- age 필터 -->
-		<if test="minFmage!='' and maxFmage==''">
+		<if test="minFmage!='' and maxFmage==''"> 
 			 <![CDATA[
 			   and #{minFmage} <= AGE
 			 ]]>

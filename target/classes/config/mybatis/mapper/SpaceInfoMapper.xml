@@ -107,6 +107,7 @@
 	<select parameterType="string" resultType="_int" id="getCountAny">
 		select count(*) from space_info where sname like '%'||#{value}||'%' 
 	</select>
+<<<<<<< HEAD
 =======
      <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
      		select * from space_info where sname like '%'||#{value}||'%'
@@ -126,4 +127,10 @@
 		select * from space_info where h_code = #{h_code}
 	</select>
 >>>>>>> origin/SPACE-7
+=======
+	
+	<select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+	</select>
+>>>>>>> origin/SPACE-14-관리자페이지
 </mapper>
