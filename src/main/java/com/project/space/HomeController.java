@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.service.SpaceInfoService;
 
@@ -32,6 +33,8 @@ public class HomeController {
 
 	@Inject
 	SpaceInfoService spaceinfoservice;
+
+	private Model model;
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test1(Model model) {
@@ -57,6 +60,19 @@ public class HomeController {
 		log.info(inArr);
 		model.addAttribute("spaceArr", inArr);
 		model.addAttribute("currentPage", pagingNumber);
+		
+		
+		List<HashtagVO> hashtag = spaceinfoservice.getHashTagAll();
+		for (int i = 0; i < hashtag.size(); i++) {
+			System.out.println(hashtag.get(i));
+		}
+		log.info(hashtag);
+		model.addAttribute("hashtag", hashtag);
+	
+
+	
+		
+		
 
 		return "Home";
 	}
@@ -65,16 +81,15 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> spaceListPaging(@RequestParam(value = "currentPage") String currentPage,
-			@RequestParam("pagingType") String pagingType, @RequestParam("keyword") String keyword , @RequestParam int HashTag) {
+			@RequestParam("pagingType") String pagingType, @RequestParam("keyword") String keyword , @RequestParam Integer HashTag) { //원래 int
+		if(HashTag==null) {
+			HashTag=0;
+		}
 		Map<String, String> pagingMap = new HashMap<String, String>();
 		log.info("param====>" + currentPage + "/" + pagingType + "/" + keyword + "/" + HashTag);
 		int pageSize = 8; // 띄우고싶은 개수
 		int pagingNumber = Integer.parseInt(currentPage); // 현재페이지
-		String findkeyword = keyword;
-		log.info("findkeyword===>" + findkeyword);
 		int maxpage = spaceinfoservice.getCountAny(keyword);
-		log.info("maxpage====>" + maxpage);
-		log.info(pagingType);
 
 		if (pagingType.equals("next") && pagingType != null) {// 다음버튼
 			if (pagingNumber + pageSize < maxpage) {
@@ -90,14 +105,16 @@ public class HomeController {
 			pagingNumber = 1;
 		}
 		
+	
+		
 		
 	
 		
-		log.info(pagingNumber);
 		pagingMap.put("pagingSize", Integer.toString(pageSize));
 		pagingMap.put("pagingNumber", Integer.toString(pagingNumber));
-		pagingMap.put("findkeyword", findkeyword);
-		pagingMap.put("hashtag", Integer.toString(HashTag));
+		pagingMap.put("findkeyword", keyword);
+		pagingMap.put("hashtag", Integer.toString(HashTag)); 
+		//숫자를 스트링객체로 변환하는데 null값이오면 에러 69번줄에서 처리해줌 
 
 		List<Space_InfoVO> inArr = spaceinfoservice.getSpaceInfoPageAll(pagingMap);
 		for (int i = 0; i < inArr.size(); i++) {
@@ -107,6 +124,9 @@ public class HomeController {
 		map.put("spaceArr", inArr);
 		log.info(pagingMap.get("pagingNumber"));
 		map.put("currentPage", pagingMap.get("pagingNumber"));
+		
+		
+	
 
 		return map;
 	}
@@ -128,6 +148,15 @@ public class HomeController {
 		List<Space_InfoVO> map = spaceinfoservice.selectByHashTag(hashTag);
 		;
 		log.info("result===>" + map);
+		
+//		int h_code = 0;
+//		List<Space_InfoVO> hashtag = spaceinfoservice.getSpaceInfoByHcode(h_code);
+//		for (int i = 0; i < hashtag.size(); i++) {
+//			System.out.println(hashtag.get(i));
+//		}
+//		log.info(hashtag);
+//		model.addAttribute("hashtag", hashtag);
+		
 		
 		return map;
 		

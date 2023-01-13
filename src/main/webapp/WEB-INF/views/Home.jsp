@@ -1,30 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/Spacetop.jsp" %>
+<%@ include file="/WEB-INF/views/Spacetop.jsp"%>
+
+
+
+
 
 <style>
-.text{
-text-align:center;
-font-family:'Heebo';
+.text {
+	text-align: center;
+	font-family: 'Heebo';
 }
-.flex-container{
-	display:flex;
-	flex-wrap:wrap;
+
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-.flex-item{
-	background-color:lightgray;
-	width:21%; 
-	margin:2%;
+
+.flex-item {
+	background-color: lightgray;
+	width: 21%;
+	margin: 2%;
 }
 
-.img{
-width:100%;
-height:200px;
-margin: auto;
-
-text-align:center;
+.img {
+	width: 100%;
+	height: 200px;
+	margin: auto;
+	text-align: center;
 }
+
 .padding80 {
 	padding: 10px;
 }
@@ -75,7 +82,7 @@ text-align:center;
 	width: 80%;
 	border-radius: 6px;
 	color: white;
-	text-align:center;
+	text-align: center;
 }
 
 #value:focus {
@@ -92,55 +99,61 @@ text-align:center;
 	font-weight: 470;
 	color: #333;
 }
-
 </style>
 
 
 
-<div class="tag" 
+<div class="tag"
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+		<c:forEach var="hashtag" items="${hashtag}">
+	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
+		style="width: 25%">
+	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
+	</c:forEach>
 
-		<input type="hidden" id="hashTag" name="hashTag" value="" style="width:25%">
-		<button class="btn btn-primary" onclick="gethashTag(1)" >하이틴</button>
-		<button class="btn btn-primary" onclick="gethashTag(2)" >느와르</button>
-		<button class="btn btn-primary" onclick="gethashTag(3)" >클래식</button>
-		<button class="btn btn-primary" onclick="gethashTag(4)" >빈티지엔틱</button>
-		<button class="btn btn-primary" onclick="gethashTag(5)" >동양풍</button>
 
-		
+
+
+
 </div>
 
 
 
+
+
+
 <div class="search_wrap">
-    <div class="search_area text-center">
-        <input type="text" id="keyword" name="keyword" value="" style="width:25%">
-        <button class="btn btn-primary" onclick="listPaging('search')">Search</button>
-    </div>
-</div>  
+	<div class="search_area text-center">
+		<input type="text" id="keyword" name="keyword" value=""
+			style="width: 25%">
+		<button onclick="listPaging('search')">Search</button>
+		<button type="button" onclick="location.href='http://localhost:8080/space/'">초기화</button>
+	</div>
+</div>
 
 
 <section class="padding80 margin50">
-		<div id="space-list" class="flex-container">
-				<c:forEach var="Space" items="${spaceArr}">
-				<div id="space-item" class="flex-item">
-					<a href="spaceDetail?snum=${Space.snum}">
-						<img class="img" alt="" src="resources/SpaceInfoImg/${Space.simage1}"/>
-					</a>
-					<p class="text">${Space.sname}</p>
-					<p class="text">${Space.saddr1}</p>
-					<p class="text">${Space.saddr2}</p>
-				</div>
-				</c:forEach>
-		</div>
-		<div class="text-center">
-			<span><button class="btn btn-primary" onclick="listPaging('prev')">이전</button></span>
-			<span><button class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
-		</div>
+	<div id="space-list" class="flex-container">
+		<c:forEach var="Space" items="${spaceArr}">
+			<div id="space-item" class="flex-item">
+				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
+					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
+				</a>
+				<p class="text">${Space.sname}</p>
+				<p class="text">${Space.saddr1}</p>
+				<p class="text">${Space.saddr2}</p>
+			</div>
+		</c:forEach>
+	</div>
+	<div class="text-center">
+		<span><button class="btn btn-primary"
+				onclick="listPaging('prev')">이전</button></span> <span><button
+				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
+	</div>
 </section>
 <a href="http://pf.kakao.com/_xnHWixj">카톡</a>
 <form>
-	<input type="hidden" id="currentPage"/>
+	<input type="hidden" id="currentPage" />
 </form>
 
 
@@ -149,6 +162,7 @@ text-align:center;
 	  var currentPage = 1;
 	  var keyword = "";
 	  var HashTag = "";
+	 
 	  /* function filter(){
 
 	        var value, name, item, i;
@@ -165,6 +179,9 @@ text-align:center;
 	          }
 	        }
 	      } */
+	      
+	   
+	      
       const listPaging= function(pagingType){
     	  if(currentPage=="" || currentPage==null){
     		  alert("값없음에 들어옴")
@@ -201,8 +218,20 @@ text-align:center;
     	  });
 	  }
 	      
+	      const flag = "";//flag 현재 해시태그가 놀려있는 여부
+	      const target="";//target 직전에 눌린 해시태그의 primary key
+	    
+	      
+	     
+	    		 
+	    	
+	    
+	      
+	 
+	 	     
 	      
 	    
+	      
 	      const gethashTag= function(hashTag2){
 	    	  HashTag = hashTag2;
 	    	  $.ajax({
@@ -223,6 +252,9 @@ text-align:center;
 	    		  alert("error"+err.status) //
 	    	  }
 	    	  });
+	    	  
+	    	  
+	    	
 		  }
 	      
 	      
@@ -246,6 +278,7 @@ text-align:center;
       	}
     }
       
+
       
 </script>
-<%@ include file="/WEB-INF/views/Spacefoot.jsp" %>
+<%@ include file="/WEB-INF/views/Spacefoot.jsp"%>

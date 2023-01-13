@@ -3,6 +3,7 @@ package com.project.space.spaceinfo.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Space_InfoVO;
 
 public interface SpaceInfoMapper {
@@ -41,5 +42,6 @@ public interface SpaceInfoMapper {
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 		
 
-	
+	public List<HashtagVO> getHashTagAll();
+
 }

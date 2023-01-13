@@ -47,7 +47,7 @@
 			 	and sname like '%'||#{findkeyword}||'%'
 			 </if>
 		 
-			 <if test="hashtag!=null and hashtag!=''">
+			 <if test="hashtag!=null and hashtag!=0">
 			 	and h_code = #{hashtag}
 			 </if>
 		 </where>
@@ -68,5 +68,9 @@
      <select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
 		select * from space_info where h_code = #{h_code}
 	</select>
+     
+     <select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+     </select>
      
 </mapper>

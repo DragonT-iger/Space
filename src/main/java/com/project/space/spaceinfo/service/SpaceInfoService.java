@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Space_InfoVO;
 
 public interface SpaceInfoService {
@@ -47,5 +48,8 @@ public interface SpaceInfoService {
 	public int getCountAny(String keyword);
 	
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+	
+	public List<HashtagVO> getHashTagAll();
+
 
 }

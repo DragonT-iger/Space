@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 
@@ -110,6 +111,12 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
 		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
+
+	@Override
+	public List<HashtagVO> getHashTagAll() {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getHashTagAll();
 	}
 
 

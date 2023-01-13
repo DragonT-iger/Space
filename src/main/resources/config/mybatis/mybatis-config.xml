@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.project.space.domain.ReviewVO" alias="Review"/>
 		<typeAlias type="com.project.space.domain.Qna_BoardVO" alias="Qna"/>
 		<typeAlias type="com.project.space.domain.PagingVO" alias="Paging"/>
+		<typeAlias type="com.project.space.domain.HashtagVO" alias="HashTag"/>
 	</typeAliases>
 	<!-- mapper 정의 -->
 	<mappers>
@@ -20,5 +21,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/ReservationMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ReviewMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/QnaMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/PointMapper.xml"/>
 	</mappers>
 </configuration>
