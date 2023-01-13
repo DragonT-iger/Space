@@ -71,7 +71,7 @@
 					
         			<button class="btn btn-primary btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">수정</button>
         			<div class="myspace-profile">
-        				<a href="info?sname=${spaceinfo.sname}"><img class="myspace_img" src="../resources/SpaceInfoImg/${spaceinfo.simage1}"></img></a>
+        				<a href="../spaceDetail?snum=${spaceinfo.snum}"><img class="myspace_img" src="../resources/SpaceInfoImg/${spaceinfo.simage1}"></img></a>
         			
 	        			<div class="myspace myspace-star">O O O O O (평균별점)</div>
 	        			<div class="myspace myspace-time">${spaceinfo.sdate}(등록시간)</div>

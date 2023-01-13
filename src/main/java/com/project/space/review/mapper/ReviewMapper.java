@@ -21,4 +21,8 @@ public interface ReviewMapper {
 	public int deleteReview(int review_num);     //리뷰 삭제
 	
 	public int rewriteReview(ReviewVO rvo);  //답변
+
+	public int getReviewRtnum(int rtnum);
+
+	public List<ReviewVO> getReviewUserid(String userid);
 }

@@ -108,8 +108,10 @@ body, ul, li {
 </style>
 
 <script>
+$(function(){
+	
 $('.slider-2 .page-nav > div').click(function() {
-    
+    //alert('3333');
     var $this = $(this);
     var $pagenav = $this.parent()
     var $current = $pagenav.find('.active');
@@ -127,6 +129,7 @@ $('.slider-2 .page-nav > div').click(function() {
 });
 
 $('.slider-2 > .side-btns > div:first-child').click(function() {
+	//alert('4444');
     var $this = $(this);
     var $slider = $this.closest('.slider-2');
     
@@ -141,6 +144,7 @@ $('.slider-2 > .side-btns > div:first-child').click(function() {
 });
 
 $('.slider-2 > .side-btns > div:last-child').click(function() {
+	//alert('5555');
     var $this = $(this);
     var $slider = $this.closest('.slider-2');
     
@@ -152,6 +156,8 @@ $('.slider-2 > .side-btns > div:last-child').click(function() {
     }
     
     $post.click();
+});
+
 });
 </script>
 

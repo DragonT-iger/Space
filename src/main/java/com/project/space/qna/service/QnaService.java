@@ -24,4 +24,6 @@ public interface QnaService {
 	public int updateGorder(Qna_BoardVO parent);
 
 	public Qna_BoardVO selectGLG(int qnum);
+
+	public String checkTitle(int qnum);
 }

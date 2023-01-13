@@ -32,6 +32,10 @@ public interface ReservationService {
 	int deleteBooking(int snum);
 	//예약 전체 취소
 	
+	
+	//예약번호로 예약내역 불러오기
+	ReservationVO getBooking(int rtnum);
+	
 	//홈화면에서 예약 일자,시간 검색 시 예약상태(가능)에 따른 예약가능 공간(뷰생성)
 	List<ReservationVO> searchBookingInfo(int rtstatus);
 	

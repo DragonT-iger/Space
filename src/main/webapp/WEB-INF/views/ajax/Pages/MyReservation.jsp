@@ -37,7 +37,7 @@
 		<c:forEach var="resArr" items="${resArr}">
 		<tr>
 			<td style="color:red;">${resArr.rtnum}</td>
-			<td colspan="3" style="color:blue;"><fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
+			<td colspan="3" style="color:blue;">결제 시간: <fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
 		</tr>
 		<tr>
 			<td rowspan="5" style="width:100px;">
@@ -48,7 +48,7 @@
 				</c:if>
 				<c:if test="${resArr.simage1 ne null}">
 					<a href="/space/spaceDetail?snum=${resArr.snum}">
-						<img id="reservation_img" src="../resources/SpaceInfoImg/${resArr.simage1})" style="width:300px;height:200px"/>
+						<img id="reservation_img" src="./resources/SpaceInfoImg/${resArr.simage1})" style="width:300px;height:200px"/>
 					</a>
 				</c:if>
 			</td> <!-- rowspan 1 -->
@@ -86,14 +86,42 @@
 			<td colspan="3">${resArr.saddr1} ${resArr.saddr2}</td>
 		</tr>
 		<tr>
-			<td colspan="4">
-				<c:if test="${resArr.rtstartdate > now}">
-					<button type="button" class="btn btn-primary">예약취소</button>
-				</c:if>
-			</td>
+			<c:if test="${resArr.rtstartdate < now}">
+				<td colspan="1">
+					<button type="button" id="done" class="btn btn-danger">이용완료</button>
+					
+				</td>
+				<td colspan="3">
+					<a id="writeR" class="nav-link" href="#ReviewModal" data-toggle="modal" onclick="reviewWrite('${resArr.rtnum}')">리뷰쓰기</a>
+				</td>
+			</c:if>
+			
+			<c:if test="${resArr.rtstartdate > now}">
+				<td colspan="4">
+					<button type="button" id="cancel" class="btn btn-primary" onclick="DelReservation('${resArr.rtnum}')">예약취소</button>
+				</td>
+			</c:if>
 		</tr>
 		</c:forEach>
 		</c:if>
 	</table>
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />
+
+<%@include file="/WEB-INF/views/ajax/spaceDetail/ReviewWrite.jsp" %>
+
+<script>
+$('#done').click(function(){
+	alert('이용이 완료된 예약으로 취소하실 수 없습니다');
+});
+
+function reviewWrite(rtnum){
+	//alert(rtnum);
+	$('#rtnum').val(rtnum);
+	
+}
+
+function DelReservation(rtnum){
+	alert(rtnum);
+}
+</script>

@@ -45,6 +45,8 @@ public interface ReservationMapper {
 	int userBookingTotalprice(String userid);
 
 	List<mem_space_res_view> BookingView(String userid);
+
+	ReservationVO getBooking(int rtnum);
 	
 	
 	
