@@ -222,10 +222,9 @@ public class JYController {
 		log.info("message: "+messageDto);
 		messageDto.setContent(rtvo.getUserid()+"님 예약이 완료되었습니다");
 		
-		
 		int res=this.reservationService.insertBooking(rtvo);
 		String str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
-		String loc=(res>0)? "/space/user/MyReservation":"/space//user/pointAdd";
+		String loc=(res>0)? "/space/user/MyReservation":"/space/user/pointAdd";
 		
 		if(res>0) {
 			//SmsResponseDTO response = smsService.sendSms(messageDto);
@@ -256,8 +255,15 @@ public class JYController {
 		
 		return "ajax/Pages/MyReservation";
 	}
-		
-		
 	
+	@PostMapping("/user/DelReservation")
+	public String DelResModal(Model m, @RequestParam(defaultValue="0") int rtnum) {
+		log.info("rtnum=="+rtnum);
+
+		ReservationVO drvo=this.reservationService.getBooking(rtnum);
+		m.addAttribute("drvo", drvo);
+		return "ajax/Reservation/DelReservation";
+	}
+		
 	
 }

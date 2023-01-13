@@ -37,6 +37,7 @@
 	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
 		select * from space_info where userid = #{userid} and sname = #{sname}
 	</select>
+<<<<<<< HEAD
 	<<<<<<< HEAD
 =======
 	
@@ -44,6 +45,49 @@
 	
 	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
 <<<<<<< HEAD
+=======
+	
+	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
+<<<<<<< HEAD
+		select * from space_info where userid=#{userid}
+	</select>
+	
+	<select id="selectSpaceLike" parameterType="int" resultType="int">
+		select count(#{value}) from heart_like where snum=#{value}
+	</select>
+		
+	<insert id="insertSpaceLike" parameterType="Like">
+		insert into heart_like(hnum,snum,userid,hdate)
+		values(heart_like_seq.nextval, #{snum}, #{userid}, sysdate)
+	</insert>
+	
+	<select id="selectBySpaceInfoExcept" parameterType="SpaceInfo" resultType="SpaceInfo">
+		select * from  space_info where userid=#{userid} and snum not in(#{snum})
+	</select>
+	
+	<select id="selectUserLikeSpace" parameterType="string" resultType="SL">
+		select * from space_like where userid=#{value}
+	</select>
+	
+	<delete id="deleteLike" parameterType="int">
+		delete heart_like where hnum=#{value}
+	</delete>
+
+	<delete id="deleteBySname" parameterType="map">
+		delete from space_info where userid = #{userid} and sname = #{sname}
+	</delete>
+<<<<<<< HEAD
+	
+	
+	<select parameterType="map" resultType="SpaceInfo" id="getSpaceInfoPageAll">
+		select * from (select space_info.* , rownum as r from SPACE_INFO 
+		<if test="findkeyword!=null and findkeyword!=''">
+		WHERE sname like '%'||#{findkeyword}||'%' 
+		</if>
+		ORDER BY SNUM asc)WHERE 
+		<![CDATA[
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
       select * from space_info where userid=#{userid}
     </select>
 	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
@@ -60,10 +104,21 @@
 		  ORDER BY SNUM asc)
 		 WHERE
 		 <![CDATA[
+>>>>>>> origin/space11
 		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
 		 ]]>
-         
 	</select>
+<<<<<<< HEAD
+	
+	<select parameterType="string" resultType="SpaceInfo" id="selectByPname">
+		select * from space_info where sname like '%'||#{value}||'%' 
+	</select>
+	
+	<select parameterType="string" resultType="_int" id="getCountAny">
+		select count(*) from space_info where sname like '%'||#{value}||'%' 
+	</select>
+<<<<<<< HEAD
+=======
      <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
      		select * from space_info where sname like '%'||#{value}||'%'
      </select>
@@ -75,6 +130,7 @@
 		select * from space_info where h_code = #{h_code}
 	</select>
      
+<<<<<<< HEAD
 =======
 		select * from space_info where userid=#{userid}
 	</select>
@@ -108,4 +164,19 @@
 	</delete>
 >>>>>>> SPACE-10-예약
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+>>>>>>> origin/space11
+=======
+
+	<select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
+		select * from space_info where h_code = #{h_code}
+	</select>
+>>>>>>> origin/SPACE-7
+=======
+	
+	<select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+	</select>
+>>>>>>> origin/SPACE-14-관리자페이지
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 </mapper>

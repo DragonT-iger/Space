@@ -6,7 +6,7 @@
 	<select id="CalbookingInfo" resultType="Reservation" parameterType="_int">
 		select * from reservation where snum=#{snum}
 	</select>
-	
+
 	<insert id="insertBooking" parameterType="Reservation">
 	<selectKey keyProperty="rtnum" resultType="int" order="BEFORE">
 		select reservation_seq.nextval from dual
@@ -28,7 +28,11 @@
 	</select>
 	
 	<select id="BookingView" parameterType="string" resultType="MSRV">
-		select * from mem_space_res_view where userid=#{value}
+		select * from mem_space_res_view where userid=#{value} order by rtnum desc
+	</select>
+	
+	<select id="getBooking" parameterType="int" resultType="Reservation">
+		select * from reservation where rtnum=#{value}
 	</select>
 	
 </mapper>

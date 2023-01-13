@@ -2,6 +2,7 @@ package com.project.space.user.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class Mem_InfoServiceImpl implements Mem_InfoService {
 	
 	@Autowired
-	private PasswordEncoder pwencoder; //암호화 객체
+	private PasswordEncoder pwencoder; //�븫�샇�솕 媛앹껜
 	
 	@Inject
 	private Mem_InfoMapper memberMapper;
@@ -30,10 +31,10 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	@Override
 	public int createUser(Mem_InfoVO memvo) {
 		String beforeEncoding = memvo.getMpwd();
-		log.info("암호화하기 전 비밀번호 확인==>"+memvo.getMpwd());
+		log.info("�븫�샇�솕�븯湲� �쟾 鍮꾨�踰덊샇 �솗�씤==>"+memvo.getMpwd());
 		String afterEncoding = pwencoder.encode(beforeEncoding);
 		memvo.setMpwd(afterEncoding);
-		log.info("암호화된지 비밀번호 확인==>"+memvo.getMpwd());
+		log.info("�븫�샇�솕�맂吏� 鍮꾨�踰덊샇 �솗�씤==>"+memvo.getMpwd());
 		return memberMapper.createUser(memvo);
 	}
 
@@ -76,7 +77,7 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	public Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException {
 		Mem_InfoVO user=memberMapper.findUser(findUser);
 		if(user==null) {
-			throw new NotUserException("존재하지 않는 아이디입니다");
+			throw new NotUserException("議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎");
 		}
 		return user;
 	}
@@ -86,16 +87,22 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		Mem_InfoVO user=this.getUser(userid);
 		log.info("mem_infoservice logincheck user==>"+user);
 		if(user==null) {
-			throw new NotUserException("존재하지 않는 아이디입니다");
+			throw new NotUserException("議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎");
 		}
 		if(!pwencoder.matches(mpwd,user.getMpwd() )) {
 		//if(!user.getMpwd().equals(mpwd)) { 
-			throw new NotUserException("비밀번호가 일치하지 않습니다");
+			throw new NotUserException("鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎");
 		}
 		
 		return user;
 	}
-
+	
+	@Override
+	public List<Mem_InfoVO> searchUserByFilter(Map<String, String> filter) {
+		// TODO Auto-generated method stub
+		return memberMapper.searchUserByFilter(filter);
+	}
+	
 	@Override
 	public int getStatusByUserid(String userid) {
 		return memberMapper.getStatusByUserid(userid);

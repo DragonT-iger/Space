@@ -12,10 +12,20 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.project.space.domain.ReviewVO" alias="Review"/>
 		<typeAlias type="com.project.space.domain.Qna_BoardVO" alias="Qna"/>
 		<typeAlias type="com.project.space.domain.PagingVO" alias="Paging"/>
+<<<<<<< HEAD
 		<typeAlias type="com.project.space.domain.PointVO" alias="Point"/>
 		<typeAlias type="com.project.space.domain.Heart_LikeVO" alias="Like"/>
 		<typeAlias type="com.project.space.domain.Space_Like" alias="SL"/>
 		<typeAlias type="com.project.space.domain.mem_space_res_view" alias="MSRV"/>
+<<<<<<< HEAD
+=======
+		<typeAlias type="com.project.space.domain.PaymentVO" alias="Payment"/>
+>>>>>>> origin/SPACE-7
+=======
+		<typeAlias type="com.project.space.domain.HashtagVO" alias="HashTag"/>
+		<typeAlias type="com.project.space.admin.service.AdminMemberInquiryVO" alias="MemberInquiry"/>
+		<typeAlias type="com.project.space.admin.service.AdminSpaceInquiryVO" alias="SpaceInquiry"/>
+>>>>>>> origin/SPACE-14-관리자페이지
 	</typeAliases>
 	<!-- mapper 정의 -->
 	<mappers>
@@ -24,6 +34,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/ReservationMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ReviewMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/QnaMapper.xml"/>
+<<<<<<< HEAD
 		<mapper resource="config/mybatis/mapper/PointMapper.xml"/>
+<<<<<<< HEAD
+=======
+		<mapper resource="config/mybatis/mapper/PaymentMapper.xml"/>
+>>>>>>> origin/SPACE-7
+=======
+		<mapper resource="config/mybatis/mapper/AdminMapper.xml"/>
+>>>>>>> origin/SPACE-14-관리자페이지
 	</mappers>
 </configuration>

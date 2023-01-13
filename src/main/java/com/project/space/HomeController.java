@@ -169,14 +169,22 @@ public class HomeController {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 	// MyReservation mapping 안됐음
 	@RequestMapping(value = "/user/MyReservation", method = RequestMethod.GET)
 	public String myreservation(Model model) {
 		logger.info("connected myreservation.");
 		return "ajax/Pages/MyReservation";
 	}
+<<<<<<< HEAD
 =======
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+>>>>>>> origin/space11
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 
 	@RequestMapping(value = "/naverMap")
 	public String naverMap() {

@@ -25,6 +25,8 @@ public interface QnaMapper {
 
 	public Qna_BoardVO selectGLG(int qnum);
 
+	public String checkTitle(int qnum);
+
 
 	
 }

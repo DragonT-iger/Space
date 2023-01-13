@@ -1,6 +1,9 @@
 package com.space.app.controller;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -14,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.project.space.domain.Space_InfoVO;
+import com.project.space.admin.service.AdminService;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 import com.project.space.user.mapper.Mem_InfoMapper;
 
@@ -38,6 +41,9 @@ public class joinsecuTest {
 	
 	@Inject
 	private SpaceInfoMapper smapper;
+	
+	@Inject
+	private AdminService adminService;
 	
 	@Test
 	public void testUser() throws Exception{
@@ -64,16 +70,16 @@ public class joinsecuTest {
 		boolean test = pwencoder.matches("test11",vo2.getMpwd() );
 		log.info("비밀번호 복호화 후 일치하는지?? ==>"+test);
 		*/
-		
+		/*
 		Random r = new Random();
 		Space_InfoVO svo = new Space_InfoVO();
 		for(int j=0; j<30;j++) {
 			svo.setSname("공간테스트"+j);
 			svo.setUserid("owner3"); //회원아이디
-			svo.setMinn(1); /* 최소인원 */
-			svo.setMaxn(10); /* 최다인원 */
-			svo.setBcost(23412); /* 기본비용 */
-			svo.setEcost(100000); /* 인원추가금 */
+			svo.setMinn(1); // 최소인원 
+			svo.setMaxn(10); // 최다인원 
+			svo.setBcost(23412); // 기본비용 
+			svo.setEcost(100000); // 인원추가금 
 			svo.setSpost("06152");
 			svo.setSaddr1("서울 강남구 언주로 508");
 			svo.setSaddr2("14층");
@@ -85,6 +91,32 @@ public class joinsecuTest {
 			svo.setSrule("테스트입니다(규칙)"+j);
 			smapper.SpaceInfoInsert(svo);
 		}
+		*/
+		
+		List<String> spaceaddr = adminService.getSpaceAddr();
+		log.info("spaceaddr==>"+spaceaddr);
+		log.info(spaceaddr.size());
+		
+		String[] test = null ;
+		HashSet<String> local = new HashSet<String>(); //중복데이터 삽입을 방지
+		for(int i =0 ; i<spaceaddr.size();i++) {
+		test = spaceaddr.get(i).split(" ");
+		local.add(test[0]);
+		}
+		List<String> list = new ArrayList<>(local); //hashset을 리스트로변환
+		log.info(list);
+		log.info(list.get(3));
+		/*
+		log.info(local.size());
+		Iterator<String> iter = local.iterator();
+		while(iter.hasNext()) {
+
+			log.info(iter.next()); // 값 없을때까지 계속 출력
+
+		}
+		
+		log.info(iter.next());
+		*/
 	}
 	
 }

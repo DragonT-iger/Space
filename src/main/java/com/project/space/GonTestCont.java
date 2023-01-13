@@ -25,8 +25,10 @@ import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
+import com.project.space.domain.ReviewVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
+import com.project.space.review.service.ReviewService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
 import com.project.space.user.service.Mem_InfoService;
@@ -40,7 +42,10 @@ public class GonTestCont {
 	private NaverLoginBO naverLoginBO;
 	
 	@Inject
+<<<<<<< HEAD
 	private Mem_InfoService memberService;
+=======
+	private Mem_InfoService mem_Infoservice;
 	
 	@Inject
 	private SpaceInfoService spaceinfoService;
@@ -63,21 +68,9 @@ public class GonTestCont {
 	@GetMapping("/user/MyZimmdelete")
 	public String zimmDelete(Model m, HttpServletRequest req, @RequestParam int hnum) {
 		log.info("hnum: "+hnum);
+>>>>>>> origin/SPACE-14-관리자페이지
 
-		//db에서 글 삭제 처리
-		int n=this.spaceinfoService.deleteLike(hnum);
-		
-		String str=(n>0)? "삭제되었습니다":"삭제 실패";
-		String loc=(n>0)? "/space/user/MyZimm":"/space/user/MyZimm";
-		return util.addMsgLoc(m, str, loc);
-	}
 	
-	
-	@GetMapping("/user/MyReviewList")
-	public String myReviewList() {
-		
-		return "ajax/ilgon/MyReviewList";
-	}
 	@GetMapping("/user/MyModify")
 	public String mymodify() {
 		return "ajax/Pages/MyModify";
@@ -124,9 +117,9 @@ public class GonTestCont {
 		NaverLoginVO nlVO = nlcVO.getResponse();
 		log.info("네이버 로그인 API 프로필정보 ===> "+nlVO);
 		
-		int result = memberService.idCheck(nlVO.getId());
+		int result = mem_Infoservice.idCheck(nlVO.getId());
 		if(result>0) {
-			Mem_InfoVO memInfoVO = memberService.getUser(nlVO.getId());
+			Mem_InfoVO memInfoVO = mem_Infoservice.getUser(nlVO.getId());
 			log.info("id일치"+memInfoVO.getUserid()+"////"+memInfoVO);
 			session.setAttribute("loginUser", memInfoVO);
 			session.setAttribute("snsLoginState", true);
@@ -186,7 +179,7 @@ public class GonTestCont {
 			return "redirect:ajax/ilgon/NaverJoin";
 		}
 		
-		int n=memberService.createUser(vo);
+		int n=mem_Infoservice.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
 		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
 		

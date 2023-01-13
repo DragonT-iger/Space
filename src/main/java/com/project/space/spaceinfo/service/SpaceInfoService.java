@@ -3,6 +3,7 @@ package com.project.space.spaceinfo.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -43,8 +44,8 @@ public interface SpaceInfoService {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 
 	public Space_InfoVO selectByuseridSname(String userid , String sname);
-<<<<<<< HEAD
 	
+<<<<<<< HEAD
 =======
 >>>>>>> SPACE-10-예약
 	
@@ -52,6 +53,8 @@ public interface SpaceInfoService {
 	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
 
 =======
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 	public int insertSpaceLike(Heart_LikeVO hlvo); //좋아요 누르기
 	//유저별 공간 가져오기(현재 보고있는 공간 제외)
 	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo);
@@ -59,9 +62,32 @@ public interface SpaceInfoService {
 	public int deleteLike(int hnum);
 	
 <<<<<<< HEAD
-=======
 	public int deleteBySname(String userid, String sname);
+<<<<<<< HEAD
 >>>>>>> SPACE-10-예약
 		
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+<<<<<<< HEAD
+	
+	public int getCountAny(String keyword);
+<<<<<<< HEAD
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
+=======
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+
+>>>>>>> origin/space11
+=======
+
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code);
+	
+	
+>>>>>>> origin/SPACE-7
+=======
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);
+	
+	//해시태그 목록가져오기
+	public List<HashtagVO> getHashTagAll();
+>>>>>>> origin/SPACE-14-관리자페이지
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 }

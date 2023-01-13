@@ -44,103 +44,6 @@ nav ul li {
 	z-index: 5;
 	margin-top: 10%;
 }
-
-.slider-2 {
-    height:400px;
-    position:relative;
-}
-
-.slider-2 .slides > div {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-position:center;
-    /* 이미지를 최대한 안짤리게 한다. */
-    background-size:cover;
-    /* 배경 반복 금지 */
-    background-repeat:no-repeat;
-    opacity:0;
-    transition: opacity 0.5s;
-}
-
-.slider-2 .slides > div.active {
-    opacity:1;
-}
-
-@media ( max-width:700px ) {
-    .slider-2 {
-        height:300px;
-    }
-}
-
-.slider-2 .page-nav {
-    position:absolute;
-    width:100%;
-    text-align:center;
-    bottom:0;
-    left:0;
-}
-
-.slider-2 .page-nav > div {
-    display:inline-block;
-    width:15px;
-    height:15px;
-    background-color:rgba(255,255,255,0.5);
-    border-radius:2px;
-    cursor:pointer;
-}
-
-.slider-2 .page-nav > div.active {
-    background-color:rgba(255,255,255,1);
-}
-
-.slider-2>.side-btns>div{
-    position:absolute;
-    top:0;
-    left:0;
-    width:30%;
-    height:100%;
-    cursor:pointer;
-    z-index:10;
-
-}
-/* 슬라이드 이미지 */
-.slider-2>.side-btns>div>span:active{
-    transform:translatey(-40%);
-}
-.slider-2>.side-btns>div:last-child{
-    left:auto;
-    right:0;
-}
-
-.slider-2>.side-btns>div>span{
-    position:absolute;
-    top:50%;
-    transform:translatey(-50%);
-    left:inherit;
-    right:inherit;
-    width:70px;
-    height:70px;
-    background-color:rgba(255,255,255,0.4);
-    border-radius:100%;
-    margin:0 10px;
-}
-.slider-2>.side-btns>div>span > i{
-    position:absolute;
-    top:50%;
-    left:50%;
-    font-size:3rem;
-    color:rgba(0,0,0,0.4);
-    transform:translateX(-70%) translateY(-50%);
-}
-
-.slider-2>.side-btns>div:last-child>span > i {
-    transform:translateX(-20%) translateY(-50%);
-}
-/* 슬라이드 버튼 끝 */
-
 </style>
 <!-- 지도 관련 -->
 <style>
@@ -152,6 +55,7 @@ nav ul li {
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- 슬라이드 이미지 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
@@ -159,6 +63,9 @@ nav ul li {
 =======
 
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 <script>
 	window.onload = function() {
 		let lat = "<c:out value='${sdvo.slat}'/>";
@@ -213,10 +120,14 @@ nav ul li {
 					alert('공간이 찜 되었습니다');	
 				}else{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					alert('실패');				
 =======
 					alert('이미 찜한 공간입니다');				
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+					alert('이미 찜한 공간입니다');				
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 				}
 			},
 			error:function(err){
@@ -226,6 +137,7 @@ nav ul li {
 		});
 	};
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	$('.slider-2 .page-nav > div').click(function() {
 	    
@@ -274,6 +186,8 @@ nav ul li {
 	});
 =======
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 </script>
 
 <c:import url="/Spacetop" charEncoding="utf-8"/>
@@ -287,6 +201,7 @@ nav ul li {
 			<h6 class="loc_space">${sdvo.saddr1}</h6>
 			<h2 class="space_name">${sdvo.sname}</h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p>
 			
 			<a id="goReservation" href="/space/Reservation">예약하기</a>
@@ -295,11 +210,17 @@ nav ul li {
 			
 			<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+			<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
+			
+			<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 		</div>
 		<a id="kakao-link-btn" href="javascript:sendLink()">공유</a>
 		<a id="love_btn" onclick="love_btn(${sdvo.snum},'${loginUser.userid}')">찜</a>
 		</div>
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<div class="slider-2">
 		    <div class="side-btns">
@@ -330,6 +251,11 @@ nav ul li {
 			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+		<div>
+			<c:import url="/spaceDetail/spaceImage"/>
+		</div>
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 		<!-- <div class="photo_box_wrap type9">
 			<ul class="swiper-wrapper slides">
 				<li class="swiper-slide1">이미지1</li>
@@ -371,6 +297,7 @@ nav ul li {
 		
 		<section id="one">
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<div id="nav1">
 			<h4>장소 소개</h4>
 			<div>${sdvo.scontents}</div>
@@ -393,6 +320,8 @@ nav ul li {
 			<div>${sdvo.srule}</div>
 		</div>
 =======
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 			<div id="nav1">
 				<h4>장소 소개</h4>
 				<div>${sdvo.scontents}</div>
@@ -415,12 +344,16 @@ nav ul li {
 				<h4>장소 이용 규칙</h4>
 				<div>${sdvo.srule}</div>
 			</div>
+<<<<<<< HEAD
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 		</section>
 		
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 		
 		<section id="three">
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<div id="nav3">
 			<c:import url="/spaceDetail/reviewlist"/>
@@ -430,11 +363,17 @@ nav ul li {
 				<c:import url="/spaceDetail/reviewlist"/>
 			</div>
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+			<div id="nav3">
+				<c:import url="/spaceDetail/reviewlist"/>
+			</div>
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 		</section>
 		
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 		
 		<section id="four">
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<div id="nav4">
 			<c:import url="/spaceDetail/qnalist"/>
@@ -444,6 +383,11 @@ nav ul li {
 				<c:import url="/spaceDetail/qnalist"/>
 			</div>
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+			<div id="nav4">
+				<c:import url="/spaceDetail/qnalist"/>
+			</div>
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 		</section>
 		
 		<hr>
@@ -466,7 +410,7 @@ nav ul li {
 								<img src="./img/noSpaceImage.jpg"/>
 							</c:if>
 							<c:if test="${otherspace.simage1 ne null}">
-								<img src="./resources/SpaceInfoImg/${otherspace.simage1})"/>
+								<img src="../resources/SpaceInfoImg/${otherspace.simage1})"/>
 							</c:if>
 							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
 						</div>
@@ -481,6 +425,7 @@ nav ul li {
 
             
 <<<<<<< HEAD
+<<<<<<< HEAD
 <c:import url="/Spacefoot"/>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
@@ -488,6 +433,8 @@ nav ul li {
   Kakao.init('2046abd15b422dc649ffdf9b8c7adf98');
 
 =======
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
 <c:import url="/Spacefoot" charEncoding="utf-8"/>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -495,7 +442,10 @@ nav ul li {
   // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
   Kakao.init('2046abd15b422dc649ffdf9b8c7adf98');
 
+<<<<<<< HEAD
 >>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+=======
+>>>>>>> a64f6ba8222cd6dd6c2273982b57cbf6e94c1ff4
   // SDK 초기화 여부를 판단합니다.
   console.log(Kakao.isInitialized());
 

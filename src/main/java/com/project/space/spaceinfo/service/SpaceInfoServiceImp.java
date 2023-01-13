@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -111,12 +112,6 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 			return this.spaceinfoMapper.insertSpaceLike(hlvo);
 		}
 	}
-	
-	@Override
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
-		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
-	}
-
 
 	@Override
 	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo) {
@@ -131,8 +126,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public int deleteLike(int hnum) {
 		return this.spaceinfoMapper.deleteLike(hnum);
-<<<<<<< HEAD
-=======
+
 	}
 	
 	@Override
@@ -142,6 +136,37 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		map.put("sname", sname);
 
 		return this.spaceinfoMapper.deleteBySname(map);
->>>>>>> SPACE-10-예약
 	}
+
+	@Override
+<<<<<<< HEAD
+	public int getCountAny(String keyword) {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getCountAny(keyword);
+	}
+	
+	@Override
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
+		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
+
+
+	@Override
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
+	}
+<<<<<<< HEAD
+	
+=======
+	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
+		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
+	}
+>>>>>>> origin/SPACE-7
+=======
+	@Override
+	public List<HashtagVO> getHashTagAll(){
+		return this.spaceinfoMapper.getHashTagAll();
+	}
+>>>>>>> origin/SPACE-14-관리자페이지
 }

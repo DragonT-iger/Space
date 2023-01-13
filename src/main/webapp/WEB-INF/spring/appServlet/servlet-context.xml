@@ -56,12 +56,15 @@
          </interceptor>
          <interceptor>
             <mapping path="/login"/>
+            <mapping path="/"/>
             <beans:bean class="com.project.interceptor.HomeDivisionIntercepter"/>
          </interceptor>
    </interceptors>
 	<!-- top, foot 매핑 -->
 	<view-controller path="/Spacetop" view-name="/Spacetop"/>
 	<view-controller path="/Spacefoot" view-name="/Spacefoot"/>
+	<view-controller path="/AdminPageTop" view-name="/ajax/AdminPage/AdminPageTop"/>
+	<view-controller path="/AdminPageFoot" view-name="/ajax/AdminPage/AdminPageFoot"/>
 	
 	
 </beans:beans>
