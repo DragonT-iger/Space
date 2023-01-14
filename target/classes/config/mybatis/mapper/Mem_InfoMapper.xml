@@ -168,7 +168,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE from mem_info)
       where mname like '%%';
     -->
-  <update id="updateUserPoint" parameterType="map">
-    update mem_info set point=point+#{point} where userid=#{userid}
-  </update>
 </mapper>
