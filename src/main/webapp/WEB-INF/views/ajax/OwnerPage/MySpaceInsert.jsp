@@ -129,11 +129,9 @@
 				<td style="width: 20%"><b>컨셉카테고리</b></td>
 				<td style="width: 80%">
 					<select name ="h_code" id="h_code">
-						<option value="1">Option 1</option>
-						<option value="2">Option 2</option>
-						<option value="3">Option 3</option>
-						<option value="4">Option 4</option>
-						<option value="5">Option 5</option>
+						<c:forEach var="hashtag" items="${hashtag }">
+							<option value="${hashtag.h_code }">${hashtag.h_name }</option>	
+						</c:forEach>						
 					</select>
 					  
 					

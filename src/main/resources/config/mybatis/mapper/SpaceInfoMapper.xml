@@ -37,45 +37,8 @@
 	<select id="selectByuseridSname" resultType="SpaceInfo" parameterType="map">
 		select * from space_info where userid = #{userid} and sname = #{sname}
 	</select>
-	<<<<<<< HEAD
-=======
-	
->>>>>>> SPACE-10-예약
 	
 	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
-<<<<<<< HEAD
-      select * from space_info where userid=#{userid}
-    </select>
-	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
-		 select * from (select space_info.* , rownum as r from SPACE_INFO
-		<where>
-			 <if test="findkeyword!=null and findkeyword!=''">
-			 	and sname like '%'||#{findkeyword}||'%'
-			 </if>
-		 
-			 <if test="hashtag!=null and hashtag!=''">
-			 	and h_code = #{hashtag}
-			 </if>
-		 </where>
-		  ORDER BY SNUM asc)
-		 WHERE
-		 <![CDATA[
-		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
-		 ]]>
-         
-	</select>
-     <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
-     		select * from space_info where sname like '%'||#{value}||'%'
-     </select>
-     <select id="getCountAny" resultType="_int" parameterType="string">
-     		select count(*) from space_info where sname like '%'||#{value}||'%'
-     </select>
-     
-     <select id="getSpaceInfoByHcode" resultType="SpaceInfo" parameterType="int">
-		select * from space_info where h_code = #{h_code}
-	</select>
-     
-=======
 		select * from space_info where userid=#{userid}
 	</select>
 	
@@ -99,13 +62,32 @@
 	<delete id="deleteLike" parameterType="int">
 		delete heart_like where hnum=#{value}
 	</delete>
-	
-<<<<<<< HEAD
-=======
 
 	<delete id="deleteBySname" parameterType="map">
 		delete from space_info where userid = #{userid} and sname = #{sname}
 	</delete>
->>>>>>> SPACE-10-예약
->>>>>>> e712214ed7c293757b4334cfa06e6f19388f0196
+	
+	
+	<select parameterType="map" resultType="SpaceInfo" id="getSpaceInfoPageAll">
+		select * from (select space_info.* , rownum as r from SPACE_INFO 
+		<if test="findkeyword!=null and findkeyword!=''">
+		WHERE sname like '%'||#{findkeyword}||'%' 
+		</if>
+		ORDER BY SNUM asc)WHERE 
+		<![CDATA[
+		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
+		 ]]>
+	</select>
+	
+	<select parameterType="string" resultType="SpaceInfo" id="selectByPname">
+		select * from space_info where sname like '%'||#{value}||'%' 
+	</select>
+	
+	<select parameterType="string" resultType="_int" id="getCountAny">
+		select count(*) from space_info where sname like '%'||#{value}||'%' 
+	</select>
+	
+	<select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+	</select>
 </mapper>

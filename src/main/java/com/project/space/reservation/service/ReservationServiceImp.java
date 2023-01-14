@@ -50,10 +50,10 @@ public class ReservationServiceImp implements ReservationService {
 
 	@Override
 	public int insertBooking(ReservationVO rtvo) {
-		int n=reservationMapper.insertBooking(rtvo);
-		if(n>0) {
-			int m=reservationMapper.updateUserRes(rtvo);
-			return m;
+		int m=reservationMapper.updateUserRes(rtvo);
+		if(m>0) {
+			int n=reservationMapper.insertBooking(rtvo);
+			return n;
 		}else {
 			return 0;
 		}
@@ -99,13 +99,22 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public int userBookingTotalprice(String userid) {
-		return this.reservationMapper.userBookingTotalprice(userid);
+	public String userBookingTotalprice(String userid) {
+		String u=this.reservationMapper.userBookingTotalprice(userid);
+		if(u==null) {
+			return "0";
+		}
+		return u;
 	}
 
 	@Override
 	public List<mem_space_res_view> BookingView(String userid) {
 		return this.reservationMapper.BookingView(userid);
+	}
+
+	@Override
+	public ReservationVO getBooking(int rtnum) {
+		return this.reservationMapper.getBooking(rtnum);
 	}
 
 	

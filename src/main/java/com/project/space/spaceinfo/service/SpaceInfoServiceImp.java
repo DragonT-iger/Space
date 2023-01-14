@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -27,7 +28,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public List<Space_InfoVO> selectByPname(String keyword) {
 		// TODO Auto-generated method stub
-		return null;
+		return spaceinfoMapper.selectByPname(keyword);
 	}
 
 	@Override
@@ -45,7 +46,10 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	public List<Space_InfoVO> getSpaceInfoAll() {
 		return this.spaceinfoMapper.getSpaceInfoAll();
 	}
-
+	@Override
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map){
+		return this.spaceinfoMapper.getSpaceInfoPageAll(map);
+	}
 	@Override
 	public Space_InfoVO selectBySnum(int snum) {
 		return this.spaceinfoMapper.selectBySnum(snum);
@@ -101,7 +105,17 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		
 		return this.spaceinfoMapper.selectByuseridSname(map);
 	}
-	
+	@Override
+	public int getCountAny(String keyword) {
+		return this.spaceinfoMapper.getCountAny(keyword);
+	}
+
+	@Override
+	public List<HashtagVO> getHashTagAll() {
+		// TODO Auto-generated method stub
+		return this.spaceinfoMapper.getHashTagAll();
+	}
+
 	@Override
 	public int insertSpaceLike(Heart_LikeVO hlvo) {
 		int res=spaceinfoMapper.selectSpaceLike(hlvo.getSnum());
@@ -111,12 +125,6 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 			return this.spaceinfoMapper.insertSpaceLike(hlvo);
 		}
 	}
-	
-	@Override
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
-		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
-	}
-
 
 	@Override
 	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo) {
@@ -131,10 +139,9 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Override
 	public int deleteLike(int hnum) {
 		return this.spaceinfoMapper.deleteLike(hnum);
-<<<<<<< HEAD
-=======
+
 	}
-	
+
 	@Override
 	public int deleteBySname(String userid, String sname) {
 		Map<String,String> map=new HashMap<>();
@@ -142,11 +149,9 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		map.put("sname", sname);
 
 		return this.spaceinfoMapper.deleteBySname(map);
->>>>>>> SPACE-10-예약
 	}
 
-	@Override
-	public List<Space_InfoVO> getSpaceInfoByHcode(int h_code) {
-		return this.spaceinfoMapper.getSpaceInfoByHcode(h_code);
-	}
+
+
+
 }

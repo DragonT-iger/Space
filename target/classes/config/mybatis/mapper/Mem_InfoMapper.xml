@@ -3,43 +3,172 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.project.space.user.mapper.Mem_InfoMapper">
+
 	<!-- 회원가입 -->
-	<insert id="createUser" parameterType="MemberInfo">
-		insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,ACCOUNT,POINTADD)
-		values(#{mname},#{nickname},#{userid},#{mpwd},#{hp},#{birth:VARCHAR},#{status},0,1,#{account:VARCHAR},0)
+
+
+	<insert parameterType="MemberInfo" id="createUser">
+		insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,BANK_CODE,ACCOUNT,POINTADD)
+		values(#{mname},#{nickname},#{userid},#{mpwd},#{hp},#{birth:VARCHAR},#{status},0,1,#{bank_code:VARCHAR},#{account:VARCHAR},0)
 	</insert>
+
 	<!-- userid와 일치하는 회원체크 -->
-	<select id="idCheck" resultType="int" parameterType="string">
-		select count(*) from mem_info where userid=#{value}
+
+
+	<select parameterType="string" id="idCheck" resultType="int">
+	select count(*) from mem_info where userid=#{value} 
 	</select>
-	
+
 	<!-- userid 검색 -->
-	<select id="getUser" resultType="MemberInfo" parameterType="string">
-		select * from mem_info where userid=#{value} <!-- 파라미터로들어오 value값 -->
+	<select parameterType="string" id="getUser"	resultType="MemberInfo">
+		select m.*,
+		(select bank_name from bank_info b where b.bank_code=m.bank_code) bank_name from mem_info m 
+		where userid=#{value}<!-- 파라미터로들어오 value값 -->
 	</select>
-	
-	<!-- <select id="findUser" resultType="MemberInfo" parameterType="MemberInfo">
-		select * from mem_info where userid=#{userid} 파라미터로들어오 value값
-	</select> -->
-	
-	<select id="listUser" resultType="MemberInfo" parameterType="com.project.space.domain.PagingVO">
-		select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr
-		from mem_info order by mdate asc
+
+	<!-- <select id="findUser" resultType="MemberInfo" parameterType="MemberInfo">select 
+		* from mem_info where userid=#{userid} 파라미터로들어오 value값 </select> -->
+
+
+	<select parameterType="com.project.space.domain.PagingVO" id="listUser" resultType="MemberInfo">
+		select mem_info.*,decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원')
+		statusStr from mem_info order by mdate asc 
 	</select>
+
 	<!-- 회원수정 -->
-	<update id="updateUser" parameterType="MemberInfo">
-		update mem_info set nickname=#{nickname:VARCHAR},
-		mpwd=#{mpwd},hp=#{hp},account=#{account} where userid=#{userid}
+
+
+	<update parameterType="MemberInfo" id="updateUser">
+		update mem_info set nickname=#{nickname},mpwd=#{mpwd},hp=#{hp},bank_code=#{bank_code:VARCHAR},account=#{account:VARCHAR}
+		where userid=#{userid} 
 	</update>
+
 	<!-- 회원탈퇴 -->
-	<delete id="deleteUser" parameterType="MemberInfo" > 
-		delete from mem_info where userid=#{userid} and mpwd=#{mpwd}
+	<delete parameterType="MemberInfo" id="deleteUser">
+		delete from mem_info where userid=#{userid}
 	</delete>
 
-	<!-- getstatusbyuserid -->
-	<select id="getStatusByUserid" resultType="int" parameterType="string">
-		select status from mem_info where userid=#{value}
+	<!-- 은행코드 -->
+	<select id="listBankcode" resultType="MemberInfo">
+		select * from bank_info b order by bank_code asc 
 	</select>
-	
+
+	<select id="searchUserByFilter" resultType="MemberInfo" parameterType="map">
+      select * from (
+      select mem_info.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr,
+      TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE from mem_info)
+      <include refid="findsearch"/>
+      <include refid="findfilter"/>
+   </select>
+   <sql id="findsearch">
+         <where>
+            <if test="FkeywordOption=='Fname'">
+               mname like '%'||#{keyword}||'%'
+            </if>
+            <if test="FkeywordOption=='Fuserid'">
+               userid like '%'||#{keyword}||'%'
+            </if>
+         </where>
+   </sql>
+   <sql id="findfilter">
+   <!-- minFmage=, maxFmage=, minFmrank=, maxFmrank=, minFmdate=, maxFmdate=, 
+   minFpointAdd=, maxFpointAdd=, minFrcount=, maxFrcount=, FkeywordOption=Fname, keyword=asd -->
+      <!-- age 필터 -->
+      <if test="minFmage!='' and maxFmage==''"> 
+          <![CDATA[
+            and #{minFmage} <= AGE
+          ]]>
+      </if>
+      <if test="maxFmage!='' and minFmage==''">
+          <![CDATA[
+            and #{maxFmage} >= AGE
+          ]]>
+      </if>
+      <if test="maxFmage!='' and minFmage!=''">
+          <![CDATA[
+            and #{minFmage} <= AGE
+            and #{maxFmage} >= AGE
+          ]]>
+      </if>
+      <!-- mrank 필터 -->
+      <if test="minFmrank!='' and maxFmrank==''">
+          <![CDATA[
+            and #{minFmrank} <= mrank
+          ]]>
+      </if>
+      <if test="maxFmrank!='' and minFmrank==''">
+          <![CDATA[
+            and #{maxFmrank} >= mrank
+          ]]>
+      </if>
+      <if test="maxFmrank!='' and minFmrank!=''">
+          <![CDATA[
+            and #{minFmrank} <= mrank
+            and #{maxFmrank} >= mrank
+          ]]>
+      </if>
+      <!-- 회원가입일자 minFmdate , maxFmdate -->
+      <if test="minFmdate!='' and maxFmdate==''">
+          <![CDATA[
+            and #{minFmdate} <= mdate
+          ]]>
+      </if>
+      <if test="maxFmdate!='' and minFmdate==''">
+          <![CDATA[
+            and #{maxFmdate} >= mdate
+          ]]>
+      </if>
+      <if test="maxFmdate!='' and minFmdate!=''">
+          <![CDATA[
+            and #{minFmdate} <= mdate
+            and #{maxFmdate} >= mdate
+          ]]>
+      </if>
+      <!--  포인트충전량 minFpointAdd, maxFpointAdd -->
+      <if test="minFpointAdd!='' and maxFpointAdd==''">
+          <![CDATA[
+            and #{minFpointAdd} <= pointAdd
+          ]]>
+      </if>
+      <if test="maxFpointAdd!='' and minFpointAdd==''">
+          <![CDATA[
+            and #{maxFmdate} >= pointAdd
+          ]]>
+      </if>
+      <if test="maxFpointAdd!='' and minFpointAdd!=''">
+          <![CDATA[
+            and #{minFpointAdd} <= pointAdd
+            and #{maxFpointAdd} >= pointAdd
+          ]]>
+      </if>
+      <!-- 예약횟수 minFrcount, maxFrcount -->
+      <!-- <if test="minFrcount!='' and maxFrcount==''">
+          <![CDATA[
+            and #{minFmdate} <= mdate
+          ]]>
+      </if>
+      <if test="maxFrcount!='' and minFrcount==''">
+          <![CDATA[
+            and #{maxFmdate} >= mdate
+          ]]>
+      </if>
+      <if test="maxFrcount!='' and minFrcount!=''">
+          <![CDATA[
+            and #{minFmdate} <= mdate
+            and #{maxFmdate} >= mdate
+          ]]>
+      </if> -->
+   </sql>
+   <!-- 
+   select * from (
+      select mem_info.*, 
+      decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') as statusStr ,
+      TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE from mem_info)
+      where mname like '%%';
+    -->
+  <update id="updateUserPoint" parameterType="map">
+    update mem_info set point=point+#{point} where userid=#{userid}
+  </update>
 </mapper>

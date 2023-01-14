@@ -17,7 +17,7 @@ public interface ReservationService {
 	//일반유저가 본인의 예약내역 열람
 	List<ReservationVO> userBookingInfo(String userid);
 	//유저가 예약한 전체 예약 금액
-	int userBookingTotalprice(String userid);
+	String userBookingTotalprice(String userid);
 	
 	//공간번호로 특정 공간 정보 가져오기
 	public Space_InfoVO selectBySnum(int snum);
@@ -31,6 +31,10 @@ public interface ReservationService {
 	//일반유저가 본인의 예약 내용을 취소
 	int deleteBooking(int snum);
 	//예약 전체 취소
+	
+	
+	//예약번호로 예약내역 불러오기
+	ReservationVO getBooking(int rtnum);
 	
 	//홈화면에서 예약 일자,시간 검색 시 예약상태(가능)에 따른 예약가능 공간(뷰생성)
 	List<ReservationVO> searchBookingInfo(int rtstatus);

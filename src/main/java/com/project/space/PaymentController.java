@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PaymentVO;
 import com.project.space.payment.service.PaymentService;
+import com.project.space.point.service.PointService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
 import com.project.space.user.service.Mem_InfoService;
 
@@ -40,6 +41,9 @@ public class PaymentController {
 
     @Inject
     PaymentService paymentService;
+
+    @Inject
+    PointService pointService;
 
 
     @GetMapping("/paytest")
@@ -156,9 +160,11 @@ public class PaymentController {
         payment.setUserid(userid);
         payment.setStatus(0);
 
+        int j = mem_infoservice.updateUserPoint(userid, Integer.parseInt(amount));
+
         int i = paymentService.insertPayment(payment);
 
-        if(i > 0) {
+        if(i > 0 && j > 0){
             log.info("결제 성공및 db저장 완료");
             return ResponseEntity.ok().build();
         }else {
@@ -200,6 +206,40 @@ public class PaymentController {
         log.info("결제 취소 실패");
         return ResponseEntity.badRequest().build();
       }
+    }
+
+    @GetMapping("pointAdd")
+    public String pointAdd(Model m, HttpSession session){
+        //즉 model에서 가져와야 하는 정보
+        //1. merchant_uid , 2.sname, 3.param(amount), 4.mname, 5.hp
+
+
+
+      //merchant_uid는 ORD + sysdate(yyyyMMdd)+ - + space_info(snum)+ - + payment_seq로 이루어짐
+      String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+      
+      int num;
+      if(paymentService.getpaymentcount() == 0){
+        num = 1;
+      }else{
+        num = paymentService.getPaynum();
+      }
+
+      String numStr = String.format("%07d", num);     
+      
+
+      String merchant_uid = "ORD" +  new SimpleDateFormat("yyyyMMdd").format(new Date()) + "-" +  numStr;
+
+      
+      
+      Mem_InfoVO mem = mem_infoservice.getUser(userid);
+
+
+      m.addAttribute("mname", mem.getMname());
+      m.addAttribute("hp", mem.getHp());
+      m.addAttribute("merchant_uid", merchant_uid);
+
+      return "ajax/pay/pointAdd";
     }
     
 }

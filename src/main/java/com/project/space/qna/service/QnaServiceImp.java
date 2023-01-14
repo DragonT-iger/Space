@@ -70,6 +70,11 @@ public class QnaServiceImp implements QnaService {
 		return this.qnaMapper.selectGLG(qnum);
 	}
 
+	@Override
+	public String checkTitle(int qnum) {
+		return this.qnaMapper.checkTitle(qnum);
+	}
+
 	
 
 }
