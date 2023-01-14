@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.space.admin.mapper.AdminMapper">
+
+	<select id="searchUserByFilter" resultType="MemberInquiry" parameterType="map">
+		select * from
+		(select m.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr,
+		TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE , r.rcount from mem_info m
+		left outer join 
+		(select userid , count(*) as rcount from reservation group by userid) r 
+		on m.userid = r.userid)
+		<include refid="findsearchUser"/>
+		<include refid="Userfindfilter"/>
+	</select>
+	<sql id="findsearchUser">
+			<where>
+				<if test="FkeywordOption=='Fname'">
+					mname like '%'||#{keyword}||'%'
+				</if>
+				<if test="FkeywordOption=='Fuserid'">
+					userid like '%'||#{keyword}||'%'
+				</if>
+			</where>
+	</sql>
+	<sql id="Userfindfilter">
+	<!-- minFmage=, maxFmage=, minFmrank=, maxFmrank=, minFmdate=, maxFmdate=, 
+	minFpointAdd=, maxFpointAdd=, minFrcount=, maxFrcount=, FkeywordOption=Fname, keyword=asd -->
+		<!-- age 필터 -->
+		<if test="minFmage!='' and maxFmage==''"> 
+			 <![CDATA[
+			   and #{minFmage} <= AGE
+			 ]]>
+		</if>
+		<if test="maxFmage!='' and minFmage==''">
+			 <![CDATA[
+			   and #{maxFmage} >= AGE
+			 ]]>
+		</if>
+		<if test="maxFmage!='' and minFmage!=''">
+			 <![CDATA[
+			   and #{minFmage} <= AGE
+			   and #{maxFmage} >= AGE
+			 ]]>
+		</if>
+		<!-- mrank 필터 -->
+		<if test="minFmrank!='' and maxFmrank==''">
+			 <![CDATA[
+			   and #{minFmrank} <= mrank
+			 ]]>
+		</if>
+		<if test="maxFmrank!='' and minFmrank==''">
+			 <![CDATA[
+			   and #{maxFmrank} >= mrank
+			 ]]>
+		</if>
+		<if test="maxFmrank!='' and minFmrank!=''">
+			 <![CDATA[
+			   and #{minFmrank} <= mrank
+			   and #{maxFmrank} >= mrank
+			 ]]>
+		</if>
+		<!-- 회원가입일자 minFmdate , maxFmdate -->
+		<if test="minFmdate!='' and maxFmdate==''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			 ]]>
+		</if>
+		<if test="maxFmdate!='' and minFmdate==''">
+			 <![CDATA[
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if>
+		<if test="maxFmdate!='' and minFmdate!=''">
+			 <![CDATA[
+			   and #{minFmdate} <= mdate
+			   and #{maxFmdate} >= mdate
+			 ]]>
+		</if>
+		<!--  포인트충전량 minFpointAdd, maxFpointAdd -->
+		<if test="minFpointAdd!='' and maxFpointAdd==''">
+			 <![CDATA[
+			   and #{minFpointAdd} <= pointAdd
+			 ]]>
+		</if>
+		<if test="maxFpointAdd!='' and minFpointAdd==''">
+			 <![CDATA[
+			   and #{maxFmdate} >= pointAdd
+			 ]]>
+		</if>
+		<if test="maxFpointAdd!='' and minFpointAdd!=''">
+			 <![CDATA[
+			   and #{minFpointAdd} <= pointAdd
+			   and #{maxFpointAdd} >= pointAdd
+			 ]]>
+		</if>
+		<!-- 예약횟수 minFrcount, maxFrcount -->
+		<if test="minFrcount!='' and maxFrcount==''">
+			 <![CDATA[
+			   and #{minFrcount} <= rcount
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount==''">
+			 <![CDATA[
+			   and #{maxFrcount} >= rcount
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount!=''">
+			 <![CDATA[
+			   and #{minFrcount} <= rcount
+			   and #{maxFrcount} >= rcount
+			 ]]>
+		</if>
+	</sql>
+	
+	<select id="getHashTagAll" resultType="HashTag">
+		select * from HashTag
+	</select>
+	
+	<select id="listUser" resultType="MemberInquiry" parameterType="com.project.space.domain.PagingVO">
+		select m.*, decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원') statusStr,
+		TO_CHAR(sysdate,'YYYY')-substr(birth,0,4) as AGE , r.rcount from mem_info m
+		left outer join 
+		(select userid , count(*) as rcount from reservation group by userid) r 
+		on m.userid = r.userid
+	</select>
+	
+	<select id="listSpace" resultType="SpaceInquiry" parameterType="Paging">
+		select s.*, r.rcount from space_info s left outer join 
+		(select snum , count(*) as rcount from reservation group by snum)
+		r on s.snum = r.snum
+	</select>
+	
+	<select id="getSpaceAddr" resultType="string" >
+		select saddr1 from space_info
+	</select>
+	
+	<select id="searchSpaceByFilter" resultType="SpaceInquiry" parameterType="map">
+	select * from (
+		select s.*, r.rcount from space_info s left outer join 
+		(select snum , count(*) as rcount from reservation group by snum)
+		r on s.snum = r.snum)
+		<include refid="findsearchSpace"/>
+		<include refid="Spacefindfilter"/>
+	</select>
+	<sql id="findsearchSpace">
+			<where>
+				<if test="FkeywordOption=='Fname'">
+					sname like '%'||#{keyword}||'%'
+				</if>
+				<if test="FkeywordOption=='Fuserid'">
+					userid like '%'||#{keyword}||'%'
+				</if>
+			</where>
+	</sql>
+	<sql id="Spacefindfilter">
+	
+		<!-- local 필터 -->
+		<if test="Fslocal!=null and Fslocal!=''"> 
+			 <![CDATA[
+			   and regexp_like(saddr1,#{Fslocal})
+			 ]]>
+		</if>
+		
+		<!-- 인원 필터 minn <= 4 and maxn >= 4; -->
+		<if test="Fspn!=null and Fspn!=''">
+			 <![CDATA[
+			   and minn <= #{Fspn} and maxn >= #{Fspn}
+			 ]]>
+		</if>
+		<!-- 해시태그 h_code -->
+		<if test="Fshtag!=null and Fshtag!=''">
+			 <![CDATA[
+			   and regexp_like(h_code,#{Fshtag})
+			 ]]>
+		</if>
+		<!--  기본비용 bcost -->
+		<if test="minFsbcost!='' and maxFsbcost==''">
+			 <![CDATA[
+			   and #{minFsbcost} <= bcost
+			 ]]>
+		</if>
+		<if test="maxFsbcost!='' and minFsbcost==''">
+			 <![CDATA[
+			   and #{maxFsbcost} >= bcost
+			 ]]>
+		</if>
+		<if test="maxFsbcost!='' and minFsbcost!=''">
+			 <![CDATA[
+			   and #{minFsbcost} <= bcost
+			   and #{maxFsbcost} >= bcost
+			 ]]>
+		</if>
+		<!-- 추가비용 Fsecost -->
+		<if test="minFsecost!='' and maxFsecost==''">
+			 <![CDATA[
+			   and #{minFsecost} <= ecost
+			 ]]>
+		</if>
+		<if test="maxFsecost!='' and minFsecost==''">
+			 <![CDATA[
+			   and #{maxFsecost} >= ecost
+			 ]]>
+		</if>
+		<if test="maxFsecost!='' and minFsecost!=''">
+			 <![CDATA[
+			   and #{minFsecost} <= ecost
+			   and #{maxFsecost} >= ecost
+			 ]]>
+		</if>
+		<!-- 예약횟수 minFrcount, maxFrcount -->
+		<if test="minFrcount!='' and maxFrcount==''">
+			 <![CDATA[
+			   and #{minFrcount} <= rcount
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount==''">
+			 <![CDATA[
+			   and #{maxFrcount} >= rcount
+			 ]]>
+		</if>
+		<if test="maxFrcount!='' and minFrcount!=''">
+			 <![CDATA[
+			   and #{minFrcount} <= rcount
+			   and #{maxFrcount} >= rcount
+			 ]]>
+		</if>
+	</sql>
+	
+<select id="getUserHistory" parameterType="string" resultType="MemberHistory">
+select * from(
+	select h.userid,h.snum,h.sname,h.rcount,h.sumtp,h.h_code,h2.h_name from(
+	select r.userid,s.snum,s.sname,r.rcount,r.sumtp,h_code from (
+	select snum , userid,count(*) as rcount, sum(totalprice) as sumtp from reservation group by snum,userid) r 
+	left outer join 
+	(select snum,sname,h_code from space_info) s on r.snum=s.snum) h 
+	left outer join
+	(select h_code,h_name from hashtag) h2 on h.h_code = h2.h_code) where userid=#{value}
+</select>
+
+<select id="todayJoinMember" parameterType="string" resultType="MemberInquiry">
+	select * from mem_info where mdate like '%'||#{value}||'%'
+</select>
+
+<select id="todayInsertSpace" parameterType="string" resultType="SpaceInquiry">
+	select * from space_info where sdate like '%'||#{value}||'%'
+</select>
+
+<select id="todayPopSpace" parameterType="string" resultType="SpaceInquiry">
+	select * from(
+		select s.*, r.rcount , r.rdate from space_info s left outer join 
+			(select snum, TO_CHAR(rdate, 'yyyy/mm/dd') as rdate ,count(*) as rcount from reservation group by snum , TO_CHAR(rdate, 'yyyy/mm/dd'))
+			r on s.snum = r.snum) where rdate like '%'||#{value}||'%'
+</select>
+</mapper>

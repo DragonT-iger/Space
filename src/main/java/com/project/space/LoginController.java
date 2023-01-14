@@ -1,5 +1,6 @@
 package com.project.space;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -27,7 +28,6 @@ import com.project.space.domain.NotUserException;
 import com.project.space.user.mapper.Mem_InfoMapper;
 import com.project.space.user.service.Mem_InfoService;
 
-
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -39,8 +39,6 @@ public class LoginController {
 	@Inject
 	private Mem_InfoService memberService;
 	
-	@Inject
-	private Mem_InfoMapper memberMapper;
 	
 	@Autowired
 	private PasswordEncoder pwencoder; //암호화 객체
@@ -72,7 +70,7 @@ public class LoginController {
 	}
 	
 	// 회원 탈퇴 post
-	@RequestMapping(value="/deleteUser", method = RequestMethod.POST)
+	@RequestMapping(value="/user/deleteUser", method = RequestMethod.POST)
 	public String deleteUser(Mem_InfoVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
 		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
@@ -84,6 +82,7 @@ public class LoginController {
 		
 		// vo로 들어오는 비밀번호
 		String voPass = vo.getMpwd();
+		log.info(vo);
 		log.info("voPass===============>"+voPass);
 		log.info(pwencoder.matches(voPass, sessionPass));
 		if(!pwencoder.matches(voPass, sessionPass)) {
@@ -122,7 +121,7 @@ public class LoginController {
 		m.addAttribute("loc",loc);
 		return "msg";
 	}//-----------------------------------
-	
+		
 	/*아이디 중복체크 ajax처리-------------------*/
 	
 	 @GetMapping(value = "/idcheck",produces="application/json")
@@ -144,11 +143,64 @@ public class LoginController {
 	 return map; 
 	 
 	 }//--------------------------------------
-	 @RequestMapping(value = "/updateUser" , method = RequestMethod.POST)
-		public String updateUser(Mem_InfoVO user) {
-		 	memberMapper.updateUser(user);
-			return "redirect:/space";
-	 }//--------------------------------
-	 
+	
+	 //회원정보수정
+	 @GetMapping("/user/MyModify")
+		public String mymodify(Model m) {
+			List<Mem_InfoVO> bankcode=memberService.listBankcode();
+			log.info("bankcode=="+bankcode);
+			m.addAttribute("bankcode", bankcode);
+			return "ajax/Pages/MyModify";
+		}
+		
+		 //회원정보수정
+		 @PostMapping("/user/updateUser")
+			public String updateUser(Model m, @ModelAttribute("user") Mem_InfoVO user) 
+					throws NotUserException 
+		 	{
+			  
+			 log.info("user====="+user);
+			 log.info("user.getUserid()==="+user.getUserid());
+				
+				/*
+				 * log.info("user====="+user);
+				 * if(user.getUserid().trim().isEmpty()||user.getMpwd().trim().isEmpty()) {
+				 * return "redirect:/"; }
+				 */
+				//반환타입 UserVO
+				Mem_InfoVO updateUser=memberService.pwCheck(user.getUserid(), user.getMpwdcheck());
+				if(updateUser!=null) {
+					
+				
+				int n=memberService.updateUser(user);
+				log.info(n);
+				String str=(n>0)?"회원정보 수정 완료":"수정 실패";
+				String loc=(n>0)?"../Login":"javascript:history.back()";
+				
+				log.info("update1 ===user: "+user);
+				m.addAttribute("message",str);
+				m.addAttribute("loc",loc);
+				
+				return "msg";
+				}else {
+					String str="수정 실패-현재 비밀번호가 일치하지 않아요";
+					String loc="javascript:history.back()";
+					
+					log.info("update2 ===user: "+user);
+					m.addAttribute("message",str);
+					m.addAttribute("loc",loc);
+					
+					return "msg";
+				}		
+		 }//-------------------------------- 
+
+	 @RequestMapping(value="/Join", method=RequestMethod.GET)
+		public String Join(Model m) {
+			logger.info("connected Join.");
+			List<Mem_InfoVO> bankcode=memberService.listBankcode();
+			//log.info("bankcode=="+bankcode);
+			m.addAttribute("bankcode", bankcode);
+			return "ajax/Join";
+		}
 }
 

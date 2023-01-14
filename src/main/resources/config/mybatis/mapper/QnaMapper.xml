@@ -50,4 +50,8 @@
 		values(#{qnum},#{userid},#{snum},#{qpwd},#{qtitle},#{qcontent},sysdate,#{qgroup},#{qlevel},#{qgorder}) 
 	</insert>
 	
+	<select id="checkTitle" parameterType="int" resultType="string">
+		select qtitle from qna_board where qnum=#{value}
+	</select>
+	
 </mapper>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 
 public interface ReservationMapper {
@@ -30,7 +32,8 @@ public interface ReservationMapper {
 	//일반유저가 본인의 예약 내역을 변경
 	int updateBookingEdit(int snum);
 	//일반유저가 본인의 예약 내용을 취소
-	int deleteBooking(int snum);
+	int deleteBooking(DelRes dr);
+	int updateUserPoint(DelRes dr); //취소된 포인트만틈 유저포인트 올려주기
 	//예약 전체 취소
 	
 	//홈화면에서 예약 일자,시간 검색 시 예약상태(가능)에 따른 예약가능 공간(뷰생성)
@@ -40,6 +43,14 @@ public interface ReservationMapper {
 	ReservationVO getTimePrice(int snum); //특정 공간의 시간별 금액 구하기
 	ReservationVO getCountPrice(int snum); //특정 공간의 인원 추가 금액 구하기
 	ReservationVO getTotalPrice(int snum); //특정 공간의 총액
+
+	String userBookingTotalprice(String userid);
+
+	List<mem_space_res_view> BookingView(String userid);
+
+	ReservationVO getBooking(int rtnum);
+
+	
 	
 	
 	

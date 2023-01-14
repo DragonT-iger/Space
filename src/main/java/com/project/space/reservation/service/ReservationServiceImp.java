@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.mapper.ReservationMapper;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
@@ -49,10 +51,10 @@ public class ReservationServiceImp implements ReservationService {
 
 	@Override
 	public int insertBooking(ReservationVO rtvo) {
-		int n=reservationMapper.insertBooking(rtvo);
-		if(n>0) {
-			int m=reservationMapper.updateUserRes(rtvo);
-			return m;
+		int m=reservationMapper.updateUserRes(rtvo);
+		if(m>0) {
+			int n=reservationMapper.insertBooking(rtvo);
+			return n;
 		}else {
 			return 0;
 		}
@@ -71,9 +73,14 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public int deleteBooking(int snum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteBooking(DelRes dr) {
+		int res=reservationMapper.deleteBooking(dr);
+		if(res>0) {
+			int n=reservationMapper.updateUserPoint(dr);
+			return n;
+		}else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -95,6 +102,25 @@ public class ReservationServiceImp implements ReservationService {
 	@Override
 	public ReservationVO getTotalPrice(int snum) {
 		return this.reservationMapper.getTotalPrice(snum);
+	}
+
+	@Override
+	public String userBookingTotalprice(String userid) {
+		String u=this.reservationMapper.userBookingTotalprice(userid);
+		if(u==null) {
+			return "0";
+		}
+		return u;
+	}
+
+	@Override
+	public List<mem_space_res_view> BookingView(String userid) {
+		return this.reservationMapper.BookingView(userid);
+	}
+
+	@Override
+	public ReservationVO getBooking(int rtnum) {
+		return this.reservationMapper.getBooking(rtnum);
 	}
 
 	

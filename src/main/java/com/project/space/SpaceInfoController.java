@@ -112,17 +112,6 @@ public class SpaceInfoController {
         logger.info("업로드 이후 product: "+vo);
         
 
-        // if(spaceinfoservice.selectByUserid(vo.getUserid())!=null) {
-        //     logger.info("이미 등록된 공간이 있습니다.");
-        //     logger.info("기존 공간을 덮어 씁니다");
-        //     int n = spaceinfoservice.SpaceInfoUpdate(vo);
-        //     logger.info("공간등록 성공여부:"+n);
-        //     return "Home";
-        // }else {
-        //     int n = spaceinfoservice.SpaceInfoInsert(vo);
-        //     logger.info("공간등록 성공여부:"+n);
-        //     return "Home";
-        // }
         //공간 이름이 중복되는지 확인하고 중복된다면 update, 중복되지 않는다면 insert
 
         if(spaceinfoservice.GetAllSpaceNameByUserid(userid).contains(vo.getSname())) {
@@ -136,11 +125,6 @@ public class SpaceInfoController {
             logger.info("공간등록 성공여부:"+n);
             return "Home";
         }
-
-
-        
-
-        
         
     }
     
@@ -169,7 +153,7 @@ public class SpaceInfoController {
 
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
         
-
+        m.addAttribute("hashtag", spaceinfoservice.getHashTagAll());
         m.addAttribute("ex_spaceinfo",spaceinfoservice.selectByUserid(userid));
 		return "ajax/OwnerPage/MySpaceInsert";
 	}
@@ -185,5 +169,41 @@ public class SpaceInfoController {
         return vo;
     }
 
+    
+	@GetMapping("/owner/MySpaceList")
+	public String mySpaceList(Model m, HttpSession session) {
+
+        String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+
+        List<Space_InfoVO> sivolist = spaceinfoservice.selectByUserid(userid);
+
+        m.addAttribute("spaceinfo", sivolist);
+        		
+		return "ajax/OwnerPage/MySpaceList";
+	}
+
+    @PostMapping("/owner/MySpaceDelete")
+    public String mySpaceDelete(@RequestParam String sname, HttpSession session) {
+        String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+        spaceinfoservice.deleteBySname(sname, userid);
+
+        return "Home";
+    }
+
+    @PostMapping("/owner/spaceinfodelete")
+    public String spacedelete(@RequestParam String sname, HttpSession session) {
+        String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
+
+        
+        int i = spaceinfoservice.deleteBySname(userid, sname);
+
+        if(i==1) {
+            logger.info("공간 삭제 성공");
+            return "Home";
+        }else {
+            logger.info("공간 삭제 실패");
+            return "ajax/OwnerPage/MySpaceInsert";
+        }
+    }
     
 }

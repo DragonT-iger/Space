@@ -51,17 +51,17 @@
 		</tr>
 		<tr>
 			<td><h5>계좌정보</h5></td>
-			<td><b>${loginUser.account }</b></td>
+			<td><b>${loginUser.bank_name}(${loginUser.bank_code}) ${loginUser.account }</b></td>
 			<%-- ${loginUser.account} --%>
 		</tr>
 	</table>
 		<div class="text-center">
 			<button type="button" class="btn btn-primary py-2" onclick="javascript:location.href='MyModify'">회원수정</button>
 			<button type="button" class="btn btn-danger py-2" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
-			<button type="button" class="btn btn-primary py-2" onclick="javascript:histroy.back()">돌아가기</button>
+			<button type="button" class="btn btn-primary py-2" onclick="history.back();">돌아가기</button>
 		</div>
 </div>
-<form class="frm1" action="../deleteUser" method="post">
+<form class="frm1" action="deleteUser" method="post">
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

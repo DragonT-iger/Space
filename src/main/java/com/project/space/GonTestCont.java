@@ -3,8 +3,10 @@ package com.project.space;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
+import com.project.interceptor.CommonUtil;
+import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
+import com.project.space.domain.ReviewVO;
+import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
+import com.project.space.review.service.ReviewService;
+import com.project.space.spaceinfo.service.SpaceInfoService;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
 import com.project.space.user.service.Mem_InfoService;
 
@@ -34,20 +43,8 @@ public class GonTestCont {
 	
 	@Inject
 	private Mem_InfoService memberService;
+
 	
-	@GetMapping("/user/MyZimm")
-	public String zimmList() {
-		return "ajax/ilgon/MyZimm";
-	}
-	@GetMapping("/user/MyReviewList")
-	public String myReviewList() {
-		
-		return "ajax/ilgon/MyReviewList";
-	}
-	@GetMapping("/user/MyModify")
-	public String mymodify() {
-		return "ajax/Pages/MyModify";
-	}
 	/* ----등록유저------ */
 	@GetMapping("/owner/MyReservationCheck")
 	public String myReservationCheck() {
@@ -57,11 +54,6 @@ public class GonTestCont {
 	public String mySpaceEdit() {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
-	}
-	@GetMapping("/owner/MySpaceList")
-	public String mySpaceList() {
-		
-		return "ajax/OwnerPage/MySpaceList";
 	}
 	
 	/*네로아 테스트*/

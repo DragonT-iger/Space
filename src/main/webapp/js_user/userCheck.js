@@ -8,7 +8,7 @@ function ajax_idcheck(uid){
 
 	if(!uid){
 		uid=$('#userid').val();
-		alert($('#userid').val());
+		//alert($('#userid').val());
 		if(!uid){
 			alert('아이디를 입력하세요');
 			$('#userid').focus();
@@ -99,11 +99,23 @@ function id_check(){
 		mf.userid.focus();
 		return;
 	}
-/*	
+	
+	if (!mf.agree1.checked||!mf.agree2.checked) { 
+	    alert("약관 동의 모두를 체크하세요");
+	    mf.agree1.focus();
+	    return false;
+ 	 }
+/*	 	 
+ 	 if (!mf.agree2.checked) { 
+	    alert("약관 동의를 체크하세요");
+	    mf.agree2.focus();
+	    return false;
+ 	 }
+
 	if(!isMobile(mf.hp)){
 		alert('핸드폰 형식에 맞지 않아요. (010|011)(숫자7~8자리)');
 		mf.hp.select();
-		return;
+		return ;
 	}	
 	
 	

@@ -61,7 +61,11 @@ public class UserBehaviorLogging {
 		Object[] args=jp.getArgs(); //해당 메서드 인자값을 배열에 저장
 		if(args!=null) { //인자값들이 있으면 반복해서 출력 
 			for(Object arg: args) {
-				log.info("파라미터값 ==> "+arg.toString());
+				//log.info("arg==>"+arg);
+				if(arg!=null) {
+					log.info("파라미터값 ==> "+arg.toString());
+				}
+				
 			}
 		}
 	}
@@ -96,10 +100,14 @@ public class UserBehaviorLogging {
 		String param =""; //파라미터 저장
 		Map<String,Object> parameter = new HashMap<>(); // 파라미터 저장할 커넥션
 		Object[] args=jp.getArgs();
+		log.info("args toString====>"+args.toString());
+		log.info("args length====>"+args.length);
 		if(args!=null) { //인자값들이 있으면 반복해서 출력 
 			for(Object arg: args) {
-				
+				log.info("arg==>"+arg);
+				if(arg!=null) {
 				param += arg.toString();
+				}
 			}
 		}
 		try {

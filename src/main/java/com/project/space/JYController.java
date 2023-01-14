@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.MessageDTO;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.SmsResponseDTO;
@@ -63,7 +67,13 @@ public class JYController {
 		
 		ses.setAttribute("snum", snum);  //세션에 snum 저장
 		
-		Space_InfoVO svo=this.spaceinfoService.selectBySnum(1);
+		Space_InfoVO svo=this.spaceinfoService.selectBySnum(snum);
+		
+		Date nowTime=new Date();
+		SimpleDateFormat sf=new SimpleDateFormat("yyyyMMdd");
+		String now=sf.format(nowTime);
+		log.info("now: "+now);
+		m.addAttribute("now", now);
 		
 		log.info(svo+"<<<<공간번호");
 		m.addAttribute("svo",svo);
@@ -131,7 +141,12 @@ public class JYController {
 		List<Schedule> dateList=new ArrayList<>();
 		
 		//스케줄
-		sch.setSnum(1);
+
+		HttpSession ses=req.getSession();
+		Space_InfoVO svo=(Space_InfoVO)ses.getAttribute("svo"); //세션에 저장된 공간 넘버
+		log.info("svo: "+svo);
+		sch.setSnum(svo.getSnum());
+
 		List<ReservationVO> sch_list=reservationService.CalbookingInfo(sch);
 
 		ReservationVO[][] schedule_data_arr=new ReservationVO[32][4];
@@ -209,8 +224,11 @@ public class JYController {
 		rvo.setTimePrice(rvo.getTotalTime(), Integer.parseInt(pay.get("rtbcost"))); //시간당금액
 		rvo.setTotalPrice(rvo.getCountPrice(), rvo.getTimePrice()); //총 예약금액
 		
+//		Mem_InfoVO pointM=this.meminfoService.getUser(pay.get("rtuser"));
+				
 		ModelMap m=new ModelMap();
 		m.addAttribute("result", rvo);
+//		m.addAttribute("pointM", pointM);
 		return m;
 	}
 	
@@ -222,10 +240,9 @@ public class JYController {
 		log.info("message: "+messageDto);
 		messageDto.setContent(rtvo.getUserid()+"님 예약이 완료되었습니다");
 		
-		
 		int res=this.reservationService.insertBooking(rtvo);
 		String str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
-		String loc=(res>0)? "/space/":"/space/Reservation";
+		String loc=(res>0)? "/space/user/MyReservation":"/space/user/pointAdd";
 		
 		if(res>0) {
 			//SmsResponseDTO response = smsService.sendSms(messageDto);
@@ -236,17 +253,57 @@ public class JYController {
 		return "msg";
 	}
 	
-	@GetMapping(value="/pointAdd")
-	public String pointAdd(Model m, HttpSession ses) {
-		Mem_InfoVO mvo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 로그인 정보
-		String mvoId=mvo.getUserid();  //로그인된 유저 꺼내오기
+
+	@RequestMapping(value = "/user/MyReservation", method = RequestMethod.GET)
+	public String myreservation(Model m, HttpServletRequest req) {
+		log.info("connected myreservation.");
 		
-		Mem_InfoVO mivo=this.meminfoService.getUser(mvoId);
+		HttpSession ses=req.getSession();
+		Mem_InfoVO rvo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 유저 아이디 정보
+		log.info("rvo: "+rvo);
+		List<mem_space_res_view> resArr=this.reservationService.BookingView(rvo.getUserid());
 		
-		m.addAttribute("mivo", mivo);
-		return "ajax/Reservation/pointAdd";
+		Date nowTime=new Date();
+		SimpleDateFormat sf=new SimpleDateFormat("yyyyMMdd");
+		String now=sf.format(nowTime);
+		log.info("now: "+now);
+		
+		m.addAttribute("resArr", resArr);
+		m.addAttribute("now", now);
+		
+		return "ajax/Pages/MyReservation";
 	}
 	
+	@GetMapping("/user/DelReservation")
+	public String DelResModal(Model m, @RequestParam(defaultValue="0") int rtnum) {
+		log.info("rtnum=="+rtnum);
+
+		ReservationVO drvo=this.reservationService.getBooking(rtnum);
+		Space_InfoVO sivo=this.spaceinfoService.selectBySnum(drvo.getSnum());
+		m.addAttribute("drvo", drvo);
+		m.addAttribute("sivo", sivo);
+		return "ajax/Reservation/DelReservation";
+	}
 	
+	@PostMapping(value="/DelR")
+	public String DeleteReservation(Model m, @ModelAttribute DelRes dr, @ModelAttribute("messageDto") MessageDTO messageDto) 
+			throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, 
+			UnsupportedEncodingException, HttpClientErrorException {
+		log.info("dr delete=="+dr);
+		log.info("message: "+messageDto);
+		messageDto.setContent(dr.getUserid()+"님 예약이 취소되었습니다");
+		
+		int res=this.reservationService.deleteBooking(dr);
+		String str=(res>0)? "예약이 취소되었습니다":"예약 취소 실패";
+		String loc=(res>0)? "/space/user/MyReservation":"/space/user/MyReservation";
+		
+		if(res>0) {
+			//SmsResponseDTO response = smsService.sendSms(messageDto);
+		}
+		
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+	}
 	
 }

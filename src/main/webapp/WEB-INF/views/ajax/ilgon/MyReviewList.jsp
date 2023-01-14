@@ -3,11 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:import url="/Spacetop" charEncoding="utf-8" />
-        <style>
+<style>
 			.review_list{
 				width:100%;
-				background-color : var(--light);
-				border : 1px solid black;
+				background-color : #fdf5e6;
+				border : 1px solid #faf0e6;
 				margin-bottom : 20px;
 			}
 			.myreview_wrap{
@@ -51,136 +51,115 @@
 				width:70%;
 			}
 			
-		</style>
-		<h1 class="text-center"> 나의 리뷰내역</h1>
-        <div class="myreview_wrap mt-5">
+.star-ratings {
+  color: #aaa9a9; 
+  position: relative;
+  unicode-bidi: bidi-override;
+  width: max-content;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: #ff4500;
+}
+ 
+.star-ratings-fill {
+  color: #fff58c;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: #ff4500;
+}
+ 
+.star-ratings-base {
+  z-index: 0;
+  padding: 0;
+}			
+.review_img_cover{
+	float:left;
+}
+.review_img{
+	width:200px;
+	height:200px;
+}
+</style>
+		
+<h1 class="text-center"> 나의 리뷰내역</h1>
+	<div class="myreview_wrap mt-5">
         	<!-- 리뷰내역 필요리스트 (로그인한 회원번호로 select) 사진 장소이름 장소주소 별점 리뷰제목 리뷰내용 리뷰 답변 -->
         		<!-- 내가등록한 리뷰들 반복출력 forEach start -->
-        		<div class="review_list">
-        			<button class="review_delbtn btn btn-danger" onclick="del_review('리뷰번호')">삭제</button>
-        			<div class="review-profile">
-        				<a href="#"><img class="review_img" src="img/menu-1.jpg"></img></a>
-        			
-	        			<div class="review review-star">O O O O O (해당공간리뷰개수)</div>
-	        			<div class="review review-time">2022-12-18 (글작성시간)</div>
-	        			
-	
-	        			<div class="review space-name">장소이름</div>
-	
-	        			<div class="review space-addr">장소주소</div>
-	
-	        			<div class="review review-title">예약날짜</div>
+		<c:if test="${reviewArr eq null or empty reviewArr}">
+			<div class="review_List">
+				<span><b>작성한 리뷰 내역이 없습니다.</b></span>
+			</div>
+		</c:if>
+      			
+		<c:if test="${reviewArr ne null or not empty reviewArr}">
+		<c:set var="w" value="0"/>
+		<c:forEach var="ra" items="${reviewArr}">
+		<c:set var="w" value="${ra.rscore*20}"/>
+		<div class="review_list">
+		<button class="review_delbtn btn btn-danger" onclick="del_review('${ra.review_num}')">삭제</button>
+			<div class="review-profile">
+				<div class="review review-time">${ra.review_date}</div>
+				
+				<div class="star-ratings">
+					<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
+						<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 					</div>
-        			<div class="review-content-wrap">
-	        			<p class="review-user">아이디</p>
-	        			<p class="review-content">
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			</p>
-        			</div>
+					<div class="star-ratings-base space-x-2 text-lg">
+						<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+					</div>
+				</div>
+				
+				<c:if test="${ra.rimage1 ne null or ra.rimage2 ne null}">
+					<div class="review_img_cover">
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage1})"></img>
+					</div>
+					<div class="review_img_cover">
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage2})"></img>
+					</div>
+				</c:if>
+				
+				<div class="review space-name"><a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a></div>
+				<div class="review review-title">예약날짜</div>
+			</div>
+			
+			<div class="review-content-wrap">
+				<p class="review-user">내가 쓴 리뷰</p>
+				<p class="review-content">
+					${ra.rcontent}
+				</p>
+			</div>
 
-        			<div class="review-reple-wrap">
-        				<p class="review-host">사장님</p>
-	        			<p class="review-reple">
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			</p>
-					</div>
-        		</div>
-        		<!-- foreach End -->
-        		<div class="review_list">
-        			<button class="review_delbtn btn btn-danger" onclick="del_review('리뷰번호')">삭제</button>
-        			<div class="review-profile">
-        				<a href="#"><img class="review_img" src="img/menu-1.jpg"></img></a>
-        			
-	        			<div class="review review-star">별 별 별 별 X (19)</div>
-	        			<div class="review review-time">2022-12-20 13:12 (글작성시간)</div>
-	        			
-	
-	        			<div class="review space-name">OOO 파티룸</div>
-	
-	        			<div class="review space-addr">부산광역시 강서구 녹산산단382로14번가길 10~29번지(송정동)<-제일긴주소</div>
-	
-	        			<div class="review review-title">2022-12-19 17:00~19:00</div>
-					</div>
-        			<div class="review-content-wrap">
-	        			<p class="review-user">아이디</p>
-	        			<p class="review-content">
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			</p>
-        			</div>
-
-        			<div class="review-reple-wrap">
-        				<p class="review-host">사장님</p>
-	        			<p class="review-reple">
-	        			사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글
-	        			사장님답변글사장님답변글사장님답변글사장님답변글사장님답변글
-	        			</p>
-					</div>
-        		</div>
-        		<div class="review_list">
-        			<button class="review_delbtn btn btn-danger" onclick="del_review('리뷰번호')">삭제</button>
-        			<div class="review-profile">
-        				<a href="#"><img class="review_img" src="img/menu-1.jpg"></img></a>
-        			
-	        			<div class="review review-star">O O O O O (해당공간리뷰개수)</div>
-	        			<div class="review review-time">2022-12-18 (글작성시간)</div>
-	        			
-	
-	        			<div class="review space-name">장소이름</div>
-	
-	        			<div class="review space-addr">장소주소</div>
-	
-	        			<div class="review review-title">예약날짜</div>
-					</div>
-        			<div class="review-content-wrap">
-	        			<p class="review-user">아이디</p>
-	        			<p class="review-content">
-	        			리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글리뷰후기글
-	        			리뷰후기글리뷰
-	        			</p>
-        			</div>
-
-<!--         			<div class="review-reple-wrap">
-        				<p class="review-host">사장님</p>
-	        			<p class="review-reple">
-	        			사장님답변글사장님답변글사장님답변글
-	        			</p>
-					</div> -->
-        		</div>
-        		<div class="review_list">
-        			<button class="review_delbtn btn btn-danger" onclick="del_review('리뷰번호')">삭제</button>
-        			<div class="review-profile">
-        				<a href="#"><img class="review_img" src="img/menu-1.jpg"></img></a>
-        			
-	        			<div class="review review-star">O O O O O (해당공간리뷰개수)</div>
-	        			<div class="review review-time">2022-12-18 (글작성시간)</div>
-	        			
-	
-	        			<div class="review space-name">장소이름</div>
-	
-	        			<div class="review space-addr">장소주소</div>
-	
-	        			<div class="review review-title">예약날짜</div>
-					</div>
-        			<div class="review-content-wrap">
-	        			<p class="review-user">아이디</p>
-	        			<p class="review-content">
-	        			리뷰후기글리뷰후기
-	        			</p>
-        			</div>
-
-        			<div class="review-reple-wrap">
-        				<p class="review-host">사장님</p>
-	        			<p class="review-reple">
-	        			사장님답변글
-	        			
-	        			</p>
-					</div>
-        		</div>
-        </div>
+			<div class="review-reple-wrap">
+				<p class="review-host">댓글</p>
+				<p class="review-reple">
+					${ra.rcontent}
+				</p>
+			</div>
+		</div>
+		</c:forEach>
+		</c:if>
+		<!-- 반복문 end -->
+	</div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />
+<script>
+$(function(){
+	ratingPercent();
+})
+function ratingToPercent() {
+	let rscore=$('.check_rscore').val();
+	alert(rscore);
+    const score = rscore * 20;
+    $('#star').css('width',score+"%")
+    return score;
+}
+
+function del_review(reviewNum){
+	//alert(reviewNum);
+	location.href="/space/user/MyReviewDelete?review_num="+reviewNum;
+}
+</script>

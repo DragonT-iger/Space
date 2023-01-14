@@ -5,7 +5,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 
-<c:import url="/Spacetop"/>
+<c:import url="/Spacetop" charEncoding="utf-8"/>
 
 <%-- <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
@@ -39,18 +39,7 @@
 		</div>
 		
 		<div class="spaceVisual">
-			<c:if test="${svo.simage1 ne null}">
-				<img src="파일경로/${svo.simage1}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage2 ne null}">
-				<img src="파일경로/${svo.simage2}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage3 ne null}">
-				<img src="파일경로/${svo.simage3}" class="img img-fluid">
-			</c:if>
-			<c:if test="${svo.simage4 ne null}">
-				<img src="파일경로/${svo.simage4}" class="img img-fluid">
-			</c:if>
+			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
 	</div>
 	<hr>
@@ -63,6 +52,7 @@
 			<span id="check_year2">${today_info.search_year}</span>년
 			<span id="check_month2">${today_info.search_month}</span>월
 			<span id="check_date2">${today_info.today}</span>일
+			<input id="check_now" type="hidden" value="${now}">
 			<!-- <span id="check_Time">오전</span>~ (
 			<span id="total_time">12</span>시간 ) -->
 		</div>
@@ -92,7 +82,7 @@
 					
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
-						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#loginModal">예약</button>
+						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#paymentModal">예약</button>
 					</div>
 				</form>
 			</div>
@@ -105,7 +95,7 @@
 	</div>
 </div>
 
-<c:import url="/Spacefoot"/>
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
 <!-- 플러그인 javascript 로딩 -->
 <script src="${pageContext.request.contextPath}/js_Reservation/jquery.timepicker.min.js"></script>
 <!-- 플러그인에서 제공해주는 css 로딩 -->
@@ -115,15 +105,14 @@
 <!-- 달력 css -->
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
 <!-- modal -->
-
 <%@include file="/WEB-INF/views/ajax/Reservation/ReservationPayment.jsp" %> 
 
 <script>
-$("#startTime").on("change", function() {
+/* $("#startTime").on("change", function() {
     let pickedTime = $("#startTime").val();
     $("#check_Time").text(
     `You picked this ${pickedTime} Date`);
-});
+}); */
 /* function payment(){
 	const rtyear3=$('#check_year2').html();
 	const rtmonth3=$('#check_month2').html();
@@ -154,6 +143,22 @@ $(function(){
 		const rtstarttime=$('#startTime').val();
 		const rtendtime=$('#endTime').val();
 		const rtcount=$('#btn_pm_count').val();
+		
+		var rtm;
+		var rtd;
+		if(rtmonth3<10){
+			rtm="0"+rtmonth3;
+		}
+		if(rtdate3<10){
+			rtd="0"+rtdate3;
+		}
+		var sum=rtyear3+rtm+rtd;
+		const rtnow=$('#check_now').val();
+		//alert(rtnow);
+		if(sum<=rtnow){
+			alert('예약할 수 없는 날짜입니다');
+			return false;
+		}
 		
 		//alert(rtspace+"/"+rtuser+"/"+rtbcost+"/"+rtecost+"/"+rtyear3+"/"
 		//	+rtmonth3+"/"+rtdate3+"/"+rtstart+"/"+rtend+"/"+rtcount)

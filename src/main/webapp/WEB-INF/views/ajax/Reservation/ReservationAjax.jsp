@@ -49,7 +49,7 @@
 							<tr>
 						</c:if>
 						<td class="today">
-							<div class="date" onclick="aa(${dList.year},${dList.month},${dList.date})">
+							<div class="todate" onclick="aa(${dList.year},${dList.month},${dList.date})">
 					</c:when>
 					<c:when test="${date_status.index%7==6}">
 						<td class="saturday">
