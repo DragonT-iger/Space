@@ -69,6 +69,12 @@ public class JYController {
 		
 		Space_InfoVO svo=this.spaceinfoService.selectBySnum(snum);
 		
+		Date nowTime=new Date();
+		SimpleDateFormat sf=new SimpleDateFormat("yyyyMMdd");
+		String now=sf.format(nowTime);
+		log.info("now: "+now);
+		m.addAttribute("now", now);
+		
 		log.info(svo+"<<<<공간번호");
 		m.addAttribute("svo",svo);
 		ses.setAttribute("svo", svo);

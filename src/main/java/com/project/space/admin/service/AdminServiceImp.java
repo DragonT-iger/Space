@@ -62,4 +62,28 @@ public class AdminServiceImp implements AdminService{
 		List<String> list = new ArrayList<>(local); //hashset을 리스트로변환
 		return list;
 	}
+
+	@Override
+	public List<AdminMemberHistoryVO> getUserHistory(String userid) {
+		// TODO Auto-generated method stub
+		return adminMapper.getUserHistory(userid);
+	}
+
+	@Override
+	public List<AdminMemberInquiryVO> todayJoinMember(String string) {
+		// TODO Auto-generated method stub
+		return adminMapper.todayJoinMember(string);
+	}
+
+	@Override
+	public List<AdminSpaceInquiryVO> todayInsertSpace(String string) {
+		// TODO Auto-generated method stub
+		return adminMapper.todayInsertSpace(string);
+	}
+
+	@Override
+	public List<AdminSpaceInquiryVO> todayPopSpace(String string) {
+		// TODO Auto-generated method stub
+		return adminMapper.todayPopSpace(string);
+	}
 }

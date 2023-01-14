@@ -70,6 +70,12 @@ div.date, div.sat, div.sun{
 	color: #ff4646;
 }
 
+.todate {
+	font-size: 30px;
+	text-align: center;
+	color: #008080;
+}
+
 .Body_Calendar .today {
 	border: 1px solid white;
 	height: 50px;

@@ -1,10 +1,12 @@
 package com.project.space;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.space.admin.service.AdminMemberHistoryVO;
 import com.project.space.admin.service.AdminMemberInquiryVO;
 import com.project.space.admin.service.AdminService;
 import com.project.space.admin.service.AdminSpaceInquiryVO;
@@ -51,6 +55,26 @@ public class AdminController {
 	
 		return "ajax/AdminPage/HostList";
 	}
+	//=============홈화면 ajax======================
+	@GetMapping("/getTodayData")
+	@ResponseBody
+	public Map<String,Object> getTodayData(){
+		LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd");
+        String nowDate = now.format(formatter);
+		log.info(nowDate);
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("todayJoinMem", adminservice.todayJoinMember(nowDate));
+		map.put("todayInsSpace", adminservice.todayInsertSpace(nowDate));
+		map.put("todayPopSpace", adminservice.todayPopSpace(nowDate));
+		log.info("todayJoinMember"+adminservice.todayJoinMember(nowDate));
+		log.info("todayInsertSpace"+adminservice.todayInsertSpace(nowDate));
+		log.info("todayPopSpace"+adminservice.todayPopSpace(nowDate));
+		
+		return map;
+	}
+	
 	
 	//===================유저 조회========================
 	@GetMapping("/userlistform")
@@ -68,7 +92,7 @@ public class AdminController {
 	}
 	@PostMapping(value="/searchUser" , produces = "application/json")
 	@ResponseBody
-	public List<AdminMemberInquiryVO> getSearchUser(@RequestBody Map<String,String> filter , HttpServletRequest req , Model m){
+	public List<AdminMemberInquiryVO> getSearchUser(@RequestBody Map<String,String> filter){
 		//log.info("test");
 		//log.info(filter.get("keyword"));
 		//log.info(filter.get("maxFmage"));
@@ -77,6 +101,26 @@ public class AdminController {
 		//log.info(memArr);
 		return memArr;
 	}
+	@GetMapping("/UserHistroyCheck")
+	@ResponseBody
+	public Map<String,Object> UserHistroyCheck(@RequestParam String userid){
+		Map<String,Object> map = new HashMap<>();
+		List<AdminMemberHistoryVO> historylist = adminservice.getUserHistory(userid);
+		int sumtotal =0;
+		for(int i =0; i<historylist.size();i++) {
+			sumtotal += Integer.parseInt(historylist.get(i).getSumtp());//총사용금액
+		}
+		log.info("sumtotal 총사용금액은??===>"+sumtotal);
+		map.put("historylist", historylist);
+		map.put("sumtotal", sumtotal);
+		return map;
+	}
+	
+	
+	
+	
+	
+	
 	//===============공간등록내역조회============================
 	@GetMapping("/spacelistform")
 	public String hostUpload(Model m) {
@@ -99,7 +143,7 @@ public class AdminController {
 	}
 	@PostMapping(value="/searchSpace" , produces = "application/json")
 	@ResponseBody
-	public List<AdminSpaceInquiryVO> getsearchSpace(@RequestBody Map<String,String> filter , HttpServletRequest req , Model m){
+	public List<AdminSpaceInquiryVO> getsearchSpace(@RequestBody Map<String,String> filter){
 		
 		List<AdminSpaceInquiryVO> spaceArr = adminservice.searchSpaceByFilter(filter);
 		log.info("memArr==>"+spaceArr);

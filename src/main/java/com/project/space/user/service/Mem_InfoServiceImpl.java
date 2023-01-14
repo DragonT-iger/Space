@@ -128,5 +128,13 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	public List<Mem_InfoVO> listBankcode() {
 		return memberMapper.listBankcode();
 	}
+	
+	@Override
+	   public int updateUserPoint(String userid, int parseInt) {
+	      Map<String, Object> map = new java.util.HashMap<String, Object>();
+	      map.put("userid", userid);
+	      map.put("point", parseInt);
+	      return memberMapper.updateUserPoint(map);
+	   }
 
 }

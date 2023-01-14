@@ -52,6 +52,7 @@
 			<span id="check_year2">${today_info.search_year}</span>년
 			<span id="check_month2">${today_info.search_month}</span>월
 			<span id="check_date2">${today_info.today}</span>일
+			<input id="check_now" type="hidden" value="${now}">
 			<!-- <span id="check_Time">오전</span>~ (
 			<span id="total_time">12</span>시간 ) -->
 		</div>
@@ -142,6 +143,22 @@ $(function(){
 		const rtstarttime=$('#startTime').val();
 		const rtendtime=$('#endTime').val();
 		const rtcount=$('#btn_pm_count').val();
+		
+		var rtm;
+		var rtd;
+		if(rtmonth3<10){
+			rtm="0"+rtmonth3;
+		}
+		if(rtdate3<10){
+			rtd="0"+rtdate3;
+		}
+		var sum=rtyear3+rtm+rtd;
+		const rtnow=$('#check_now').val();
+		//alert(rtnow);
+		if(sum<=rtnow){
+			alert('예약할 수 없는 날짜입니다');
+			return false;
+		}
 		
 		//alert(rtspace+"/"+rtuser+"/"+rtbcost+"/"+rtecost+"/"+rtyear3+"/"
 		//	+rtmonth3+"/"+rtdate3+"/"+rtstart+"/"+rtend+"/"+rtcount)

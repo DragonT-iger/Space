@@ -158,7 +158,7 @@
 				<th>예약횟수</th>
 			</tr>`
 			$.each(res,function(i,member){
-			str+=`<tr onclick="test('\${member.userid}')">
+			str+=`<tr onclick="userHistoryCheck('\${member.userid}')">
 					<td>\${member.mname}</td>
 					<td>\${member.nickname}</td>
 					<td>\${member.userid}</td>
@@ -181,8 +181,42 @@
 		//console.log(str);
 		$('#'+sel+'Setbtn').html(str);
 	}
-	const test = function(userid){
-		//alert("userid===>"+userid);
+	const userHistoryCheck = function(userid){
+		alert("userid===>"+userid);
+		let str ="";
+		$.ajax({
+			type:'get',
+			url:'UserHistroyCheck',
+			data:'userid='+userid,
+			dataType:'json',
+			success : function(res){
+				$('#UserHistoryModal').modal();
+				str +=`
+					<tr>
+						<th>공간명</th>
+						<th>해시태그</th>
+						<th>사용금액</th>
+						<th>예약횟수</th>
+					</tr>`
+				$.each(res.historylist,function(i,history){
+				str += `
+					<tr>
+						<td>\${history.sname}</td>
+						<td>\${history.h_name}</td>
+						<td>\${history.sumtp} 원</td>
+						<td>\${history.rcount} 회</td>
+					</tr>
+				`
+				})
+				$('#historyitem').html(str);
+				$('#SumTotalPrice').html("총사용금액은 = " + res.sumtotal + "원");
+			},
+			error : function(err){
+				alert(res);
+			}
+		});
+		
 	}
 </script>
+<%@include file="/WEB-INF/views/ajax/AdminPage/UserHistory.jsp" %> 
 <%@ include file="/WEB-INF/views/ajax/AdminPage/AdminPageFoot.jsp" %>

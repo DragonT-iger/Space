@@ -34,4 +34,6 @@ public interface Mem_InfoService {
 	List<Mem_InfoVO> listBankcode();
 	
 	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
+	
+	int updateUserPoint(String userid, int parseInt);
 }
