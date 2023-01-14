@@ -60,7 +60,7 @@
 				userid : userid
 			},
 			success : function(data) {
-				alert(JSON.stringify(data));
+				//alert(JSON.stringify(data));
 
 				
 				// h_code 값에 해당하는 option 요소 찾기

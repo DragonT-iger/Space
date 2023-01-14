@@ -211,6 +211,7 @@ nav ul li {
 			<div id="nav3">
 				<c:import url="/spaceDetail/reviewlist"/>
 			</div>
+			<div id="nav3_re"></div>
 		</section>
 		
 		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
@@ -219,6 +220,7 @@ nav ul li {
 			<div id="nav4">
 				<c:import url="/spaceDetail/qnalist"/>
 			</div>
+			<div id="nav4_re"></div>
 		</section>
 		
 		<hr>

@@ -25,19 +25,25 @@
 		예약수정
 		예약취소버튼 -->
 	<h1 class="text-center">나의 예약내역</h1>
-	<table class="table table-border"id="reservation_table">
-	
 		<c:if test="${resArr eq null or empty resArr}">
+			<table class="table table-border" id="reservation_table_none">
 			<tr>
 				<td><b>예약 내역이 없습니다.</b></td>
 			</tr>
+			</table>
 		</c:if>
 	
 		<c:if test="${resArr ne null or not empty resArr}">
 		<c:forEach var="resArr" items="${resArr}">
+		<table class="table table-border" id="reservation_table" style="border:1px solid #f5f5f5">
 		<tr>
+			<td>
+			<c:if test="${resArr.rtstartdate <= now}">
+				<a id="writeR" class="nav-link" href="#ReviewModal" data-toggle="modal" onclick="reviewWrite('${resArr.rtnum}')">리뷰쓰기</a>
+			</c:if>
+			</td>
 			<td style="color:red;">${resArr.rtnum}</td>
-			<td colspan="3" style="color:blue;">결제 시간: <fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
+			<td colspan="2" style="color:blue;"><fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
 		</tr>
 		<tr>
 			<td rowspan="5" style="width:100px;">
@@ -48,7 +54,7 @@
 				</c:if>
 				<c:if test="${resArr.simage1 ne null}">
 					<a href="/space/spaceDetail?snum=${resArr.snum}">
-						<img id="reservation_img" src="./resources/SpaceInfoImg/${resArr.simage1})" style="width:300px;height:200px"/>
+						<img id="reservation_img" src="../resources/SpaceInfoImg/${resArr.simage1})" style="width:300px;height:200px"/>
 					</a>
 				</c:if>
 			</td> <!-- rowspan 1 -->
@@ -79,41 +85,39 @@
 		</tr>
 		<tr>
 			<td colspan="1" style="font-weight:bold;">공간이름</td>
-			<td colspan="3">${resArr.sname}</td>
+			<td colspan="2">${resArr.sname}</td>
 		</tr>
 		<tr>
 			<td colspan="1" style="font-weight:bold;">대여공간 주소: ${resArr.spost}</td>
 			<td colspan="3">${resArr.saddr1} ${resArr.saddr2}</td>
 		</tr>
 		<tr>
-			<c:if test="${resArr.rtstartdate < now}">
-				<td colspan="1">
-					<button type="button" id="done" class="btn btn-danger">이용완료</button>
-					
-				</td>
-				<td colspan="3">
-					<a id="writeR" class="nav-link" href="#ReviewModal" data-toggle="modal" onclick="reviewWrite('${resArr.rtnum}')">리뷰쓰기</a>
+			<c:if test="${resArr.rtstartdate <= now}">
+				<td colspan="4">
+				<button type="button" id="done" class="btn btn-danger" onclick="done()">이용완료</button>
 				</td>
 			</c:if>
 			
 			<c:if test="${resArr.rtstartdate > now}">
 				<td colspan="4">
-					<button type="button" id="cancel" class="btn btn-primary" onclick="DelReservation('${resArr.rtnum}')">예약취소</button>
+				<%-- <a id="DelR" class="nav-link" href="#DelRModal" data-toggle="modal" onclick="DelReservation('${resArr.rtnum}')">예약취소</a> --%>
+				<button type="button" id="cancel" class="btn btn-primary" onclick="DelReservation('${resArr.rtnum}')">예약취소</button>
 				</td>
 			</c:if>
 		</tr>
+		</table>
 		</c:forEach>
 		</c:if>
-	</table>
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />
 
 <%@include file="/WEB-INF/views/ajax/spaceDetail/ReviewWrite.jsp" %>
+<%@include file="/WEB-INF/views/ajax/Reservation/DelReservation.jsp" %>
 
 <script>
-$('#done').click(function(){
+function done(){
 	alert('이용이 완료된 예약으로 취소하실 수 없습니다');
-});
+};
 
 function reviewWrite(rtnum){
 	//alert(rtnum);
@@ -122,6 +126,9 @@ function reviewWrite(rtnum){
 }
 
 function DelReservation(rtnum){
-	alert(rtnum);
+	//alert(rtnum);
+	//$('#rtnum').val(rtnum);
+	location.href="/space/user/DelReservation?rtnum="+rtnum;
 }
+	
 </script>

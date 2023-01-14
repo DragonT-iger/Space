@@ -184,12 +184,12 @@
 	      
       const listPaging= function(pagingType){
     	  if(currentPage=="" || currentPage==null){
-    		  alert("값없음에 들어옴")
+    		  //alert("값없음에 들어옴")
     		  currentPage = 1;
     	  }
-    	  alert("해시태그 확인==>"+HashTag);
+    	  //alert("해시태그 확인==>"+HashTag);
     	  keyword=$('#keyword').val();
-    	  alert(keyword);
+    	  //alert(keyword);
     	  $.ajax({
 			type:'get',
 			url:'home',
@@ -204,8 +204,8 @@
     	  cache:false,
     	  success :function (res){
     		  currentPage = res.currentPage;
-    		  alert(currentPage);
-    		  alert(res.spaceArr);
+    		  //alert(currentPage);
+    		  //alert(res.spaceArr);
     		  if(res.spaceArr==""||res.spaceArr==null){ //res값이 없을시
     			  alert("검색결과가 없습니다.");
     		  }else{
@@ -245,7 +245,7 @@
 	    	  cache:false,
 	    	  success :function (res){
 	    		  
-	    		  alert(JSON.stringify(res));
+	    		  //alert(JSON.stringify(res));
 					showSpace(res);
 	    	  },
 	    	  error: function (err){

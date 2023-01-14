@@ -116,17 +116,29 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qnadelete")
-	public int qnaDelete(Model m, HttpServletRequest req, 
+	public String qnaDelete(Model m, HttpServletRequest req, 
 			@RequestParam(defaultValue="0") int qnum, @RequestParam(defaultValue="") String qpwd) {
 		log.info("num: "+qnum+", passwd: "+qpwd);
 		
 		if(qnum==0 || qpwd.isEmpty()) {
-			return 0;
+			return "";
+		}
+		//해당글을 db에서 가져오기
+		Qna_BoardVO vo=this.qnaService.getQna(qnum);
+		if(vo==null) {
+			return util.addMsgBack(m, "존재하지 않는 글입니다");
+		}
+		//비밀번호 일치여부 체크
+		String dbPwd=vo.getQpwd();
+		if(!dbPwd.equals(qpwd)) {  //일치하지 않는다면
+			return util.addMsgBack(m, "비밀번호가 일치하지 않습니다");
 		}
 		//db에서 글 삭제 처리
 		int n=this.qnaService.deleteQna(qnum);
 		
-		return n;
+		String str=(n>0)? "삭제 성공":"삭제 실패";
+		String loc=(n>0)? "javascript:history.back()":"javascript:history.back()";
+		return util.addMsgLoc(m, str, loc);
 	}
 	
 	@PostMapping("/qnaedit")

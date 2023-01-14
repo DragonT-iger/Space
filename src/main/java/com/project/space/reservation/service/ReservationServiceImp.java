@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.mapper.ReservationMapper;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
@@ -72,9 +73,14 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public int deleteBooking(int snum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteBooking(DelRes dr) {
+		int res=reservationMapper.deleteBooking(dr);
+		if(res>0) {
+			int n=reservationMapper.updateUserPoint(dr);
+			return n;
+		}else {
+			return 0;
+		}
 	}
 
 	@Override

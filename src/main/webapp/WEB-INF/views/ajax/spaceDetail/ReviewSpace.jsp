@@ -32,7 +32,7 @@
   padding: 0;
 }			
 
-.sizes{
+.sizes,.leftr{
 	font-size:1px;
 }
 .reviewList{
@@ -73,8 +73,8 @@
 			
 				<table class="box">
 					<tr>
-						<td class="sizes">${review.review_num}</td>
-						<td>
+						<td class="sizes" colspan="3">${review.review_num}</td>
+						<td colspan="3">
 						<c:if test="${sdvo.userid eq loginUser.userid}">
 							<c:if test="${review.rgorder<1}">
 								<span class="leftr" onclick="review_rewrite()">답변 작성하기</span>
@@ -84,12 +84,8 @@
 					</tr>
 					
 					<tr>
-						<td colspan="2" class="sizes">${review.review_date}</td>
-					</tr>
-					
-					<tr>
-						<td>${review.userid}</td>
-						<td>
+						<td colspan="2">${review.userid}</td>
+						<td colspan="2">
 							<div class="star-ratings">
 								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -99,14 +95,26 @@
 								</div>
 							</div>
 						</td>
+						<td colspan="2" class="sizes">${review.review_date}</td>
+					</tr>
+					
+					<c:if test="${review.rimage1 ne null or review.rimage2 ne null}">
+					<tr>
+						<td rowspan="5" colspan="3">
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage1})"></img>
+						</td>
+						<td rowspan="5" colspan="3">
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage2})"></img>
+						</td>
+					</tr>
+					</c:if>
+
+					<tr>
+						<td colspan="6">${review.rtitle}</td>
 					</tr>
 					
 					<tr>
-						<td>${review.rtitle}</td>
-					</tr>
-					
-					<tr>
-						<td>${review.rcontent}</td>
+						<td colspan="6">${review.rcontent}</td>
 					</tr>
 				</table>
 			</li>
@@ -151,8 +159,8 @@ const review_rewrite=function(qnum){
 		data:qnum,
 		cache:false,
 		success:function(res){
-			$('#s_qna').html("");
-			$('#s_qna').html(res);
+			$('#nav3_re').html("");
+			$('#nav3_re').html(res);
 			$('#qnum').val(qnum);
 		},
 		error:function(err){

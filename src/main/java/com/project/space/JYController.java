@@ -34,6 +34,7 @@ import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.MessageDTO;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.SmsResponseDTO;
@@ -53,6 +54,9 @@ public class JYController {
 	
 	@Inject
 	private ReservationService reservationService;
+	
+	@Inject
+	private Mem_InfoService meminfoService;
 	
 	@Inject
 	private SmsService smsService;
@@ -214,8 +218,11 @@ public class JYController {
 		rvo.setTimePrice(rvo.getTotalTime(), Integer.parseInt(pay.get("rtbcost"))); //시간당금액
 		rvo.setTotalPrice(rvo.getCountPrice(), rvo.getTimePrice()); //총 예약금액
 		
+//		Mem_InfoVO pointM=this.meminfoService.getUser(pay.get("rtuser"));
+				
 		ModelMap m=new ModelMap();
 		m.addAttribute("result", rvo);
+//		m.addAttribute("pointM", pointM);
 		return m;
 	}
 	
@@ -261,14 +268,36 @@ public class JYController {
 		return "ajax/Pages/MyReservation";
 	}
 	
-	@PostMapping("/user/DelReservation")
+	@GetMapping("/user/DelReservation")
 	public String DelResModal(Model m, @RequestParam(defaultValue="0") int rtnum) {
 		log.info("rtnum=="+rtnum);
 
 		ReservationVO drvo=this.reservationService.getBooking(rtnum);
+		Space_InfoVO sivo=this.spaceinfoService.selectBySnum(drvo.getSnum());
 		m.addAttribute("drvo", drvo);
+		m.addAttribute("sivo", sivo);
 		return "ajax/Reservation/DelReservation";
 	}
+	
+	@PostMapping(value="/DelR")
+	public String DeleteReservation(Model m, @ModelAttribute DelRes dr, @ModelAttribute("messageDto") MessageDTO messageDto) 
+			throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, 
+			UnsupportedEncodingException, HttpClientErrorException {
+		log.info("dr delete=="+dr);
+		log.info("message: "+messageDto);
+		messageDto.setContent(dr.getUserid()+"님 예약이 취소되었습니다");
 		
+		int res=this.reservationService.deleteBooking(dr);
+		String str=(res>0)? "예약이 취소되었습니다":"예약 취소 실패";
+		String loc=(res>0)? "/space/user/MyReservation":"/space/user/MyReservation";
+		
+		if(res>0) {
+			//SmsResponseDTO response = smsService.sendSms(messageDto);
+		}
+		
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+	}
 	
 }

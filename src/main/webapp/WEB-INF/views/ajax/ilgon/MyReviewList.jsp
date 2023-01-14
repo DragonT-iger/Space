@@ -77,6 +77,13 @@
   z-index: 0;
   padding: 0;
 }			
+.review_img_cover{
+	float:left;
+}
+.review_img{
+	width:200px;
+	height:200px;
+}
 </style>
 		
 <h1 class="text-center"> 나의 리뷰내역</h1>
@@ -108,9 +115,11 @@
 				</div>
 				
 				<c:if test="${ra.rimage1 ne null or ra.rimage2 ne null}">
-					<div class="review_img">
-					<img class="review_img" src="./resources/SpaceInfoImg/${ra.rimage1})"></img>
-					<img class="review_img" src="./resources/SpaceInfoImg/${ra.rimage2})"></img>
+					<div class="review_img_cover">
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage1})"></img>
+					</div>
+					<div class="review_img_cover">
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage2})"></img>
 					</div>
 				</c:if>
 				
@@ -147,5 +156,10 @@ function ratingToPercent() {
     const score = rscore * 20;
     $('#star').css('width',score+"%")
     return score;
+}
+
+function del_review(reviewNum){
+	//alert(reviewNum);
+	location.href="/space/user/MyReviewDelete?review_num="+reviewNum;
 }
 </script>

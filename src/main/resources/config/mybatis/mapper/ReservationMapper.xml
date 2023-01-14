@@ -35,4 +35,12 @@
 		select * from reservation where rtnum=#{value}
 	</select>
 	
+	<delete id="deleteBooking" parameterType="DR">
+		delete from reservation where rtnum=#{rtnum}
+	</delete>
+	
+	<update id="updateUserPoint" parameterType="DR">
+		update mem_info set point=(point+#{totalprice}) where userid=#{userid}
+	</update>
+	
 </mapper>

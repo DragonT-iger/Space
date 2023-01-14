@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.mem_space_res_view;
+import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 
 public interface ReservationService {
@@ -29,7 +30,7 @@ public interface ReservationService {
 	//일반유저가 본인의 예약 내역을 변경
 	int updateBookingEdit(int snum);
 	//일반유저가 본인의 예약 내용을 취소
-	int deleteBooking(int snum);
+	int deleteBooking(DelRes dr);
 	//예약 전체 취소
 	
 	

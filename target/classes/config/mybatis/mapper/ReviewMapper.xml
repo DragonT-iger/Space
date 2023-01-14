@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="getReviewUserid" parameterType="string" resultType="Review">
-		select * from review where userid=#{value}
+		select * from review where userid=#{value} order by review_date desc
 	</select>
 	
 	
