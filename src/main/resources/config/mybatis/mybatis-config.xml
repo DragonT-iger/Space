@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.project.space.admin.service.AdminMemberInquiryVO" alias="MemberInquiry"/>
 		<typeAlias type="com.project.space.admin.service.AdminSpaceInquiryVO" alias="SpaceInquiry"/>
 		<typeAlias type="com.project.space.reservation.DelRes" alias="DR"/>
+		<typeAlias type="com.project.space.admin.service.AdminMemberHistoryVO" alias="MemberHistory"/>
 		
 	</typeAliases>
 	<!-- mapper 정의 -->
