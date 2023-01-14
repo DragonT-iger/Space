@@ -228,4 +228,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 ]]>
 		</if>
 	</sql>
+	
+<select id="getUserHistory" parameterType="string" resultType="MemberHistory">
+select * from(
+	select h.userid,h.snum,h.sname,h.rcount,h.sumtp,h.h_code,h2.h_name from(
+	select r.userid,s.snum,s.sname,r.rcount,r.sumtp,h_code from (
+	select snum , userid,count(*) as rcount, sum(totalprice) as sumtp from reservation group by snum,userid) r 
+	left outer join 
+	(select snum,sname,h_code from space_info) s on r.snum=s.snum) h 
+	left outer join
+	(select h_code,h_name from hashtag) h2 on h.h_code = h2.h_code) where userid=#{value}
+</select>
+
+<select id="todayJoinMember" parameterType="string" resultType="MemberInquiry">
+	select * from mem_info where mdate like '%'||#{value}||'%'
+</select>
+
+<select id="todayInsertSpace" parameterType="string" resultType="SpaceInquiry">
+	select * from space_info where sdate like '%'||#{value}||'%'
+</select>
+
+<select id="todayPopSpace" parameterType="string" resultType="SpaceInquiry">
+	select * from(
+		select s.*, r.rcount , r.rdate from space_info s left outer join 
+			(select snum, TO_CHAR(rdate, 'yyyy/mm/dd') as rdate ,count(*) as rcount from reservation group by snum , TO_CHAR(rdate, 'yyyy/mm/dd'))
+			r on s.snum = r.snum) where rdate like '%'||#{value}||'%'
+</select>
 </mapper>
