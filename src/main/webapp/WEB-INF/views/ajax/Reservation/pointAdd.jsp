@@ -12,7 +12,12 @@
 			<div class="point_user">
 				<h1 class="havePoint">${mivo.mname}님의 현재 잔여 포인트</h1>
 				<h2 class="havePoint"><fmt:formatNumber value="${mivo.point}" pattern="###,###"/></h2>
-				<button class="btn-primary btn">충전하기</button>
+
+
+
+				<a href="../payments/pointAdd">
+					<button class="btn-primary btn">충전하기</button>
+				</a>
 			</div>
 		</div>
 
