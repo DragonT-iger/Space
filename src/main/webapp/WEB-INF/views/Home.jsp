@@ -99,16 +99,41 @@
 	font-weight: 470;
 	color: #333;
 }
+
+
+.community-page-area{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 30px;
+	
+	.community-page {
+		display: flex;
+		aling-items: center;
+		justify-content: center;
+		font-size: 16px;
+		width: 25px;
+		border: 3px solid gainsboro;
+		cursor: pointer;
+		
+	&.active{
+		font-weight: bold;
+		background-color: gainsboro;
+		color: white;
+	}
+	}
+}
 </style>
 
 
 
 <div class="tag"
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-		<c:forEach var="hashtag" items="${hashtag}">
-	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
-		style="width: 25%">
-	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
+	<c:forEach var="hashtag" items="${hashtag}">
+		<input type="hidden" id="hashTag" name="hashTag" value="on_off"
+			style="width: 25%">
+		<button class="btn btn-primary"
+			onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
 	</c:forEach>
 
 
@@ -127,7 +152,8 @@
 		<input type="text" id="keyword" name="keyword" value=""
 			style="width: 25%">
 		<button onclick="listPaging('search')">Search</button>
-		<button type="button" onclick="location.href='http://localhost:8080/space/'">초기화</button>
+		<button type="button"
+			onclick="location.href='http://localhost:8080/space/'">초기화</button>
 	</div>
 </div>
 
@@ -147,13 +173,24 @@
 	</div>
 	<div class="text-center">
 		<span><button class="btn btn-primary"
-				onclick="listPaging('prev')">이전</button></span> <span><button
+				onclick="listPaging('prev')">이전</button></span>
+				render(){
+					return(
+						<div class='community-page-area'>
+							{this.renderPage()}
+						</div>
+					)
+				}
+				<span><button
 				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
 	</div>
 </section>
 <a href="http://pf.kakao.com/_xnHWixj">카톡</a>
 <form>
 	<input type="hidden" id="currentPage" />
+	<div>
+		<ul class="" id="pages"></ul>
+	</div>
 </form>
 
 
@@ -222,12 +259,99 @@
 	      const target="";//target 직전에 눌린 해시태그의 primary key
 	    
 	      
-	     
-	    		 
-	    	
+/* 	      const pageGroup = 1
+	      const pageCount = 8
+	      const totalPage = 13
+
+	      let lastNumber = pageGroup * pageCount // 8
+	      if (lastNumber > totalPage) {
+	        lastNumber = totalPage
+	      }
+	      let firstNumber = lastNumber - (pageCount - 1) // 1
+
+	      const next = lastNumber + 1 // 9
+	      const prev = firstNumber - 1 // 0
+
+	      // 1~5만큼 페이지네이션 그려줌
+	      for (let i = firstNumber; i <= lastNumber; i++) {
+	        html += `<button class="pageNumber" id="page_${i}">${i}</button>
+	      }
+	    	 */
 	    
 	      
-	 
+/* 	    	 function paging(totalData, currentPage){
+	    	 const dataPerPage=13;
+	    	 const pageCount=8;
+	    	 
+	    	 //console.log("curentPage : " + currentPage);
+	    	 //console.log("totalData : " + totalData);
+	    	 
+	    	 const totalPage = Math.ceil(totalData / dataPerPage); //총페이지 수
+	    	 const pageGroup = Math.ceil(currentPage / pageCount);// 페이지 그룹
+	    	 
+	    	 //console.log("pageGroup : "+pageGroup);
+	    	 //console.log("total : "+totalPage);
+	    	 
+	    	 let last =pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+	    	 if(last>totalPage)
+	    		 last = totalPage;
+	    	 let first = last - (pageCount -1); //화면에 보여질 첫번째 페이지 번호
+	 		 const next = last +1;
+	    	 const prev = first -1;
+	    	 
+	    	 //console.log("last : "+ last);
+	    	 //console .log("first : "+ first);
+	    	 
+	    	 if(total Page < 1){
+	    		first = last;
+	    		
+	    	 }
+	    	 const pages = ${"#showSpace"};
+	    	 pages.empty();
+	    	 if (first > ) 
+	    	 
+	   }*/
+	   
+	   
+	   
+	   const pageLength = Math.ceil(totalItem / itemPerPage)
+	   
+	   get Data =() =>{
+		   const {currentPage, itemPerPage, totalItem, DataList} =this.sta
+		   console.log(currentPage)
+		   axios.get('http://url?offset=${currentPage}&limit=${itemPerPage}')
+		   .then(response => {
+			   this.setState({
+				   DataList: response.data.list,
+				   totalItem: response.data.count
+			   })
+		   })
+		   .catch(error => {
+			   console.log(error)
+		   })
+	   }
+	 				
+	    	 
+	    	//총 페이지 수 랜더
+	    	
+	    	renderPage =() ->{
+	    		const {totlaItem, itemPerPage, currentPage}=this.state
+	    		const pageLength=Math.ceil(totalItem/ itemPerPage)
+	    		const pageNumbers = []
+	    		for (let i =0; i< pageLength; i++){
+	    			pageNumbers.push(i)
+	    		}
+	    		return pageNumbers.map(item => {
+	    			return(
+	    				<span>
+	    					className={`community-page ${(item === currentPage ? 'active' : '')}`}
+	    					onClick={()=>this.handlePageNumberClicked(item)}>
+	    					{item+1}
+	    				</span>
+	    			)
+	    		})
+	    		
+	    	}
 	 	     
 	      
 	    

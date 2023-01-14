@@ -31,23 +31,23 @@ public class PointController {
 	@Inject
 	private ReservationService reservationService;
 
-	@GetMapping(value="/user/pointAdd")
-	public String pointAdd(Model m, HttpSession ses) {
-		Mem_InfoVO mvo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 로그인 정보
-		String mvoId=mvo.getUserid();  //로그인된 유저 꺼내오기
-		log.info("들어온 회원 아이디: "+mvoId);
-		
-		Mem_InfoVO mivo=this.meminfoService.getUser(mvoId); //회원정보
-		List<PointVO> pvoArr=this.pointService.getPointUser(mvoId); //포인트 충전내역
-		List<ReservationVO> resArr=this.reservationService.userBookingInfo(mvoId); //예약한 공간정보(포인트 사용처)
-		int resPrice=this.reservationService.userBookingTotalprice(mvoId); //총 예약 포인트 합계
-		
-		m.addAttribute("mivo", mivo);
-		m.addAttribute("pvoArr", pvoArr);
-		m.addAttribute("resArr", resArr);
-		m.addAttribute("resPrice", resPrice);
-		return "ajax/Reservation/pointAdd";
-	}
+//	@GetMapping(value="/user/pointAdd")
+//	public String pointAdd(Model m, HttpSession ses) {
+//		Mem_InfoVO mvo=(Mem_InfoVO)ses.getAttribute("loginUser"); //�꽭�뀡�뿉 ���옣�맂 濡쒓렇�씤 �젙蹂�
+//		String mvoId=mvo.getUserid();  //濡쒓렇�씤�맂 �쑀�� 爰쇰궡�삤湲�
+//		log.info("�뱾�뼱�삩 �쉶�썝 �븘�씠�뵒: "+mvoId);
+//		
+//		Mem_InfoVO mivo=this.meminfoService.getUser(mvoId); //�쉶�썝�젙蹂�
+//		List<PointVO> pvoArr=this.pointService.getPointUser(mvoId); //�룷�씤�듃 異⑹쟾�궡�뿭
+//		List<ReservationVO> resArr=this.reservationService.userBookingInfo(mvoId); //�삁�빟�븳 怨듦컙�젙蹂�(�룷�씤�듃 �궗�슜泥�)
+//		int resPrice=this.reservationService.userBookingTotalprice(mvoId); //珥� �삁�빟 �룷�씤�듃 �빀怨�
+//		
+//		m.addAttribute("mivo", mivo);
+//		m.addAttribute("pvoArr", pvoArr);
+//		m.addAttribute("resArr", resArr);
+//		m.addAttribute("resPrice", resPrice);
+//		return "ajax/Reservation/pointAdd";
+//	}
 	
 	
 }

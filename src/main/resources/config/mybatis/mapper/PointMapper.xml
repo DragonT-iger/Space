@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.space.point.mapper.PointMapper">
 	
-	<select id="getPointUser" parameterType="string" resultType="Point">
-		select * from point where userid=#{value}
-	</select>
+<!-- 	<select id="getPointUser" parameterType="string" resultType="Point"> -->
+<!-- 		select * from point where userid=#{value} -->
+<!-- 	</select> -->
 	
 	
 </mapper>
