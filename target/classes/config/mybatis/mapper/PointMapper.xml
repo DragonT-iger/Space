@@ -6,6 +6,11 @@
 	<select id="getPointUser" parameterType="string" resultType="Point">
 		select * from point where userid=#{value}
 	</select>
-	
+
+	<insert id= "insertPoint" parameterType="Point">
+		insert into point (paynum, userid, pluspoint, paykind, paydate, paystatus)
+		values (point_seq.nextval, #{userid}, #{plusPoint}, #{paykind}, sysdate, #{paystatus})
+	</insert>
+
 	
 </mapper>
