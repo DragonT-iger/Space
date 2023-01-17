@@ -155,7 +155,7 @@ public class LoginController {
 		
 		 //회원정보수정
 		 @PostMapping("/user/updateUser")
-			public String updateUser(Model m, @ModelAttribute("user") Mem_InfoVO user) 
+			public String updateUser(Model m, @ModelAttribute("user") Mem_InfoVO user, HttpSession ses) 
 					throws NotUserException 
 		 	{
 			  
@@ -174,6 +174,10 @@ public class LoginController {
 				
 				int n=memberService.updateUser(user);
 				log.info(n);
+				if(n>0) {
+					Mem_InfoVO loginUser = memberService.getUser(user.getUserid());
+					ses.setAttribute("loginUser", loginUser);
+				}
 				String str=(n>0)?"회원정보 수정 완료":"수정 실패";
 				String loc=(n>0)?"../Login":"javascript:history.back()";
 				
