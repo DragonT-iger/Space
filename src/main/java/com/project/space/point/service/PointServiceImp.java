@@ -19,4 +19,12 @@ public class PointServiceImp implements PointService {
 		return this.pointMapper.getPointUser(mvoId);
 	}
 
+	@Override
+	public int insertPoint(PointVO pvo) {
+		return this.pointMapper.insertPoint(pvo);
+	}
+
+
+	
+
 }

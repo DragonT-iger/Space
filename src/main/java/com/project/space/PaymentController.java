@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PaymentVO;
+import com.project.space.domain.PointVO;
 import com.project.space.payment.service.PaymentService;
 import com.project.space.point.service.PointService;
 import com.project.space.spaceinfo.service.SpaceInfoService;
@@ -164,13 +165,26 @@ public class PaymentController {
 
         int i = paymentService.insertPayment(payment);
 
-        if(i > 0 && j > 0){
-            log.info("결제 성공및 db저장 완료");
-            return ResponseEntity.ok().build();
-        }else {
-            log.info("결제 성공및 db저장 실패");
-            return ResponseEntity.badRequest().build();
+
+        PointVO point = new PointVO();
+
+        point.setUserid(userid);
+        point.setPlusPoint(Integer.parseInt(amount));
+        point.setPaykind("Card");
+        point.setPaystatus(1);
+
+
+        int k = pointService.insertPoint(point);
+
+        if(i > 0 && j > 0 && k > 0){
+          log.info("결제 성공 및 db저장 성공");
+          return ResponseEntity.ok().build();
         }
+        else{
+          log.info("결제 성공 및 db저장 실패");
+          return ResponseEntity.badRequest().build();
+        }
+        
       } catch (Exception e) {
         log.info("결제 실패");
         e.printStackTrace();
