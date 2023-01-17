@@ -32,6 +32,7 @@
 
 <!-- Template Stylesheet -->
 
+<script src="${pageContext.request.contextPath}/js_Reservation/Change.js"></script>
 
 
 <!-- Font Awesome -->
@@ -59,7 +60,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="navbar-nav ms-auto py-0 pe-4">
-						
+						<a onclick="change()">Eng</a>
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
 							<c:if test="${loginUser.status ne null}">
@@ -83,6 +84,8 @@
                                 <%-- <a href="${myctx}/owner/MyReservationCheck" class="dropdown-item">MyReservationCheck</a> --%>
                                 <a href="${myctx}/owner/MySpaceInsert" class="dropdown-item">MySpaceInsert</a>
                                 <a href="${myctx}/owner/MySpaceList" class="dropdown-item">MySpaceList</a>
+                                <a href="${myctx}/owner/MyFeedback" class="dropdown-item">MyFeedback</a>
+                                <%-- <a href="${myctx}/user/pointAdd" class="dropdown-item">MyPoint</a> --%>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
                                 <a href="${myctx}/admin/AdminHome" class="dropdown-item">AdminPage</a>

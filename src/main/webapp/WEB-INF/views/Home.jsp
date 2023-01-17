@@ -101,9 +101,34 @@
 }
 </style>
 
+<!-- <script type="text/javascript">
+	function test(){
+		var stringHtml =document.body.innerHTML; //document.getElementById('changeLang').innerHTML;
+		alert(stringHtml);
+		
+		$.ajax({
+			type:'post',
+			url:'/space/space/changeLang',
+			data:{
+				html: stringHtml,
+			},
+			dataType:"html",
+			success : function(res){
+				$('body').html("");
+				$('body').html(res);
+			},
+			error: function(err){
+				alert("실패!"+err.status);
+			}
+		});
+		
+	}
+</script> -->
 
+<div id="changeL">
+<!-- <button onclick="test()">Eng</button> -->
 
-<div class="tag"
+<div class="tag" id="changeLang"
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
 		<c:forEach var="hashtag" items="${hashtag}">
 	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
@@ -111,14 +136,7 @@
 	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
 	</c:forEach>
 
-
-
-
-
 </div>
-
-
-
 
 
 
@@ -156,6 +174,7 @@
 	<input type="hidden" id="currentPage" />
 </form>
 
+</div>
 
 <script>
 	  //초기값 (전역변수) 세팅
@@ -221,14 +240,6 @@
 	      const flag = "";//flag 현재 해시태그가 놀려있는 여부
 	      const target="";//target 직전에 눌린 해시태그의 primary key
 	    
-	      
-	     
-	    		 
-	    	
-	    
-	      
-	 
-	 	     
 	      
 	    
 	      

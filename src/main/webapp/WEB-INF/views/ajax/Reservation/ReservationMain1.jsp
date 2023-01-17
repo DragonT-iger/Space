@@ -134,31 +134,54 @@ $(function(){
 		
 		const rtspace=$('#check_space').val();
 		const rtuser=$('#check_user').val();
+		if(rtuser==''){
+			alert('로그인 후 이용해주세요');
+			return false;
+		}
 		const rtbcost=$('#check_Bprice').val();
 		const rtecost=$('#check_Eprice').val();
 		const rtminn=$('#check_minn').val();
 		const rtyear3=$('#check_year2').html();
 		const rtmonth3=$('#check_month2').html();
 		const rtdate3=$('#check_date2').html();
-		const rtstarttime=$('#startTime').val();
-		const rtendtime=$('#endTime').val();
-		const rtcount=$('#btn_pm_count').val();
-		
+
 		var rtm;
 		var rtd;
 		if(rtmonth3<10){
 			rtm="0"+rtmonth3;
+		}else{
+			rtm=rtmonth3;
 		}
 		if(rtdate3<10){
 			rtd="0"+rtdate3;
+		}else{
+			rtd=rtdate3;
 		}
 		var sum=rtyear3+rtm+rtd;
 		const rtnow=$('#check_now').val();
-		//alert(rtnow);
 		if(sum<=rtnow){
 			alert('예약할 수 없는 날짜입니다');
 			return false;
 		}
+		
+		const rtstarttime=$('#startTime').val();
+		if(rtstarttime==''){
+			alert('대여 시작시간을 선택해주세요');
+			return false;
+		}
+		const rtendtime=$('#endTime').val();
+		if(rtendtime==''){
+			alert('대여 종료시간을 선택해주세요');
+			return false;
+		}
+		
+		const rs=parseInt(rtstarttime.substring(0,2));
+		const re=parseInt(rtendtime.substring(0,2));
+		if(rs>=re){
+			alert('대여 시간을 다시 확인해주세요');
+			return false;
+		}
+		const rtcount=$('#btn_pm_count').val();
 		
 		//alert(rtspace+"/"+rtuser+"/"+rtbcost+"/"+rtecost+"/"+rtyear3+"/"
 		//	+rtmonth3+"/"+rtdate3+"/"+rtstart+"/"+rtend+"/"+rtcount)

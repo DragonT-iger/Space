@@ -4,10 +4,9 @@
 <c:import url="/Spacetop" charEncoding="utf-8" />
 <div id="DelR">
 <form name="DelR" method="post" action="${pageContext.request.contextPath}/DelR">
-<input type="text" id="rtnum" name="rtnum" value="${drvo.rtnum}" class="form-control">
-<input type="text" id="totalprice" name="totalprice" value="${drvo.totalprice}" class="form-control">
-<input type="text" id="userid" name="userid" value="${loginUser.userid}" class="form-control">
-<input type="text" name="to" id="to" class="form-control"  value="${loginUser.hp}">
+<input type="hidden" id="rtnum" name="rtnum" value="${drvo.rtnum}" class="form-control">
+<input type="hidden" id="userid" name="userid" value="${loginUser.userid}" class="form-control">
+<input type="hidden" name="to" id="to" class="form-control"  value="${loginUser.hp}">
 <table>
 	<thead class="header">
 		<tr class="title">
@@ -38,27 +37,25 @@
 	
 		<tr class="body_two">
 			<td rowspan="5">취소 사유 선택</td>
-			<td>
-				<p><label><input type="checkbox" name="nb[]" value="01">단순변심</label></p>
-			</td>
+			<td><input type="radio" name="r_code" value="1" id="r1"><label for="1">단순변심</label></td>
 		</tr>
-		
+
 		<tr>
-			<td><p><label><input type="checkbox" name="nb[]" value="02">예약정보 변경(일정,연락처)/중복예약</label></p></td>
+			<td><input type="radio" name="r_code" value="2" id="r2"><label for="2">예약정보 변경(일정,연락처)/중복예약</label></td>
 		</tr>
 		<tr>
-			<td><p><label><input type="checkbox" name="nb[]" value="03">호스트 요청에 따른 이용불가</label></p></td>
+			<td><input type="radio" name="r_code" value="3" id="r3"><label for="3">호스트 요청에 따른 이용불가</label></td>
 		</tr>
 		<tr>
-			<td><p><label><input type="checkbox" name="nb[]" value="04">이용조건 불만</label></p></td>
+			<td><input type="radio" name="r_code" value="4" id="r4"><label for="5">이용조건 불만</label></td>
 		</tr>
 		<tr>
-			<td><p><label><input type="checkbox" name="nb[]" value="05">기타</label></p></td>
+			<td><input type="radio" name="r_code" value="5" id="r5"><label for="5">기타</label></td>
 		</tr>
 		
 		<tr>
 			<td>피드백</td>
-			<td><textarea cols="50" rows="5" placeholder="더 나은 space가 되도록 하겠습니다"></textarea></td>
+			<td><textarea name="etc" id="etc" class="form-control" cols="50" rows="5" placeholder="더 나은 space가 되도록 하겠습니다"></textarea></td>
 		</tr>
 	
 		<tr class="body_three">

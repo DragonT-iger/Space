@@ -1,15 +1,17 @@
 package com.project.space.reservation.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.space.domain.FeedbackVO;
+import com.project.space.domain.PointVO;
+import com.project.space.domain.ReasonVO;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.mem_space_res_view;
-import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 import com.project.space.reservation.mapper.ReservationMapper;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
@@ -51,13 +53,12 @@ public class ReservationServiceImp implements ReservationService {
 
 	@Override
 	public int insertBooking(ReservationVO rtvo) {
-		int m=reservationMapper.updateUserRes(rtvo);
-		if(m>0) {
-			int n=reservationMapper.insertBooking(rtvo);
-			return n;
-		}else {
-			return 0;
-		}
+		return this.reservationMapper.insertBooking(rtvo);
+	}
+	
+	@Override
+	public int updateUserRes(ReservationVO rtvo) {
+		return this.reservationMapper.updateUserRes(rtvo);
 	}
 
 	@Override
@@ -73,14 +74,8 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public int deleteBooking(DelRes dr) {
-		int res=reservationMapper.deleteBooking(dr);
-		if(res>0) {
-			int n=reservationMapper.updateUserPoint(dr);
-			return n;
-		}else {
-			return 0;
-		}
+	public int deleteBooking(int rtnum) {
+		return this.reservationMapper.deleteBooking(rtnum);
 	}
 
 	@Override
@@ -121,6 +116,56 @@ public class ReservationServiceImp implements ReservationService {
 	@Override
 	public ReservationVO getBooking(int rtnum) {
 		return this.reservationMapper.getBooking(rtnum);
+	}
+
+	@Override
+	public int insertFeedback(FeedbackVO fbvo) {
+		return this.reservationMapper.insertFeedback(fbvo);
+	}
+
+	@Override
+	public int updateUserPoint(FeedbackVO fbvo) {
+		return this.reservationMapper.updateUserPoint(fbvo);
+	}
+
+	@Override
+	public List<FeedbackVO> checkFeedback(String userid) {
+		return this.reservationMapper.checkFeedback(userid);
+	}
+
+	@Override
+	public List<ReasonVO> getReasonAll() {
+		return this.reservationMapper.getReasonAll();
+	}
+
+	@Override
+	public List<FeedbackVO> searchFeedbackByFilter(Map<String, String> filter) {
+		return this.reservationMapper.searchFeedbackByFilter(filter);
+	}
+
+	@Override
+	public List<ReservationVO> ReservationDateInfo(ReservationVO rvo) {
+		return this.reservationMapper.ReservationDateInfo(rvo);
+	}
+
+	@Override
+	public List<ReservationVO> CountbookingInfo(Schedule sch) {
+		return this.reservationMapper.CountbookingInfo(sch);
+	}
+
+	@Override
+	public int PlusSpacePoint(PointVO check) {
+		return this.reservationMapper.PlusSpacePoint(check);
+	}
+
+	@Override
+	public int MinusSpacePoint(PointVO check) {
+		return this.reservationMapper.MinusSpacePoint(check);
+	}
+
+	@Override
+	public List<ReservationVO> searchReservationByFilter(ReservationVO rvo) {
+		return this.reservationMapper.searchReservationByFilter(rvo);
 	}
 
 	

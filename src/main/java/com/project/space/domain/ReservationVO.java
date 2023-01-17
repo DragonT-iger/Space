@@ -83,5 +83,7 @@ public class ReservationVO {  //공간 예약하기
 		this.totalprice=CountPrice+TimePrice;
 	}
 	
-			
+	private String mname; /* 이름 */
+	private String hp; /* 연락처 */
+	private int rcount; 
 }

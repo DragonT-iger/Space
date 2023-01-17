@@ -112,7 +112,7 @@
 <c:import url="/Spacefoot" charEncoding="utf-8" />
 
 <%@include file="/WEB-INF/views/ajax/spaceDetail/ReviewWrite.jsp" %>
-<%@include file="/WEB-INF/views/ajax/Reservation/DelReservation.jsp" %>
+<%-- <%@include file="/WEB-INF/views/ajax/Reservation/DelReservation.jsp" %> --%>
 
 <script>
 function done(){

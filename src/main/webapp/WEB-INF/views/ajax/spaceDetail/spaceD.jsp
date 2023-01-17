@@ -127,17 +127,29 @@ nav ul li {
 	<div class="inner_space">
 		
 		<div class="space_title">
-		<div class="h_space">
-			<h6 class="loc_space">${sdvo.saddr1}</h6>
-			<h2 class="space_name">${sdvo.sname}</h2>
-			<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
-			
-			<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
+			<c:choose>
+			<c:when test="${sdvo.userid eq loginUser.userid}">
+				<div class="h_space">
+					<h1 class="spaceUserLogin">내가 등록한 공간 상세페이지</h1>
+					<h2 class="space_name">${sdvo.sname}</h2>
+				</div>
+				<a id="ReservationStatus" href="/space/ReservationStatus?snum=${sdvo.snum}">예약현황</a>
+			</c:when>
+			<c:otherwise>
+				<div class="h_space">
+					<h6 class="loc_space">${sdvo.saddr1}</h6>
+					<h2 class="space_name">${sdvo.sname}</h2>
+				<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
+				</div>
+				<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
+				<div>
+					<a id="kakao-link-btn" href="javascript:sendLink()">공유</a>
+					<a id="love_btn" onclick="love_btn(${sdvo.snum},'${loginUser.userid}')">찜</a>
+				</div>
+			</c:otherwise>
+			</c:choose>
 		</div>
-		<a id="kakao-link-btn" href="javascript:sendLink()">공유</a>
-		<a id="love_btn" onclick="love_btn(${sdvo.snum},'${loginUser.userid}')">찜</a>
-		</div>
-	
+		
 		<div>
 			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
