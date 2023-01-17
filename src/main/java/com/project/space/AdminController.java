@@ -2,6 +2,7 @@ package com.project.space;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.space.admin.service.AdminGraphDataVO;
 import com.project.space.admin.service.AdminMemberHistoryVO;
 import com.project.space.admin.service.AdminMemberInquiryVO;
 import com.project.space.admin.service.AdminService;
@@ -56,7 +58,7 @@ public class AdminController {
 		return "ajax/AdminPage/HostList";
 	}
 	//=============홈화면 ajax======================
-	@GetMapping("/getTodayData")
+	@GetMapping(value="/getTodayData", produces = "application/json")
 	@ResponseBody
 	public Map<String,Object> getTodayData(){
 		LocalDate now = LocalDate.now();
@@ -73,6 +75,42 @@ public class AdminController {
 		log.info("todayPopSpace"+adminservice.todayPopSpace(nowDate));
 		
 		return map;
+	}
+	
+	//날짜별 그래프에 필요한 데이터 받아오는 컨트롤러
+	@GetMapping(value="/databydate" , produces = "application/json")
+	@ResponseBody
+	public List<Object> databydate(){
+		List<Object> result = new ArrayList<>();
+		List<AdminGraphDataVO> map = adminservice.DatabyDate("");
+		log.info("DatabyDate==>"+map);
+		
+		for(int i =0;i<map.size();i++) {
+		Map<String,Object> elements = new HashMap<>();
+		String[] newDate = null;
+		try {
+			newDate = map.get(i).getMsearchdate().split("/");
+		}catch (NullPointerException e){
+			log.info("npe발생!!");
+			newDate = map.get(i).getRsearchdate().split("/");
+		}
+		log.info(newDate[0]+"/"+newDate[1]+"/"+newDate[2]);
+		elements.put("year", newDate[0]);
+		elements.put("month", newDate[1]);
+		elements.put("day", newDate[2]);
+		
+		String joincount = map.get(i).getJoincount();
+		elements.put("joincount", Integer.parseInt(joincount));
+		
+		String rescount = map.get(i).getRescount();
+		elements.put("rescount", Integer.parseInt(rescount));
+
+		
+		result.add(elements);
+		log.info("list add!!");
+		}
+		log.info(result);
+		return result;
 	}
 	
 	
@@ -101,7 +139,7 @@ public class AdminController {
 		//log.info(memArr);
 		return memArr;
 	}
-	@GetMapping("/UserHistroyCheck")
+	@GetMapping(value="/UserHistroyCheck" ,produces = "application/json")
 	@ResponseBody
 	public Map<String,Object> UserHistroyCheck(@RequestParam String userid){
 		Map<String,Object> map = new HashMap<>();
@@ -149,4 +187,5 @@ public class AdminController {
 		log.info("memArr==>"+spaceArr);
 		return spaceArr;
 	}
+	
 }

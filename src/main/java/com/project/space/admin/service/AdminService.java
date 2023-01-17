@@ -22,9 +22,11 @@ public interface AdminService {
 	
 	public List<AdminMemberHistoryVO> getUserHistory(String userid);
 
-	public List<AdminMemberInquiryVO> todayJoinMember(String string);
+	public List<AdminMemberInquiryVO> todayJoinMember(String date);
 	
-	public List<AdminSpaceInquiryVO> todayInsertSpace(String string);
+	public List<AdminSpaceInquiryVO> todayInsertSpace(String date);
 	
-	public List<AdminSpaceInquiryVO> todayPopSpace(String string);
+	public List<AdminSpaceInquiryVO> todayPopSpace(String date);
+	
+	public List<AdminGraphDataVO> DatabyDate(String date);
 }
