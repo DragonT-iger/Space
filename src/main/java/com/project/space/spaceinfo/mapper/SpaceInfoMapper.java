@@ -38,7 +38,7 @@ public interface SpaceInfoMapper {
 	public List<String> GetAllSpaceNameByUserid(String userid);
 	public Space_InfoVO selectByuseridSname(Map<String, String> map);
 	
-	public int selectSpaceLike(int snum);
+	public int selectSpaceLike(Heart_LikeVO hlvo);
 	public int insertSpaceLike(Heart_LikeVO hlvo);
 	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo);
 	public List<Space_Like> selectUserLikeSpace(String userid);

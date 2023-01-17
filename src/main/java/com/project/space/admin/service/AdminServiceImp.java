@@ -70,20 +70,26 @@ public class AdminServiceImp implements AdminService{
 	}
 
 	@Override
-	public List<AdminMemberInquiryVO> todayJoinMember(String string) {
+	public List<AdminMemberInquiryVO> todayJoinMember(String date) {
 		// TODO Auto-generated method stub
-		return adminMapper.todayJoinMember(string);
+		return adminMapper.todayJoinMember(date);
 	}
 
 	@Override
-	public List<AdminSpaceInquiryVO> todayInsertSpace(String string) {
+	public List<AdminSpaceInquiryVO> todayInsertSpace(String date) {
 		// TODO Auto-generated method stub
-		return adminMapper.todayInsertSpace(string);
+		return adminMapper.todayInsertSpace(date);
 	}
 
 	@Override
-	public List<AdminSpaceInquiryVO> todayPopSpace(String string) {
+	public List<AdminSpaceInquiryVO> todayPopSpace(String date) {
 		// TODO Auto-generated method stub
-		return adminMapper.todayPopSpace(string);
+		return adminMapper.todayPopSpace(date);
+	}
+
+	@Override
+	public List<AdminGraphDataVO> DatabyDate(String date) {
+		
+		return adminMapper.DatabyDate(date);
 	}
 }

@@ -1,11 +1,14 @@
 package com.project.space.reservation.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import com.project.space.domain.FeedbackVO;
+import com.project.space.domain.PointVO;
+import com.project.space.domain.ReasonVO;
 import com.project.space.domain.ReservationVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.mem_space_res_view;
-import com.project.space.reservation.DelRes;
 import com.project.space.reservation.Schedule;
 
 public interface ReservationMapper {
@@ -32,8 +35,8 @@ public interface ReservationMapper {
 	//일반유저가 본인의 예약 내역을 변경
 	int updateBookingEdit(int snum);
 	//일반유저가 본인의 예약 내용을 취소
-	int deleteBooking(DelRes dr);
-	int updateUserPoint(DelRes dr); //취소된 포인트만틈 유저포인트 올려주기
+	int deleteBooking(int rtnum);
+	int updateUserPoint(FeedbackVO fbvo); //취소된 포인트만틈 유저포인트 올려주기
 	//예약 전체 취소
 	
 	//홈화면에서 예약 일자,시간 검색 시 예약상태(가능)에 따른 예약가능 공간(뷰생성)
@@ -50,6 +53,23 @@ public interface ReservationMapper {
 
 	ReservationVO getBooking(int rtnum);
 
+	int insertFeedback(FeedbackVO fbvo);
+
+	List<FeedbackVO> checkFeedback(String userid);
+
+	List<ReasonVO> getReasonAll();
+
+	List<FeedbackVO> searchFeedbackByFilter(Map<String, String> filter);
+
+	List<ReservationVO> ReservationDateInfo(ReservationVO rvo);
+
+	List<ReservationVO> CountbookingInfo(Schedule sch); //공간등록유저화면
+
+	int PlusSpacePoint(PointVO check);
+
+	int MinusSpacePoint(PointVO check);
+
+	List<ReservationVO> searchReservationByFilter(ReservationVO rvo);
 	
 	
 	

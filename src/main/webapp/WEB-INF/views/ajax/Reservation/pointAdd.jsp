@@ -5,6 +5,15 @@
 
 <c:import url="/Spacetop" />
 
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script>
+    var IMP = window.IMP; // 생략 가능
+        IMP.init("imp74514601"); // 예: imp00000000
+</script>
+
 <div class="point_total">
 	<div class="container">
 		
@@ -12,12 +21,10 @@
 			<div class="point_user">
 				<h1 class="havePoint">${mivo.mname}님의 현재 잔여 포인트</h1>
 				<h2 class="havePoint"><fmt:formatNumber value="${mivo.point}" pattern="###,###"/></h2>
+				
 
-
-
-				<a href="../payments/pointAdd">
-					<button class="btn-primary btn">충전하기</button>
-				</a>
+				<input type="text" id="amount" placeholder="금액을 입력하세요">
+				<button onclick="requestPay()" class="btn-primary btn">충전하기</button>
 			</div>
 		</div>
 
@@ -103,3 +110,53 @@
 	float:left;
 }	
 </style>
+
+<script>
+    function requestPay() {
+
+        var amount = document.getElementById("amount").value;
+
+
+      // IMP.request_pay(param, callback) 결제창 호출
+      IMP.request_pay({ // param
+        
+
+        pg: "html5_inicis", // 상수
+        pay_method: "card", // 상수
+        merchant_uid: "${merchant_uid}",
+        name: "포인트 충전",  // space_info(sname)
+        amount: amount, //100원 미만은 결제 불가능 // model requestparam
+        buyer_email: "gildong@gmail.com", // 이메일이 없으므로 고정값을 넣거나 해야됨
+        buyer_name: "${mname}", // mname
+        buyer_tel: "${hp}", //hp
+        buyer_addr: "서울특별시 강남구 신사동", //addr 정보도 없음 --> 임의값
+        buyer_postcode: "01181" // 마찬가지로 정보 없음. --> 임의값
+          
+          
+          //즉 model에서 가져와야 하는 정보
+          //1. mearchant_uid , 2.sname, 3.param(amount), 4.mname, 5.hp
+          
+          
+          
+      }, function (rsp) { // callback
+        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+        // jQuery로 HTTP 요청
+        jQuery.ajax({
+            url: "../payments/complete", // 예: localhost:9090/payments/complete
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify({
+                imp_uid: rsp.imp_uid,
+                merchant_uid: rsp.merchant_uid,
+                amount: amount
+            })
+        }).done(function (data) {
+            alert("성공 (디버깅용)");
+            location.reload();
+        })
+        } else {
+            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+        }
+      });
+    }
+  </script>

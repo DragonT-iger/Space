@@ -33,6 +33,6 @@ public interface Mem_InfoMapper {
 	List<Mem_InfoVO> listBankcode();
 	
 	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
-	
-	int updateUserPoint(Map<String, Object> map);
+
+    int updateUserPoint(Map<String, Object> map);
 }

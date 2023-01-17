@@ -5,17 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.sound.sampled.Port.Info;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.interceptor.PapagoService;
 import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.service.SpaceInfoService;
@@ -34,6 +37,16 @@ public class HomeController {
 	
 	@Inject
 	SpaceInfoService spaceinfoservice;
+	
+	@RequestMapping("/changeLang")
+	@ResponseBody
+	public String changeLang(@RequestParam String html) {
+		log.info("변환 전 값========"+html);
+		PapagoService ps=new PapagoService();
+		String str=ps.getTransPages(html);
+		log.info("영어 변환========="+str);
+		return str;
+	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test1(Model model) {

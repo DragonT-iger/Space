@@ -18,6 +18,7 @@ public class AdminSpaceInquiryVO {
 	private String slat;
 	private String sdate;
 	private int h_code;  //해시태그 fk
+	private String h_name;
 	private String simage1;
 	private String simage2;
 	private String simage3;

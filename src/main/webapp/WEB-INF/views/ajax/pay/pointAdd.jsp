@@ -25,6 +25,7 @@ pageEncoding="UTF-8"%>
 <body>
     <input type="text" id="amount" placeholder="금액을 입력하세요">
     <button onclick="requestPay()">결제하기</button>
+    <p>${merchant_uid }</p>
 
   <script>
     function requestPay() {

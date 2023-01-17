@@ -8,4 +8,7 @@ public interface PointMapper {
 
 	List<PointVO> getPointUser(String mvoId);
 
+	int insertPoint(PointVO pvo);
+
 }
+
