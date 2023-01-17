@@ -6,6 +6,17 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
 
+
+
+<style>
+.wrap {
+	padding: 0px 100px 0px 100px;
+	
+}
+
+
+
+</style>
 <%-- <script>
 
 

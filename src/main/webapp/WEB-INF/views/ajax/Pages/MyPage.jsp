@@ -14,44 +14,48 @@
 		width:40%;
 		text-align:right;
 	}
+	
+	.table{
+	margin-right:1000px;
+	}
 </style>
 <div class="container text-center" id="mypage_wrap">
 	<h2 class="section-title ff-secondary text-center text-primary fw-normal">My Page</h2>
 	<table class="table table-borderless mt-5 mb-5" id="mypage_table">
 		<tr>
 			<td><h5>이름</h5></td>
-			<td><b>${loginUser.mname }</b></td>
+			<td class="table"><b>${loginUser.mname }</b></td>
 			<%-- ${loginUser.uname} --%>
 		</tr>
 		<tr>
 			<td><h5>닉네임</h5></td>
-			<td><b>${loginUser.nickname }</b></td>
+			<td class="table"><b>${loginUser.nickname }</b></td>
 			<%-- ${loginUser.userid} --%>
 		</tr>
 		<tr>
 			<td><h5>연락처</h5></td>
-			<td><b>${loginUser.hp }</b></td>
+			<td class="table"><b>${loginUser.hp }</b></td>
 			<%-- ${loginUser.hp} --%>
 		</tr>
 		<tr>
 			<td><h5>나의 회원상태</h5></td>
-			<td><b><c:out value="${loginUser.statusStr}"/></b></td>
+			<td class="table"><b><c:out value="${loginUser.statusStr}"/></b></td>
 			<%-- ${loginUser.status} --%>
 		</tr>
 		<tr>
 			<td><h5>가입일</h5></td>
-			<td><b><fmt:formatDate value="${loginUser.mdate}" pattern="yyyy-MM-dd" /></b></td>
+			<td class="table"><b><fmt:formatDate value="${loginUser.mdate}" pattern="yyyy-MM-dd" /></b></td>
 			
 			<%-- ${loginUser.wdate} --%>
 		</tr>
 		<tr>
 			<td><h5>나의 마일리지</h5></td>
-			<td><b>${loginUser.point }</b></td>
+			<td class="table"><b>${loginUser.point }</b></td>
 			<%-- ${loginUser.mileage} --%>
 		</tr>
 		<tr>
 			<td><h5>계좌정보</h5></td>
-			<td><b>${loginUser.bank_name}(${loginUser.bank_code}) ${loginUser.account }</b></td>
+			<td class="table"><b>${loginUser.bank_name}(${loginUser.bank_code}) ${loginUser.account }</b></td>
 			<%-- ${loginUser.account} --%>
 		</tr>
 	</table>

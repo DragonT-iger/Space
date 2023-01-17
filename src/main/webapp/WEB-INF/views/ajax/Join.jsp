@@ -41,7 +41,7 @@ body {
 
 .textForm {
 	border-bottom: 2px solid #adadad;
-	margin: 30px;
+	margin: 30px 30px 30px 350px;
 	padding: 10px 10px;
 }
 
@@ -67,8 +67,19 @@ body {
 .dropdown {
 	text-align: left;
 }
-p{
-	font-size:8px;
+
+p {
+	font-size: 8px;
+}
+
+.container1 {
+	margin: 0px 0px 0px 350px;
+	
+}
+
+.join {
+	margin: 30px 0px 0px 350px;
+
 }
 </style>
 <script>
@@ -151,11 +162,14 @@ p{
 								<c:forEach var="bank" items="${bankcode}">
 									<option value="${bank.bank_code}">${bank.bank_name}</option>
 								</c:forEach>
-							</select> <input name="account" type="text" class="account tf-input"
+							
+							</select>
+							<br>
+							<input name="account" type="text" class="account tf-input"
 								placeholder="ACCOUNT">
 
 						</div>
-
+							<br>		
 						<div id=sub>숫자만 입력해주세요</div>
 					</div>
 					<div class="textForm">
@@ -170,13 +184,13 @@ p{
 							<input type="hidden" id="status" name="status" value="" />
 						</div>
 					</div>
-					<div class="container">
-						<a data-toggle="modal" href="#myModal1">회원가입 약관</a> 
-						<input type="checkbox" name="agree1" id="agree1">동의
+					<div class="container1">
+						<a data-toggle="modal" href="#myModal1">회원가입 약관</a> <input
+							type="checkbox" name="agree1" id="agree1">동의
 					</div>
-					<div>
-						<a data-toggle="modal" href="#myModal2">개인정보 취급방침</a> 
-						<input type="checkbox" name="agree2" id="agree2">동의
+					<div class="container1">
+						<a data-toggle="modal" href="#myModal2">개인정보 취급방침</a> <input
+							type="checkbox" name="agree2" id="agree2">동의
 					</div>
 				</div>
 				<!-- The Modal1 -->
@@ -516,10 +530,10 @@ p{
 					</div>
 				</div>
 				<!-- [2] -->
-				
 
 
-				<div class="col-md-6">
+
+				<div class="join col-md-6">
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
 						<div class="row g-3">
 							<div class="col-12">

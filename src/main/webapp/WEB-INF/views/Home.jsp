@@ -8,10 +8,13 @@
 
 
 <style>
-.text {
-	text-align: center;
-	font-family: 'Heebo';
-}
+@import
+	url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 
 .flex-container {
 	display: flex;
@@ -39,9 +42,6 @@
 .margin50 {
 	margin: 10px;
 }
-
-@import
-	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .tag {
 	font-family: 'Lobster', cursive;
@@ -99,16 +99,65 @@
 	font-weight: 470;
 	color: #333;
 }
+
+.btn {
+	padding: 10 30px;
+	margin: 0 5px;
+	border-radius: 20px;
+}
+
+#keyword {
+	width: 25%;
+}
+
+#space-list {
+	width:100%;
+
+
+	
+}
+
+#space-item {
+	background-color: transparent;
+	width: 20%;
+	height: 100%;
+
+	
+}
+
+.img {
+	width: 100%;
+	height: 100%;
+	border-radius: 5%;
+
+	  
+}
+
+.text {
+	font-family: 'Oswald', sans-serif;
+	color: black;
+	font-weight:500;
+	text-align:center;
+}
+
+.kaka{
+width:50px;
+height:50px;
+
+margin:20px;
+}
+
 </style>
 
 
 
 <div class="tag"
 	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-		<c:forEach var="hashtag" items="${hashtag}">
-	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
-		style="width: 25%">
-	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
+	<c:forEach var="hashtag" items="${hashtag}">
+		<input type="hidden" id="hashTag" name="hashTag" value="on_off"
+			style="width: 25%">
+		<button class="btn btn-outline-primary"
+			onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
 	</c:forEach>
 
 
@@ -124,10 +173,10 @@
 
 <div class="search_wrap">
 	<div class="search_area text-center">
-		<input type="text" id="keyword" name="keyword" value=""
-			style="width: 25%">
-		<button onclick="listPaging('search')">Search</button>
-		<button type="button" onclick="location.href='http://localhost:9090/space/'">초기화</button>
+		<input type="text" id="keyword" name="keyword" value="">
+		<button class="btn btn-secondary" onclick="listPaging('search')">Search</button>
+		<button type="button" class="btn btn-secondary"
+			onclick="location.href='http://localhost:8080/space/'">초기화</button>
 	</div>
 </div>
 
@@ -139,7 +188,7 @@
 				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
 					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
 				</a>
-				<p class="text">${Space.sname}</p>
+				<p class="text" >${Space.sname}</p>
 				<p class="text">${Space.saddr1}</p>
 				<p class="text">${Space.saddr2}</p>
 			</div>
@@ -151,7 +200,8 @@
 				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
 	</div>
 </section>
-<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
+<a href="http://pf.kakao.com/_xnHWixj" target="-blank">
+<img class="kaka" src="https://blog.kakaocdn.net/dn/SrDTV/btrb8U2oU6B/KmR3YeMZVn4WZFZMN6QhX1/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EC%B1%84%EB%84%90%20%EB%A1%9C%EA%B3%A0%20%EB%9D%BC%EC%9A%B4%EB%93%9C.png?attach=1&knm=img.png"></a>
 <form>
 	<input type="hidden" id="currentPage" />
 </form>

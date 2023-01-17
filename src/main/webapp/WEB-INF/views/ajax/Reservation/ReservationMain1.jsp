@@ -7,6 +7,8 @@
 
 <c:import url="/Spacetop" charEncoding="utf-8"/>
 
+
+
 <%-- <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
@@ -26,7 +28,12 @@
  --%>
 
 <%-- <%@ include file="/WEB-INF/views/Spacetop.jsp" %> --%>
+<style>
+	.wrap{
+	padding: 0px 100px 0px 100px;
+	}
 
+</style>
 
 <div class="wrap">
 	<div class="bookingStep">
@@ -35,7 +42,12 @@
 		<div class="top_spaceTitle">
 			<a class="btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
 			<h2 class="spaceName"><a href="#" onclick="onSpaceClick()" class="title">${svo.sname}</a></h2>
-			<div>${svo.sname}의 /기본인원: ${svo.minn}/ 최대인원: ${svo.maxn}/ 기본비용: ${svo.bcost}/ 인원추가금: ${svo.ecost}</div>
+		<div>방이름: ${svo.sname}<br>
+			기본인원: ${svo.minn}<br>
+			최대인원: ${svo.maxn}<br>
+			기본비용: ${svo.bcost}<br>
+			인원추가금: ${svo.ecost}</div>
+		</div>
 		</div>
 		
 		<div class="spaceVisual">
@@ -106,6 +118,7 @@
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
 <!-- modal -->
 <%@include file="/WEB-INF/views/ajax/Reservation/ReservationPayment.jsp" %> 
+
 
 <script>
 /* $("#startTime").on("change", function() {
