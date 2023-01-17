@@ -65,11 +65,19 @@ public class PointController {
 		}
 
 		String numStr = String.format("%07d", num);     
+		log.info("numStr====>"+numStr);
 		
+		//랜덤한 3자리 문자를 만든다
+        String randomStr = "";
+        for(int i=0; i<3; i++){
+            int random = (int)(Math.random()*26+97);
+            randomStr += (char)random;
+        }
 
-		String merchant_uid = "ORD" +  new SimpleDateFormat("yyyyMMdd").format(new Date()) + "-" +  numStr;
+        String merchant_uid = randomStr +  new SimpleDateFormat("yyyyMMdd").format(new Date()) + "-" +  numStr;
 
 		
+		//
 		
 		Mem_InfoVO mem = meminfoService.getUser(userid);
 

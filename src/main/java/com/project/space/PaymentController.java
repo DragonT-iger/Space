@@ -222,38 +222,5 @@ public class PaymentController {
       }
     }
 
-    @GetMapping("pointAdd")
-    public String pointAdd(Model m, HttpSession session){
-        //즉 model에서 가져와야 하는 정보
-        //1. merchant_uid , 2.sname, 3.param(amount), 4.mname, 5.hp
-
-
-
-      //merchant_uid는 ORD + sysdate(yyyyMMdd)+ - + space_info(snum)+ - + payment_seq로 이루어짐
-      String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
-      
-      int num;
-      if(paymentService.getpaymentcount() == 0){
-        num = 1;
-      }else{
-        num = paymentService.getPaynum();
-      }
-
-      String numStr = String.format("%07d", num);     
-      
-
-      String merchant_uid = "ORD" +  new SimpleDateFormat("yyyyMMdd").format(new Date()) + "-" +  numStr;
-
-      
-      
-      Mem_InfoVO mem = mem_infoservice.getUser(userid);
-
-
-      m.addAttribute("mname", mem.getMname());
-      m.addAttribute("hp", mem.getHp());
-      m.addAttribute("merchant_uid", merchant_uid);
-
-      return "ajax/pay/pointAdd";
-    }
     
 }
