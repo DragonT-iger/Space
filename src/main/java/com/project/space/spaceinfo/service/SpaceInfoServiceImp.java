@@ -118,7 +118,7 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 
 	@Override
 	public int insertSpaceLike(Heart_LikeVO hlvo) {
-		int res=spaceinfoMapper.selectSpaceLike(hlvo.getSnum());
+		int res=spaceinfoMapper.selectSpaceLike(hlvo);
 		if(res>0) {
 			return 0;
 		}else {
