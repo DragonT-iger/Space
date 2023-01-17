@@ -72,17 +72,23 @@ p{
 }
 </style>
 <script>
-	$(function(){
+	window.onload= function(){
+		setTimeout(100);
 		if(${flag=='NAVER'}){
 			//alert(${flag});
 			$('#mf[action^="join"]').prop('action','Naverjoin');
 			$('#jointitle').html('SNS 연동 추가정보 입력!!');
-			$('#mname').val(${MemInfo.mname});
-			$('#userid').val(${MemInfo.userid});
-			$('#hp').val(${MemInfo.hp});
-			$('#birth').val(${MemInfo.birth});
+			$('#mname').val('${MemInfo.mname}');
+			$('#userid').val('${MemInfo.userid}');
+			$('#mpwd1').val('${MemInfo.mpwd}');
+			$('#mpwd').val('${MemInfo.mpwd}');
+			$('#hp').val('${MemInfo.hp}');
+			$('#birth').val('${MemInfo.birth}');
+			
+			//$('.sns-join').prop('class','hide');
+			$('.sns-join').css('display', 'none');
 		}
-	})
+	}
 </script>
 
 <div class="container-xxl py-5">
@@ -94,7 +100,7 @@ p{
 			<h1 id="jointitle" class="mb-5">Sign Up</h1>
 		</div>
 		<c:if test="${flag eq 'NAVER'}">
-			<form name="mf" action="Naverjoin" method="post">
+			<form id="mf" name="mf" action="Naverjoin" method="post">
 		</c:if>
 		<c:if test="${flag ne 'NAVER'}">
 			<form id="mf" name="mf" action="join" method="post">
@@ -106,40 +112,40 @@ p{
 			<div class="text-center">
 				<div class="row tf_wrap" id="">
 
-					<div class="textForm">
+					<div class="textForm sns-join">
 						<input id="mname" name="mname" type="text" class="name tf-input"
 							placeholder="NAME" value="">
 						<div id=sub>이름은 한글이름만 가능합니다</div>
 					</div>
 
 					<div class="textForm">
-						<input name="nickname" type="text" class="nickname tf-input"
+						<input id="nickname" name="nickname" type="text" class="nickname tf-input"
 							placeholder="NICKNAME">
 					</div>
-					<div class="textForm">
+					<div class="textForm sns-join">
 						<input id="userid" name="userid" type="text" class="id tf-input"
-							onkeyup="ajax_idcheck(this.value)" placeholder="ID">
+							onchange="ajax_idcheck(this.value)" placeholder="ID">
 						<div id="id_result" class="result"></div>
 						<div id=sub>아이디는 영문자로 시작하고 영문, 숫자_! 포함 4~8자리여야 해요</div>
 
 						<!-- <button type="button" onclick="ajax_idcheck()">아이디 중복 체크</button> -->
 					</div>
-					<div class="textForm">
-						<input name="mpwd1" type="password" class="pw tf-input"
+					<div class="textForm sns-join">
+						<input id="mpwd1" name="mpwd1" type="password" class="pw tf-input"
 							placeholder="PASSWORD">
 						<div id=sub>비밀번호는 영문자,숫자,!,. 로 4~8자리까지 가능해요</div>
 					</div>
-					<div class="textForm">
-						<input name="mpwd" type="password" class="pw tf-input"
+					<div class="textForm sns-join">
+						<input id="mpwd" name="mpwd" type="password" class="pw tf-input"
 							placeholder="PASSWORD CHECK">
 					</div>
-					<div class="textForm">
-						<input name="hp" type="text" class="cellphoneNo tf-input"
+					<div class="textForm sns-join">
+						<input id="hp" name="hp" type="text" class="cellphoneNo tf-input"
 							placeholder="TEL">
 						<div id=sub>010or011 숫자 7~8자리 ex)01012345678</div>
 					</div>
-					<div class="textForm">
-						<input name="birth" type="text" class="birth tf-input"
+					<div class="textForm sns-join">
+						<input id="birth" name="birth" type="text" class="birth tf-input"
 							placeholder="BIRTH DATE">
 						<div id=sub>생년월일을 8자리로 입력해주세요</div>
 					</div>
@@ -523,8 +529,13 @@ p{
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
 						<div class="row g-3">
 							<div class="col-12">
-								<button class="btn btn-primary w-40 py-2" type="button"
+								<c:if test="${flag eq 'NAVER'}">
+									<button class="btn btn-primary w-40 py-2">SNS Join</button>
+								</c:if>
+								<c:if test="${flag ne 'NAVER'}">
+									<button class="btn btn-primary w-40 py-2" type="button"
 									onclick="member_check()">Join</button>
+								</c:if>
 								<button class="btn btn-primary w-40 py-2" type="reset">Reset</button>
 								<a href="javascript:histroy.back()"
 									class="btn btn-primary w-40 py-2">Cancel</a>

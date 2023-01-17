@@ -54,7 +54,7 @@ public class SmsService {
 		 
 		 //헤더 세팅 
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setContentType(MediaType.APPLICATION_JSON);
+		 headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		 headers.set("x-ncp-apigw-timestamp", time.toString());
 		 headers.set("x-ncp-iam-access-key", this.accessKey);
 		 headers.set("x-ncp-apigw-signature-v2", makeSignature(time));
