@@ -1,9 +1,9 @@
 package com.space.app.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.project.space.admin.service.AdminGraphDataVO;
 import com.project.space.admin.service.AdminService;
 import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 import com.project.space.user.mapper.Mem_InfoMapper;
@@ -52,7 +53,7 @@ public class joinsecuTest {
 		Mem_InfoVO vo = new Mem_InfoVO();
 		vo.setUserid("admin");
 		vo.setMpwd(pwencoder.encode("admin"));
-		vo.setMname("이관리");
+		vo.setMname("관리자");
 		vo.setStatus(9);
 		vo.setNickname("admin");
 		vo.setHp("01000001234");
@@ -92,7 +93,7 @@ public class joinsecuTest {
 			smapper.SpaceInfoInsert(svo);
 		}
 		*/
-		
+		/*
 		List<String> spaceaddr = adminService.getSpaceAddr();
 		log.info("spaceaddr==>"+spaceaddr);
 		log.info(spaceaddr.size());
@@ -105,7 +106,39 @@ public class joinsecuTest {
 		}
 		List<String> list = new ArrayList<>(local); //hashset을 리스트로변환
 		log.info(list);
-		log.info(list.get(3));
+		log.info(list.get(3));*/
+		
+		
+		List<Object> result = new ArrayList<>();
+		List<AdminGraphDataVO> map = adminService.DatabyDate("");
+		log.info("DatabyDate==>"+map);
+		
+		for(int i =0;i<map.size();i++) {
+		Map<String,String> elements = new HashMap<>();
+		String[] newDate = null;
+		try {
+			newDate = map.get(i).getMsearchdate().split("/");
+		}catch (NullPointerException e){
+			log.info("npe발생!!");
+			newDate = map.get(i).getRsearchdate().split("/");
+		}
+		log.info(newDate[0]+"/"+newDate[1]+"/"+newDate[2]);
+		elements.put("year", newDate[0]);
+		elements.put("month", newDate[1]);
+		elements.put("day", newDate[2]);
+		
+		String joincount = map.get(i).getJoincount();
+		elements.put("joincount", joincount);
+		
+		String rescount = map.get(i).getRescount();
+		elements.put("rescount", rescount);
+
+		
+		result.add(elements);
+		log.info("list add!!");
+		}
+		log.info(result);
+		
 		/*
 		log.info(local.size());
 		Iterator<String> iter = local.iterator();

@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.project.space.domain.FeedbackVO" alias="Feedback"/>
 		<typeAlias type="com.project.space.domain.ReasonVO" alias="Reason"/>
 		<typeAlias type="com.project.space.admin.service.AdminMemberHistoryVO" alias="MemberHistory"/>
+		<typeAlias type="com.project.space.admin.service.AdminGraphDataVO" alias="GraphData"/>
 		
 	</typeAliases>
 	<!-- mapper 정의 -->
