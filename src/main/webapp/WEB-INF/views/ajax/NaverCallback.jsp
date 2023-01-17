@@ -17,10 +17,11 @@
 <body>
         <div>
         	<form id="fm" name="fm" action="NaverJoin" method="post">
-        		<input type="text" id="userid" name="userid" value="<c:out value='${result.id }'/>"/>
-        		<input type="text" id="hp" name="hp" value="<c:out value='${result.mobile.replace("010-","").replace("-","")}'/>"/>
-        		<input type="text" id="mname" name="mname" value="<c:out value='${result.name }'/>"/>
-        		<input type="text" id="birth" name="birth" value="<c:out value='${result.birthyear}${result.birthday.replace("-","")}'/>"/>
+        		<input type="hidden" id="userid" name="userid" value="<c:out value='${result.id }'/>"/>
+        		<input type="hidden" id="hp" name="hp" value="<c:out value='${result.mobile.replace("-","")}'/>"/>
+        		<input type="hidden" id="mname" name="mname" value="<c:out value='${result.name }'/>"/>
+        		<input type="hidden" id="mpwd" name="mpwd" value="naversnslogin"/>
+        		<input type="hidden" id="birth" name="birth" value="<c:out value='${result.birthyear}${result.birthday.replace("-","")}'/>"/>
         	</form>
         </div>
     <!-- JavaScript Libraries -->

@@ -122,14 +122,18 @@ public class GonTestCont {
 	public String naverDelete(HttpSession session) throws Exception{
 		OAuth2AccessToken ReadSessionToken = (OAuth2AccessToken) session.getAttribute("naver_oauthToken");
 		//log.info("NaverDelete // access_token ===>"+ReadSessionToken.getParameter("access_token"));
-		log.info(ReadSessionToken.getAccessToken());
+		//log.info(ReadSessionToken.getAccessToken());
+			
 		String deleteTokenUrl = naverLoginBO.NaverDeleteToken(ReadSessionToken.getAccessToken());
-		log.info("deleteTokenUrl====>"+deleteTokenUrl);
+		//log.info("deleteTokenUrl====>"+deleteTokenUrl);
 		URL obj = new URL(deleteTokenUrl); // 호출할 url
         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
         con.setRequestMethod("GET");
         con.connect();
 		log.info(con.getResponseCode());
+		
+		Mem_InfoVO user = (Mem_InfoVO) session.getAttribute("loginUser");
+		memberService.deleteUser(user);
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -141,7 +145,7 @@ public class GonTestCont {
 		return "redirect:Join";
 	}
 	@PostMapping("/Naverjoin")
-	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo ) {
+	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
 		log.info("join === user :"+vo);
 		if(vo.getMname()==null||vo.getUserid()==null||vo.getMpwd()==null||
 				vo.getMname().trim().isEmpty()||vo.getUserid().trim().isEmpty()
@@ -151,7 +155,11 @@ public class GonTestCont {
 		
 		int n=memberService.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
-		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
+		if(n<0) {
+			rttr.addFlashAttribute("MemInfo",vo);
+			rttr.addFlashAttribute("flag","NAVER");
+		}
+		String loc=(n>0)?"redirect:/":"redirect:Join";
 		
 		return loc;
 	}//----------------
