@@ -39,7 +39,7 @@ public class SpaceInfoController {
     private static final Logger logger = LoggerFactory.getLogger(SpaceInfoController.class);
     @PostMapping("/owner/spaceInsert")
     public String spaceInfo(Model m, HttpSession session ,@ModelAttribute Space_InfoVO vo, BindingResult br,@RequestParam("simage") List<MultipartFile> simage , HttpServletRequest req) throws IOException{        
-        logger.info("spaceInsert:sdfgsdfg"+vo);
+        logger.info("spaceInsert:"+vo);
         br.getFieldError();
 
 
@@ -47,7 +47,7 @@ public class SpaceInfoController {
         // 유효성 검사 (SNAME)
         if(vo.getSname()==null||vo.getSname().trim().isEmpty()) {
             logger.info("공간명 입력안함");
-            return "/owner/MySpaceInsert";
+            return "redirect:/owner/MySpaceInsert";
         }
 		ServletContext app=req.getServletContext();
 
@@ -60,24 +60,6 @@ public class SpaceInfoController {
 		if(!dir.exists()) {  //업로드 디렉토리 생성
 			dir.mkdirs();  //디렉토리가 여러 계층에 있는 경우 dirs
 		}
-
-        File image1 = new File(upDir + "/" + vo.getSimage1());
-        File image2 = new File(upDir + "/" + vo.getSimage2());
-        File image3 = new File(upDir + "/" + vo.getSimage3());
-        File image4 = new File(upDir + "/" + vo.getSimage4());
-
-        if(image1.exists()){
-            image1.delete();
-        }
-        if(image2.exists()){
-            image2.delete();
-        }
-        if(image3.exists()){
-            image3.delete();
-        }
-        if(image4.exists()){
-            image4.delete();
-        }
 
 		//2. 업로드 처리
 		if(simage!=null) {
@@ -107,7 +89,41 @@ public class SpaceInfoController {
         //session에서 id값 받아오기
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
         vo.setUserid(userid);
-            
+        vo.setScontents(vo.getScontents().replace("\r\n", "<br>"));
+        vo.setSrule(vo.getSrule().replace("\r\n", "<br>"));
+        //만약 simage1이 null이라면 기존에 있던 이미지를 그대로 유지
+
+        Space_InfoVO origin_svo = spaceinfoservice.selectByuseridSname(userid, vo.getSname());
+
+
+        try{
+            if(vo.getSimage1()==null) {
+                vo.setSimage1(origin_svo.getSimage1());
+            }
+        }catch(NullPointerException e) {
+            logger.info("simage1이 null이므로 기존 이미지 유지");
+        }
+        try{
+            if(vo.getSimage2()==null) {
+                vo.setSimage2(origin_svo.getSimage2());
+            }
+        }catch(NullPointerException e) {
+            logger.info("simage2이 null이므로 기존 이미지 유지");
+        }
+        try{
+            if(vo.getSimage3()==null) {
+                vo.setSimage3(origin_svo.getSimage3());
+            }
+        }catch(NullPointerException e) {
+            logger.info("simage3이 null이므로 기존 이미지 유지");
+        }
+        try{
+            if(vo.getSimage4()==null) {
+                vo.setSimage4(origin_svo.getSimage4());
+            }
+        }catch(NullPointerException e) {
+            logger.info("simage4이 null이므로 기존 이미지 유지");
+        }            
         
         logger.info("업로드 이후 product: "+vo);
         
@@ -119,11 +135,11 @@ public class SpaceInfoController {
             logger.info("기존 공간을 덮어 씁니다");
             int n = spaceinfoservice.SpaceInfoUpdate(vo);
             logger.info("공간등록 성공여부:"+n);
-            return "Home";
+            return "redirect:/owner/MySpaceList";
         }else {
             int n = spaceinfoservice.SpaceInfoInsert(vo);
             logger.info("공간등록 성공여부:"+n);
-            return "Home";
+            return "redirect:/owner/MySpaceList";
         }
         
     }
@@ -166,6 +182,9 @@ public class SpaceInfoController {
     public Space_InfoVO spaceInsertAjax(@RequestParam String userid, @RequestParam String sname) {
         logger.info("sname:"+sname);
         Space_InfoVO vo = spaceinfoservice.selectByuseridSname(userid, sname);
+
+        vo.setScontents(vo.getScontents().replace("<br>", "\r\n"));
+        vo.setSrule(vo.getSrule().replace("<br>", "\r\n"));
         return vo;
     }
 
@@ -187,7 +206,7 @@ public class SpaceInfoController {
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
         spaceinfoservice.deleteBySname(sname, userid);
 
-        return "Home";
+        return "redirect:/owner/MySpaceList";
     }
 
     @PostMapping("/owner/spaceinfodelete")
@@ -199,10 +218,10 @@ public class SpaceInfoController {
 
         if(i==1) {
             logger.info("공간 삭제 성공");
-            return "Home";
+            return "redirect:/owner/MySpaceList";
         }else {
             logger.info("공간 삭제 실패");
-            return "ajax/OwnerPage/MySpaceInsert";
+            return "redirect:/owner/MySpaceInsert";
         }
     }
     
