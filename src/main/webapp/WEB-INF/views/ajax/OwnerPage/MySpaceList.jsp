@@ -79,8 +79,7 @@
 	
 	        			<div class="myspace space-name">장소이름: ${spaceinfo.sname} </div>
 	
-	        			<div class="myspace space-addr">장소주소: ${spaceinfo.saddr1} <br>
-																 ${spaceinfo.saddr2} </div>
+	        			<div class="myspace space-addr">장소주소: ${spaceinfo.saddr1}  ${spaceinfo.saddr2} <br></div>
 
 						<div class="myspace space-addr">우편번호: ${spaceinfo.spost} </div>
 	

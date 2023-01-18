@@ -128,7 +128,4 @@ public class SpacedetailController {
 		String loc=(n>0)? "/space/user/MyZimm":"/space/user/MyZimm";
 		return util.addMsgLoc(m, str, loc);
 	}
-	
-	
-
 }
