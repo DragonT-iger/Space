@@ -1,6 +1,6 @@
 	function change(){
 		var stringHtml =document.body.innerHTML; //document.getElementById('changeLang').innerHTML;
-		//alert(stringHtml);
+		alert(stringHtml);
 		
 		$.ajax({
 			type:'post',
