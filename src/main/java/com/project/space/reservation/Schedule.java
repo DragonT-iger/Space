@@ -79,25 +79,8 @@ public class Schedule {
 	}
 	
 	private String YMD;  //db에 저장된 값과 맞춰주기
-
 	public String getYMD() {
-		String mm="";
-		String dd="";
-		if(!month.trim().equals("")) {
-			int m=Integer.parseInt(month);
-			mm=(m<10)?"0"+m:m+"";
-		}else {
-			mm=month+"";
-		}
-		
-		if(!date.trim().equals("")) {
-			int m=Integer.parseInt(date);
-			dd=(m<10)?"0"+m:m+"";
-		}else {
-			dd=date+"";
-		}
-		
-		this.YMD=year+mm+dd;
+		this.YMD=year+month+date;
 		return YMD;
 	}
 	

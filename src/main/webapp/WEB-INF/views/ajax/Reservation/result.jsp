@@ -23,10 +23,10 @@
     </thead>
     <tbody>
       <tr >
-        <td th:text="${response.requestId}">${response.requestId}</td>
-        <td th:text="${response.requestTime}">${response.requestTime}"</td>
-        <td th:text="${response.statusCode}">${response.statusCode}</td>
-        <td th:text="${response.statusName}">${response.statusName}</td>
+        <td th:text="${response.requestId}"></td>
+        <td th:text="${response.requestTime}"></td>
+        <td th:text="${response.statusCode}"></td>
+        <td th:text="${response.statusName}"></td>
       </tr>
     </tbody>
   </table>

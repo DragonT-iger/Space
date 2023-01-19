@@ -45,43 +45,87 @@
 			<div class="myzzim-wrap mt-5">
 				<div class="myzzim-list">
 					<!-- 반복문 start-->
-					<c:if test="${hlArr eq null or empty hlArr}">
-						<div>
-							<span><b>아직 찜한 공간이 없습니다.</b></span>
-						</div>
-					</c:if>
-					
-					<c:if test="${hlArr ne null or not empty hlArr}">
-					<c:forEach var="sl" items="${hlArr}">
 					<div class="myzzim-item">
-						<input type="hidden" value="${sl.hnum}"/>
-						<div class="myzzim-col myzzim-img">
-							<a href="/space/spaceDetail?snum=${sl.snum}">
-								<c:if test="${sl.simage1 eq null}">
-									<img class="space-info-img" src="../img/noSpaceImage.jpg"/>
-								</c:if>
-								<c:if test="${sl.simage1 ne null}">
-									<img class="space-info-img" src="../resources/SpaceInfoImg/${sl.simage1}"/>
-								</c:if>
-							</a>
-						</div>
+						<input type="hidden" value="장소번호"/>
+						<div class="myzzim-col myzzim-img"><a href="#"><img class="space-info-img" src="img/menu-1.jpg"/></a></div>
 						<ul class="myzzim-col myzzim-space-info">
-							<li><a>${sl.sname}</a></li>
-							<li>★★★★★</li>
-							<li>(후기개수)</li>
-							<!-- <li>찜개수</li> -->
+							<li><a>장소명</a></li>
+							<li>★★★★★(8 ->후기개수)</li>
+							<li>찜개수</li>
 						</ul>
 						<ul class="myzzim-col">
-							<li><fmt:formatDate value="${sl.hdate}" pattern="yyyy-MM-dd"/></li>
+							<li>찜한날짜</li>
 						</ul>
 						<ul class="myzzim-col">
-							<li><a href="/space/Reservation?snum=${sl.snum}">예약하기</a><li>
-							<li><a href="/space/user/MyZimmdelete?hnum=${sl.hnum}">찜 취소</a><li>
+							<li><a href="#">예약하기</a><li>
+							<li><a href="#">찜 취소</a><li>
 						</ul>
 					</div>
-					</c:forEach>
-					</c:if>
 					<!-- 반복문 end -->
+					<div class="myzzim-item">
+						<input type="hidden" value="장소번호"/>
+						<div class="myzzim-col myzzim-img"><a href="#"><img class="space-info-img" src="img/menu-1.jpg"/></a></div>
+						<ul class="myzzim-col myzzim-space-info">
+							<li><a>장소명</a></li>
+							<li>★★★★★(8 ->후기개수)</li>
+							<li>찜개수</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li>찜한날짜</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li><a href="#">예약하기</a><li>
+							<li><a href="#">찜 취소</a><li>
+						</ul>
+					</div>
+					<div class="myzzim-item">
+						<input type="hidden" value="장소번호"/>
+						<div class="myzzim-col myzzim-img"><a href="#"><img class="space-info-img" src="img/menu-1.jpg"/></a></div>
+						<ul class="myzzim-col myzzim-space-info">
+							<li><a>장소명</a></li>
+							<li>★★★★★(8 ->후기개수)</li>
+							<li>찜개수</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li>찜한날짜</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li><a href="#">예약하기</a><li>
+							<li><a href="#">찜 취소</a><li>
+						</ul>
+					</div>
+					<div class="myzzim-item">
+						<input type="hidden" value="장소번호"/>
+						<div class="myzzim-col myzzim-img"><a href="#"><img class="space-info-img" src="img/menu-1.jpg"/></a></div>
+						<ul class="myzzim-col myzzim-space-info">
+							<li><a>장소명</a></li>
+							<li>★★★★★(8 ->후기개수)</li>
+							<li>찜개수</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li>찜한날짜</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li><a href="#">예약하기</a><li>
+							<li><a href="#">찜 취소</a><li>
+						</ul>
+					</div>
+					<div class="myzzim-item">
+						<input type="hidden" value="장소번호"/>
+						<div class="myzzim-col myzzim-img"><a href="#"><img class="space-info-img" src="img/menu-1.jpg"/></a></div>
+						<ul class="myzzim-col myzzim-space-info">
+							<li><a>장소명</a></li>
+							<li>★★★★★(8 ->후기개수)</li>
+							<li>찜개수</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li>찜한날짜</li>
+						</ul>
+						<ul class="myzzim-col">
+							<li><a href="#">예약하기</a><li>
+							<li><a href="#">찜 취소</a><li>
+						</ul>
+					</div>
 				</div>
 			</div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />

@@ -51,14 +51,14 @@
 		</tr>
 		<tr>
 			<td><h5>계좌정보</h5></td>
-			<td><b>${loginUser.bank_name}(${loginUser.bank_code}) ${loginUser.account }</b></td>
+			<td><b>${loginUser.account }</b></td>
 			<%-- ${loginUser.account} --%>
 		</tr>
 	</table>
 		<div class="text-center">
 			<button type="button" class="btn btn-primary py-2" onclick="javascript:location.href='MyModify'">회원수정</button>
-			<button type="button" class="btn btn-danger py-2" data-toggle="modal" data-target="#exampleModal">회원탈퇴</button>
-			<button type="button" class="btn btn-primary py-2" onclick="history.back();">돌아가기</button>
+			<button type="button" class="btn btn-danger py-2" data-bs-toggle="modal" data-bs-target="#exampleModal">회원탈퇴</button>
+			<button type="button" class="btn btn-primary py-2" onclick="javascript:histroy.back()">돌아가기</button>
 		</div>
 </div>
 <form class="frm1" action="deleteUser" method="post">
@@ -67,14 +67,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">정말 탈퇴 하시겠습니까?</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       	<h3 class="text-center">::비밀번호 입력 후 탈퇴처리::</h3>
         <input type="password" class="form-control border-primary py-3 ps-4" id="mpwd" name="mpwd" placeholder="비밀번호확인"/>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <c:if test="${snsLoginState eq true}">
         <button type="button" onClick="javascript:location.href='NaverDelete?code=${oauth_code }&state=${oauth_state}'" class="btn btn-danger">네이버 탈퇴</button>
         </c:if>

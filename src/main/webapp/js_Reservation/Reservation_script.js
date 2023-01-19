@@ -60,13 +60,10 @@ const aa=function(yy,mm,dd){
 	$('#check_month').html(mm);
 	$('#check_date').html("");
 	$('#check_date').html(dd);
-	
-	$('#check_year2').html("");
 	$('#check_year2').html(yy);
 	$('#check_month2').html("");
 	$('#check_month2').html(mm);
 	$('#check_date2').html("");
 	$('#check_date2').html(dd);
 }
-
 

@@ -54,4 +54,4 @@ nav{
 		</div>
 	</div>
 	
-<c:import url="/Spacefoot" charEncoding="utf-8" />
+<c:import url="/Spacefoot" charEncording="utf-8"/>

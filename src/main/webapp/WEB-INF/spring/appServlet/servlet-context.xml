@@ -3,11 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -30,43 +28,16 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.space" />
-	<!-- 인터셉터패키지 컴포넌트스캔 등록 -->
-	<context:component-scan base-package="com.project.interceptor" />
-	<!-- AOP패키지 컴포넌트스캔 등록 -->
-	<context:component-scan base-package="com.project.aop" />
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 		<beans:property name="maxUploadSize" value="-1"/>
 		<!-- -1로 주면 무제한 업로드 가능 -->
 	</beans:bean>
-	<!-- Interceptor설정 =========================================================== -->
-   <interceptors>
-         <interceptor>
-            <mapping path="/user/**"/>
-            <mapping path="/owner/**"/>
-            <mapping path="/admin/**"/>
-            <beans:bean class="com.project.interceptor.LoginCheckInterceptor"/>
-         </interceptor>
-         <interceptor>
-            <mapping path="/owner/**"/>
-            <beans:bean class="com.project.interceptor.OwnerCheckInterceptor"/>
-         </interceptor>
-         <interceptor>
-            <mapping path="/admin/**"/>
-            <beans:bean class="com.project.interceptor.AdminCheckInterceptor"/>
-         </interceptor>
-         <interceptor>
-            <mapping path="/login"/>
-            <mapping path="/"/>
-            <beans:bean class="com.project.interceptor.HomeDivisionIntercepter"/>
-         </interceptor>
-   </interceptors>
+	
 	<!-- top, foot 매핑 -->
 	<view-controller path="/Spacetop" view-name="/Spacetop"/>
 	<view-controller path="/Spacefoot" view-name="/Spacefoot"/>
-	<view-controller path="/AdminPageTop" view-name="/ajax/AdminPage/AdminPageTop"/>
-	<view-controller path="/AdminPageFoot" view-name="/ajax/AdminPage/AdminPageFoot"/>
 	
 	
 </beans:beans>

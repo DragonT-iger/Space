@@ -54,76 +54,54 @@
 		float:right;
 		margin-right:10%;
 	}
-	
 </style>
-
-	
-	
-
 		<h1 class="text-center"> 나의 공간 관리</h1>
 		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">공간등록</button>
-		
         <div class="myspacelist-wrap mt-5">
         	<!-- 리뷰내역 필요리스트 (로그인한 회원번호로 select) 사진 장소이름 장소주소 별점 리뷰제목 리뷰내용 리뷰 답변 -->
         		<!-- 내가등록한 리뷰들 반복출력 forEach start -->
-			<c:forEach var="spaceinfo" items="${spaceinfo}">
         		<div class="myspace_list">
-					
-        			<button class="btn btn-primary btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">수정</button>
+        			<input type="hidden" value='${space_info.snum }'/>
+        			<button class="myspacelist_btn btn btn-primary" onclick="update_myspace('${space_info.snum}')">수정</button>
+        			<button class="myspacelist_btn btn btn-danger" onclick="del_myspace('${space_info.snum}')">삭제</button>
         			<div class="myspace-profile">
-        				<a href="../spaceDetail?snum=${spaceinfo.snum}"><img class="myspace_img" src="../resources/SpaceInfoImg/${spaceinfo.simage1}"></img></a>
+        				<a href="javascript:sel_menu('MyReservationCheck')"><img class="myspace_img" src="img/menu-1.jpg"></img></a>
         			
 	        			<div class="myspace myspace-star">O O O O O (평균별점)</div>
-	        			<div class="myspace myspace-time">${spaceinfo.sdate}(등록시간)</div>
+	        			<div class="myspace myspace-time">2022-12-24 (등록시간)</div>
 	        			
 	
-	        			<div class="myspace space-name">장소이름: ${spaceinfo.sname} </div>
+	        			<div class="myspace space-name">장소이름</div>
 	
-	        			<div class="myspace space-addr">장소주소: ${spaceinfo.saddr1}  ${spaceinfo.saddr2} <br></div>
-
-						<div class="myspace space-addr">우편번호: ${spaceinfo.spost} </div>
+	        			<div class="myspace space-addr">장소주소</div>
 	
 	        			<div class="myspace myspace-cost row">
 							<div class="col">
-						      	기본비용 : <c:out value="${spaceinfo.bcost}"/>
+						      	기본비용 : <c:out value="${Space_info.bcost}"/>
 						    </div>
 						    <div class="col">
-								인원추가금: <c:out value="${spaceinfo.ecost}"/>
+								인원추가금: <c:out value="${Space_info.ecost}"/>
 						    </div>
 	        			</div>
 	        			<div class="myspace myspace-numset row">
 							<div class="col">
-						      	추가금발생인원 수 : <c:out value="${spaceinfo.minn}"/>
+						      	추가금발생인원 수 : <c:out value="${Space_info.minn}"/>
 						    </div>
 						    <div class="col">
-								최대인원 수: <c:out value="${spaceinfo.maxn}"/>
+								최대인원 수: <c:out value="${Space_info.maxn}"/>
 						    </div>
 	        			</div>
 					</div>
         			<div class="myspace-content-wrap">
 	        			<p class="myspace-tab">공간설명</p>
 	        			<p class="myspace-content">
-							${spaceinfo.scontents}
-	        			</p>
-        			</div>
-					<div class="myspace-content-wrap">
-	        			<p class="myspace-tab">공간규칙</p>
-	        			<p class="myspace-content">
-							${spaceinfo.srule}
+		        			공간설명공간설명공간설명공간설명공간설명공간설명공간설명공간설명<br>
+		        			공간설명공간설명공간설명공간설명공간설명공간설명공간설명공간설명<br>
+		        			공간설명공간설명공간설명공간설명공간설명공간설명공간설명공간설명<br>
+	        			블라블라
 	        			</p>
         			</div>
         		</div>
-			
-		</c:forEach>
         		<!-- foreach End -->
         </div>
-
-	
-
-
-
-
-
-
-		  
 <c:import url="/Spacefoot" charEncoding="utf-8" />

@@ -1,12 +1,9 @@
 package com.project.space;
 
-
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,20 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
-import com.project.interceptor.CommonUtil;
-import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
-import com.project.space.domain.ReviewVO;
-import com.project.space.domain.Space_InfoVO;
-import com.project.space.domain.Space_Like;
-import com.project.space.review.service.ReviewService;
-import com.project.space.spaceinfo.service.SpaceInfoService;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
 import com.project.space.user.service.Mem_InfoService;
 
@@ -43,17 +32,38 @@ public class GonTestCont {
 	
 	@Inject
 	private Mem_InfoService memberService;
-
 	
-	/* ----등록유저------ */
-	@GetMapping("/owner/MyReservationCheck")
+	@GetMapping("/MyZimm")
+	public String zimmList() {
+		return "ajax/ilgon/MyZimm";
+	}
+	@GetMapping("/MyReviewList")
+	public String myReviewList() {
+		
+		return "ajax/ilgon/MyReviewList";
+	}
+	@GetMapping("/MyModify")
+	public String mymodify() {
+		return "ajax/Pages/MyModify";
+	}
+	@GetMapping("/MyReservationCheck")
 	public String myReservationCheck() {
 		return "ajax/OwnerPage/MyReservationCheck";
 	}
-	@GetMapping("/owner/MySpaceEdit")
+	@GetMapping("/MySpaceEdit")
 	public String mySpaceEdit() {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
+	}
+	@GetMapping("/MySpaceInsert")
+	public String mySpaceInsert() {
+		
+		return "ajax/OwnerPage/MySpaceInsert";
+	}
+	@GetMapping("/MySpaceList")
+	public String mySpaceList() {
+		
+		return "ajax/OwnerPage/MySpaceList";
 	}
 	
 	/*네로아 테스트*/
@@ -118,34 +128,30 @@ public class GonTestCont {
 		return "ajax/Pages/MyPage";
 	}
 	*/
-	@GetMapping("user/NaverDelete")
+	@GetMapping("/NaverDelete")
 	public String naverDelete(HttpSession session) throws Exception{
 		OAuth2AccessToken ReadSessionToken = (OAuth2AccessToken) session.getAttribute("naver_oauthToken");
 		//log.info("NaverDelete // access_token ===>"+ReadSessionToken.getParameter("access_token"));
-		//log.info(ReadSessionToken.getAccessToken());
-			
+		log.info(ReadSessionToken.getAccessToken());
 		String deleteTokenUrl = naverLoginBO.NaverDeleteToken(ReadSessionToken.getAccessToken());
-		//log.info("deleteTokenUrl====>"+deleteTokenUrl);
+		log.info("deleteTokenUrl====>"+deleteTokenUrl);
 		URL obj = new URL(deleteTokenUrl); // 호출할 url
         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
         con.setRequestMethod("GET");
         con.connect();
 		log.info(con.getResponseCode());
-		
-		Mem_InfoVO user = (Mem_InfoVO) session.getAttribute("loginUser");
-		memberService.deleteUser(user);
 		session.invalidate();
 		return "redirect:/";
 	}
 	@PostMapping("/NaverJoin")
-	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
+	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo) {
 		log.info("NaverJoin post value VO===>"+vo);
-		rttr.addFlashAttribute("MemInfo",vo);
-		rttr.addFlashAttribute("flag","NAVER");
-		return "redirect:Join";
+		m.addAttribute("MemInfo",vo);
+		m.addAttribute("flag","NAVER");
+		return "ajax/ilgon/NaverJoin";
 	}
-	@PostMapping("/Naverjoin")
-	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
+	@PostMapping("/Join")
+	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo) {
 		log.info("join === user :"+vo);
 		if(vo.getMname()==null||vo.getUserid()==null||vo.getMpwd()==null||
 				vo.getMname().trim().isEmpty()||vo.getUserid().trim().isEmpty()
@@ -155,11 +161,7 @@ public class GonTestCont {
 		
 		int n=memberService.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
-		if(n<0) {
-			rttr.addFlashAttribute("MemInfo",vo);
-			rttr.addFlashAttribute("flag","NAVER");
-		}
-		String loc=(n>0)?"redirect:/":"redirect:Join";
+		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
 		
 		return loc;
 	}//----------------

@@ -1,36 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/Spacetop.jsp"%>
+<%@ include file="/WEB-INF/views/Spacetop.jsp" %>
 
+<script type="text/javascript">
+      function filter(){
 
+        var value, name, item, i;
 
+        value = document.getElementById("value").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("name");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "flex";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
+      }
+</script>
 
 
 <style>
-.text {
-	text-align: center;
-	font-family: 'Heebo';
-}
 
-.flex-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-
-.flex-item {
-	background-color: lightgray;
-	width: 21%;
-	margin: 2%;
-}
-
-.img {
-	width: 100%;
-	height: 200px;
-	margin: auto;
-	text-align: center;
-}
 
 .padding80 {
 	padding: 10px;
@@ -82,7 +75,7 @@
 	width: 80%;
 	border-radius: 6px;
 	color: white;
-	text-align: center;
+	text-align:center;
 }
 
 #value:focus {
@@ -101,195 +94,88 @@
 }
 </style>
 
-<!-- <script type="text/javascript">
-	function test(){
-		var stringHtml =document.body.innerHTML; //document.getElementById('changeLang').innerHTML;
-		alert(stringHtml);
-		
-		$.ajax({
-			type:'post',
-			url:'/space/space/changeLang',
-			data:{
-				html: stringHtml,
-			},
-			dataType:"html",
-			success : function(res){
-				$('body').html("");
-				$('body').html(res);
-			},
-			error: function(err){
-				alert("실패!"+err.status);
-			}
-		});
-		
-	}
-</script> -->
-
-<div id="changeL">
-<!-- <button onclick="test()">Eng</button> -->
-
-<div class="tag" id="changeLang"
-	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-		<c:forEach var="hashtag" items="${hashtag}">
-	<input type="hidden" id="hashTag" name="hashTag" value="on_off"
-		style="width: 25%">
-	<button class="btn btn-primary"  onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
-	</c:forEach>
-
-</div>
 
 
+	<div class="tag"
+		class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+		<a href="#" class="tag">#Christmas</a> <a href="#" class="tag">#Winter</a>
 
-<div class="search_wrap">
-	<div class="search_area text-center">
-		<input type="text" id="keyword" name="keyword" value=""
-			style="width: 25%">
-		<button onclick="listPaging('search')">Search</button>
-		<button type="button" onclick="location.href='http://localhost:9090/space/'">초기화</button>
+
+		<a href="#" class="tag">#Travel</a> <a href="#" class="tag">#New
+			Year</a>
 	</div>
-</div>
 
 
-<section class="padding80 margin50">
-	<div id="space-list" class="flex-container">
-		<c:forEach var="Space" items="${spaceArr}">
-			<div id="space-item" class="flex-item">
-				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
-					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
-				</a>
-				<p class="text">${Space.sname}</p>
-				<p class="text">${Space.saddr1}</p>
-				<p class="text">${Space.saddr2}</p>
-			</div>
-		</c:forEach>
+
+	<div class="searchbox">
+		<div class="header">
+			<h1>Search</h1>
+			<input onkeyup="filter()" type="text" id="value"
+				placeholder="Type to Search">
+		</div>
+
 	</div>
-	<div class="text-center">
-		<span><button class="btn btn-primary"
-				onclick="listPaging('prev')">이전</button></span> <span><button
-				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
-	</div>
-</section>
-<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
-<form>
-	<input type="hidden" id="currentPage" />
-</form>
 
-</div>
+	<section class="padding80 margin50">
+		<ul class="items quarter">
+			<table>
+				<tr>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480"
+						width="90%" /></td>&nbsp;
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/ce6814ba-ed53-4d6e-b8f8-c0bbcf821011.jpg?im_w=480"
+						width="90%" /></td>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/ff69ac49-64e7-4f4a-ae2b-ee01163d0790.jpg?im_w=480"
+						width="90%" /></td>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/34b9d53a-8952-47f8-876d-bb927ea487b2.jpg?im_w=480"
+						width="90%" /></td>
+				<tr>
+			</table>
 
-<script>
-	  //초기값 (전역변수) 세팅
-	  var currentPage = 1;
-	  var keyword = "";
-	  var HashTag = "";
-	 
-	  /* function filter(){
+			<br>
+			<br>
 
-	        var value, name, item, i;
+			<table>
+				<tr>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480"
+						width="90%" /></td>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/ce6814ba-ed53-4d6e-b8f8-c0bbcf821011.jpg?im_w=480"
+						width="90%" /></td>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/ff69ac49-64e7-4f4a-ae2b-ee01163d0790.jpg?im_w=480"
+						width="90%" /></td>
+					<td><img class="img" alt=""
+						src="https://a0.muscache.com/im/pictures/34b9d53a-8952-47f8-876d-bb927ea487b2.jpg?im_w=480"
+						width="90%" /></td>
+				<tr>
+			</table>
 
-	        value = document.getElementById("value").value.toUpperCase();
-	        item = document.getElementsByClassName("item");
+		</ul>
+	</section>
+	<a href="http://pf.kakao.com/_xnHWixj">카톡</a>
 
-	        for(i=0;i<item.length;i++){
-	          name = item[i].getElementsByClassName("name");
-	          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
-	            item[i].style.display = "flex";
-	          }else{
-	            item[i].style.display = "none";
-	          }
-	        }
-	      } */
-	      
-	   
-	      
-      const listPaging= function(pagingType){
-    	  if(currentPage=="" || currentPage==null){
-    		  //alert("값없음에 들어옴")
-    		  currentPage = 1;
-    	  }
-    	  //alert("해시태그 확인==>"+HashTag);
-    	  keyword=$('#keyword').val();
-    	  //alert(keyword);
-    	  $.ajax({
-			type:'get',
-			url:'home',
-			contentType:'application/json',
-			data:{ //get파라미터로 넘어가는 key:value 값 
-					//home?currentPage=value&pagingType=value&keyword=value (url+data)
-				currentPage : currentPage,
-				pagingType : pagingType,
-				keyword : keyword,
-				HashTag : HashTag
-			},
-    	  cache:false,
-    	  success :function (res){
-    		  currentPage = res.currentPage;
-    		  //alert(currentPage);
-    		  //alert(res.spaceArr);
-    		  if(res.spaceArr==""||res.spaceArr==null){ //res값이 없을시
-    			  alert("검색결과가 없습니다.");
-    		  }else{
-    		  	showSpace(res.spaceArr);
-    		  }
-    	  },
-    	  error: function (err){
-    		  alert("error"+err.status) //
-    	  }
-    	  });
-	  }
-	      
-	      const flag = "";//flag 현재 해시태그가 놀려있는 여부
-	      const target="";//target 직전에 눌린 해시태그의 primary key
-	    
-	      
-	    
-	      
-	      const gethashTag= function(hashTag2){
-	    	  HashTag = hashTag2;
-	    	  $.ajax({
-				type:'get',
-				url:'hashTag', //control 주소
-				contentType:'application/json',
-				data:{ //get파라미터로 넘어가는 key:value 값 
-						//home?currentPage=value&pagingType=value&keyword=value (url+data)
-					hashTag : hashTag2
-				},
-	    	  cache:false,
-	    	  success :function (res){
-	    		  
-	    		  //alert(JSON.stringify(res));
-					showSpace(res);
-	    	  },
-	    	  error: function (err){
-	    		  alert("error"+err.status) //
-	    	  }
-	    	  });
-	    	  
-	    	  
-	    	
-		  }
-	      
-	      
-      
-      const showSpace = function(res){
-    	  if(res==null){
-    		  $('#space-list').html("결과가 없습니다");
-    	  }else{
-    		  let str="";
-	    	  $.each(res,function(i,spacevo){
-	    		  	str+='<div id="space-item" class="flex-item">';
-	    		  	str+='<a href="spaceDetail?snum='+spacevo.snum+'">';
-	    		  	str+='<img class="img" alt="" src="resources/SpaceInfoImg/'+spacevo.simage1+'"/>';
-	    		  	str+='<p class="text">'+spacevo.sname+'</p>';
-	    		  	str+='<p class="text">'+spacevo.saddr1+'</p>';
-	    		  	str+='<p class="text">'+spacevo.saddr2+'</p>';
-	    		  	str+='</a>';
-	    		  	str+='</div>';
-      	  	});
-    	  $('#space-list').html(str);
-      	}
-    }
-      
+<script type="text/javascript">
+      function filter(){
 
-      
+        var value, name, item, i;
+
+        value = document.getElementById("value").value.toUpperCase();
+        item = document.getElementsByClassName("item");
+
+        for(i=0;i<item.length;i++){
+          name = item[i].getElementsByClassName("name");
+          if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+            item[i].style.display = "flex";
+          }else{
+            item[i].style.display = "none";
+          }
+        }
+      }
 </script>
-<%@ include file="/WEB-INF/views/Spacefoot.jsp"%>
+
+<%@ include file="/WEB-INF/views/Spacefoot.jsp" %>

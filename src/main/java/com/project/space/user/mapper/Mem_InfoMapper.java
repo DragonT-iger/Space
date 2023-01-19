@@ -1,11 +1,10 @@
 package com.project.space.user.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import com.project.space.domain.Mem_InfoVO;
-import com.project.space.domain.NotUserException;
 import com.project.space.domain.PagingVO;
+import com.project.space.domain.NotUserException;
 
 public interface Mem_InfoMapper {
 	int createUser(Mem_InfoVO memvo);  //유저등록
@@ -18,21 +17,13 @@ public interface Mem_InfoMapper {
 
 	int deleteUser(Mem_InfoVO mpwd);//회원탈퇴
 
-	int updateUser(Mem_InfoVO user);//회원수정
+	int updateUser(Mem_InfoVO user);
 
 	Mem_InfoVO getUser(String userid);
 
 	Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException;
 
 	Mem_InfoVO loginCheck(String userid, String mpwd) throws NotUserException;
-
-	int getStatusByUserid(String userid);
 	
-	Mem_InfoVO pwCheck(String userid, String mpwd)throws NotUserException;
 	
-	List<Mem_InfoVO> listBankcode();
-	
-	List<Mem_InfoVO> searchUserByFilter(Map<String,String> filter);
-
-    int updateUserPoint(Map<String, Object> map);
 }

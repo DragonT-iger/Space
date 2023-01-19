@@ -30,8 +30,8 @@ public class NaverLoginBOImpl implements NaverLoginBO{
 			@Value("${naver.login.api.ClientSecret}") String clientsecret) {
 		this.clientid = clientid;
 		this.clientsecret = clientsecret;
-		//log.info(clientid);
-		//log.info(clientsecret);
+		log.info(clientid);
+		log.info(clientsecret);
 	}
 	
 	//private final static String CLIENT_ID=clientid;
