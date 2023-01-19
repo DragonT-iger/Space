@@ -20,7 +20,7 @@ public interface ReservationService {
 	List<ReservationVO> CountbookingInfo(Schedule sch); //공간등록유저화면
 	
 	//예약 시작날짜별로 예약 내역 가져오기
-	List<ReservationVO> bookingTimeInfo(String rtstartdate);
+	List<ReservationVO> bookingTimeInfo(ReservationVO rtvo);
 	//일반유저가 본인의 예약내역 열람
 	List<ReservationVO> userBookingInfo(String userid);
 	//유저가 예약한 전체 예약 금액

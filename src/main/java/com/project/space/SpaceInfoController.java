@@ -30,8 +30,8 @@ import com.project.space.spaceinfo.service.SpaceInfoService;
 
 @Controller
 public class SpaceInfoController {
-   
-   @Inject
+	
+	@Inject
     private SpaceInfoService spaceinfoservice;
 
 
@@ -49,41 +49,41 @@ public class SpaceInfoController {
             logger.info("공간명 입력안함");
             return "redirect:/owner/MySpaceInsert";
         }
-      ServletContext app=req.getServletContext();
+		ServletContext app=req.getServletContext();
 
-      String upDir=app.getRealPath("/resources/SpaceInfoImg");  //context를 기준으로 절대경로 구하기
-      logger.info("upDir: "+upDir);
+		String upDir=app.getRealPath("/resources/SpaceInfoImg");  //context를 기준으로 절대경로 구하기
+		logger.info("upDir: "+upDir);
 
    
-      
-      File dir=new File(upDir);
-      if(!dir.exists()) {  //업로드 디렉토리 생성
-         dir.mkdirs();  //디렉토리가 여러 계층에 있는 경우 dirs
-      }
+		
+		File dir=new File(upDir);
+		if(!dir.exists()) {  //업로드 디렉토리 생성
+			dir.mkdirs();  //디렉토리가 여러 계층에 있는 경우 dirs
+		}
 
-      //2. 업로드 처리
-      if(simage!=null) {
-         for(int i=0;i<simage.size();i++) {
-            MultipartFile mfile=simage.get(i);
-            if(!mfile.isEmpty()) {
-               try {
-                  //업로드 처리 성공
-                  mfile.transferTo(new File(upDir,mfile.getOriginalFilename()));
-                  if(i==0) {
-                     vo.setSimage1(mfile.getOriginalFilename());
-                  }else if(i==1) {
-                     vo.setSimage2(mfile.getOriginalFilename());
-                  }else if(i==2) {
-                     vo.setSimage3(mfile.getOriginalFilename());
-                  }else if(i==3) {
+		//2. 업로드 처리
+		if(simage!=null) {
+			for(int i=0;i<simage.size();i++) {
+				MultipartFile mfile=simage.get(i);
+				if(!mfile.isEmpty()) {
+					try {
+						//업로드 처리 성공
+						mfile.transferTo(new File(upDir,mfile.getOriginalFilename()));
+						if(i==0) {
+							vo.setSimage1(mfile.getOriginalFilename());
+						}else if(i==1) {
+							vo.setSimage2(mfile.getOriginalFilename());
+						}else if(i==2) {
+							vo.setSimage3(mfile.getOriginalFilename());
+						}else if(i==3) {
                             vo.setSimage4(mfile.getOriginalFilename());
                         }
-               } catch (IOException e) {
-                  logger.error("파일 업로드 실패: "+e);
-               }
-            }//if
-         }//for
-      }
+					} catch (IOException e) {
+						logger.error("파일 업로드 실패: "+e);
+					}
+				}//if
+			}//for
+		}
 
         
         //session에서 id값 받아오기
@@ -154,7 +154,7 @@ public class SpaceInfoController {
         logger.info("connected MySpaceInfoView.");
 
         List<Space_InfoVO> sivolist = spaceinfoservice.getSpaceInfoAll();
-      
+		
         m.addAttribute("spaceArr", sivolist);
 
         m.addAttribute("hashtag",spaceinfoservice.selectByh_code(spaceinfoservice.selectBySnum(snum).getH_code()));
@@ -164,15 +164,15 @@ public class SpaceInfoController {
     }
 
     @GetMapping("/owner/MySpaceInsert")
-   public String mySpaceEdit(Model m , HttpSession session) {
+	public String mySpaceEdit(Model m , HttpSession session) {
         
 
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
         
         m.addAttribute("hashtag", spaceinfoservice.getHashTagAll());
         m.addAttribute("ex_spaceinfo",spaceinfoservice.selectByUserid(userid));
-      return "ajax/OwnerPage/MySpaceInsert";
-   }
+		return "ajax/OwnerPage/MySpaceInsert";
+	}
 
 
 
@@ -189,17 +189,17 @@ public class SpaceInfoController {
     }
 
     
-   @GetMapping("/owner/MySpaceList")
-   public String mySpaceList(Model m, HttpSession session) {
+	@GetMapping("/owner/MySpaceList")
+	public String mySpaceList(Model m, HttpSession session) {
 
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
 
         List<Space_InfoVO> sivolist = spaceinfoservice.selectByUserid(userid);
 
         m.addAttribute("spaceinfo", sivolist);
-              
-      return "ajax/OwnerPage/MySpaceList";
-   }
+        		
+		return "ajax/OwnerPage/MySpaceList";
+	}
 
     @PostMapping("/owner/MySpaceDelete")
     public String mySpaceDelete(@RequestParam String sname, HttpSession session) {

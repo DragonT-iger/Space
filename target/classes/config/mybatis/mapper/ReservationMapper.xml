@@ -12,6 +12,10 @@
 		from (select * from reservation where snum=#{snum} and rtstatus=0) r
 		group by r.rtstartdate
 	</select>
+	
+	<select id="bookingTimeInfo" resultType="Reservation" parameterType="Reservation">
+		select * from reservation where snum=#{snum} and rtstartdate=#{rtstartdate} and rtstatus=0
+	</select>
 
 	<insert id="insertBooking" parameterType="Reservation">
 	<selectKey keyProperty="rtnum" resultType="int" order="BEFORE">

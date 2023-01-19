@@ -154,6 +154,10 @@ function backHome(){
 	window.history.back();
 }
 
+function backHome(){
+	window.history.back();
+}
+
 $(function(){
 	$('#RPModal').click(function(e){
 		e.preventDefault();
@@ -235,15 +239,21 @@ $(function(){
 			cache:false,
 			success:function(res){
 				//alert(JSON.stringify(res));
-				$('#paymentModal').modal();
-				$('#snum').val(res.result.snum);
-				$('#userid').val(res.result.userid);
-				$('#rtstartdate').val(res.result.rtstartdate);
-				$('#totalTime').val(res.result.totalTime);
-				$('#rtstart').val(res.result.rtstart);
-				$('#rtend').val(res.result.rtend);
-				$('#rtnumber').val(res.result.rtnumber);
-				$('#totalprice').val(res.result.totalprice);
+				if(res.result==0){
+					alert('예약할 수 없는 시간입니다');
+					$('#paymentModal').modal('hide');
+					location.reload();
+				}else{
+					$('#paymentModal').modal();
+					$('#snum').val(res.result.snum);
+					$('#userid').val(res.result.userid);
+					$('#rtstartdate').val(res.result.rtstartdate);
+					$('#totalTime').val(res.result.totalTime);
+					$('#rtstart').val(res.result.rtstart);
+					$('#rtend').val(res.result.rtend);
+					$('#rtnumber').val(res.result.rtnumber);
+					$('#totalprice').val(res.result.totalprice);
+				}
 			},
 			error:function(err){
 				alert('err: '+err.status);

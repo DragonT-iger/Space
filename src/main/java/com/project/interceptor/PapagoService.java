@@ -36,6 +36,7 @@ public class PapagoService {
 		
 		try {
 			html=URLEncoder.encode(pages,"UTF-8");
+			System.out.println(html);
 			URL url=new URL(apiURL);
 			HttpURLConnection con=(HttpURLConnection)url.openConnection();
 			con.setRequestMethod("POST"); //요청방식
@@ -51,7 +52,7 @@ public class PapagoService {
 			 */
 			
 			OutputStream os=con.getOutputStream();
-			BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os));
+			BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
 			bw.write(postParams);
 			bw.flush();
 			bw.close();
@@ -62,9 +63,9 @@ public class PapagoService {
 			System.out.println(responseCode+"<<<responseCode");
 			
 			if(responseCode==200) { // 정상 호출
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
 			} else {  // 오류 발생
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
 			}
 			String inputLine;
 			StringBuffer response = new StringBuffer();

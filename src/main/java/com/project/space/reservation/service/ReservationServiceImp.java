@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.space.domain.FeedbackVO;
 import com.project.space.domain.PointVO;
@@ -42,8 +43,8 @@ public class ReservationServiceImp implements ReservationService {
 	}
 
 	@Override
-	public List<ReservationVO> bookingTimeInfo(String rtstartdate) {
-		return this.reservationMapper.bookingTimeInfo(rtstartdate);
+	public List<ReservationVO> bookingTimeInfo(ReservationVO rtvo) {
+		return this.reservationMapper.bookingTimeInfo(rtvo);
 	}
 
 	@Override
@@ -51,6 +52,7 @@ public class ReservationServiceImp implements ReservationService {
 		return this.reservationMapper.userBookingInfo(userid);
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertBooking(ReservationVO rtvo) {
 		return this.reservationMapper.insertBooking(rtvo);

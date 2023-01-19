@@ -31,7 +31,7 @@ public class ReservationVO {  //공간 예약하기
 		String re=rtend.substring(0, 2);
 		this.TotalTime=Integer.parseInt(re)-Integer.parseInt(rs);
 	}
-		
+	
 	//날짜 합치기
 	private String rtyear; //년
 	private String rtmonth; //월
@@ -85,5 +85,6 @@ public class ReservationVO {  //공간 예약하기
 	
 	private String mname; /* 이름 */
 	private String hp; /* 연락처 */
-	private int rcount; 
+	private int rcount;
+		
 }

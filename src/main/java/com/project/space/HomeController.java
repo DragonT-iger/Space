@@ -40,7 +40,7 @@ public class HomeController {
 	
 	@RequestMapping("/changeLang")
 	@ResponseBody
-	public String changeLang(@RequestParam String html) {
+	public String changeEng(@RequestParam String html) {
 		log.info("변환 전 값========"+html);
 		PapagoService ps=new PapagoService();
 		String str=ps.getTransPages(html);
