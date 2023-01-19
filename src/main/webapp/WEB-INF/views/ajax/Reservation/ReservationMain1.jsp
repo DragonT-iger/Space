@@ -128,6 +128,10 @@
 	$('#res_count').val(rf.btn_pm_count.value);
 } */
 
+function backHome(){
+	window.history.back();
+}
+
 $(function(){
 	$('#RPModal').click(function(e){
 		e.preventDefault();

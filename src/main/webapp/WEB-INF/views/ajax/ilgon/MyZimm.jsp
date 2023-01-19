@@ -61,7 +61,7 @@
 									<img class="space-info-img" src="../img/noSpaceImage.jpg"/>
 								</c:if>
 								<c:if test="${sl.simage1 ne null}">
-									<img class="space-info-img" src="../resources/SpaceInfoImg/${sl.simage1})"/>
+									<img class="space-info-img" src="../resources/SpaceInfoImg/${sl.simage1}"/>
 								</c:if>
 							</a>
 						</div>

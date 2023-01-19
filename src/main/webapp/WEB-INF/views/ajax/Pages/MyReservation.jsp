@@ -54,7 +54,7 @@
 				</c:if>
 				<c:if test="${resArr.simage1 ne null}">
 					<a href="/space/spaceDetail?snum=${resArr.snum}">
-						<img id="reservation_img" src="../resources/SpaceInfoImg/${resArr.simage1})" style="width:300px;height:200px"/>
+						<img id="reservation_img" src="../resources/SpaceInfoImg/${resArr.simage1}" style="width:300px;height:200px"/>
 					</a>
 				</c:if>
 			</td> <!-- rowspan 1 -->
