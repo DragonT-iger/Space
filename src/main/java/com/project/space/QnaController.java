@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +64,7 @@ public class QnaController {
 		String loc="space/spaceDetail";
 		String pageNavi=page.getPageNavi(myctx,loc,userAgent);
 		
+		
 		m.addAttribute("pageNavi",pageNavi);
 		
 		return "ajax/spaceDetail/QnaSpace";
@@ -80,11 +80,6 @@ public class QnaController {
 		HttpSession ses=req.getSession();
 		int snum=(int)ses.getAttribute("snum");
 		log.info(snum);
-		
-		String CheckTitle=this.qnaService.checkTitle(qna.getQnum());
-		if(qna.getQtitle()==null || qna.getQtitle().trim().isEmpty()) {
-			qna.setQtitle("[RE]"+CheckTitle);
-		}
 		
 		//유효성 체크 (subject, name, passwd) ==> redirect "write"
 		if(qna.getQtitle()==null || qna.getQcontent()==null || qna.getQpwd()==null ||
@@ -164,13 +159,11 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qnarewrite")
-	public String boardRewrite(Model m, 
-			@RequestParam(defaultValue="0") int qnum, @RequestParam(defaultValue="") String qtitle) {
-		log.info("========================qnum: "+qnum+", qtitle: "+qtitle);
-		
-		m.addAttribute("qnum", qnum);
-		m.addAttribute("qtitle", qtitle);
-		return "ajax/spaceDetail/qnaRewrite";
+	public String boardRewrite(Model m, @ModelAttribute Qna_BoardVO qvo) {
+		log.info("vo: "+qvo);
+		m.addAttribute("qnum", qvo.getQnum());
+		m.addAttribute("qtitle", qvo.getQtitle());
+		return "ajax/spaceDetail/spaceD";
 	}
 	
 }

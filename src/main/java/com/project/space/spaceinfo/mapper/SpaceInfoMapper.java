@@ -3,7 +3,6 @@ package com.project.space.spaceinfo.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.project.space.domain.HashtagVO;
 import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.domain.Space_Like;
@@ -43,10 +42,10 @@ public interface SpaceInfoMapper {
 	public List<Space_InfoVO> selectBySpaceInfoExcept(Space_InfoVO sivo);
 	public List<Space_Like> selectUserLikeSpace(String userid);
 	public int deleteLike(int hnum);
-
+	
 	public int deleteBySname(Map<String, String> map);
 	
 	public int getCountAny(String keyword);
-	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
-	public List<HashtagVO> getHashTagAll();	
+	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);
+
 }

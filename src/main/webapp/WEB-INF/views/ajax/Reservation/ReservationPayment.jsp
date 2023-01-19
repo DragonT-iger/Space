@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- <style>
 .modal{
 	position:relative;
@@ -29,7 +29,7 @@
 
 <div class="modal-body">
 <div id="userpoint_add">
-	${loginUser.mname}님의 잔여 포인트: <fmt:formatNumber value="${loginUser.point}" pattern="###,###,###"/>
+	${loginUser.mname}님의 잔여 포인트: ${loginUser.point}
 </div>
 <a id="pointAddGo" href="user/pointAdd">포인트 충전</a>
 <hr>

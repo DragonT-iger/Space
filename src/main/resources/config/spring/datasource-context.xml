@@ -51,7 +51,6 @@
 									
 	<mybatis-spring:scan base-package="com.project.space.qna.mapper"/>
 	<mybatis-spring:scan base-package="com.project.space.payment.mapper"/>
-	<mybatis-spring:scan base-package="com.project.space.admin.mapper"/>
 	<!-- HikariCP 커넥션풀 빈 등록 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="${Global.DriverClassName}"/>

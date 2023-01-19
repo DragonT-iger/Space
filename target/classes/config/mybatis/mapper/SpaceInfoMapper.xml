@@ -39,8 +39,33 @@
 	</select>
 	
 	<select id="selectBySpaceInfo" parameterType="string" resultType="SpaceInfo">
-		select * from space_info where userid=#{userid}
+      select * from space_info where userid=#{userid}
+    </select>
+    
+	<select id="getSpaceInfoPageAll" parameterType="map" resultType="SpaceInfo">
+		 select * from (select space_info.* , rownum as r from SPACE_INFO
+		<where>
+			 <if test="findkeyword!=null and findkeyword!=''">
+			 	and sname like '%'||#{findkeyword}||'%'
+			 </if>
+		 
+			 <if test="hashtag!=null and hashtag!=''">
+			 	and h_code = #{hashtag}
+			 </if>
+		 </where>
+		  ORDER BY SNUM asc)
+		 WHERE
+		 <![CDATA[
+		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
+		 ]]>
+         
 	</select>
+     <select id="selectByPname" parameterType="string" resultType="SpaceInfo">
+     		select * from space_info where sname like '%'||#{value}||'%'
+     </select>
+     <select id="getCountAny" resultType="_int" parameterType="string">
+     		select count(*) from space_info where sname like '%'||#{value}||'%'
+     </select> 
 	
 	<select id="selectSpaceLike" parameterType="Like" resultType="int">
 		select count(#{snum}) from heart_like where snum=#{snum} and userid=#{userid}
@@ -62,32 +87,9 @@
 	<delete id="deleteLike" parameterType="int">
 		delete heart_like where hnum=#{value}
 	</delete>
-
+	
 	<delete id="deleteBySname" parameterType="map">
 		delete from space_info where userid = #{userid} and sname = #{sname}
 	</delete>
-	
-	
-	<select parameterType="map" resultType="SpaceInfo" id="getSpaceInfoPageAll">
-		select * from (select space_info.* , rownum as r from SPACE_INFO 
-		<if test="findkeyword!=null and findkeyword!=''">
-		WHERE sname like '%'||#{findkeyword}||'%' 
-		</if>
-		ORDER BY SNUM asc)WHERE 
-		<![CDATA[
-		 	r>=#{pagingNumber}and ROWNUM<=#{pagingSize}
-		 ]]>
-	</select>
-	
-	<select parameterType="string" resultType="SpaceInfo" id="selectByPname">
-		select * from space_info where sname like '%'||#{value}||'%' 
-	</select>
-	
-	<select parameterType="string" resultType="_int" id="getCountAny">
-		select count(*) from space_info where sname like '%'||#{value}||'%' 
-	</select>
-	
-	<select id="getHashTagAll" resultType="HashTag">
-		select * from HashTag
-	</select>
+
 </mapper>

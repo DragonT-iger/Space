@@ -60,14 +60,4 @@ public class ReviewServiceImp implements ReviewService {
 		return 0;
 	}
 
-	@Override
-	public int getReviewRtnum(int rtnum) {
-		return this.reviewMapper.getReviewRtnum(rtnum);
-	}
-
-	@Override
-	public List<ReviewVO> getReviewUserid(String userid) {
-		return this.reviewMapper.getReviewUserid(userid);
-	}
-
 }

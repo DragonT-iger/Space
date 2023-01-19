@@ -1,6 +1,6 @@
 package com.project.space.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -19,8 +19,7 @@ public class Space_InfoVO {
 	private String slong;
 	private String slat;
 	private Date sdate;
-	private int h_code; //해시태그 fk
-	private String h_name;
+	private int h_code;  //해시태그 fk
 	private String simage1;
 	private String simage2;
 	private String simage3;

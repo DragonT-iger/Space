@@ -50,7 +50,7 @@
 		<!-- Navbar & Hero Start -->
 		<div class="container-xxl position-relative p-0">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
-               	<a href="${myctx}/" class="navbar-brand p-0">
+				<a href="${myctx}/" class="navbar-brand p-0">
 					<h1 class="text-primary m-0">
 						<i class="fa-solid fa-meteor"></i> Space
 					</h1> <!-- <img src="img/logo.png" alt="Logo"> -->
@@ -88,7 +88,7 @@
                                 <%-- <a href="${myctx}/user/pointAdd" class="dropdown-item">MyPoint</a> --%>
                                 </c:if>
                                 <c:if test="${loginUser.status eq 9 }">
-                                <a href="${myctx}/admin/AdminHome" class="dropdown-item">AdminPage</a>
+                                <a href="${myctx}/admin/AdminPage" class="dropdown-item">AdminPage</a>
                                 </c:if>
 							</div>
 

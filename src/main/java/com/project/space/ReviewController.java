@@ -20,17 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.interceptor.CommonUtil;
-import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.PagingVO;
-import com.project.space.domain.ReservationVO;
 import com.project.space.domain.ReviewVO;
 import com.project.space.domain.Space_InfoVO;
-import com.project.space.reservation.service.ReservationService;
 import com.project.space.review.service.ReviewService;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequestMapping("/spaceDetail")
 @Log4j
 public class ReviewController {
 	
@@ -38,13 +36,10 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	@Inject
-	private ReservationService reservationService;
-	
-	@Inject
 	private CommonUtil util;
 	
-	@GetMapping("/spaceDetail/reviewlist")
-	public String reviewListPaging(Model m, @ModelAttribute("page") PagingVO page, 
+	@GetMapping("/reviewlist")
+	public String qnaListPaging(Model m, @ModelAttribute("page") PagingVO page, 
 			HttpServletRequest req, @RequestHeader("User-Agent") String userAgent) {
 		String myctx=req.getContextPath();
 		HttpSession ses=req.getSession();
@@ -79,33 +74,15 @@ public class ReviewController {
 		return "ajax/spaceDetail/ReviewSpace";
 	}
 	
-	@GetMapping("/user/MyReviewList")
-	public String myReviewList(Model m, HttpServletRequest req) {
-		HttpSession ses=req.getSession();
-		Mem_InfoVO mivo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 유저 정보
-		
-		List<ReviewVO> reviewArr=this.reviewService.getReviewUserid(mivo.getUserid());
-		
-		log.info("reviewArr: "+reviewArr);
-		m.addAttribute("reviewArr", reviewArr);
-		return "ajax/ilgon/MyReviewList";
+	@PostMapping("/reviewwrite")
+	public String qnaForm() {
+		return "ajax/spaceDetail/reviewWrite";
 	}
-
-	@PostMapping("/user/reviewWrite")
-	public String reviewWrite(Model m, HttpServletRequest req, 
-			@RequestParam("rimage") List<MultipartFile> rimage, @ModelAttribute ReviewVO revo) {
+	
+	@PostMapping("/reviewwriteEnd")
+	public String boardInsert(Model m, HttpServletRequest req, 
+			@RequestParam("mfilename") MultipartFile mfilename, @ModelAttribute ReviewVO revo) {
 		log.info("revo: "+revo);
-		//리뷰 남기는 공간
-		ReservationVO drvo=this.reservationService.getBooking(revo.getRtnum());
-		revo.setSnum(drvo.getSnum());
-		log.info("revo: "+revo);
-		//예약번호로 남긴 리뷰가 이미 있는지 없는지
-		int reviewVO=this.reviewService.getReviewRtnum(revo.getRtnum());
-		if(reviewVO>0) {
-			String str="이미 리뷰가 등록된 예약건 입니다.";
-			String loc="/space/user/MyReviewList";
-			return util.addMsgLoc(m, str, loc);
-		}
 		
 		//1. 파일 업로드 처리
 		//업로드 절대경로 얻어오기
@@ -115,54 +92,45 @@ public class ReviewController {
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
-		
-		if(!rimage.isEmpty()) {  //첨부파일이 있다면
+		if(!mfilename.isEmpty()) {  //첨부파일이 있다면
+			//먼저 첨부파일명과 파일크기 알아내자
+			String originFname=mfilename.getOriginalFilename(); //원본파일명
+			long fsize=mfilename.getSize();
+
 			//*mode가 edit(수정)이고 예전에 첨부했던 파일이 있다면 예전 파일 삭제 처리
-			if(revo.getMode().equals("edit") && revo.getRimage1()!=null) {
+			if(revo.getMode().equals("edit") && revo.getOld_rimage1()!=null) {
 				//수정모드라면 예전에 업로드했던 파일은 삭제처리
-				File delF1=new File(upDir, revo.getRimage1());
-				File delF2=new File(upDir, revo.getRimage2());
-				if(delF1.exists()) {
-					boolean b=delF1.delete();
-					log.info("old File1 delete: "+b);
-				}
-				if(delF2.exists()) {
-					boolean b=delF2.delete();
-					log.info("old File2 delete: "+b);
+				File delF=new File(upDir, revo.getOld_rimage1());
+				if(delF.exists()) {
+					boolean b=delF.delete();
+					log.info("old File delete: "+b);
 				}
 			}
 			
 			//업로드 처리
-			for(int i=0;i<rimage.size();i++) {
-				MultipartFile mfile=rimage.get(i);
-				if(!mfile.isEmpty()) {
-					
-					try {
-						mfile.transferTo(new File(upDir, mfile.getOriginalFilename()));
-						if(i==0) {
-							revo.setRimage1(mfile.getOriginalFilename());
-						}else if(i==1) {
-							revo.setRimage2(mfile.getOriginalFilename());
-						}
-						log.info("upDir: "+upDir);
-					}catch(Exception e) {
-						log.error("review write upload error: "+e);
-					}
-				} //if
-			} //for
-		} //if
+			try {
+				mfilename.transferTo(new File(upDir, originFname));
+				log.info("upDir: "+upDir);
+			}catch(Exception e) {
+				log.error("review write upload error: "+e);
+			}
+			
+			//boardVO객체에 업로드파일명,원본파일명,파일사이즈 세팅
+			revo.setRimage1(originFname);
+		}
 		
-		//2. 유효성 체크 (subject, name) ==> redirect "write"
-		if(revo.getRtitle()==null || revo.getRcontent()==null ||
-				revo.getRtitle().trim().isEmpty() || revo.getRcontent().trim().isEmpty()) {
-			return "redirect:MyReservation";
+		//2. 유효성 체크 (subject, name, passwd) ==> redirect "write"
+		if(revo.getRtitle()==null || revo.getRcontent()==null || revo.getRpwd()==null ||
+				revo.getRtitle().trim().isEmpty() || revo.getRcontent().trim().isEmpty() ||
+				revo.getRpwd().trim().isEmpty()) {
+			return "redirect:reviewlist";
 		}
 		//3. boardService의 insertBoard()호출
 		int n=0;
 		String str="",loc="";
 		if("write".equals(revo.getMode())) {  //글쓰기 모드라면
 			n=reviewService.addReview(revo);
-			str="리뷰 등록 ";
+			str="글쓰기 ";
 		}else if("rewrite".equals(revo.getMode())) {  //답변 글쓰기 모드라면
 			n=reviewService.rewriteReview(revo);
 			str="답변글쓰기 ";
@@ -172,20 +140,35 @@ public class ReviewController {
 		}
 		
 		str+=(n>0)? "성공":"실패";
-		loc=(n>0)? "/space/user/MyReviewList":"/space/user/MyReservation";
+		loc=(n>0)? "reviewlist":"reviewlist";
 
 		return util.addMsgLoc(m, str, loc);  //msg를 반환
 	}
 	
-	@GetMapping("/user/MyReviewDelete")
-	public String ReviewDelete(Model m, HttpServletRequest req, @RequestParam int review_num) {
-		log.info("review_num: "+review_num);
-
+	@PostMapping("/reviewdelete")
+	public String qnaDelete(Model m, HttpServletRequest req, 
+			@RequestParam(defaultValue="0") int renum, @RequestParam(defaultValue="") String repwd) {
+		log.info("num: "+renum+", passwd: "+repwd);
+		
+		if(renum==0 || repwd.isEmpty()) {
+			return "redirect:reviewlist";
+		}
+		
+		//해당글을 db에서 가져오기
+		ReviewVO revo=this.reviewService.getReview(renum);
+		if(revo==null) {
+			return util.addMsgBack(m, "존재하지 않는 글입니다");
+		}
+		//비밀번호 일치여부 체크
+		String dbPwd=revo.getRpwd();
+		if(!dbPwd.equals(repwd)) {  //일치하지 않는다면
+			return util.addMsgBack(m, "비밀번호가 일치하지 않습니다");
+		}
 		//db에서 글 삭제 처리
-		int n=this.reviewService.deleteReview(review_num);
+		int n=this.reviewService.deleteReview(renum);
 		
 		String str=(n>0)? "삭제되었습니다":"삭제 실패";
-		String loc=(n>0)? "/space/user/MyReviewList":"/space/user/MyReviewList";
+		String loc=(n>0)? "reviewlist":"reviewlist";
 		return util.addMsgLoc(m, str, loc);
 	}
 	
@@ -202,6 +185,9 @@ public class ReviewController {
 			return util.addMsgBack(m, "존재하지 않는 글입니다");
 		}
 
+		if(!revo.getRpwd().equals(repwd)) {  //일치하지 않는다면
+			return util.addMsgBack(m, "비밀번호가 일치하지 않습니다");
+		}
 		//4. model에 해당 글 저장 board		
 		m.addAttribute("revo", revo);
 		

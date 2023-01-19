@@ -169,7 +169,7 @@ public class SpaceInfoController {
 
         String userid = ((Mem_InfoVO)session.getAttribute("loginUser")).getUserid();
         
-        m.addAttribute("hashtag", spaceinfoservice.getHashTagAll());
+
         m.addAttribute("ex_spaceinfo",spaceinfoservice.selectByUserid(userid));
 		return "ajax/OwnerPage/MySpaceInsert";
 	}

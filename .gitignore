@@ -28,5 +28,3 @@ MANIFEST.MF
 pom.properties
 #db 정보 파일 제외
 db.propertise
-src/main/resources/config/props/NaverLoginAPI.properties
-src/main/resources/config/props/NaverSmsAPI.properties
