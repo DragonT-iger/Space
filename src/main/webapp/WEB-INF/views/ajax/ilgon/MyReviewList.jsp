@@ -117,10 +117,10 @@
 				
 				<c:if test="${ra.rimage1 ne null or ra.rimage2 ne null}">
 					<div class="review_img_cover">
-					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage1})"></img>
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage1}"></img>
 					</div>
 					<div class="review_img_cover">
-					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage2})"></img>
+					<img class="review_img" src="../resources/SpaceInfoImg/${ra.rimage2}"></img>
 					</div>
 				</c:if>
 				

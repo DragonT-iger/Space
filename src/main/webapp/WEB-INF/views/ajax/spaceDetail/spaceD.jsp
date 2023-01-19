@@ -357,7 +357,7 @@ nav ul li {
 								<img src="./img/noSpaceImage.jpg" />
 							</c:if>
 							<c:if test="${otherspace.simage1 ne null}">
-								<img src="../resources/SpaceInfoImg/${otherspace.simage1})" />
+								<img src="./resources/SpaceInfoImg/${otherspace.simage1}" />
 							</c:if>
 							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
 						</div>

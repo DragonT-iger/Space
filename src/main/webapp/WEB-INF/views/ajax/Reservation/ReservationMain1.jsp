@@ -150,6 +150,9 @@ margin:0px 0px 0px 100px;
 	$('#res_endTime').val(rf.rtend.value);
 	$('#res_count').val(rf.btn_pm_count.value);
 } */
+function backHome(){
+	window.history.back();
+}
 
 $(function(){
 	$('#RPModal').click(function(e){
