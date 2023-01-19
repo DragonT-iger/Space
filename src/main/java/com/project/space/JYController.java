@@ -196,7 +196,7 @@ public class JYController {
 		int dst[]=new int[TimeT.size()];
 		int ded[]=new int[TimeT.size()];
 		
-		if(TimeT!=null || TimeT.size()!=0) {
+		if(TimeT!=null && TimeT.size()!=0) {
 			for(int i=0;i<TimeT.size();i++) {
 				dst[i]=Integer.parseInt(TimeT.get(i).getRtstart().substring(0,2));
 				log.info("db 시작시간 세팅=="+dst);

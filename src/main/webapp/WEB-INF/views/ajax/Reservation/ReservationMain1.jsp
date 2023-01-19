@@ -82,7 +82,7 @@
 					
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
-						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#paymentModal">예약</button>
+						<button class="nav-link" id="RPModal" data-toggle="modal" >예약</button>
 					</div>
 				</form>
 			</div>
@@ -215,8 +215,8 @@ $(function(){
 				//alert(JSON.stringify(res));
 				if(res.result==0){
 					alert('예약할 수 없는 시간입니다');
-					$('#paymentModal').modal('hide');
-					location.reload();
+					//$('#paymentModal').modal('hide');
+					//location.reload();
 				}else{
 					$('#paymentModal').modal();
 					$('#snum').val(res.result.snum);

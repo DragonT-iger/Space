@@ -48,11 +48,13 @@
 					</div>
 					
 					<div class="user_name">${qna.userid}
-						<span class="leftq" onclick="delete_qnum(${qna.qnum},${qna.qpwd})">x</span>
+						<span class="leftq" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">x</span>
 					</div>
-					<p id="qna_title">${qna.qtitle}</p>
-					<p>${qna.qcontent}</p>
-					<p class="qd">${qna.qdate}</p>
+					<div>
+						<p id="qna_title">${qna.qtitle}</p>
+						<p>${qna.qcontent}</p>
+						<p class="qd">${qna.qdate}</p>
+					</div>
 				</div>
 			</li>
 		</c:forEach>
@@ -96,7 +98,7 @@
 	background-color:#FFEFD5;
 }
 #qna_qnum{
-	font-size:1px;
+	font-size: 1px;
 }
 .qd{
 	font-size:10px;
@@ -106,6 +108,9 @@
 }
 .leftq{
 	padding-left:70px;
+}
+.user_name{
+	float:left;
 }
 </style>
 
@@ -153,7 +158,7 @@ const delete_qnum=function(ss,qp){
 	//alert(qp);
 	//alert(ss);
 	var text=prompt('비밀번호를 입력해주세요');
-	document.write("</h4>"+text+"</h4>");
+	//document.write("</h4>"+text+"</h4>");
 	//alert(text);
 	data={
 		qnum:ss,
@@ -165,7 +170,7 @@ const delete_qnum=function(ss,qp){
 			url:'/space/spaceDetail/qnadelete',
 			data:data,
 			cache:false,
-			suceess:function(res){
+			success:function(res){
 				//alert(res);
 				//if(res>0){
 				alert('글이 삭제되었습니다')
