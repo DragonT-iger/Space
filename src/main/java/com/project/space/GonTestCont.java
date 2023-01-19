@@ -1,9 +1,12 @@
 package com.project.space;
 
+
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,12 +16,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
+import com.project.interceptor.CommonUtil;
+import com.project.space.domain.Heart_LikeVO;
 import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.NaverLoginCallbackVO;
 import com.project.space.domain.NaverLoginVO;
+import com.project.space.domain.Space_InfoVO;
+import com.project.space.domain.Space_Like;
+import com.project.space.spaceinfo.service.SpaceInfoService;
 import com.project.space.user.naverlogintest.bo.NaverLoginBO;
 import com.project.space.user.service.Mem_InfoService;
 
@@ -33,37 +42,56 @@ public class GonTestCont {
 	@Inject
 	private Mem_InfoService memberService;
 	
-	@GetMapping("/MyZimm")
-	public String zimmList() {
+	@Inject
+	private SpaceInfoService spaceinfoService;
+	
+	@Inject
+	private CommonUtil util;
+	
+	@GetMapping("/user/MyZimm")
+	public String zimmList(Model m, HttpServletRequest req) {
+		HttpSession ses=req.getSession();
+		Mem_InfoVO mivo=(Mem_InfoVO)ses.getAttribute("loginUser"); //세션에 저장된 유저 정보
+		
+		List<Space_Like> hlArr=this.spaceinfoService.selectUserLikeSpace(mivo.getUserid());
+		
+		log.info("hlArr: "+hlArr);
+		m.addAttribute("hlArr", hlArr);
+		
 		return "ajax/ilgon/MyZimm";
 	}
-	@GetMapping("/MyReviewList")
+	@GetMapping("/user/MyZimmdelete")
+	public String zimmDelete(Model m, HttpServletRequest req, @RequestParam int hnum) {
+		log.info("hnum: "+hnum);
+
+		//db에서 글 삭제 처리
+		int n=this.spaceinfoService.deleteLike(hnum);
+		
+		String str=(n>0)? "삭제되었습니다":"삭제 실패";
+		String loc=(n>0)? "/space/user/MyZimm":"/space/user/MyZimm";
+		return util.addMsgLoc(m, str, loc);
+	}
+	
+	
+	@GetMapping("/user/MyReviewList")
 	public String myReviewList() {
 		
 		return "ajax/ilgon/MyReviewList";
 	}
-	@GetMapping("/MyModify")
-	public String mymodify() {
-		return "ajax/Pages/MyModify";
-	}
-	@GetMapping("/MyReservationCheck")
+
+	/*
+	 * @GetMapping("/user/MyModify") public String mymodify() { return
+	 * "ajax/Pages/MyModify"; }
+	 */
+	/* ----등록유저------ */
+	@GetMapping("/owner/MyReservationCheck")
 	public String myReservationCheck() {
 		return "ajax/OwnerPage/MyReservationCheck";
 	}
-	@GetMapping("/MySpaceEdit")
+	@GetMapping("/owner/MySpaceEdit")
 	public String mySpaceEdit() {
 		
 		return "ajax/OwnerPage/MySpaceEdit";
-	}
-	@GetMapping("/MySpaceInsert")
-	public String mySpaceInsert() {
-		
-		return "ajax/OwnerPage/MySpaceInsert";
-	}
-	@GetMapping("/MySpaceList")
-	public String mySpaceList() {
-		
-		return "ajax/OwnerPage/MySpaceList";
 	}
 	
 	/*네로아 테스트*/
@@ -128,30 +156,34 @@ public class GonTestCont {
 		return "ajax/Pages/MyPage";
 	}
 	*/
-	@GetMapping("/NaverDelete")
+	@GetMapping("user/NaverDelete")
 	public String naverDelete(HttpSession session) throws Exception{
 		OAuth2AccessToken ReadSessionToken = (OAuth2AccessToken) session.getAttribute("naver_oauthToken");
 		//log.info("NaverDelete // access_token ===>"+ReadSessionToken.getParameter("access_token"));
-		log.info(ReadSessionToken.getAccessToken());
+		//log.info(ReadSessionToken.getAccessToken());
+			
 		String deleteTokenUrl = naverLoginBO.NaverDeleteToken(ReadSessionToken.getAccessToken());
-		log.info("deleteTokenUrl====>"+deleteTokenUrl);
+		//log.info("deleteTokenUrl====>"+deleteTokenUrl);
 		URL obj = new URL(deleteTokenUrl); // 호출할 url
         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
         con.setRequestMethod("GET");
         con.connect();
 		log.info(con.getResponseCode());
+		
+		Mem_InfoVO user = (Mem_InfoVO) session.getAttribute("loginUser");
+		memberService.deleteUser(user);
 		session.invalidate();
 		return "redirect:/";
 	}
 	@PostMapping("/NaverJoin")
-	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo) {
+	public String memberInfoAdd(Model m , @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
 		log.info("NaverJoin post value VO===>"+vo);
-		m.addAttribute("MemInfo",vo);
-		m.addAttribute("flag","NAVER");
-		return "ajax/ilgon/NaverJoin";
+		rttr.addFlashAttribute("MemInfo",vo);
+		rttr.addFlashAttribute("flag","NAVER");
+		return "redirect:Join";
 	}
-	@PostMapping("/Join")
-	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo) {
+	@PostMapping("/Naverjoin")
+	public String joinEnd(Model m, @ModelAttribute Mem_InfoVO vo , RedirectAttributes rttr) {
 		log.info("join === user :"+vo);
 		if(vo.getMname()==null||vo.getUserid()==null||vo.getMpwd()==null||
 				vo.getMname().trim().isEmpty()||vo.getUserid().trim().isEmpty()
@@ -161,7 +193,11 @@ public class GonTestCont {
 		
 		int n=memberService.createUser(vo);
 		//성공하면 home 실패시 뒤로가기
-		String loc=(n>0)?"redirect:/":"redirect:ajax/ilgon/NaverJoin";
+		if(n<0) {
+			rttr.addFlashAttribute("MemInfo",vo);
+			rttr.addFlashAttribute("flag","NAVER");
+		}
+		String loc=(n>0)?"redirect:/":"redirect:Join";
 		
 		return loc;
 	}//----------------
