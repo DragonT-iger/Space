@@ -38,6 +38,14 @@
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/ce9db0be33.js" crossorigin="anonymous"></script>
 </head>
+<style>
+.eng{
+width:60px;
+height:40px;
+
+margin:25px;
+}
+</style>
 <body>
 	<div class="container-xxl bg-white p-0">
 		<!-- Spinner Start -->
@@ -60,7 +68,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="navbar-nav ms-auto py-0 pe-4">
-						<a onclick="change()">Eng</a>
+						<a class="eng btn btn-primary" onclick="change()">Eng</a>
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
 							<c:if test="${loginUser.status ne null}">

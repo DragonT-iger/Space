@@ -7,7 +7,13 @@
 
 <c:import url="/Spacetop" charEncoding="utf-8"/>
 
-
+<head>
+<style>
+.time_booking{
+margin:0px 0px 0px 100px;
+}
+</style>
+</head>
 
 <%-- <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
@@ -56,10 +62,12 @@
 	</div>
 	<hr>
 	
+	
 	<c:import url="/ReservationAjax"></c:import>
-		
+	
 	<hr>
 	<div class="time_booking">
+	<br>
 		<div class="time_now">
 			<span id="check_year2">${today_info.search_year}</span>년
 			<span id="check_month2">${today_info.search_month}</span>월
@@ -77,6 +85,7 @@
 		
 		<div class="time_controller slick_slider">
 			<div class="time_controller_inner">
+			<p></p>
 				<form name="rf" id="rf" method="post" >
 					<input id="check_space" type="hidden" value="${svo.snum}">
 					<input id="check_user" type="hidden" value="${loginUser.userid}">
@@ -84,16 +93,17 @@
 					<input id="check_Eprice" type="hidden" value="${svo.ecost}">
 					<input id="check_minn" type="hidden" value="${svo.minn}">
 					
-					대여 시작 시간을 선택해주세요 : <input id="startTime" type="text" name="rtstart" autocomplete="off"><br>
-					대여 종료 시간을 선택해주세요 : <input id="endTime" type="text" name="rtend" autocomplete="off"><br>
+					대여 시작 시간을 선택해주세요 : <input id="startTime" type="text" name="rtstart" autocomplete="off"><br><br>
+					대여 종료 시간을 선택해주세요 : <input id="endTime" type="text" name="rtend" autocomplete="off"><br><br>
 					
 					예약하실 인원을 선택해주세요 : 
 					<!-- <input type="button" id="btn_minus_count" onclick="javascript:this.form.pmCount.value--" value="-">  -->
 					<input id="btn_pm_count" type="number" name="pmCount" value="${svo.minn}" min="1" max="${svo.maxn}">
 					<!-- <input type="button" id="btn_plus_count" onclick="javascript:this.form.pmCount.value++" value="+"> -->
-					
+			
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
+							<br>
 						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#paymentModal">예약</button>
 					</div>
 				</form>

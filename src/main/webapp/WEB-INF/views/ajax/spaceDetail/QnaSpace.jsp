@@ -3,16 +3,40 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<head>
+<style>
+
+#qna_qnum{
+font-size: 100px;
+weight:100px;
+}
+
+.user_name{
+float:left;
+
+
+
+}
+.leftq{
+float:right;
+
+
+}
+</style>
+</head>
 
 <div id="s_qna">
 <div id="qna_question">
 	<div id="qna_head">
-		<h4>Q&A
+		<h4 class="fa-solid fa-meteor">Q&A
 			<strong>${paging.totalCount}</strong>
 		</h4>
-		<a class="btn_qna_write">
+		<br>
+		
+		<a class="btn btn-primary btn_qna_write">
 			<span onclick="qna_write()">질문 작성하기</span>
 		</a>
+		<br><br>
 	</div>
 	
 	<div id="body_change_qna">
@@ -47,9 +71,9 @@
 					
 					</div>
 					
-					<div class="user_name">${qna.userid}
+					<div class="user_name">${qna.userid}</div>
 						<span class="leftq" onclick="delete_qnum(${qna.qnum})">x</span>
-					</div>
+					
 					<p id="qna_title">${qna.qtitle}</p>
 					<p>${qna.qcontent}</p>
 					<p class="qd">${qna.qdate}</p>

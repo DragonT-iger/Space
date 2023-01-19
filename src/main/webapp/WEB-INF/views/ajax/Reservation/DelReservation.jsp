@@ -2,18 +2,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:import url="/Spacetop" charEncoding="utf-8" />
+
+<style>
+
+.header{
+text-align:center;
+}
+.body{
+text-align:center;
+margin-left:0px auto;
+margin-right:0px auto;
+
+
+}
+</style>
+
 <div id="DelR">
 <form name="DelR" method="post" action="${pageContext.request.contextPath}/DelR">
 <input type="hidden" id="rtnum" name="rtnum" value="${drvo.rtnum}" class="form-control">
 <input type="hidden" id="userid" name="userid" value="${loginUser.userid}" class="form-control">
 <input type="hidden" name="to" id="to" class="form-control"  value="${loginUser.hp}">
-<table>
+<table class="table1">
 	<thead class="header">
 		<tr class="title">
 			<th>예약취소 요청</th>
 		</tr>
 	</thead>
-
+	<br>
 	<tbody class="body">
 		<tr class="body_one">
 			<td>예약한 공간</td>

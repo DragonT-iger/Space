@@ -100,7 +100,7 @@
 	color: #333;
 }
 
-.btn {
+.btn1 {
 	padding: 10 30px;
 	margin: 0 5px;
 	border-radius: 20px;
@@ -181,7 +181,7 @@ margin:20px;
 	<c:forEach var="hashtag" items="${hashtag}">
 		<input type="hidden" id="hashTag" name="hashTag" value="on_off"
 			style="width: 25%">
-		<button class="btn btn-outline-primary"
+		<button class="btn1 btn btn-outline-primary"
 			onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
 	</c:forEach>
 
@@ -192,8 +192,8 @@ margin:20px;
 <div class="search_wrap">
 	<div class="search_area text-center">
 		<input type="text" id="keyword" name="keyword" value="">
-		<button class="btn btn-secondary" onclick="listPaging('search')">Search</button>
-		<button type="button" class="btn btn-secondary"
+		<button class="btn1 btn btn-secondary" onclick="listPaging('search')">Search</button>
+		<button type="button" class="btn1 btn btn-secondary"
 			onclick="location.href='http://localhost:8080/space/'">초기화</button>
 	</div>
 </div>
@@ -213,9 +213,9 @@ margin:20px;
 		</c:forEach>
 	</div>
 	<div class="text-center">
-		<span><button class="btn btn-primary"
+		<span><button class="btn1 btn btn-primary"
 				onclick="listPaging('prev')">이전</button></span> <span><button
-				class="btn btn-primary" onclick="listPaging('next')">다음</button></span>
+				class="btn1 btn btn-primary" onclick="listPaging('next')">다음</button></span>
 	</div>
 </section>
 <a href="http://pf.kakao.com/_xnHWixj" target="-blank">

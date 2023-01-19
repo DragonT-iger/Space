@@ -9,7 +9,11 @@
 		width:100%;
 		height:300px;
 	}
+	.container{
+		padding: 0px 100px 0px 100px;
+	}
 </style>
+<p></p>
 <div class="container" id="myReservation_wrap">
 <!-- 	결제날짜시간
 		회원명
@@ -109,6 +113,8 @@
 		</c:forEach>
 		</c:if>
 </div>
+<br>
+
 <c:import url="/Spacefoot" charEncoding="utf-8" />
 
 <%@include file="/WEB-INF/views/ajax/spaceDetail/ReviewWrite.jsp" %>
