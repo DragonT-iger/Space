@@ -135,6 +135,7 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		map.put("userid", userid);
 		map.put("point", point);
 		return memberMapper.updateUserPoint(map);
-	}
+	}	
+	
 
 }

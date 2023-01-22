@@ -265,4 +265,29 @@ select * from(
         group by r.searchdate , m.searchdate, m.joincount, r.rescount
 		order by m.searchdate asc
 </select>
+
+ <!-- 테스트코드용 매퍼 -->
+<insert parameterType="MemberInfo" id="createUserTest">
+	insert into mem_info(MNAME,NICKNAME,USERID,MPWD,HP,BIRTH,STATUS,POINT,MRANK,BANK_CODE,ACCOUNT,POINTADD,MDATE)
+	values(#{mname},#{nickname},#{userid},#{mpwd},#{hp},#{birth:VARCHAR},#{status},#{point},#{mrank},#{bank_code:VARCHAR},#{account:VARCHAR},0,#{mdate})
+</insert>
+
+<insert id="SpaceInfoInsertTest" parameterType="SpaceInfo">
+	insert into space_info(snum, sname, userid, minn, maxn, bcost, ecost, spost, saddr1, saddr2, slong, slat, sdate, h_code, simage1, simage2, simage3, simage4, scontents,srule)
+	values(space_info_seq.nextval, #{sname}, #{userid}, #{minn}, #{maxn}, #{bcost}, #{ecost}, #{spost:VARCHAR}, #{saddr1:VARCHAR}, #{saddr2:VARCHAR}, #{slong:VARCHAR}, #{slat:VARCHAR}, sysdate, #{h_code}, #{simage1:VARCHAR}, #{simage2:VARCHAR}, #{simage3:VARCHAR}, #{simage4:VARCHAR}, #{scontents:VARCHAR}, #{srule:VARCHAR})
+</insert>
+
+<select id="testUserList" resultType="MemberInfo">
+	select mem_info.*,decode(status,1,'등록유저',0,'일반유저',-2,'정지회원',-3,'탈퇴회원')
+		statusStr from mem_info where status = '0'
+</select>
+
+<select id="testselectBySnum" resultType="SpaceInfo" parameterType="_int">
+	select * from space_info where snum=#{value}
+</select>
+
+<insert id="testinsertBooking" parameterType="Reservation">
+	insert into reservation(rtnum,snum,userid,rtstartdate,rtstart,rtend,rtnumber,totalprice,rtstatus,rdate)
+	values(#{rtnum},#{snum},#{userid},#{rtstartdate},#{rtstart},#{rtend},#{rtnumber},#{totalprice},0,#{rdate})
+</insert>
 </mapper>

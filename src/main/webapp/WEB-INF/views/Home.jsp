@@ -139,7 +139,6 @@
 </div>
 
 
-
 <div class="search_wrap">
 	<div class="search_area text-center">
 		<input type="text" id="keyword" name="keyword" value=""
@@ -151,6 +150,22 @@
 
 
 <section class="padding80 margin50">
+	<c:if test="${RecSpaceArr ne null}">
+	<h2 class="text-center">추천 공간 리스트</h2>
+	<div id="space-recomend-list" class="flex-container">
+		<c:forEach var="Space" items="${RecSpaceArr }">
+			<div id="space-item" class="flex-item">
+				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
+					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
+				</a>
+				<p class="text">${Space.sname}</p>
+				<p class="text">${Space.saddr1}</p>
+				<p class="text">${Space.saddr2}</p>
+			</div>
+		</c:forEach>
+	</div>
+	<hr color="red" class="mt-3 mb-3">
+	</c:if>
 	<div id="space-list" class="flex-container">
 		<c:forEach var="Space" items="${spaceArr}">
 			<div id="space-item" class="flex-item">

@@ -171,4 +171,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateUserPoint" parameterType="map">
     	update mem_info set point=point+#{point}, pointadd=pointadd+#{point} where userid=#{userid}
   	</update>
+
 </mapper>

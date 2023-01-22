@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserTestController {
 	/*
-	//而⑦듃濡ㅻ윭 �뀒�뒪�듃�떆�뿉 �븘�슂�븳 媛앹껜	
+	//컨트롤러 테스트예제
 	@Inject
 	private WebApplicationContext ctx;
 	
@@ -42,7 +42,7 @@ public class UserTestController {
 	}
 	*/
 
-	//�꽌鍮꾩뒪 �뀒�뒪�듃�떆�뿉 �븘�슂�븳 媛앹껜
+	//서비스단 or mapper쪽만 사용할 경우 예제
 	/*
 	@Inject
 	private Mem_InfoMapper mapper;
