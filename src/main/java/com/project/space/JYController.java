@@ -228,7 +228,10 @@ public class JYController {
 			UnsupportedEncodingException, HttpClientErrorException {
 		log.info("rtvo insert=="+rtvo);
 		log.info("message: "+messageDto);
-		messageDto.setContent(rtvo.getUserid()+"님 예약이 완료되었습니다");
+		
+		SimpleDateFormat sf=new SimpleDateFormat("yyyy년 MM월 dd일");
+		String date=sf.format(rtvo.getRtstartdate());
+		messageDto.setContent(rtvo.getUserid()+"님 "+date+"로 예약이 완료되었습니다");
 		
 		int res=this.reservationService.insertBooking(rtvo);
 		
