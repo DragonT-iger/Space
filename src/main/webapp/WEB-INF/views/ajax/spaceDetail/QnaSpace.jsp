@@ -48,11 +48,13 @@
 					</div>
 					
 					<div class="user_name">${qna.userid}
-						<span class="leftq" onclick="delete_qnum(${qna.qnum})">x</span>
+						<span class="leftq" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">x</span>
 					</div>
-					<p id="qna_title">${qna.qtitle}</p>
-					<p>${qna.qcontent}</p>
-					<p class="qd">${qna.qdate}</p>
+					<div>
+						<p id="qna_title">${qna.qtitle}</p>
+						<p>${qna.qcontent}</p>
+						<p class="qd">${qna.qdate}</p>
+					</div>
 				</div>
 			</li>
 		</c:forEach>
@@ -96,7 +98,7 @@
 	background-color:#FFEFD5;
 }
 #qna_qnum{
-	font-size:1px;
+	font-size: 1px;
 }
 .qd{
 	font-size:10px;
@@ -106,6 +108,9 @@
 }
 .leftq{
 	padding-left:70px;
+}
+.user_name{
+	float:left;
 }
 </style>
 
@@ -145,34 +150,31 @@ const qna_rewrite=function(qnum){
 	})
 }
 
-const delete_qnum=function(ss){
+const delete_qnum=function(ss,qp){
 	//alert(snum);
 	//let qn=$('#qna_qnum').html();
 	//alert(qn);
 	//var qp=$('#check_qpwd').val()
 	//alert(qp);
-	alert(ss);
+	//alert(ss);
 	var text=prompt('비밀번호를 입력해주세요');
-	document.write("</h4>"+text+"</h4>");
+	//document.write("</h4>"+text+"</h4>");
 	//alert(text);
-
 	data={
 		qnum:ss,
 		qpwd:text
 	}
-	
-	//if(text==qp){
+	if(text==qp){
 		$.ajax({
 			type:'post',
 			url:'/space/spaceDetail/qnadelete',
 			data:data,
 			cache:false,
-			suceess:function(res){
-				alert(res);
-				window.location.reload();
+			success:function(res){
+				//alert(res);
 				//if(res>0){
-				//	alert('글이 삭제되었습니다')
-				//	window.location.reload();
+				alert('글이 삭제되었습니다')
+				location.reload();
 				//}
 					//alert('비밀번호가 일치하지 않습니다')
 					//window.location.replace();
@@ -180,15 +182,15 @@ const delete_qnum=function(ss){
 			},
 			error:function(err){
 				alert('err: '+err.status);
-				//window.location.replace();
+				location.reload();
 			}
 		});
-	//}else if(text==null){
-	//	alert('비밀번호를 입력해주세요');
-	//	window.location.replace();
-	//}else if(text!=qp){
-	//	alert('비밀번호가 일치하지 않습니다');
-	//	window.location.replace();
-	//}
+	}else if(text==null){
+		alert('비밀번호를 입력해주세요');
+		location.reload();
+	}else if(text!=qp){
+		alert('비밀번호가 일치하지 않습니다');
+		location.reload();
+	}
 }
 </script>

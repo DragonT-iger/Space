@@ -5,16 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.sound.sampled.Port.Info;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.interceptor.PapagoService;
 import com.project.space.domain.HashtagVO;
-import com.project.space.domain.Mem_InfoVO;
 import com.project.space.domain.Space_InfoVO;
 import com.project.space.spaceinfo.service.SpaceInfoService;
 
@@ -43,32 +40,12 @@ public class HomeController {
 	
 	@RequestMapping("/changeLang")
 	@ResponseBody
-	public String changeLang(@RequestParam String html) {
-		//log.info("변환 전 값========"+html);
+	public String changeEng(@RequestParam String html) {
+		log.info("변환 전 값========"+html);
 		PapagoService ps=new PapagoService();
 		String str=ps.getTransPages(html);
-		//log.info("영어 변환========="+str);
+		log.info("영어 변환========="+str);
 		return str;
-	}
-	
-	@GetMapping("/changeToggle")
-	@ResponseBody
-	public String changeToggle(@CookieValue(value="PaPagoToggle",required=false, defaultValue="false") String value , HttpServletResponse res) {
-		Cookie cookie = new Cookie("PaPagoToggle",value);
-		
-		if(cookie.getValue().equals("true")) {
-			cookie = new Cookie("PaPagoToggle",null);
-			cookie.setMaxAge(0);
-			cookie.setPath("/");
-			res.addCookie(cookie);
-			return "false";
-		}else {
-			cookie = new Cookie("PaPagoToggle","true");
-			cookie.setMaxAge(60*60*30); //30분저장
-			cookie.setPath("/");
-			res.addCookie(cookie);
-			return "true";
-		}		
 	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -77,7 +54,7 @@ public class HomeController {
 	}
 	// MainHome
 	   @RequestMapping(value = "/", method = RequestMethod.GET)
-	   public String Mainhome(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage, HttpSession ses) {
+	   public String Mainhome(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
 	      logger.info("connected Home");
 	      Map<String, String> pagingMap = new HashMap<String, String>();
 	      int pageSize = 8;
@@ -102,27 +79,11 @@ public class HomeController {
 	      }
 	      log.info(hashtag);
 	      model.addAttribute("hashtag", hashtag);
-	      
-	      Mem_InfoVO loginUser = (Mem_InfoVO) ses.getAttribute("loginUser");
-	      
-	      if(loginUser!=null) {
-	    	  String userid = loginUser.getUserid();
-	    	  try {
-				List<Space_InfoVO> RecSpaceArr=spaceinfoservice.getRecommendSpace(userid);
-				log.info("RecSpaceArr===>>>"+RecSpaceArr);
-				log.info("RecSpaceArr Size===>>>"+RecSpaceArr.size());
-				if(RecSpaceArr!=null && RecSpaceArr.size()!=0) {
-					model.addAttribute("RecSpaceArr", RecSpaceArr);
-				}else {
-					model.addAttribute("RecSpaceArr",null);
-				}
-			  } catch (Exception e) {
-					e.printStackTrace();
-			  }
-	      }else {
-	    	  model.addAttribute("RecSpaceArr",null);
-	      }
+	   
 
+	   
+	      
+	      
 
 	      return "Home";
 	   }

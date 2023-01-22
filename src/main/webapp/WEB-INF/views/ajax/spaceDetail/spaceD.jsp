@@ -44,6 +44,10 @@ nav ul li {
 	z-index: 5;
 	margin-top: 10%;
 }
+.imgbox>a{
+	width:70px;
+	height:50px;
+}
 </style>
 <!-- 지도 관련 -->
 <style>
@@ -200,7 +204,7 @@ nav ul li {
 				<div class="map_wrap">
 				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				    <div id="map_tag" class="hAddr">
-				        <span class="title"> ${sdvo.saddr1 } </span>
+				        <span class="title"> ${sdvo.saddr1} </span>
 				        <span id="centerAddr"></span>
 				    </div>
 				</div>	
@@ -250,14 +254,16 @@ nav ul li {
 				<c:if test="${svoArr ne null or not empty svoArr}">
 				<c:forEach var="otherspace" items="${svoArr}">
 					<div class="ospace">
-						<div class="box">
+						<div class="imgbox">
+							<a href="/space/spaceDetail?snum=${otherspace.snum}">
 							<c:if test="${otherspace.simage1 eq null}">
 								<img src="./img/noSpaceImage.jpg"/>
 							</c:if>
 							<c:if test="${otherspace.simage1 ne null}">
-								<img src="../resources/SpaceInfoImg/${otherspace.simage1}"/>
+								<img src="./resources/SpaceInfoImg/${otherspace.simage1}"/>
 							</c:if>
-							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
+							${otherspace.sname}
+							</a>
 						</div>
 					</div>
 				</c:forEach>

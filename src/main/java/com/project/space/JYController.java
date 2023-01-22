@@ -169,7 +169,7 @@ public class JYController {
 	@PostMapping(value="/ReservationModal", produces="application/json")
 	@ResponseBody
 	public ModelMap ReservationModal(@RequestBody Map<String,String> pay) {
-		log.info(pay);
+		log.info("세팅전"+pay);
 		ReservationVO rvo=new ReservationVO();
 		rvo.setSnum(Integer.parseInt(pay.get("rtspace")));  //공간번호
 		rvo.setUserid(pay.get("rtuser")); //회원아이디
@@ -181,12 +181,44 @@ public class JYController {
 		rvo.setCountprice(Integer.parseInt(pay.get("rtcount")), Integer.parseInt(pay.get("rtminn")), Integer.parseInt(pay.get("rtecost"))); //인원추가금
 		rvo.setTimePrice(rvo.getTotalTime(), Integer.parseInt(pay.get("rtbcost"))); //시간당금액
 		rvo.setTotalPrice(rvo.getCountPrice(), rvo.getTimePrice()); //총 예약금액
+		log.info("세팅후"+rvo);
 		
 //		Mem_InfoVO pointM=this.meminfoService.getUser(pay.get("rtuser"));
-				
 		ModelMap m=new ModelMap();
-		m.addAttribute("result", rvo);
-//		m.addAttribute("pointM", pointM);
+		
+		int cst=Integer.parseInt(rvo.getRtstart().substring(0, 2));
+		log.info("가공한 startTime"+cst);
+		int ced=Integer.parseInt(rvo.getRtend().substring(0, 2));
+		log.info("가공한 endTime"+ced);
+		
+		List<ReservationVO> TimeT=reservationService.bookingTimeInfo(rvo);
+		log.info("db불러오기"+TimeT);
+		int dst[]=new int[TimeT.size()];
+		int ded[]=new int[TimeT.size()];
+		
+		if(TimeT!=null && TimeT.size()!=0) {
+			for(int i=0;i<TimeT.size();i++) {
+				dst[i]=Integer.parseInt(TimeT.get(i).getRtstart().substring(0,2));
+				log.info("db 시작시간 세팅=="+dst);
+				ded[i]=Integer.parseInt(TimeT.get(i).getRtend().substring(0,2));
+				log.info("db 끝시간 세팅=="+ded);
+				if(cst!=dst[i] && cst!=ded[i] && ced!=dst[i] && ced!=ded[i]) {
+					while(cst<ded[i]) {
+						if(ced<dst[i]) {
+							m.addAttribute("result",rvo);
+							return m;
+						}else {
+							m.addAttribute("result",0);
+							return m;
+						} //if
+					} //while
+				}else {
+					m.addAttribute("result",0);
+					return m;
+				} //if
+			} //for
+		} //if
+		m.addAttribute("result",rvo);
 		return m;
 	}
 	
