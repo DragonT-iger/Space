@@ -58,4 +58,7 @@ public interface SpaceInfoService {
 	
 	//해시태그 목록가져오기
 	public List<HashtagVO> getHashTagAll();
+	
+	//개인 공간 추천 (Aitems)
+	public List<Space_InfoVO> getRecommendSpace(String userid)throws Exception;
 }

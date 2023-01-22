@@ -18,7 +18,10 @@ import com.project.space.spaceinfo.mapper.SpaceInfoMapper;
 public class SpaceInfoServiceImp implements SpaceInfoService{
 	@Inject
 	private SpaceInfoMapper spaceinfoMapper;
-
+	
+	@Inject
+	private AitemsService aitemsService; 
+	
 	@Override
 	public List<Space_InfoVO> selectByLoc(String keyword) {
 		// TODO Auto-generated method stub
@@ -149,6 +152,12 @@ public class SpaceInfoServiceImp implements SpaceInfoService{
 		map.put("sname", sname);
 
 		return this.spaceinfoMapper.deleteBySname(map);
+	}
+
+	@Override
+	public List<Space_InfoVO> getRecommendSpace(String userid) throws Exception{
+		
+		return aitemsService.getRecSpace(userid);
 	}
 
 

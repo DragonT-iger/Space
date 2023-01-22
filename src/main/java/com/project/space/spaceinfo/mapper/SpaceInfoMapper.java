@@ -48,5 +48,5 @@ public interface SpaceInfoMapper {
 	
 	public int getCountAny(String keyword);
 	public List<Space_InfoVO> getSpaceInfoPageAll(Map<String, String> map);	
-	public List<HashtagVO> getHashTagAll();	
+	public List<HashtagVO> getHashTagAll();
 }

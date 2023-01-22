@@ -95,7 +95,7 @@
 	</div>
 </div>
 
-<c:import url="/Spacefoot" charEncoding="utf-8"/>
+
 <!-- 플러그인 javascript 로딩 -->
 <script src="${pageContext.request.contextPath}/js_Reservation/jquery.timepicker.min.js"></script>
 <!-- 플러그인에서 제공해주는 css 로딩 -->
@@ -130,6 +130,10 @@
 
 function backHome(){
 	window.history.back();
+}
+
+function modal_hide(){
+	$("#paymentModal").hide();
 }
 
 $(function(){
@@ -218,7 +222,8 @@ $(function(){
 					//$('#paymentModal').modal('hide');
 					//location.reload();
 				}else{
-					$('#paymentModal').modal();
+					//$('#paymentModal').modal();
+					$('#paymentModal').show();
 					$('#snum').val(res.result.snum);
 					$('#userid').val(res.result.userid);
 					$('#rtstartdate').val(res.result.rtstartdate);
@@ -237,6 +242,6 @@ $(function(){
 }) //$()
 </script>
 
-
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
 
 <%-- <%@ include file="/WEB-INF/views/Spacefoot.jsp" %> --%>

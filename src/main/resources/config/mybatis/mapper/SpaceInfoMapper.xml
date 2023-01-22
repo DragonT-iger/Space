@@ -90,4 +90,5 @@
 	<select id="getHashTagAll" resultType="HashTag">
 		select * from HashTag
 	</select>
+	
 </mapper>
