@@ -85,9 +85,6 @@
 				$("#slat").val(data.slat);
 				
 
-			},
-			error : function() {
-				alert("실패");
 			}
 		})
 	}

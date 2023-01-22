@@ -42,8 +42,8 @@
 		select * from space_info where userid=#{userid}
 	</select>
 	
-	<select id="selectSpaceLike" parameterType="int" resultType="int">
-		select count(#{value}) from heart_like where snum=#{value}
+	<select id="selectSpaceLike" parameterType="Like" resultType="int">
+		select count(#{snum}) from heart_like where snum=#{snum} and userid=#{userid}
 	</select>
 		
 	<insert id="insertSpaceLike" parameterType="Like">

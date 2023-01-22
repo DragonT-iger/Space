@@ -173,13 +173,17 @@ public class LoginController {
 					
 				
 				int n=memberService.updateUser(user);
+				if(n>0) {
+					Mem_InfoVO loginUser = memberService.getUser(user.getUserid());
+					ses.setAttribute("loginUser", loginUser);
+				}
 				log.info(n);
 				if(n>0) {
 					Mem_InfoVO loginUser = memberService.getUser(user.getUserid());
 					ses.setAttribute("loginUser", loginUser);
 				}
 				String str=(n>0)?"회원정보 수정 완료":"수정 실패";
-				String loc=(n>0)?"../Login":"javascript:history.back()";
+				String loc=(n>0)?"/space/user/MyPage":"javascript:history.back()";
 				
 				log.info("update1 ===user: "+user);
 				m.addAttribute("message",str);
