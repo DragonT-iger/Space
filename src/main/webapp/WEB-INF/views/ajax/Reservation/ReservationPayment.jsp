@@ -20,7 +20,8 @@
 <!-- Modal Header --> 
 <div class="modal-header">
 <h4 class="modal-title">Reservation</h4>
-<button type="button" class="close" data-dismiss="modal">×</button>
+<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+<button type="button" class="close" onclick="modal_hide()">×</button>
 </div>
 
 ​
@@ -82,7 +83,8 @@
 
 <button class="btn btn-info">결제</button>
 
-<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+<!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+<button type="button" class="btn btn-danger" onclick="modal_hide()">Close</button>
 
 </div>
 
