@@ -17,6 +17,9 @@
 .dropdown-menu{
 	padding:5px;
 }
+#container-spacelist{
+	min-height:600px;
+}
 </style>
 <div class="container mt-3" id="spacelist">
 <h1 class="text-center">등록된 공간 목록</h1>

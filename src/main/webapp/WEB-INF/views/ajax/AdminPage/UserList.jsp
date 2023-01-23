@@ -17,6 +17,9 @@
 	.dropdown-menu{
 		padding:5px;
 	}
+	#container-userlist{
+		min-height:500px;
+	}
 </style>
 	<div class="container mt-3" id="userlist">
 	<h1 class="text-center">회원 목록</h1>

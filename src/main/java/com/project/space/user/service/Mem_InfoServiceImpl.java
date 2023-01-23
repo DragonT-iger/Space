@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class Mem_InfoServiceImpl implements Mem_InfoService {
 	
 	@Autowired
-	private PasswordEncoder pwencoder; //�븫�샇�솕 媛앹껜
+	private PasswordEncoder pwencoder; //비밀번호 암호화인코더
 	
 	@Inject
 	private Mem_InfoMapper memberMapper;
@@ -31,10 +31,10 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	@Override
 	public int createUser(Mem_InfoVO memvo) {
 		String beforeEncoding = memvo.getMpwd();
-		log.info("�븫�샇�솕�븯湲� �쟾 鍮꾨�踰덊샇 �솗�씤==>"+memvo.getMpwd());
+		log.info("암호화 전 비밀번호==>"+memvo.getMpwd());
 		String afterEncoding = pwencoder.encode(beforeEncoding);
 		memvo.setMpwd(afterEncoding);
-		log.info("�븫�샇�솕�맂吏� 鍮꾨�踰덊샇 �솗�씤==>"+memvo.getMpwd());
+		log.info("암호화 후 비밀번호==>"+memvo.getMpwd());
 		return memberMapper.createUser(memvo);
 	}
 
@@ -78,7 +78,7 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 	public Mem_InfoVO findUser(Mem_InfoVO findUser) throws NotUserException {
 		Mem_InfoVO user=memberMapper.findUser(findUser);
 		if(user==null) {
-			throw new NotUserException("議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎");
+			throw new NotUserException("존재하지 않은 회원 입니다");
 		}
 		return user;
 	}
@@ -88,11 +88,11 @@ public class Mem_InfoServiceImpl implements Mem_InfoService {
 		Mem_InfoVO user=this.getUser(userid);
 		log.info("mem_infoservice logincheck user==>"+user);
 		if(user==null) {
-			throw new NotUserException("議댁옱�븯吏� �븡�뒗 �븘�씠�뵒�엯�땲�떎");
+			throw new NotUserException("존재하지 않은 회원입니다.");
 		}
 		if(!pwencoder.matches(mpwd,user.getMpwd() )) {
 		//if(!user.getMpwd().equals(mpwd)) { 
-			throw new NotUserException("鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎");
+			throw new NotUserException("비밀번호가 일치하지 않습니다");
 		}
 		
 		return user;

@@ -46,6 +46,9 @@
 	float:left;
 	background-color:lightgray;
 }
+#admin_nav{
+	height: 100vh;
+}
 #content-wrap{
 	width:85%;
 	float:left;
