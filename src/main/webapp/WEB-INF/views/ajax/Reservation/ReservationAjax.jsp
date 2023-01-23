@@ -7,10 +7,26 @@
 
 <head>
 <style>
+
+
 .Body_Calendar{
-	 margin-left:auto; 
-    margin-right:auto;
+margin-left:auto;
+margin-right:auto;
+
+
 }
+
+div.todate{
+
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 3px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+
+
 </style>
 </head>
 
@@ -80,7 +96,9 @@
 							<div id="sch_date">
 								<c:forEach var="scheduleList" items="${dList.schedule_date_arr}" varStatus="schedule_data_arr_status"> 
 								<c:if test="${scheduleList.rtstartdate eq dList.YMD}">
-									<p class="date_subject">${scheduleList.rtnumber}명: ${scheduleList.rtstart}~${scheduleList.rtend}</p>
+									<p class="date_subject">${scheduleList.rtnumber}명<br>
+									${scheduleList.rtstart}~${scheduleList.rtend}
+									</p>
 								</c:if>
 								</c:forEach>
 							</div>	

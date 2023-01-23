@@ -18,6 +18,7 @@
 
 .point_total{
 	padding: 0px 100px 0px 100px;
+	width:100%;
 }
 .pay{
 
@@ -31,8 +32,26 @@ height:40px;
 .point_inner{
 	text-align:center;
 
-
 }
+.btn{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.havePoint{
+	margin-top:20px;
+	margin-bottom:20px;
+	text-align:center;
+}
+
+.point_body{
+display: flex;
+justify-content: center;
+}
+
+.point_inner{
+padding:100px;
+}
+
 </style>
 
 <div class="point_total">
@@ -53,7 +72,7 @@ height:40px;
 
 		<div class="point_body">
 			<div class="point_inner">
-				<div class="point_1" >
+				<div>
 					<h5>포인트 충전 내역</h5>
 					<span>충전된 총 포인트: <fmt:formatNumber value="${mivo.pointadd}" pattern="###,###"/></span>
 					<hr>
@@ -83,7 +102,10 @@ height:40px;
 					</ul>
 				</div>
 				
-				<div class="point_1">
+
+				
+			</div>
+					<div class="point_inner">
 					<h5>포인트 사용 내역</h5>
 					<span>사용된 총 포인트: <fmt:formatNumber value="${resPrice}" pattern="###,###,###"/></span>
 					<hr>
@@ -111,38 +133,15 @@ height:40px;
 					</c:if>
 					</ul>
 				</div>
-				
-			</div>
-
 						
 		</div>
 		
 		
 	</div>
 </div>
-<c:import url="/Spacefoot" />
 
-<style>
-.btn{
-	margin-top:20px;
-	margin-bottom:20px;
-}
-.havePoint{
-	margin-top:20px;
-	margin-bottom:20px;
-	text-align:center;
-}
+<c:import url="/Spacefoot" charEncoding="utf-8" />
 
-.point_total{
-	width:100%;
-	height:800px;
-}
-.point_1{
-	width:48%;
-	height:500px;
-	float:left;
-}	
-</style>
 
 <script>
     function requestPay() {

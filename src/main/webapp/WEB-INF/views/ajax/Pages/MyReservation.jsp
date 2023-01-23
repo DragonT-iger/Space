@@ -12,6 +12,24 @@
 	.container{
 		padding: 0px 100px 0px 100px;
 	}
+	
+	.number{
+		float:left;
+		margin:0px 0px 0px 10px;
+	}
+	
+	.success{
+	float:left;
+	}
+		.review{
+		width:100px;
+		height:38px;
+		float:left;
+		margin:0px 10px 0px 0px;
+		
+		
+	}
+	
 </style>
 <p></p>
 <div class="container" id="myReservation_wrap">
@@ -41,12 +59,8 @@
 		<c:forEach var="resArr" items="${resArr}">
 		<table class="table table-border" id="reservation_table" style="border:1px solid #f5f5f5">
 		<tr>
-			<td>
-			<c:if test="${resArr.rtstartdate <= now}">
-				<a id="writeR" class="nav-link" href="#ReviewModal" data-toggle="modal" onclick="reviewWrite('${resArr.rtnum}')">리뷰쓰기</a>
-			</c:if>
-			</td>
-			<td style="color:red;">${resArr.rtnum}</td>
+			
+			<td class="number" style="color:red;">${resArr.rtnum}</td>
 			<td colspan="2" style="color:blue;"><fmt:formatDate value="${resArr.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></td>
 		</tr>
 		<tr>
@@ -98,9 +112,11 @@
 		<tr>
 			<c:if test="${resArr.rtstartdate <= now}">
 				<td colspan="4">
-				<button type="button" id="done" class="btn btn-danger" onclick="done()">이용완료</button>
+				<button type="button" id="done" class="class=success btn btn-danger" onclick="done()">이용완료</button>
+				<a id="writeR" class="review btn btn-primary nav-link" href="#ReviewModal" data-toggle="modal" onclick="reviewWrite('${resArr.rtnum}')">리뷰쓰기</a>
 				</td>
 			</c:if>
+			
 			
 			<c:if test="${resArr.rtstartdate > now}">
 				<td colspan="4">

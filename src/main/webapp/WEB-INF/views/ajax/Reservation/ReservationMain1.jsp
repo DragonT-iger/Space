@@ -9,9 +9,15 @@
 
 <head>
 <style>
-.time_booking{
-margin:0px 0px 0px 100px;
-}
+
+	.wrap{
+	padding: 0px 150px 0px 150px;
+	}
+	
+	a.btn1{
+	
+	margin:20px 0px 20px 0px;
+	}
 </style>
 </head>
 
@@ -34,20 +40,16 @@ margin:0px 0px 0px 100px;
  --%>
 
 <%-- <%@ include file="/WEB-INF/views/Spacetop.jsp" %> --%>
-<style>
-	.wrap{
-	padding: 0px 100px 0px 100px;
-	}
 
-</style>
 
 <div class="wrap">
 	<div class="bookingStep">
 	
 	<div class="section_spaceInfo">
 		<div class="top_spaceTitle">
-			<a class="btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
+			<a class="btn1 btn btn-primary btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
 			<h2 class="spaceName"><a href="#" onclick="onSpaceClick()" class="title">${svo.sname}</a></h2>
+			<p class="fa-solid fa-meteor">예약 안내</p>
 		<div>방이름: ${svo.sname}<br>
 			기본인원: ${svo.minn}<br>
 			최대인원: ${svo.maxn}<br>
@@ -56,6 +58,7 @@ margin:0px 0px 0px 100px;
 		</div>
 		</div>
 		
+		<br>
 		<div class="spaceVisual">
 			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
@@ -104,7 +107,8 @@ margin:0px 0px 0px 100px;
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
 							<br>
-						<button class="nav-link" id="RPModal" data-toggle="modal" data-target="#paymentModal">예약</button>
+						<button class="nav-link" id="RPModal" data-toggle="modal">예약</button>
+						<!--  data-target="#paymentModal" -->
 					</div>
 				</form>
 			</div>
@@ -241,8 +245,8 @@ $(function(){
 				//alert(JSON.stringify(res));
 				if(res.result==0){
 					alert('예약할 수 없는 시간입니다');
-					$('#paymentModal').modal('hide');
-					location.reload();
+					//$('#paymentModal').modal('hide');
+					//location.reload();
 				}else{
 					$('#paymentModal').modal();
 					$('#snum').val(res.result.snum);

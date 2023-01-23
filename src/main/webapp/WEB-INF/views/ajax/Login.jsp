@@ -9,13 +9,10 @@
 	charset="utf-8"></script>
 <head>
 <style>
-.wrap {
-	padding: 0px 100px 0px 500px;
-
-
-	
+.wrap{
+	display: flex;
+	justify-content: center;
 }
-
 
 
 </style>
@@ -35,8 +32,8 @@
 			<form  action="login" method="post">
 				<div class="row g-4">
 					<div class="col-12">
-						<div class="row gy-4">
-							<div class="col-10">
+						<div class="col-12">
+							<div class="col-12">
 								<h5
 									class="section-title ff-secondary fw-normal text-start text-primary">ID</h5>
 								<div class="col-md-6">

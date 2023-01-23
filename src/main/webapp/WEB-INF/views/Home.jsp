@@ -15,7 +15,6 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-
 .flex-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -111,41 +110,40 @@
 }
 
 #space-list {
-	width:100%;
-
-
-	
+	width: 100%;
 }
 
 #space-item {
 	background-color: transparent;
 	width: 20%;
 	height: 100%;
-
-	
 }
 
 .img {
 	width: 100%;
 	height: 100%;
 	border-radius: 5%;
-
-	  
 }
 
 .text {
 	font-family: 'Oswald', sans-serif;
 	color: black;
-	font-weight:500;
-	text-align:center;
+	font-weight: 500;
+	text-align: center;
 }
 
-.kaka{
-width:50px;
-height:50px;
-
-margin:20px;
+.kaka {
+	width: 50px;
+	height: 50px;
+	margin: 20px;
 }
+
+.flex-container{
+
+	display: flex;
+	justify-content: center;
+}
+
 
 </style>
 
@@ -174,55 +172,56 @@ margin:20px;
 </script> -->
 
 <div id="changeL">
-<!-- <button onclick="test()">Eng</button> -->
+	<!-- <button onclick="test()">Eng</button> -->
 
-<div class="tag" id="changeLang"
-	class="section-title ff-secondary text-start text-primary fw-normal mb-4">
-	<c:forEach var="hashtag" items="${hashtag}">
-		<input type="hidden" id="hashTag" name="hashTag" value="on_off"
-			style="width: 25%">
-		<button class="btn1 btn btn-outline-primary"
-			onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
-	</c:forEach>
-
-</div>
-
-
-
-<div class="search_wrap">
-	<div class="search_area text-center">
-		<input type="text" id="keyword" name="keyword" value="">
-		<button class="btn1 btn btn-secondary" onclick="listPaging('search')">Search</button>
-		<button type="button" class="btn1 btn btn-secondary"
-			onclick="location.href='http://localhost:8080/space/'">초기화</button>
-	</div>
-</div>
-
-
-<section class="padding80 margin50">
-	<div id="space-list" class="flex-container">
-		<c:forEach var="Space" items="${spaceArr}">
-			<div id="space-item" class="flex-item">
-				<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
-					alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
-				</a>
-				<p class="text" >${Space.sname}</p>
-				<p class="text">${Space.saddr1}</p>
-				<p class="text">${Space.saddr2}</p>
-			</div>
+	<div class="tag" id="changeLang"
+		class="section-title ff-secondary text-start text-primary fw-normal mb-4">
+		<c:forEach var="hashtag" items="${hashtag}">
+			<input type="hidden" id="hashTag" name="hashTag" value="on_off"
+				style="width: 25%">
+			<button class="btn1 btn btn-outline-primary"
+				onclick="gethashTag(${hashtag.h_code})">${hashtag.h_name}</button>
 		</c:forEach>
+
 	</div>
-	<div class="text-center">
-		<span><button class="btn1 btn btn-primary"
-				onclick="listPaging('prev')">이전</button></span> <span><button
-				class="btn1 btn btn-primary" onclick="listPaging('next')">다음</button></span>
+
+
+
+	<div class="search_wrap">
+		<div class="search1 search_area text-center">
+			<input type="text" id="keyword" name="keyword" value="">
+			<button class="btn1 btn btn-secondary" onclick="listPaging('search')">Search</button>
+			<button type="button" class="btn1 btn btn-secondary"
+				onclick="location.href='http://localhost:8080/space/'">초기화</button>
+		</div>
 	</div>
-</section>
-<a href="http://pf.kakao.com/_xnHWixj" target="-blank">
-<img class="kaka" src="https://blog.kakaocdn.net/dn/SrDTV/btrb8U2oU6B/KmR3YeMZVn4WZFZMN6QhX1/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EC%B1%84%EB%84%90%20%EB%A1%9C%EA%B3%A0%20%EB%9D%BC%EC%9A%B4%EB%93%9C.png?attach=1&knm=img.png"></a>
-<form>
-	<input type="hidden" id="currentPage" />
-</form>
+
+
+	<section class="list1">
+		<div id="space-list" class="flex-container">
+			<c:forEach var="Space" items="${spaceArr}">
+				<div id="space-item" class="flex-item">
+					<a href="spaceDetail?snum=${Space.snum}"> <img class="img"
+						alt="" src="resources/SpaceInfoImg/${Space.simage1}" />
+					</a>
+					<p class="text">${Space.sname}</p>
+					<p class="text">${Space.saddr1}</p>
+					<p class="text">${Space.saddr2}</p>
+				</div>
+			</c:forEach>
+		</div>
+		<div class="text-center">
+			<span><button class="btn1 btn btn-primary"
+					onclick="listPaging('prev')">이전</button></span> <span><button
+					class="btn1 btn btn-primary" onclick="listPaging('next')">다음</button></span>
+		</div>
+	</section>
+	<a href="http://pf.kakao.com/_xnHWixj" target="-blank"> <img
+		class="kaka"
+		src="https://blog.kakaocdn.net/dn/SrDTV/btrb8U2oU6B/KmR3YeMZVn4WZFZMN6QhX1/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EC%B1%84%EB%84%90%20%EB%A1%9C%EA%B3%A0%20%EB%9D%BC%EC%9A%B4%EB%93%9C.png?attach=1&knm=img.png"></a>
+	<form>
+		<input type="hidden" id="currentPage" />
+	</form>
 
 </div>
 

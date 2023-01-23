@@ -3,41 +3,47 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<head>
 <style>
-
-#qna_qnum{
-font-size: 100px;
-weight:100px;
+.box{
+margin:10px;
 }
 
-.user_name{
-float:left;
-
-
-
+.qlist{
+	background-color:#fdf5e6;
+}
+.qrlist{
+	background-color:#FFEFD5;
+}
+#qna_qnum{
+	font-size: 1px;
+}
+.qd{
+	font-size:10px;
+}
+#qna_title{
+	font-weight:bold;
 }
 .leftq{
-float:right;
-
+	text-align:right;
+}
+.user_name{
+	float:left;
 
 }
 </style>
-</head>
 
 <div id="s_qna">
 <div id="qna_question">
 	<div id="qna_head">
 		<h4 class="fa-solid fa-meteor">Q&A
 			<strong>${paging.totalCount}</strong>
-		</h4>
-		<br>
 		
-		<a class="btn btn-primary btn_qna_write">
+		</h4>
+	</div>
+	
+	<a class=".btn1 btn btn-primary btn_qna_write">
 			<span onclick="qna_write()">질문 작성하기</span>
 		</a>
-		<br><br>
-	</div>
 	
 	<div id="body_change_qna">
 	<div class="qna_body">
@@ -62,7 +68,7 @@ float:right;
 					
 					<c:if test="${sdvo.userid eq loginUser.userid}">
 						<c:if test="${qna.qgorder eq 0}">
-							<span class="leftq" onclick="qna_rewrite(${qna.qnum})">답변 작성하기</span>
+							<span class="leftq" onclick="qna_rewrite('${qna.qnum}')">답변 작성하기</span>
 						</c:if>
 						<%-- <c:if test="${qna.qgorder>0}">
 							<div onclick="qna_UpdateRewrite()">답변 수정하기</div>
@@ -71,12 +77,14 @@ float:right;
 					
 					</div>
 					
-					<div class="user_name">${qna.userid}</div>
-						<span class="leftq" onclick="delete_qnum(${qna.qnum},${qna.qpwd})">x</span>
-					
-					<p id="qna_title">${qna.qtitle}</p>
-					<p>${qna.qcontent}</p>
-					<p class="qd">${qna.qdate}</p>
+					<div class="user_name">${qna.userid}
+						<span class="leftq" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">x</span>
+				</div>
+					<div>
+						<p id="qna_title">${qna.qtitle}</p>
+						<p>${qna.qcontent}</p>
+						<p class="qd">${qna.qdate}</p>
+					</div>
 				</div>
 			</li>
 		</c:forEach>
@@ -112,26 +120,7 @@ float:right;
 
 </div>
 
-<style>
-.qlist{
-	background-color:#fdf5e6;
-}
-.qrlist{
-	background-color:#FFEFD5;
-}
-#qna_qnum{
-	font-size:1px;
-}
-.qd{
-	font-size:10px;
-}
-#qna_title{
-	font-weight:bold;
-}
-.leftq{
-	padding-left:70px;
-}
-</style>
+
 
 
 <script>
@@ -179,12 +168,10 @@ const delete_qnum=function(ss,qp){
 	var text=prompt('비밀번호를 입력해주세요');
 	//document.write("</h4>"+text+"</h4>");
 	//alert(text);
-
 	data={
 		qnum:ss,
 		qpwd:text
 	}
-	
 	if(text==qp){
 		$.ajax({
 			type:'post',
@@ -193,11 +180,9 @@ const delete_qnum=function(ss,qp){
 			cache:false,
 			success:function(res){
 				//alert(res);
-				alert('글이 삭제되었습니다');
-				location.reload();
 				//if(res>0){
-				//	alert('글이 삭제되었습니다')
-				//	window.location.reload();
+				alert('글이 삭제되었습니다')
+				location.reload();
 				//}
 					//alert('비밀번호가 일치하지 않습니다')
 					//window.location.replace();
@@ -210,7 +195,7 @@ const delete_qnum=function(ss,qp){
 		});
 	}else if(text==null){
 		alert('비밀번호를 입력해주세요');
-		window.location.replace();
+		location.reload();
 	}else if(text!=qp){
 		alert('비밀번호가 일치하지 않습니다');
 		location.reload();

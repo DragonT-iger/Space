@@ -91,6 +91,20 @@ nav ul li {
 	height: 30px;
 	margin: 0px 0px 40px 0px;
 }
+
+.image4{
+	width:200px;
+	height:200px;
+	padding:10px;
+	margin:10px;
+
+}
+.spaced{
+
+
+	padding: 0px 200px 0px 200px;
+
+}
 </style>
 <!-- 지도 관련 -->
 <style>
@@ -201,7 +215,7 @@ nav ul li {
 <c:import url="/Spacetop" charEncoding="utf-8" />
 
 
-<div class="detail wrap main detail meetspace">
+<div class="spaced detail wrap main detail meetspace">
 	<div class="inner_space">
 
 		<div class="space_title">
@@ -232,10 +246,11 @@ nav ul li {
 							onclick="love_btn(${sdvo.snum},'${loginUser.userid}')"> <img
 							class="zzim"
 							src="https://e7.pngegg.com/pngimages/22/527/png-clipart-heart-open-free-content-heart-thumbnail.png">
-						</a> <a id="kakao-link-btn" href="javascript:sendLink()"
-							target="-blank"> <img class="share"
-							src="https://cdn-icons-png.flaticon.com/512/1250/1250709.png">
-						</a> <a id="goReservation" class="btn btn-primary"
+						</a> 
+						<a id="kakao-link-btn" href="javascript:sendLink()"> 
+						<img class="share" src="https://cdn-icons-png.flaticon.com/512/1250/1250709.png">
+						</a> 
+						<a id="goReservation" class="btn btn-primary"
 							href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
 					</div>
 
@@ -322,7 +337,7 @@ nav ul li {
 	<section id="three">
 		<div id="nav3">
 		<br>
-			<c:import url="/spaceDetail/reviewlist" />
+			<c:import  url="/spaceDetail/reviewlist" />
 		</div>
 		<div id="nav3_re"></div>
 	</section>
@@ -332,7 +347,7 @@ nav ul li {
 	<section id="four">
 		<div id="nav4">
 		<br>
-			<c:import url="/spaceDetail/qnalist" />
+			</span><c:import  url="/spaceDetail/qnalist" />
 		</div>
 		<div id="nav4_re"></div>
 	</section>
@@ -342,7 +357,7 @@ nav ul li {
 
 	<div class="space_host" style="position: relative;">
 		<div class="h_row_center">
-			<p >호스트의 다른 장소</p>
+			<p class="fa-solid fa-meteor">호스트의 다른 장소</p>
 			<c:if test="${svoArr eq null or empty svoArr}">
 				<div>
 					<span><b>이 호스트의 다른 공간은 없습니다.</b></span>
@@ -354,10 +369,10 @@ nav ul li {
 					<div class="ospace">
 						<div class="box">
 							<c:if test="${otherspace.simage1 eq null}">
-								<img src="./img/noSpaceImage.jpg" />
+								<img class="image4"src="./img/noSpaceImage.jpg" />
 							</c:if>
 							<c:if test="${otherspace.simage1 ne null}">
-								<img src="./resources/SpaceInfoImg/${otherspace.simage1}" />
+								<img class="image4" src="./resources/SpaceInfoImg/${otherspace.simage1}" />
 							</c:if>
 							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
 						</div>
