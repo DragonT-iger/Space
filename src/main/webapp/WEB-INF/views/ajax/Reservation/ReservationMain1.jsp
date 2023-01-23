@@ -158,8 +158,8 @@ function backHome(){
 	window.history.back();
 }
 
-function backHome(){
-	window.history.back();
+function modal_hide(){
+	$("#paymentModal").hide();
 }
 
 $(function(){
@@ -248,7 +248,7 @@ $(function(){
 					//$('#paymentModal').modal('hide');
 					//location.reload();
 				}else{
-					$('#paymentModal').modal();
+					$('#paymentModal').show();
 					$('#snum').val(res.result.snum);
 					$('#userid').val(res.result.userid);
 					$('#rtstartdate').val(res.result.rtstartdate);

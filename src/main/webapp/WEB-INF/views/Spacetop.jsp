@@ -82,7 +82,7 @@ margin:25px;
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="navbar-nav ms-auto py-0 pe-4">
 
-						<a class="eng btn btn-primary" onclick="change()">Eng</a>
+						<a class="eng btn btn-primary" onclick="changeToggle()">Eng</a>
 
 						<!-- Home Reservation Services Contact Pages MyPage MyReservation -->
 						<div class="nav-item dropdown">
