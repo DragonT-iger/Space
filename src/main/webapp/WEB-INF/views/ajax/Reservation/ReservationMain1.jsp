@@ -7,6 +7,20 @@
 
 <c:import url="/Spacetop" charEncoding="utf-8"/>
 
+<head>
+<style>
+
+	.wrap{
+	padding: 0px 150px 0px 150px;
+	}
+	
+	a.btn1{
+	
+	margin:20px 0px 20px 0px;
+	}
+</style>
+</head>
+
 <%-- <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- jQuery library -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
@@ -33,21 +47,30 @@
 	
 	<div class="section_spaceInfo">
 		<div class="top_spaceTitle">
-			<a class="btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
+			<a class="btn1 btn btn-primary btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
 			<h2 class="spaceName"><a href="#" onclick="onSpaceClick()" class="title">${svo.sname}</a></h2>
-			<div>${svo.sname}의 /기본인원: ${svo.minn}/ 최대인원: ${svo.maxn}/ 기본비용: ${svo.bcost}/ 인원추가금: ${svo.ecost}</div>
+			<p class="fa-solid fa-meteor">예약 안내</p>
+		<div>방이름: ${svo.sname}<br>
+			기본인원: ${svo.minn}<br>
+			최대인원: ${svo.maxn}<br>
+			기본비용: ${svo.bcost}<br>
+			인원추가금: ${svo.ecost}</div>
+		</div>
 		</div>
 		
+		<br>
 		<div class="spaceVisual">
 			<c:import url="/spaceDetail/spaceImage"/>
 		</div>
 	</div>
 	<hr>
 	
+	
 	<c:import url="/ReservationAjax"></c:import>
-		
+	
 	<hr>
 	<div class="time_booking">
+	<br>
 		<div class="time_now">
 			<span id="check_year2">${today_info.search_year}</span>년
 			<span id="check_month2">${today_info.search_month}</span>월
@@ -65,6 +88,7 @@
 		
 		<div class="time_controller slick_slider">
 			<div class="time_controller_inner">
+			<p></p>
 				<form name="rf" id="rf" method="post" >
 					<input id="check_space" type="hidden" value="${svo.snum}">
 					<input id="check_user" type="hidden" value="${loginUser.userid}">
@@ -72,17 +96,19 @@
 					<input id="check_Eprice" type="hidden" value="${svo.ecost}">
 					<input id="check_minn" type="hidden" value="${svo.minn}">
 					
-					대여 시작 시간을 선택해주세요 : <input id="startTime" type="text" name="rtstart" autocomplete="off"><br>
-					대여 종료 시간을 선택해주세요 : <input id="endTime" type="text" name="rtend" autocomplete="off"><br>
+					대여 시작 시간을 선택해주세요 : <input id="startTime" type="text" name="rtstart" autocomplete="off"><br><br>
+					대여 종료 시간을 선택해주세요 : <input id="endTime" type="text" name="rtend" autocomplete="off"><br><br>
 					
 					예약하실 인원을 선택해주세요 : 
 					<!-- <input type="button" id="btn_minus_count" onclick="javascript:this.form.pmCount.value--" value="-">  -->
 					<input id="btn_pm_count" type="number" name="pmCount" value="${svo.minn}" min="1" max="${svo.maxn}">
 					<!-- <input type="button" id="btn_plus_count" onclick="javascript:this.form.pmCount.value++" value="+"> -->
-					
+			
 					<div class="payment">
 						<!-- <a class="nav-link" href="#paymentModal" data-toggle="modal" onclick="payment()">예약</a> -->
-						<button class="nav-link" id="RPModal" data-toggle="modal" >예약</button>
+							<br>
+						<button class="nav-link" id="RPModal" data-toggle="modal">예약</button>
+						<!--  data-target="#paymentModal" -->
 					</div>
 				</form>
 			</div>
@@ -95,7 +121,7 @@
 	</div>
 </div>
 
-
+<c:import url="/Spacefoot" charEncoding="utf-8"/>
 <!-- 플러그인 javascript 로딩 -->
 <script src="${pageContext.request.contextPath}/js_Reservation/jquery.timepicker.min.js"></script>
 <!-- 플러그인에서 제공해주는 css 로딩 -->
@@ -106,6 +132,7 @@
 <link rel="stylesheet" href="css_Reservation/res_style.css" />
 <!-- modal -->
 <%@include file="/WEB-INF/views/ajax/Reservation/ReservationPayment.jsp" %> 
+
 
 <script>
 /* $("#startTime").on("change", function() {
@@ -127,13 +154,12 @@
 	$('#res_endTime').val(rf.rtend.value);
 	$('#res_count').val(rf.btn_pm_count.value);
 } */
-
 function backHome(){
 	window.history.back();
 }
 
-function modal_hide(){
-	$("#paymentModal").hide();
+function backHome(){
+	window.history.back();
 }
 
 $(function(){
@@ -222,8 +248,7 @@ $(function(){
 					//$('#paymentModal').modal('hide');
 					//location.reload();
 				}else{
-					//$('#paymentModal').modal();
-					$('#paymentModal').show();
+					$('#paymentModal').modal();
 					$('#snum').val(res.result.snum);
 					$('#userid').val(res.result.userid);
 					$('#rtstartdate').val(res.result.rtstartdate);
@@ -242,6 +267,6 @@ $(function(){
 }) //$()
 </script>
 
-<c:import url="/Spacefoot" charEncoding="utf-8"/>
+
 
 <%-- <%@ include file="/WEB-INF/views/Spacefoot.jsp" %> --%>

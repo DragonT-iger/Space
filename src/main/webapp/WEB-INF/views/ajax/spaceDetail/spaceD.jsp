@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -8,12 +9,15 @@
 ul {
 	text-align: left;
 }
+
 .list {
 	font-size: 12px;
 }
+
 .plaform {
 	text-align: center;
 }
+
 nav ul {
 	width: 100%;
 	list-style-type: none;
@@ -27,37 +31,121 @@ nav ul li {
 	display: inline-block;
 	text-align: center;
 }
-.home {
-	background-color: darkorange;
-	width: 100px;
-	text-align: center;
+
+.wrap {
+	padding: 0px 100px 0px 100px;
+}
+
+#kakao-link-btn, #love_btn {
+	float: right;
+	margin: 10px;
+	padding: 10px;
+}
+
+#goReservation {
+	float: left;
+	margin: 20px 10px 0px 10px;
+}
+
+.nav {
 	font-weight: bold;
-	cursor: pointer;
+	display: flex;
+	justify-content: center;
 }
-.home>a {
-	display: block;
-	text-decoration: none;
-	color: white;
+
+.information {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 100%
 }
-.home, .home>a {
-	position: relative;
-	z-index: 5;
-	margin-top: 10%;
+
+.list1 {
+	display: inline;
+	margin: 20px;
 }
-.imgbox>a{
-	width:70px;
-	height:50px;
+
+.spaceUserLogin {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	text-align: center;
+}
+
+.reservation {
+	margin: 30px 0px 0px 10px;
+}
+
+.inner_space.detail {
+	padding: 0px 100px 0px 100px;
+}
+
+.share {
+	width: 20px;
+	height: 20px;
+	margin: 0px 0px 30px 0px;
+}
+
+.zzim {
+	width: 30px;
+	height: 30px;
+	margin: 0px 0px 40px 0px;
+}
+
+.image4{
+	width:200px;
+	height:200px;
+	padding:10px;
+	margin:10px;
+
+}
+.spaced{
+
+
+	padding: 0px 200px 0px 200px;
+
 }
 </style>
 <!-- 지도 관련 -->
 <style>
-    .map_wrap {position:relative;width:900px;height:400px; margin:auto;}
-    .title {font-weight:bold;display:block;}
-    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
-    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
-    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.map_wrap {
+	position: relative;
+	width: 900px;
+	height: 400px;
+	margin: auto;
+}
+
+.title {
+	font-weight: bold;
+	display: block;
+}
+
+.hAddr {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border-radius: 2px;
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 1;
+	padding: 5px;
+}
+
+#centerAddr {
+	display: block;
+	margin-top: 2px;
+	font-weight: normal;
+}
+
+.bAddr {
+	padding: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
 </style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d46c89f3b6dd702f6ea692b4e562a79&libraries=services"></script>
 
 <script>
 	window.onload = function() {
@@ -124,38 +212,54 @@ nav ul li {
 	
 </script>
 
-<c:import url="/Spacetop" charEncoding="utf-8"/>
+<c:import url="/Spacetop" charEncoding="utf-8" />
 
 
-<div class="wrap main detail meetspace">
+<div class="spaced detail wrap main detail meetspace">
 	<div class="inner_space">
-		
+
 		<div class="space_title">
 			<c:choose>
-			<c:when test="${sdvo.userid eq loginUser.userid}">
-				<div class="h_space">
-					<h1 class="spaceUserLogin">내가 등록한 공간 상세페이지</h1>
-					<h2 class="space_name">${sdvo.sname}</h2>
-				</div>
-				<a id="ReservationStatus" href="/space/ReservationStatus?snum=${sdvo.snum}">예약현황</a>
-			</c:when>
-			<c:otherwise>
-				<div class="h_space">
-					<h6 class="loc_space">${sdvo.saddr1}</h6>
-					<h2 class="space_name">${sdvo.sname}</h2>
-				<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
-				</div>
-				<a id="goReservation" href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
-				<div>
-					<a id="kakao-link-btn" href="javascript:sendLink()">공유</a>
-					<a id="love_btn" onclick="love_btn(${sdvo.snum},'${loginUser.userid}')">찜</a>
-				</div>
-			</c:otherwise>
+				<c:when test="${sdvo.userid eq loginUser.userid}">
+					<div class="h_space">
+						<br>
+						<h1 class="spaceUserLogin">내가 등록한 공간 상세페이지</h1>
+						<br> <br>
+						<h2 class="space_name">${sdvo.sname}</h2>
+					</div>
+					<a id="ReservationStatus" class="reservation btn btn-primary"
+						href="/space/ReservationStatus?snum=${sdvo.snum}">예약현황</a>
+				</c:when>
+				<c:otherwise>
+					<div class="h_space">
+						<br>
+						<h2 class="space_name">${sdvo.sname}</h2>
+						<br>
+						<h6 class="loc_space">${sdvo.saddr1}</h6>
+
+						<%-- <p class="h_code">${sdvo.h_code} (여기에 해시태그명)</p> --%>
+					</div>
+
+					<div>
+
+						<a id="love_btn"
+							onclick="love_btn(${sdvo.snum},'${loginUser.userid}')"> <img
+							class="zzim"
+							src="https://e7.pngegg.com/pngimages/22/527/png-clipart-heart-open-free-content-heart-thumbnail.png">
+						</a> 
+						<a id="kakao-link-btn" href="javascript:sendLink()"> 
+						<img class="share" src="https://cdn-icons-png.flaticon.com/512/1250/1250709.png">
+						</a> 
+						<a id="goReservation" class="btn btn-primary"
+							href="/space/Reservation?snum=${sdvo.snum}">예약하기</a>
+					</div>
+
+				</c:otherwise>
 			</c:choose>
 		</div>
-		
+		<br> <br> <br>
 		<div>
-			<c:import url="/spaceDetail/spaceImage"/>
+			<c:import url="/spaceDetail/spaceImage" />
 		</div>
 		<!-- <div class="photo_box_wrap type9">
 			<ul class="swiper-wrapper slides">
@@ -165,117 +269,124 @@ nav ul li {
 				<li class="swiper-slide4">이미지4</li>
 			</ul>
 		</div> -->
-			
-			<hr>
-			<div class="host_info">
-				<div>
-					<p>호스트 정보</p>
-					<p>${mivo.nickname}</p>
-					<p>${mivo.hp}</p>
-					<p>${sdvo.snum}번</p>
-		        </div>
-		    </div>
-		    <hr>
-		    
+
+		<hr>
+		<div class="host_info">
+			<div>
+				<p class="fa-solid fa-meteor">호스트 정보</p>
+				<p>호스트 이름: ${mivo.nickname}</p>
+				<p>호스트 연락처: ${mivo.hp}</p>
+				<p>${sdvo.snum}번</p>
+			</div>
+		</div>
+		<hr>
+
 	</div>
-		
-		<div class="nav">
-		    <div class="space_info_nav">
-		        <nav>
-					<ul>
-						<li><a data-scroll="one" href="#one" class="dot active"><span>장소 소개</span></a></li>
-						<li><a data-scroll="two" href="#two" class="dot"><span>이용 규칙</span></a></li>
-						<li><a data-scroll="three" href="#three" class="dot"><span>리뷰</span></a></li>
-						<li><a data-scroll="four" href="#four" class="dot"><span>질문</span></a></li>
-						<!-- <li class="home"><div onclick="scrollTab(0)">장소 소개</div></li>
+
+	<div class="nav">
+		<div class="space_info_nav">
+			<nav>
+				<ul class="information">
+					<li class="list1"><a data-scroll="one" href="#one"
+						class="dot active"><span>장소 소개</span></a></li>
+					<li class="list1"><a data-scroll="two" href="#two" class="dot"><span>이용
+								규칙</span></a></li>
+					<li class="list1"><a data-scroll="three" href="#three"
+						class="dot"><span>리뷰</span></a></li>
+					<li class="list1"><a data-scroll="four" href="#four"
+						class="dot"><span>질문</span></a></li>
+					<!-- <li class="home"><div onclick="scrollTab(0)">장소 소개</div></li>
 						<li class="home"><div onclick="scrollTab(1)">이용 규칙</div></li>
 						<li class="home"><div onclick="scrollTab(2)">리뷰</div></li>
 						<li class="home"><div onclick="scrollTab(3)">질문</div></li> -->
-					</ul>
-				</nav>
-		    </div>
+				</ul>
+			</nav>
 		</div>
-		
-		<section id="one">
-			<div id="nav1">
-				<h4>장소 소개</h4>
-				<div>${sdvo.scontents}</div>
-				<!-- 지도 -->
-				<div class="map_wrap">
-				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-				    <div id="map_tag" class="hAddr">
-				        <span class="title"> ${sdvo.saddr1} </span>
-				        <span id="centerAddr"></span>
-				    </div>
-				</div>	
-				<!--  -->
+	</div>
+	<br> <br> <br> <br> <br>
+	<section id="one">
+		<div id="nav1">
+		<br>
+			<h4 class="fa-solid fa-meteor">장소 소개</h4>
+			<div>${sdvo.scontents}</div>
+			<!-- 지도 -->
+			<div class="map_wrap">
+				<div id="map"
+					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+				<div id="map_tag" class="hAddr">
+					<span class="title"> ${sdvo.saddr1 } </span> <span id="centerAddr"></span>
+				</div>
 			</div>
-		</section>
-		
-		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
-		
-		<section id="two">
-			<div id="nav2">
-				<h4>장소 이용 규칙</h4>
-				<div>${sdvo.srule}</div>
-			</div>
-		</section>
-		
-		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
-		
-		<section id="three">
-			<div id="nav3">
-				<c:import url="/spaceDetail/reviewlist"/>
-			</div>
-			<div id="nav3_re"></div>
-		</section>
-		
-		<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
-		
-		<section id="four">
-			<div id="nav4">
-				<c:import url="/spaceDetail/qnalist"/>
-			</div>
-			<div id="nav4_re"></div>
-		</section>
-		
-		<hr>
-		
-		
-		<div class="space_host" style="position:relative;">
-			<div class="h_row_center">
-			    <p>호스트의 다른 장소</p>
-			    <c:if test="${svoArr eq null or empty svoArr}">
-					<div>
-						<span><b>이 호스트의 다른 공간은 없습니다.</b></span>
-					</div>
-				</c:if>
-				
-				<c:if test="${svoArr ne null or not empty svoArr}">
+			<!--  -->
+		</div>
+	</section>
+
+	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
+
+	<section id="two">
+		<div id="nav2">
+		<br>
+			<h4 class="fa-solid fa-meteor" >장소 이용 규칙</h4>
+			<br>
+			<div>${sdvo.srule}</div>
+		</div>
+	</section>
+
+	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
+
+	<section id="three">
+		<div id="nav3">
+		<br>
+			<c:import  url="/spaceDetail/reviewlist" />
+		</div>
+		<div id="nav3_re"></div>
+	</section>
+
+	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
+
+	<section id="four">
+		<div id="nav4">
+		<br>
+			</span><c:import  url="/spaceDetail/qnalist" />
+		</div>
+		<div id="nav4_re"></div>
+	</section>
+
+	<hr>
+
+
+	<div class="space_host" style="position: relative;">
+		<div class="h_row_center">
+			<p class="fa-solid fa-meteor">호스트의 다른 장소</p>
+			<c:if test="${svoArr eq null or empty svoArr}">
+				<div>
+					<span><b>이 호스트의 다른 공간은 없습니다.</b></span>
+				</div>
+			</c:if>
+
+			<c:if test="${svoArr ne null or not empty svoArr}">
 				<c:forEach var="otherspace" items="${svoArr}">
 					<div class="ospace">
-						<div class="imgbox">
-							<a href="/space/spaceDetail?snum=${otherspace.snum}">
+						<div class="box">
 							<c:if test="${otherspace.simage1 eq null}">
-								<img src="./img/noSpaceImage.jpg"/>
+								<img class="image4"src="./img/noSpaceImage.jpg" />
 							</c:if>
 							<c:if test="${otherspace.simage1 ne null}">
-								<img src="./resources/SpaceInfoImg/${otherspace.simage1}"/>
+								<img class="image4" src="./resources/SpaceInfoImg/${otherspace.simage1}" />
 							</c:if>
-							${otherspace.sname}
-							</a>
+							<a href="/space/spaceDetail?snum=${otherspace.snum}">${otherspace.sname}</a>
 						</div>
 					</div>
 				</c:forEach>
-				</c:if>
-			    
-			</div>
+			</c:if>
+
 		</div>
-	
 	</div>
 
-            
-<c:import url="/Spacefoot" charEncoding="utf-8"/>
+</div>
+
+
+<c:import url="/Spacefoot" charEncoding="utf-8" />
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">

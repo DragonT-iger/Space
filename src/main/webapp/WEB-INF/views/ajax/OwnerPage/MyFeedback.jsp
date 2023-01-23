@@ -3,15 +3,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:import url="/Spacetop" charEncoding="utf-8" />
+<head>
+<style>
 
+	.container{
+	
+	padding: 0px 100px 0px 100px;
+	
+	}
+	
+	.search{
+		display:inline-block;
+	}
+
+</style>
+</head>
 <div class="container mt-3" style="height:600px;overflow:auto;">
 	<h1 class="text-center">나의 공간 피드백</h1>
-
+<br>
 	<!-- 검색 폼 -->
-	<form name="searchF" action="searchForm" id="searchF" method="post">
+	<form class="search" name="searchF" action="searchForm" id="searchF" method="post">
 		<input type="hidden" id="userid" name="userid" value="${loginUser.userid}">
 		<div class="feedbackList-filter-bar">
-		<div class="feedbackList-filter-item">
+		<span class="feedbackList-filter-item">
 			<button id="FsnumSetbtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    공간 선택
 			</button>
@@ -21,8 +35,8 @@
 			    <a class="dropdown-item" href="#" onclick="btnSelectOption('Fsnum','${sArr.snum}')">${sArr.sname}</a>
 			    </c:forEach>
 			</div>
-		</div>
-		<div class="spacelist-filter-item">
+		</span>
+		<span class="spacelist-filter-item">
 			<input type="hidden" id="Freason" name="Freason" value="">
 			<button id="FreasonSetbtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    사  유
@@ -32,8 +46,10 @@
 					<a class="dropdown-item" href="#" onclick="btnSelectOption('Freason','${rArr.r_code}')">${rArr.r_content}</a>
 				</c:forEach>
 			</div>
+		</span>
+		<button class="btn btn-outline-primary" type="button" onclick="search_btn()">검색</button>
 		</div>
-		</div>
+		<br>
 		<%-- <select name="SpaceType" style="padding:6px;">
 			<option value="">::공간 선택::</option>
 			<c:if test="${sArr eq null or empty sArr}">
@@ -42,7 +58,9 @@
 			<option value="3" <c:if test="${paging.findType eq 3}">selected</c:if>>글내용</option>
 			</c:if>
 		</select> --%>
-		<button class="btn btn-outline-primary" type="button" onclick="search_btn()">검색</button>
+		
+		
+		
 	</form>
 <!-- ========================================================-->
 <table class="table table-condensed table-striped">

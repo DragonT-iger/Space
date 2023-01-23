@@ -85,7 +85,8 @@
 	height:200px;
 }
 </style>
-		
+
+<p></p>
 <h1 class="text-center"> 나의 리뷰내역</h1>
 	<div class="myreview_wrap mt-5">
         	<!-- 리뷰내역 필요리스트 (로그인한 회원번호로 select) 사진 장소이름 장소주소 별점 리뷰제목 리뷰내용 리뷰 답변 -->

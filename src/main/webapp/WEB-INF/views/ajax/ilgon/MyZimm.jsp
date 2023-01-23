@@ -39,8 +39,13 @@
         			width:100%;
         			height:100%;
         		}
+        		.btn1{
+        		color:white;
+        		}
         	</style>
+       
             <!-- set defalut Ajax   -->
+            <br>
             <h1 class="text-center">나의 찜목록</h1>
 			<div class="myzzim-wrap mt-5">
 				<div class="myzzim-list">
@@ -75,8 +80,9 @@
 							<li><fmt:formatDate value="${sl.hdate}" pattern="yyyy-MM-dd"/></li>
 						</ul>
 						<ul class="myzzim-col">
-							<li><a href="/space/Reservation?snum=${sl.snum}">예약하기</a><li>
-							<li><a href="/space/user/MyZimmdelete?hnum=${sl.hnum}">찜 취소</a><li>
+							<li class="btn btn-primary"><a class="btn1" href="/space/Reservation?snum=${sl.snum}">예약하기</a><li>
+							<br>
+							<li class="btn btn-primary"><a class="btn1" href="/space/user/MyZimmdelete?hnum=${sl.hnum}">찜 취소</a><li>
 						</ul>
 					</div>
 					</c:forEach>

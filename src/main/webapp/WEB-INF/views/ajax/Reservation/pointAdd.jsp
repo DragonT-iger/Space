@@ -14,82 +14,25 @@
         IMP.init("imp74514601"); // 예: imp00000000
 </script>
 
-<div class="point_total">
-	<div class="container">
-		
-		<div class="point_header">
-			<div class="point_user">
-				<h1 class="havePoint">${mivo.mname}님의 현재 잔여 포인트</h1>
-				<h2 class="havePoint"><fmt:formatNumber value="${mivo.point}" pattern="###,###"/></h2>
-				
-
-				<input type="text" id="amount" placeholder="금액을 입력하세요">
-				<button onclick="requestPay()" class="btn-primary btn">충전하기</button>
-			</div>
-		</div>
-
-
-		<div class="point_body">
-			<div class="point_inner">
-				<div class="point_1" >
-					<h5>포인트 충전 내역</h5>
-					<span>충전된 총 포인트: <fmt:formatNumber value="${mivo.pointadd}" pattern="###,###"/></span>
-					<ul class="point_list">
-					<c:if test="${pvoArr eq null or empty pvoArr}">
-						<div>
-							<span><b>포인트 충전 내역이 없습니다.</b></span>
-						</div>
-					</c:if>
-					
-					<c:if test="${pvoArr ne null or not empty pvoArr}">
-					<c:forEach var="pp" items="${pvoArr}">
-						<li class="pointaddlist">
-							<div class="box">
-								<p>충전처 : ${pp.paykind}</p>
-								<p>충전된 포인트 : <fmt:formatNumber value="${pp.plusPoint}" pattern="###,###,###"/></p>
-								<p><fmt:formatDate value="${pp.paydate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
-							</div>
-						</li>
-					</c:forEach>
-					</c:if>
-					</ul>
-				</div>
-				
-				<div class="point_1">
-					<h5>포인트 사용 내역</h5>
-					<span>사용된 총 포인트: <fmt:formatNumber value="${resPrice}" pattern="###,###,###"/></span>
-					<ul class="point_list">
-					<c:if test="${resArr eq null or empty resArr}">
-						<div>
-							<span><b>포인트 사용 내역이 없습니다.</b></span>
-						</div>
-					</c:if>
-					
-					<c:if test="${resArr ne null or not empty resArr}">
-					<c:forEach var="pu" items="${resArr}">
-						<li class="pointuselist">
-							<div class="box">
-								<p><a href="/space/user/MyReservation">사용처 : ${pu.snum}</a></p>
-								<p>사용된 포인트 : <fmt:formatNumber value="${pu.totalprice}" pattern="###,###"/></p>
-								<p><fmt:formatDate value="${pu.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
-							</div>
-						</li>
-					</c:forEach>
-					</c:if>
-					</ul>
-				</div>
-				
-			</div>
-
-						
-		</div>
-		
-		
-	</div>
-</div>
-<c:import url="/Spacefoot" />
-
 <style>
+
+.point_total{
+	padding: 0px 100px 0px 100px;
+	width:100%;
+}
+.pay{
+
+	text-align:center;
+}
+#amount{
+width:200px;
+height:40px;
+}
+
+.point_inner{
+	text-align:center;
+
+}
 .btn{
 	margin-top:20px;
 	margin-bottom:20px;
@@ -100,16 +43,105 @@
 	text-align:center;
 }
 
-.point_total{
-	width:100%;
-	height:800px;
+.point_body{
+display: flex;
+justify-content: center;
 }
-.point_1{
-	width:48%;
-	height:500px;
-	float:left;
-}	
+
+.point_inner{
+padding:100px;
+}
+
 </style>
+
+<div class="point_total">
+	<div class="container">
+		
+		<div class="point_header">
+			<div class="point_user">
+				<h1 class="havePoint">${mivo.mname}님의 현재 잔여 포인트</h1>
+				<h2 class="havePoint"><fmt:formatNumber value="${mivo.point}" pattern="###,###"/></h2>
+				
+				<div class="pay">
+				<input type="text" id="amount" placeholder="금액을 입력하세요">
+				<button onclick="requestPay()" class="btn-primary btn">충전하기</button>
+				</div>
+			</div>
+		</div>
+		<br><br>
+
+		<div class="point_body">
+			<div class="point_inner">
+				<div>
+					<h5>포인트 충전 내역</h5>
+					<span>충전된 총 포인트: <fmt:formatNumber value="${mivo.pointadd}" pattern="###,###"/></span>
+					<hr>
+					<p></p>
+			
+					<ul class="point_list">
+					<c:if test="${pvoArr eq null or empty pvoArr}">
+							<br>
+						<div>
+							<span><b>포인트 충전 내역이 없습니다.</b></span>
+						</div>
+					</c:if>
+					
+					<c:if test="${pvoArr ne null or not empty pvoArr}">
+					<c:forEach var="pp" items="${pvoArr}">
+						<li class="pointaddlist">
+							<div class="box">
+								<p><fmt:formatDate value="${pp.paydate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
+								<p>충전처 : ${pp.paykind}</p>
+								<p>충전된 포인트 : <fmt:formatNumber value="${pp.plusPoint}" pattern="###,###,###"/></p>
+							
+						
+							</div>
+						</li>
+					</c:forEach>
+					</c:if>
+					</ul>
+				</div>
+				
+
+				
+			</div>
+					<div class="point_inner">
+					<h5>포인트 사용 내역</h5>
+					<span>사용된 총 포인트: <fmt:formatNumber value="${resPrice}" pattern="###,###,###"/></span>
+					<hr>
+					<p></p>
+					
+					<ul class="point_list">
+					<c:if test="${resArr eq null or empty resArr}">
+					<br>
+						<div>
+							<span><b>포인트 사용 내역이 없습니다.</b></span>
+						</div>
+					</c:if>
+					
+					<c:if test="${resArr ne null or not empty resArr}">
+					<c:forEach var="pu" items="${resArr}">
+						<li class="pointuselist">
+							<div class="box">
+							<p><fmt:formatDate value="${pu.rdate}" pattern="yyyy-MM-dd [E] a hh:mm:ss"/></p>
+								<p><a href="/space/user/MyReservation">사용처 : ${pu.snum}</a></p>
+								<p>사용된 포인트 : <fmt:formatNumber value="${pu.totalprice}" pattern="###,###"/></p>
+								
+							</div>
+						</li>
+					</c:forEach>
+					</c:if>
+					</ul>
+				</div>
+						
+		</div>
+		
+		
+	</div>
+</div>
+
+<c:import url="/Spacefoot" charEncoding="utf-8" />
+
 
 <script>
     function requestPay() {

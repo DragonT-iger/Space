@@ -148,6 +148,7 @@ public class PaymentController {
     @PostMapping("/complete")
     public ResponseEntity<?> completePayment(@RequestBody Map<String, String> requestBody,HttpSession session) {
       try {
+    	log.info("controller접속");
         String impUid = requestBody.get("imp_uid");
         String merchantUid = requestBody.get("merchant_uid");
         String amount = requestBody.get("amount");
@@ -160,7 +161,7 @@ public class PaymentController {
         payment.setAmount(Integer.parseInt(amount));
         payment.setUserid(userid);
         payment.setStatus(0);
-
+        log.info("userid->"+userid);
         int j = mem_infoservice.updateUserPoint(userid, Integer.parseInt(amount));
 
         int i = paymentService.insertPayment(payment);
