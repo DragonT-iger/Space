@@ -80,7 +80,7 @@
 	
 	
 	.class_btn{
-		margin: 0px 0px 20px 950px;
+		margin: 0px 0px 20px 90%;
 	}
 	.space1{
 		
@@ -88,11 +88,7 @@
 		margin:40px 0px 0px 80px;
 	}
 </style>
-
-	
-	
-		<h1></h1>
-		<h1 class="text-center"> 나의 공간 관리</h1>
+		<h1 class="text-center mt-3"> 나의 공간 관리</h1>
 		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">공간등록</button>
 		
         <div class="myspacelist-wrap mt-5">

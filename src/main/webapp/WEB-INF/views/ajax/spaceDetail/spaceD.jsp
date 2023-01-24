@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
 ul {
 	text-align: left;
@@ -171,8 +171,8 @@ nav ul li {
 			marker.setPosition(new kakao.maps.LatLng(latlng));
 			// 지도를 생성합니다    
 			var map = new kakao.maps.StaticMap(mapContainer, mapOption);
-			marker.setMap(map);
-			marker.getMap();
+			//marker.setMap(map);
+			//marker.getMap();
 		}else{
 			$('#map').css({"background":"url(img/noimage.jpg)"});
 			$("#map_tag").hide();
@@ -212,7 +212,7 @@ nav ul li {
 	
 </script>
 
-<c:import url="/Spacetop" charEncoding="utf-8" />
+
 
 
 <div class="spaced detail wrap main detail meetspace">
@@ -303,7 +303,7 @@ nav ul li {
 			</nav>
 		</div>
 	</div>
-	<br> <br> <br> <br> <br>
+	<br> <br>
 	<section id="one">
 		<div id="nav1">
 		<br>
@@ -347,7 +347,7 @@ nav ul li {
 	<section id="four">
 		<div id="nav4">
 		<br>
-			</span><c:import  url="/spaceDetail/qnalist" />
+			<c:import  url="/spaceDetail/qnalist" />
 		</div>
 		<div id="nav4_re"></div>
 	</section>

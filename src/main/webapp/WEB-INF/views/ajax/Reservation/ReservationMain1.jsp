@@ -47,7 +47,7 @@
 	
 	<div class="section_spaceInfo">
 		<div class="top_spaceTitle">
-			<a class="btn1 btn btn-primary btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">::before</i></a>
+			<a class="btn1 btn btn-primary btn_back" onclick="backHome()" title="이전화면이동"><i aria-hidden="true">돌아가기</i></a>
 			<h2 class="spaceName"><a href="#" onclick="onSpaceClick()" class="title">${svo.sname}</a></h2>
 			<p class="fa-solid fa-meteor">예약 안내</p>
 		<div>방이름: ${svo.sname}<br>

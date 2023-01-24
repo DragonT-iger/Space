@@ -110,7 +110,7 @@
 		    			  <tr>
 		    			  <td>\${todayPopSpace.sname}</td>
 		    			  <td>\${todayPopSpace.saddr1}</td>
-		    			  <td>\${todayPopSpace.h_code}</td>
+		    			  <td>\${todayPopSpace.h_name}</td>
 		    			  <td>\${todayPopSpace.rescount}</td>
 		    			  </tr>
 		    		  `

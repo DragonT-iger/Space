@@ -245,14 +245,18 @@ select * from(
 </select>
 
 <select id="todayInsertSpace" parameterType="string" resultType="SpaceInquiry">
-	select * from space_info where sdate like '%'||#{value}||'%'
+	select * from   
+(select s.*,h.h_name from space_info s left join
+(select * from hashtag) h on s.h_code = h.h_code)
+where sdate like '%'||#{value}||'%'
 </select>
 
 <select id="todayPopSpace" parameterType="string" resultType="SpaceInquiry">
 	select * from(
-		select s.*, r.rcount as rescount , r.rdate from space_info s left outer join 
-			(select snum, TO_CHAR(rdate, 'yyyy/mm/dd') as rdate ,count(*) as rcount from reservation group by snum , TO_CHAR(rdate, 'yyyy/mm/dd'))
-			r on s.snum = r.snum) where rdate like '%'||#{value}||'%'
+	select sr.* , h.h_name from hashtag h left outer join(
+	select s.*, r.rcount as rescount , r.rdate from space_info s left outer join 
+	    (select snum, TO_CHAR(rdate, 'yyyy/mm/dd') as rdate ,count(*) as rcount from reservation group by snum , TO_CHAR(rdate, 'yyyy/mm/dd'))
+    r on s.snum = r.snum) sr  on sr.h_code = h.h_code)where rdate like '%'||#{value}||'%'
 </select>
 
 <select id="DatabyDate" parameterType="string" resultType="GraphData">
