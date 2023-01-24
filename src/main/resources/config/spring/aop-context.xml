@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
@@ -20,5 +24,33 @@
         <property name="initialSize" value="..." />
       </bean>
 
+
+	<!-- ======================================================================= -->
+   <!-- 트랜잭션 설정 -->
+	<!-- 특정 package만을 scan만 한다. -->
+	<context:component-scan base-package="com.project.space" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 이 이름으로 시작하는 method를 트랙잭션으로 설정함 -->
+			<!-- 어디에 있는 메서드인지는 config 태그에서 설정 -->
+			<tx:method name="insertBooking" rollback-for="Exception" propagation="REQUIRED" isolation="READ_COMMITTED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 여기 있는 메서드에 트랜잭션 설정을 해주세요 -->
+	<!-- 현재는 serviceImpl에 있는 메서드에 트랜잭션 설정이 걸려있다. -->
+	<!-- 따라서  servuceImpl수준에서 발생한 Exception에 대해서 rollback하게 된다. -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.project.space..ReservationServiceImp.*(..))" id="serviceMethod"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" id="transactionAdvisor"/>
+	</aop:config>
 	
 </beans>
