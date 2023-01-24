@@ -62,5 +62,6 @@
             <beans:bean class="com.project.interceptor.AdminCheckInterceptor"/>
          </interceptor>
    </interceptors>
+   
 	
 </beans:beans>

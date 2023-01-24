@@ -3,6 +3,8 @@ package com.project.space.reservation.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.project.space.domain.FeedbackVO;
 import com.project.space.domain.PointVO;
 import com.project.space.domain.ReasonVO;
@@ -30,6 +32,7 @@ public interface ReservationService {
 	public Space_InfoVO selectBySnum(int snum);
 	
 	//일반유저가 예약신청
+	//@Transactional
 	int insertBooking(ReservationVO rtvo);
 	int updateUserRes(ReservationVO rtvo);
 	//예약 추가 관련=> 기존에 담긴 상품이면 인원만 수정하기
