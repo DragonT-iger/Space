@@ -13,4 +13,6 @@ public class Space_Like {
 	private int hnum;
 	private String userid;
 	private Date hdate;
+	private int rscore;
+	private int rcount;
 }

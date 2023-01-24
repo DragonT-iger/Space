@@ -68,7 +68,7 @@
 						<ul class="myzzim-col myzzim-space-info">
 							<li><a>${sl.sname}</a></li>
 							<li>★★★★★</li>
-							<li>(후기개수)</li>
+							<li>${sl.rcount}</li>
 							<!-- <li>찜개수</li> -->
 						</ul>
 						<ul class="myzzim-col">
