@@ -228,10 +228,12 @@ public class JYController {
 			UnsupportedEncodingException, HttpClientErrorException {
 		log.info("rtvo insert=="+rtvo);
 		log.info("message: "+messageDto);
-		
-		SimpleDateFormat sf=new SimpleDateFormat("yyyy년 MM월 dd일");
-		String date=sf.format(rtvo.getRtstartdate());
-		messageDto.setContent(rtvo.getUserid()+"님 "+date+"로 예약이 완료되었습니다");
+		String date = rtvo.getRtstartdate();
+		String year = date.substring(0,4);
+		String month = date.substring(4,6);
+		String day = date.substring(6,8);
+		messageDto.setContent(rtvo.getUserid()+"님 "+year+"년 "+month+"월 "+day+"일 "+"날로 예약이 완료되었습니다");
+
 		
 		int res=this.reservationService.insertBooking(rtvo);
 		
@@ -244,7 +246,7 @@ public class JYController {
 		        check.setPlusPoint(rtvo.getTotalprice());
 		        int usp=this.reservationService.PlusSpacePoint(check); //호스트 포인트 +
 			}
-			//SmsResponseDTO response = smsService.sendSms(messageDto);
+			SmsResponseDTO response = smsService.sendSms(messageDto);
 		}
 
 		String str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
@@ -293,13 +295,18 @@ public class JYController {
 			UnsupportedEncodingException, HttpClientErrorException {
 		log.info("fbvo delete=="+fbvo);
 		log.info("message: "+messageDto);
-		messageDto.setContent(fbvo.getUserid()+"님 예약이 취소되었습니다");
+		
 		
 		ReservationVO rtvo=this.reservationService.getBooking(fbvo.getRtnum()); //예약내용 불러오기
 		fbvo.setTotalprice(rtvo.getTotalprice());
 		fbvo.setSnum(rtvo.getSnum());
 		log.info("setting fbvo========"+fbvo);
-		
+		String date = rtvo.getRtstartdate();
+		String year = date.substring(0,4);
+		String month = date.substring(4,6);
+		String day = date.substring(6,8);
+		//messageDto.setContent(rtvo.getUserid()+"님 "+year+"년 "+month+"월 "+day+"일 "+"날 예약이 취소 되었습니다");
+		messageDto.setContent(rtvo.getUserid()+"님 2023년 01월 27일 "+"날 예약이 취소 되었습니다");
 		int res=this.reservationService.deleteBooking(fbvo.getRtnum()); //예약취소 상태 변경
 		if(res>0) {
 			int fb=this.reservationService.insertFeedback(fbvo); //취소사유 피드백
@@ -311,7 +318,7 @@ public class JYController {
 			check.setPlusPoint(rtvo.getTotalprice());
 	        int usp=this.reservationService.MinusSpacePoint(check); //호스트 포인트 차감
 	        
-			//SmsResponseDTO response = smsService.sendSms(messageDto);
+			SmsResponseDTO response = smsService.sendSms(messageDto);
 			String str="예약이 취소되었습니다";
 			String loc="/space/user/MyReservation";
 			m.addAttribute("message", str);

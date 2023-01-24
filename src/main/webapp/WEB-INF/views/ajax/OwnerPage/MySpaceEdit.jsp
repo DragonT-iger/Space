@@ -101,22 +101,22 @@
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>메인사진</b></td>
-				<td style="width: 80%"><input type="file" name="simage1"
+				<td style="width: 80%"><input type="file" name="simage"
 					id="simage1" class="form-control"></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>소개사진1</b></td>
-				<td style="width: 80%"><input type="file" name="simage2"
+				<td style="width: 80%"><input type="file" name="simage"
 					id="simage2" class="form-control"></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>소개사진2</b></td>
-				<td style="width: 80%"><input type="file" name="simage3"
+				<td style="width: 80%"><input type="file" name="simage"
 					id="simage3" class="form-control"></td>
 			</tr>
 			<tr>
 				<td style="width: 20%"><b>소개사진3</b></td>
-				<td style="width: 80%"><input type="file" name="simage4"
+				<td style="width: 80%"><input type="file" name="simage"
 					id="simage4" class="form-control"></td>
 			</tr>
 			<tr>

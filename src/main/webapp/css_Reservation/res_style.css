@@ -48,8 +48,10 @@
 }
 
 div.date, div.sat, div.sun{
-	width:90%;
-	height:90%;
+	width:auto;
+	table-layout:fixed;
+	word-break:break-all;
+	height:auto;
 	margin:auto;
 }
 
@@ -71,7 +73,7 @@ div.date, div.sat, div.sun{
 }
 
 .todate {
-	font-size: 30px;
+	font-size: 15px;
 	text-align: center;
 	color: #008080;
 }
@@ -96,8 +98,7 @@ div.date, div.sat, div.sun{
 	border: 1px solid white;
 	height: 50px;
 	background-color: #ffe4c4;
-	text-align: left;
-	vertical-align: center;
+	text-align: center;
 }
 
 .Body_Calendar .saturday .sat {
@@ -106,14 +107,15 @@ div.date, div.sat, div.sun{
 	font-size: 15px;
 	padding-left: 3px;
 	padding-top: 5px;
+	vertical-align: center;
 }
 
 .Body_Calendar .sunday {
 	border: 1px solid white;
 	height: 50px;
 	background-color: #ffe4c4;
-	text-align: left;
-	vertical-align: center;
+	text-align: center;
+
 }
 
 .Body_Calendar .sunday .sun {
@@ -122,6 +124,7 @@ div.date, div.sat, div.sun{
 	font-size: 15px;
 	padding-left: 3px;
 	padding-top: 5px;
+	vertical-align: center;
 }
 
 .Body_Calendar .normal_day {

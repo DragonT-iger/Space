@@ -4,6 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
+
+
+	@font-face{
+		font-family: '여행';
+		src : url(MapoBackpacking.ttf)
+	}
+
 	.myspace_list{
 		width:100%;
 		background-color : var(--light);
@@ -13,16 +20,20 @@
 	.myspacelist-wrap{
 		width:80%;
 		margin:auto;
+		font-family: '여행';
 	}
 	.myspace-profile{
 		width:100%;
 		height:250px;
+		margin: 20px 0px 0px 0px;
+		
 	}
 	.myspace_img{
 		float:left;
-		width:40%;
+		width:30%;
 		height:100%;
 		margin-right:5%;
+		padding-right: 20px;
 	}
 	.myspacelist_btn{
 		float:right;
@@ -55,11 +66,32 @@
 		margin-right:10%;
 	}
 	
+	.text-center{
+	
+	padding: 0px 100px 0px 100px;
+	
+	}
+	
+	
+	
+	.myspace_img{
+		margin:0px 0px 0px 20px;
+	}
+	
+	
+	.class_btn{
+		margin: 0px 0px 20px 950px;
+	}
+	.space1{
+		
+		
+		margin:40px 0px 0px 80px;
+	}
 </style>
 
 	
 	
-
+		<h1></h1>
 		<h1 class="text-center"> 나의 공간 관리</h1>
 		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">공간등록</button>
 		
@@ -69,37 +101,30 @@
 			<c:forEach var="spaceinfo" items="${spaceinfo}">
         		<div class="myspace_list">
 					
-        			<button class="btn btn-primary btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">수정</button>
+        			
         			<div class="myspace-profile">
         				<a href="../spaceDetail?snum=${spaceinfo.snum}"><img class="myspace_img" src="../resources/SpaceInfoImg/${spaceinfo.simage1}"></img></a>
         			
-	        			<div class="myspace myspace-star">O O O O O (평균별점)</div>
 	        			<div class="myspace myspace-time">${spaceinfo.sdate}(등록시간)</div>
 	        			
 	
-	        			<div class="myspace space-name">장소이름: ${spaceinfo.sname} </div>
+	        			<div class="myspace space-name">대여공간 이름: ${spaceinfo.sname} </div>
 	
-	        			<div class="myspace space-addr">장소주소: ${spaceinfo.saddr1}  ${spaceinfo.saddr2} <br></div>
-
+	        			<div class="myspace space-addr">대여공간 주소: ${spaceinfo.saddr1} &nbsp;${spaceinfo.saddr2} </div>
 						<div class="myspace space-addr">우편번호: ${spaceinfo.spost} </div>
 	
 	        			<div class="myspace myspace-cost row">
-							<div class="col">
-						      	기본비용 : <c:out value="${spaceinfo.bcost}"/>
-						    </div>
-						    <div class="col">
-								인원추가금: <c:out value="${spaceinfo.ecost}"/>
-						    </div>
+							기본비용 : <c:out value="${spaceinfo.bcost}"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;인원추가금: <c:out value="${spaceinfo.ecost}"/>
+						    
 	        			</div>
 	        			<div class="myspace myspace-numset row">
-							<div class="col">
-						      	추가금발생인원 수 : <c:out value="${spaceinfo.minn}"/>
-						    </div>
-						    <div class="col">
-								최대인원 수: <c:out value="${spaceinfo.maxn}"/>
-						    </div>
+							
+						      	추가금발생인원 수 : <c:out value="${spaceinfo.minn}"/>&emsp;&emsp;&emsp;&emsp;&emsp;최대인원 수: <c:out value="${spaceinfo.maxn}"/>
+						   
 	        			</div>
 					</div>
+					<br>
+					<br>
         			<div class="myspace-content-wrap">
 	        			<p class="myspace-tab">공간설명</p>
 	        			<p class="myspace-content">
@@ -112,6 +137,8 @@
 							${spaceinfo.srule}
 	        			</p>
         			</div>
+        			<div class="space1 myspace myspace-star">O O O O O (평균별점)</div>
+        			<button class="class_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">수정</button>
         		</div>
 			
 		</c:forEach>

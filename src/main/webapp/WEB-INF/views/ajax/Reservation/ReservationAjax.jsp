@@ -5,6 +5,31 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="css_Reservation/res_style.css" /> -->
 
+<head>
+<style>
+
+
+.Body_Calendar{
+margin-left:auto;
+margin-right:auto;
+
+
+}
+
+div.todate{
+
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 3px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+
+
+</style>
+</head>
+
 <div class="bookingCalendar" id="bookingCalendar">
 	<div class="section_inner">
 		<div class="time_title">
@@ -71,7 +96,9 @@
 							<div id="sch_date">
 								<c:forEach var="scheduleList" items="${dList.schedule_date_arr}" varStatus="schedule_data_arr_status"> 
 								<c:if test="${scheduleList.rtstartdate eq dList.YMD}">
-									<p class="date_subject">${scheduleList.rtnumber}명: ${scheduleList.rtstart}~${scheduleList.rtend}</p>
+									<p class="date_subject">${scheduleList.rtnumber}명<br>
+									${scheduleList.rtstart}~${scheduleList.rtend}
+									</p>
 								</c:if>
 								</c:forEach>
 							</div>	

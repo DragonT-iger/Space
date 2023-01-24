@@ -3,17 +3,47 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.box{
+margin:10px;
+}
+
+.qlist{
+	background-color:#fdf5e6;
+}
+.qrlist{
+	background-color:#FFEFD5;
+}
+#qna_qnum{
+	font-size: 1px;
+}
+.qd{
+	font-size:10px;
+}
+#qna_title{
+	font-weight:bold;
+}
+.leftq{
+	text-align:right;
+}
+.user_name{
+	float:left;
+
+}
+</style>
 
 <div id="s_qna">
 <div id="qna_question">
 	<div id="qna_head">
-		<h4>Q&A
+		<h4 class="fa-solid fa-meteor">Q&A
 			<strong>${paging.totalCount}</strong>
+		
 		</h4>
-		<a class="btn_qna_write">
+	</div>
+	
+	<a class=".btn1 btn btn-primary btn_qna_write">
 			<span onclick="qna_write()">질문 작성하기</span>
 		</a>
-	</div>
 	
 	<div id="body_change_qna">
 	<div class="qna_body">
@@ -49,7 +79,7 @@
 					
 					<div class="user_name">${qna.userid}
 						<span class="leftq" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">x</span>
-					</div>
+				</div>
 					<div>
 						<p id="qna_title">${qna.qtitle}</p>
 						<p>${qna.qcontent}</p>
@@ -90,29 +120,7 @@
 
 </div>
 
-<style>
-.qlist{
-	background-color:#fdf5e6;
-}
-.qrlist{
-	background-color:#FFEFD5;
-}
-#qna_qnum{
-	font-size: 1px;
-}
-.qd{
-	font-size:10px;
-}
-#qna_title{
-	font-weight:bold;
-}
-.leftq{
-	padding-left:70px;
-}
-.user_name{
-	float:left;
-}
-</style>
+
 
 
 <script>

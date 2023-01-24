@@ -1,4 +1,4 @@
-create user space identified by "space1";
+create user space identified by "space";
 grant connect, resource, dba to space;
 grant create table, create view, create sequence to space;
 commit;

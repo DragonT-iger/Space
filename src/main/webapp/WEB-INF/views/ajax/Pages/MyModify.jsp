@@ -34,6 +34,8 @@ input#hp1, input#hp2, input#hp3 {
 .dropdown {
 	text-align: left;
 }
+
+
 </style>
 <div class="container mt-5 text-center" id="modify_wrap">
 	<h2
@@ -91,6 +93,7 @@ input#hp1, input#hp2, input#hp3 {
 				</td>
 			</tr>
 			<tr>
+			
 				<td><h5>계좌정보</h5></td>
 				<td>
 					<div class="textForm">
@@ -98,12 +101,13 @@ input#hp1, input#hp2, input#hp3 {
 						<select name="bank_code" id="bankCode">
 							<option value="">은행</option>
 							<c:forEach var="bank" items="${bankcode}">
+						
 								<option value="${bank.bank_code}" <c:if test="${bank.bank_code eq loginUser.bank_code}">selected</c:if>  >${bank.bank_name}</option>
 							</c:forEach>
 						</select>
 					</div> 
 					</div>
-				
+					<br>
 					<input type="text" class="form-control border-primary py-3 ps-4"
 					id="account" name="account" value="${loginUser.account }"
 					placeholder="수정할 계좌번호">

@@ -39,8 +39,39 @@
         			width:100%;
         			height:100%;
         		}
+        		.btn1{
+        		color:white;
+        		}
+        		.star-ratings {
+				  color: #aaa9a9; 
+				  position: relative;
+				  unicode-bidi: bidi-override;
+				  width: max-content;
+				  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+				  -webkit-text-stroke-width: 1.3px;
+				  -webkit-text-stroke-color: #ff4500;
+				}
+				 
+				.star-ratings-fill {
+				  color: #fff58c;
+				  padding: 0;
+				  position: absolute;
+				  z-index: 1;
+				  display: flex;
+				  top: 0;
+				  left: 0;
+				  overflow: hidden;
+				  -webkit-text-fill-color: #ff4500;
+				}
+				 
+				.star-ratings-base {
+				  z-index: 0;
+				  padding: 0;
+				}			
         	</style>
+       
             <!-- set defalut Ajax   -->
+            <br>
             <h1 class="text-center">나의 찜목록</h1>
 			<div class="myzzim-wrap mt-5">
 				<div class="myzzim-list">
@@ -52,7 +83,9 @@
 					</c:if>
 					
 					<c:if test="${hlArr ne null or not empty hlArr}">
+					<c:set var="w" value="0"/>
 					<c:forEach var="sl" items="${hlArr}">
+					<c:set var="w" value="${sl.rscore*20}"/>
 					<div class="myzzim-item">
 						<input type="hidden" value="${sl.hnum}"/>
 						<div class="myzzim-col myzzim-img">
@@ -67,7 +100,14 @@
 						</div>
 						<ul class="myzzim-col myzzim-space-info">
 							<li><a>${sl.sname}</a></li>
-							<li>★★★★★</li>
+							<li class="star-ratings">
+								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
+									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+								</div>
+								<div class="star-ratings-base space-x-2 text-lg">
+									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+								</div>
+							</li>
 							<li>${sl.rcount}</li>
 							<!-- <li>찜개수</li> -->
 						</ul>
@@ -75,8 +115,9 @@
 							<li><fmt:formatDate value="${sl.hdate}" pattern="yyyy-MM-dd"/></li>
 						</ul>
 						<ul class="myzzim-col">
-							<li><a href="/space/Reservation?snum=${sl.snum}">예약하기</a><li>
-							<li><a href="/space/user/MyZimmdelete?hnum=${sl.hnum}">찜 취소</a><li>
+							<li class="btn btn-primary"><a class="btn1" href="/space/Reservation?snum=${sl.snum}">예약하기</a><li>
+							<br>
+							<li class="btn btn-primary"><a class="btn1" href="/space/user/MyZimmdelete?hnum=${sl.hnum}">찜 취소</a><li>
 						</ul>
 					</div>
 					</c:forEach>
