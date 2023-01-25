@@ -6,6 +6,7 @@
 <style>
 .review_list {
 	width: 100%;
+	height: 100%;
 	background-color: #fdf5e6;
 	border: 1px solid #faf0e6;
 	margin-bottom: 20px;
@@ -14,12 +15,15 @@
 .myreview_wrap {
 	width: 80%;
 	margin: auto;
+
 }
 
 .review-profile {
-	overflow:hidden;
 	width: 100%;
-	/* height: 310px; */
+	overflow:hidden;
+		
+	height: 100%;
+	padding:20px;
 }
 
 .review_img {
@@ -31,7 +35,8 @@
 
 .review_delbtn {
 	float: right;
-	margin:0px 10px 0px 0px;
+	margin:0px 10px 10px 0px;
+	
 
 }
 
@@ -101,10 +106,7 @@
 	height: 200px;
 	margin:10px 10px 20px 10px;
 }
-.br{
-	display:flex;
-	flex-wrap: wrap;
-}
+
 
 
 </style>
@@ -129,7 +131,7 @@
 				<div class="review-profile">
 					<div class="review review-time">${ra.review_date}</div>
 					<div class="review space-name">
-						<a href="/space/spaceDetail?snum=${ra.snum}">${ra.sname}</a>
+						<a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a>
 					</div>
 					<div class="star-ratings">
 						<div class="star-ratings-fill space-x-2 text-lg"
@@ -150,7 +152,6 @@
 							<img class="review_img"
 								src="../resources/SpaceInfoImg/${ra.rimage2}"></img>
 						</div>
-						<div class="br"></div>
 					</c:if>
 	
 					

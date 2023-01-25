@@ -307,8 +307,9 @@ nav ul li {
 	<section id="one">
 		<div id="nav1">
 		<br>
-			<h4 class="fa-solid fa-meteor">장소 소개</h4>
+			<h4 class="fa-solid fa-meteor"> 장소 소개</h4>
 			<div>${sdvo.scontents}</div>
+			<br><br>
 			<!-- 지도 -->
 			<div class="map_wrap">
 				<div id="map"
@@ -320,18 +321,18 @@ nav ul li {
 			<!--  -->
 		</div>
 	</section>
-
+<br><br>
 	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 
 	<section id="two">
 		<div id="nav2">
 		<br>
-			<h4 class="fa-solid fa-meteor" >장소 이용 규칙</h4>
+			<h4 class="fa-solid fa-meteor" > 장소 이용 규칙</h4>
 			<br>
 			<div>${sdvo.srule}</div>
 		</div>
 	</section>
-
+<br><br>
 	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 
 	<section id="three">
@@ -341,7 +342,7 @@ nav ul li {
 		</div>
 		<div id="nav3_re"></div>
 	</section>
-
+<br>
 	<div style="width: 100%; height: 1px; background-color: #e7eaee;"></div>
 
 	<section id="four">
@@ -354,7 +355,7 @@ nav ul li {
 
 	<hr>
 
-
+<br><br>
 	<div class="space_host" style="position: relative;">
 		<div class="h_row_center">
 			<p class="fa-solid fa-meteor">호스트의 다른 장소</p>

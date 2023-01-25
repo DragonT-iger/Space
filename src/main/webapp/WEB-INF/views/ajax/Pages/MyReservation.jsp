@@ -102,12 +102,12 @@
 			<td colspan="2"><fmt:formatNumber value="${resArr.totalprice}" pattern="###,###"/></td>
 		</tr>
 		<tr>
-			<td colspan="1" style="font-weight:bold;">공간이름</td>
-			<td colspan="2">${resArr.sname}</td>
+			<td colspan="3" style="font-weight:bold;">공간이름: ${resArr.sname}</td>
+			
 		</tr>
 		<tr>
-			<td colspan="1" style="font-weight:bold;">대여공간 주소: ${resArr.spost}</td>
-			<td colspan="3">${resArr.saddr1} ${resArr.saddr2}</td>
+			<td colspan="3" style="font-weight:bold;">대여공간 주소: ${resArr.saddr1} ${resArr.saddr2} ${resArr.spost}</td>
+			
 		</tr>
 		<tr>
 			<c:if test="${resArr.rtstartdate <= now}">

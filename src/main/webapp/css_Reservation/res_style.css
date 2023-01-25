@@ -1,7 +1,7 @@
 
 
 .bookingCalendar {
-	width: 1000px;
+	width: 100%;
 	margin: auto;
 }
 
@@ -33,7 +33,8 @@
 }
 
 .Body_Calendar {
-	width: 800px;
+	width: 100%;
+	height:100%;
 	background-color: #FFe4b5;
 	border: 1px solid white;
 	margin-bottom: 30px;

@@ -87,6 +87,12 @@
 		
 		margin:40px 0px 0px 80px;
 	}
+	
+	.line{
+		width:80%;
+		margin-left:auto;
+		margin-right:auto;
+	}
 </style>
 		<h1 class="text-center mt-3"> 나의 공간 관리</h1>
 		<button class="myspaceInsert_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">공간등록</button>
@@ -127,6 +133,7 @@
 							${spaceinfo.scontents}
 	        			</p>
         			</div>
+        			<hr class="line">
 					<div class="myspace-content-wrap">
 	        			<p class="myspace-tab">공간규칙</p>
 	        			<p class="myspace-content">

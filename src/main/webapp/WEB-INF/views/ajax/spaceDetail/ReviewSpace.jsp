@@ -41,12 +41,38 @@
 .reviewrList{
 	background-color:#FFEFD5;
 }
+.box{
+overflow:hidden;
+padding:10px 10px 5px 10px;
+}
+
+.sizes{
+		font-size:15px;
+font-weight:bolder;
+padding:20px 20px 10px 20px;
+}
+
+.star{
+padding:0px 0px 20px 20px;
+}
+
+.title{
+font-weight:bold;
+	display: inline-block;
+	padding:0px 10px 20px 20px;
+}
+
+.content{
+font-weight:bold;
+
+	padding:0px 10px 20px 20px;
+}
 </style>
 
 <div id="s_revw">
 <div id="revw_question">
 	<div id="revw_head">
-		<h4>Review
+		<h4 class="fa-solid fa-meteor"> Review
 			<strong>${paging.totalCount}</strong>
 		</h4>
 	</div>
@@ -73,19 +99,18 @@
 			
 				<table class="box">
 					<tr>
-						<td class="sizes" colspan="3">${review.review_num}</td>
+						<td class="sizes" >${review.review_num}. &nbsp;&nbsp;&nbsp;${review.review_date}&nbsp;&nbsp;&nbsp;&nbsp${review.userid}</td>
 						<td colspan="3">
 						<c:if test="${sdvo.userid eq loginUser.userid}">
 							<c:if test="${review.rgorder<1}">
-								<span class="leftr" onclick="review_rewrite()">답변 작성하기</span>
+								<span class="leftr btn btn-primary" onclick="review_rewrite()">답변 작성하기</span>
 							</c:if>
 						</c:if>
 						</td>
 					</tr>
 					
 					<tr>
-						<td colspan="2">${review.userid}</td>
-						<td colspan="2">
+						<td class="star"colspan="2">
 							<div class="star-ratings">
 								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -95,7 +120,7 @@
 								</div>
 							</div>
 						</td>
-						<td colspan="2" class="sizes">${review.review_date}</td>
+					
 					</tr>
 					
 					<c:if test="${review.rimage1 ne null or review.rimage2 ne null}">
@@ -110,11 +135,11 @@
 					</c:if>
 
 					<tr>
-						<td colspan="6">${review.rtitle}</td>
+						<td class="title"colspan="6">${review.rtitle}</td>
 					</tr>
 					
 					<tr>
-						<td colspan="6">${review.rcontent}</td>
+						<td class="content"colspan="6">${review.rcontent}</td>
 					</tr>
 				</table>
 			</li>
