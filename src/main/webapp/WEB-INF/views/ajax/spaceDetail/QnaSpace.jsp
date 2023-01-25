@@ -5,37 +5,60 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
 .box{
-margin:10px;
+margin:20px 0px 0px 0px;
+overflow:hidden;
 }
 
 .qlist{
 	background-color:#fdf5e6;
+ 
+
 }
 .qrlist{
 	background-color:#FFEFD5;
 }
 #qna_qnum{
-	font-size: 1px;
+	font-size:15px;
+font-weight:bolder;
+padding:10px 10px 5px 10px;
 }
 .qd{
-	font-size:10px;
+
+	display: inline-block;
+	font-size:15px;
+	font-weight:bolder;
+	padding:0px 10px 2.5px 10px;
 }
 #qna_title{
 	font-weight:bold;
+	display: inline-block;
 }
-.leftq{
-	text-align:right;
+#qna_content{
+	display: inline-block;
 }
-.user_name{
-	float:left;
 
+.user_name{
+	display: inline-block;
+	font-weight:bolder;
+	padding:0px 10px 5px 10px;
 }
+
+.leftq{
+	display: inline-block;
+	float:right;
+	margin:0px 0px 10px 0px;
+	
+}
+
+
+
+
 </style>
 
 <div id="s_qna">
 <div id="qna_question">
 	<div id="qna_head">
-		<h4 class="fa-solid fa-meteor">Q&A
+		<h4 class="fa-solid fa-meteor"> Q&A
 			<strong>${paging.totalCount}</strong>
 		
 		</h4>
@@ -64,27 +87,28 @@ margin:10px;
 			</c:if>
 		
 				<div class="box">
-					<div id="qna_qnum">${qna.qnum}
-					
+					<div id="qna_qnum">${qna.qnum}. <p class="qd">${qna.qdate}</p>
+				
+					<div class="user_name">${qna.userid}</div>
 					<c:if test="${sdvo.userid eq loginUser.userid}">
 						<c:if test="${qna.qgorder eq 0}">
-							<span class="leftq" onclick="qna_rewrite('${qna.qnum}')">답변 작성하기</span>
+							<span class="leftq btn btn-primary" onclick="qna_rewrite('${qna.qnum}')">답변 작성하기</span>
 						</c:if>
 						<%-- <c:if test="${qna.qgorder>0}">
 							<div onclick="qna_UpdateRewrite()">답변 수정하기</div>
 						</c:if> --%>
 					</c:if>
-					
-					</div>
-					
-					<div class="user_name">${qna.userid}
-						<span class="leftq" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">x</span>
-				</div>
-					<div>
+						<div>
 						<p id="qna_title">${qna.qtitle}</p>
-						<p>${qna.qcontent}</p>
-						<p class="qd">${qna.qdate}</p>
 					</div>
+					<div>	
+						<p id="qna_content">${qna.qcontent}</p>
+					</div>
+					
+					
+					</div>
+				
+					<div class="leftq btn btn-danger" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">삭제</div>
 				</div>
 			</li>
 		</c:forEach>

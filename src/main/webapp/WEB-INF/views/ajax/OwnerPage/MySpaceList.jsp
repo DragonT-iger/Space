@@ -87,6 +87,12 @@
 		
 		margin:40px 0px 0px 80px;
 	}
+	
+	.line{
+		width:80%;
+		margin-left:auto;
+		margin-right:auto;
+	}
 </style>
 
 	
@@ -131,6 +137,7 @@
 							${spaceinfo.scontents}
 	        			</p>
         			</div>
+        			<hr class="line">
 					<div class="myspace-content-wrap">
 	        			<p class="myspace-tab">공간규칙</p>
 	        			<p class="myspace-content">

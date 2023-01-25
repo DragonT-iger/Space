@@ -12,9 +12,7 @@
 	
 	}
 	
-	.search{
-		display:inline-block;
-	}
+
 
 </style>
 </head>
@@ -66,8 +64,8 @@
 <table class="table table-condensed table-striped">
 	<thead>
 		<tr>
-			<th>공간명</th>
-			<th>사유</th>
+			<th colspan="1">공간명</th>
+			<th colspan="1">사유</th>
 			<th>피드백</th>
 		</tr>
 	</thead>
@@ -83,8 +81,8 @@
 	<c:if test="${fArr ne null or not empty fArr}">
 		<c:forEach var="fb" items="${fArr}">
 		<tr>
-			<td>${fb.sname}</td>
-			<td>${fb.r_content}</td>
+			<td colspan="1">${fb.sname}</td>
+			<td colspan="1">${fb.r_content}</td>
 			<td>${fb.etc}</td>
 		</tr>
 		</c:forEach>

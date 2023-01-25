@@ -6,14 +6,29 @@
 
 <c:import url="/Spacetop" charEncoding="utf-8"/>
 
+<style>
+.wrap{
+padding: 0px 100px 0px 100px;
+}
 
+.spaceStatus{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	text-align: center;
+	padding:20px 0px 20px 0px;
+}
+
+
+
+</style>
 <div class="wrap">
 	<div class="ResStatus">
 	
 	<div class="section_spaceInfo">
 		<div class="top_spaceTitle">
 			<h1 class="spaceStatus">내가 등록한 공간 예약 현황 관리</h1>
-			<h2 class="spaceName">${svo.sname}</h2>
+			<h4 class="spaceName fa-solid fa-meteor">${svo.sname}</h4>
 		</div>
 	</div>
 	

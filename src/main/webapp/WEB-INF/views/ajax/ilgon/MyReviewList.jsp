@@ -6,6 +6,7 @@
 <style>
 .review_list {
 	width: 100%;
+	height: 100%;
 	background-color: #fdf5e6;
 	border: 1px solid #faf0e6;
 	margin-bottom: 20px;
@@ -14,11 +15,15 @@
 .myreview_wrap {
 	width: 80%;
 	margin: auto;
+
 }
 
 .review-profile {
 	width: 100%;
-	height: 310px;
+	overflow:hidden;
+		
+	height: 100%;
+	padding:20px;
 }
 
 .review_img {
@@ -30,7 +35,8 @@
 
 .review_delbtn {
 	float: right;
-	margin:0px 10px 0px 0px;
+	margin:0px 10px 10px 0px;
+	
 
 }
 
@@ -151,23 +157,12 @@
 					
 				
 					<div class="review-review-title">
-					<p class="review-user">예약날짜</p>
-					<p class="review-content"></p>
-					
+					<h3 class="review-content"><b>${ra.rtitle }</b></h3>
 					</div>
-				
-			
-
 				<div class="review-content-wrap">
 					<p class="review-user">내가 쓴 리뷰</p>
 					<p class="review-content">${ra.rcontent}</p>
 				</div>
-
-				<div class="review-reple-wrap">
-					<p class="review-host">댓글</p>
-					<p class="review-reple">${ra.rcontent}</p>
-				</div>
-			
 						<button class="review_delbtn btn btn-danger"
 					onclick="del_review('${ra.review_num}')">삭제</button>
 			</div>
