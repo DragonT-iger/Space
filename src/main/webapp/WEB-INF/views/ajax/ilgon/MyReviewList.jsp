@@ -17,8 +17,9 @@
 }
 
 .review-profile {
+	overflow:hidden;
 	width: 100%;
-	height: 310px;
+	/* height: 310px; */
 }
 
 .review_img {
@@ -100,7 +101,10 @@
 	height: 200px;
 	margin:10px 10px 20px 10px;
 }
-
+.br{
+	display:flex;
+	flex-wrap: wrap;
+}
 
 
 </style>
@@ -125,7 +129,7 @@
 				<div class="review-profile">
 					<div class="review review-time">${ra.review_date}</div>
 					<div class="review space-name">
-						<a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a>
+						<a href="/space/spaceDetail?snum=${ra.snum}">${ra.sname}</a>
 					</div>
 					<div class="star-ratings">
 						<div class="star-ratings-fill space-x-2 text-lg"
@@ -146,28 +150,18 @@
 							<img class="review_img"
 								src="../resources/SpaceInfoImg/${ra.rimage2}"></img>
 						</div>
+						<div class="br"></div>
 					</c:if>
 	
 					
 				
 					<div class="review-review-title">
-					<p class="review-user">예약날짜</p>
-					<p class="review-content"></p>
-					
+					<h3 class="review-content"><b>${ra.rtitle }</b></h3>
 					</div>
-				
-			
-
 				<div class="review-content-wrap">
 					<p class="review-user">내가 쓴 리뷰</p>
 					<p class="review-content">${ra.rcontent}</p>
 				</div>
-
-				<div class="review-reple-wrap">
-					<p class="review-host">댓글</p>
-					<p class="review-reple">${ra.rcontent}</p>
-				</div>
-			
 						<button class="review_delbtn btn btn-danger"
 					onclick="del_review('${ra.review_num}')">삭제</button>
 			</div>
