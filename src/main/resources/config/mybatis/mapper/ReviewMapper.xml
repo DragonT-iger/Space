@@ -43,7 +43,8 @@
 	</select>
 	
 	<select id="getReviewUserid" parameterType="string" resultType="Review">
-		select * from review where userid=#{value} order by review_date desc
+		select r.*,s.sname from review r join space_info s on s.snum=r.snum 
+		where r.userid=#{value} order by r.review_date desc
 	</select>
 	
 	

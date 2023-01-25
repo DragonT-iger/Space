@@ -4,52 +4,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:import url="/Spacetop" charEncoding="utf-8" />
 <style>
-			.review_list{
-				width:100%;
-				background-color : #fdf5e6;
-				border : 1px solid #faf0e6;
-				margin-bottom : 20px;
-			}
-			.myreview_wrap{
-				width:80%;
-				margin:auto;
-			}
-			.review-profile{
-				width:100%;
-				height:200px;
-			}
-			.review_img{
-				float:left;
-				width:200px;
-				height:100%;
-				margin-right:5%;
-			}
-			.review_delbtn{
-				float:right;
-			}
-			.review {
-				height:20%;
-				align-items:center;
-			}
-			.review-content-wrap, .review-reple-wrap{
-				overflow:hidden;
-				display: flex;
- 				align-items: center;
-			}
-			.review-user,.review-host {
-				float:left;
-				height:100%;
-				margin-right:5%;
-				padding:10px;
-				text-align:center;
-				width:20%;
-			}
-			.review-content,.review-reple{
-				display:inline-block;
-				padding:10px;
-				margin-left:5px;
-				width:70%;
-			}
+.review_list{
+	width:100%;
+	background-color : #fdf5e6;
+	border : 1px solid #faf0e6;
+	margin-bottom : 20px;
+}
+.myreview_wrap{
+	width:80%;
+	margin:auto;
+}
+.review-profile{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+.review_img{
+	float:left;
+	width:200px;
+	height:100%;
+	margin-right:5%;
+}
+.review_delbtn{
+	float:right;
+}
+.review {
+	height:20%;
+	align-items:center;
+}
+.review-content-wrap, .review-reple-wrap{
+	overflow:hidden;
+	display: flex;
+		align-items: center;
+}
+.review-user,.review-host {
+	float:left;
+	height:100%;
+	margin-right:5%;
+	padding:10px;
+	text-align:center;
+	width:20%;
+}
+.review-content,.review-reple{
+	display:inline-block;
+	padding:10px;
+	margin-left:5px;
+	width:70%;
+}
 			
 .star-ratings {
   color: #aaa9a9; 
@@ -103,6 +104,7 @@
 		<c:set var="w" value="${ra.rscore*20}"/>
 		<div class="review_list">
 		<button class="review_delbtn btn btn-danger" onclick="del_review('${ra.review_num}')">삭제</button>
+			
 			<div class="review-profile">
 				<div class="review review-time">${ra.review_date}</div>
 				
@@ -124,8 +126,7 @@
 					</div>
 				</c:if>
 				
-				<div class="review space-name"><a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a></div>
-				<div class="review review-title">예약날짜</div>
+				<div class="review space-name"><a href="/space/spaceDetail?snum=${ra.snum}">${ra.sname}</a></div>
 			</div>
 			
 			<div class="review-content-wrap">
@@ -135,12 +136,6 @@
 				</p>
 			</div>
 
-			<div class="review-reple-wrap">
-				<p class="review-host">댓글</p>
-				<p class="review-reple">
-					${ra.rcontent}
-				</p>
-			</div>
 		</div>
 		</c:forEach>
 		</c:if>

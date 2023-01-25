@@ -128,9 +128,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listSpace" resultType="SpaceInquiry" parameterType="Paging">
+		select rs.*, h.h_name from (
 		select s.*, r.rcount from space_info s left outer join 
 		(select snum , count(*) as rcount from reservation group by snum)
-		r on s.snum = r.snum
+		r on s.snum = r.snum )
+		rs left join
+		(select * from hashtag) h on rs.h_code = h.h_code
 	</select>
 	
 	<select id="getSpaceAddr" resultType="string" >
@@ -139,9 +142,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="searchSpaceByFilter" resultType="SpaceInquiry" parameterType="map">
 	select * from (
+		select rs.*, h.h_name from (
 		select s.*, r.rcount from space_info s left outer join 
 		(select snum , count(*) as rcount from reservation group by snum)
-		r on s.snum = r.snum)
+		r on s.snum = r.snum )
+		rs left join
+		(select * from hashtag) h on rs.h_code = h.h_code)
 		<include refid="findsearchSpace"/>
 		<include refid="Spacefindfilter"/>
 	</select>
@@ -171,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 ]]>
 		</if>
 		<!-- 해시태그 h_code -->
-		<if test="Fshtag!=null and Fshtag!=''">
+		<if test="Fshtag!='전체' and Fshtag!=''">
 			 <![CDATA[
 			   and regexp_like(h_code,#{Fshtag})
 			 ]]>
@@ -254,9 +260,9 @@ where sdate like '%'||#{value}||'%'
 <select id="todayPopSpace" parameterType="string" resultType="SpaceInquiry">
 	select * from(
 	select sr.* , h.h_name from hashtag h left outer join(
-	select s.*, r.rcount as rescount , r.rdate from space_info s left outer join 
+	select s.*, r.rcount as rcount , r.rdate from space_info s left outer join 
 	    (select snum, TO_CHAR(rdate, 'yyyy/mm/dd') as rdate ,count(*) as rcount from reservation group by snum , TO_CHAR(rdate, 'yyyy/mm/dd'))
-    r on s.snum = r.snum) sr  on sr.h_code = h.h_code)where rdate like '%'||#{value}||'%'
+    r on s.snum = r.snum) sr  on sr.h_code = h.h_code)where rdate like '%'||#{value}||'%' and rcount>0 order by rcount desc
 </select>
 
 <select id="DatabyDate" parameterType="string" resultType="GraphData">
