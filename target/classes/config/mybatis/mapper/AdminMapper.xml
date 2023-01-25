@@ -278,7 +278,7 @@ where sdate like '%'||#{value}||'%'
 
 <insert id="SpaceInfoInsertTest" parameterType="SpaceInfo">
 	insert into space_info(snum, sname, userid, minn, maxn, bcost, ecost, spost, saddr1, saddr2, slong, slat, sdate, h_code, simage1, simage2, simage3, simage4, scontents,srule)
-	values(space_info_seq.nextval, #{sname}, #{userid}, #{minn}, #{maxn}, #{bcost}, #{ecost}, #{spost:VARCHAR}, #{saddr1:VARCHAR}, #{saddr2:VARCHAR}, #{slong:VARCHAR}, #{slat:VARCHAR}, sysdate, #{h_code}, #{simage1:VARCHAR}, #{simage2:VARCHAR}, #{simage3:VARCHAR}, #{simage4:VARCHAR}, #{scontents:VARCHAR}, #{srule:VARCHAR})
+	values(#{snum}, #{sname}, #{userid}, #{minn}, #{maxn}, #{bcost}, #{ecost}, #{spost:VARCHAR}, #{saddr1:VARCHAR}, #{saddr2:VARCHAR}, #{slong:VARCHAR}, #{slat:VARCHAR}, sysdate, #{h_code}, #{simage1:VARCHAR}, #{simage2:VARCHAR}, #{simage3:VARCHAR}, #{simage4:VARCHAR}, #{scontents:VARCHAR}, #{srule:VARCHAR})
 </insert>
 
 <select id="testUserList" resultType="MemberInfo">

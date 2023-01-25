@@ -40,7 +40,7 @@ public class JoinUserTest {
 	//서비스 테스트시에 필요한 객체
 	@Inject
 	private Mem_InfoMapper mapper;
-	
+	@Inject
 	private AdminMapper testmapper;
 	
 	private final static Random random = new Random();
@@ -54,7 +54,7 @@ public class JoinUserTest {
 	public void testUser() throws Exception{
 		
 		
-		for(int i=30;i<50;i++) {
+		for(int i=33;i<34;i++) {
 		Mem_InfoVO vo = new Mem_InfoVO();
 		vo.setUserid("user"+i);
 		vo.setMpwd(pwencoder.encode("user"+i));
@@ -83,12 +83,46 @@ public class JoinUserTest {
 		int rpoint = 100000+randomNumber(999999);
 		vo.setPoint(rpoint);
 		vo.setPointadd(rpoint);
-		int day = randomNumber(18)+1;
+		int day = randomNumber(1)+21;
 		Date date = Date.valueOf("2023-01-"+Integer.toString(day));
 		vo.setMdate(date);
-		int j = testmapper.createUserTest(vo);
-		}
-		
+		log.info(vo);
+		testmapper.createUserTest(vo);
+		}/*
+		for(int i=1;i<6;i++) {
+	         Mem_InfoVO vo = new Mem_InfoVO();
+	         vo.setUserid("owner"+i);
+	         vo.setMpwd(pwencoder.encode("owner"+i));
+	         vo.setMname(randomSelect(ALL_KOREAN_LAST_NAME,1)+randomSelect(ALL_KOREAN_NAMABLE_KOR,2));
+	         vo.setStatus(1);
+	         vo.setNickname("등록유저"+i);
+	         vo.setMrank(1);
+	         String hp = "010";
+	         for(int rhp=0; rhp<8; rhp++ ) {
+	            hp += randomNumber(10);
+	         }
+	         vo.setHp(hp);
+	         String acparam = "";
+	         for(int rac=0; rac<11; rac++ ) {
+	            acparam += randomNumber(10);
+	         }
+	         Long ac = Long.parseLong(acparam);
+	         vo.setAccount(ac);
+	         
+	         List<Mem_InfoVO> listbc = mapper.listBankcode();
+	         int rbc = randomNumber(listbc.size());
+	         String bc=listbc.get(rbc).getBank_code();
+	         vo.setBank_code(bc);
+	         
+	         vo.setBirth(Integer.parseInt(randomBirth(1980,2008)));
+	         int rpoint = 100000+randomNumber(999999);
+	         vo.setPoint(rpoint);
+	         vo.setPointadd(rpoint);
+	         int day = randomNumber(10)+1;
+	         Date date = Date.valueOf("2023-01-"+Integer.toString(day));
+	         vo.setMdate(date);
+	         int j = testmapper.createUserTest(vo);
+	         }*/
 		
 		/*
 		String acparam = "";

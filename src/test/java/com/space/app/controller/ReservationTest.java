@@ -55,7 +55,7 @@ public class ReservationTest {
 	@Test
 	public void testRes() throws Exception{
 		ReservationVO vo = new ReservationVO();
-		for(int i=100; i<105; i++) {
+		for(int i=105; i<151; i++) {
 			vo.setRtnum(i); //예약번호
 			List<Space_InfoVO> space = smapper.getSpaceInfoAll(); //space 모든공간가져와서 랜덤한 리스트중 공간번호 입력
 			vo.setSnum(space.get(randomNumber(space.size())).getSnum()); //공간번호
@@ -94,7 +94,7 @@ public class ReservationTest {
 			vo.setRtstatus(0); //예약상태
 			
 			
-			int day = randomNumber(18)+1;
+			int day = randomNumber(24)+1;
 			Date date = Date.valueOf("2023-01-"+Integer.toString(day));
 			vo.setRdate(date); //예약완료 시간
 			int rtday = day+randomNumber(31-day)+1;
@@ -106,7 +106,7 @@ public class ReservationTest {
 			log.info(vo);
 			
 			testmapper.testinsertBooking(vo);
-			rmapper.updateUserRes(vo); //포인트차감
+			//rmapper.updateUserRes(vo); //포인트차감
 		}
 		
 	}

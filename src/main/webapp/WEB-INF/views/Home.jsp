@@ -185,7 +185,7 @@
 			<input type="text" id="keyword" name="keyword" value="">
 			<button class="btn1 btn btn-secondary" onclick="listPaging('search')">Search</button>
 			<button type="button" class="btn1 btn btn-secondary"
-				onclick="location.href='http://localhost:8080/space/'">초기화</button>
+				onclick="location.href='http://localhost:9090/space/'">초기화</button>
 		</div>
 	</div>
 
@@ -201,7 +201,6 @@
 					</a>
 					<p class="text">${Space.sname}</p>
 					<p class="text">${Space.saddr1}</p>
-					<p class="text">${Space.saddr2}</p>
 				</div>
 			</c:forEach>
 		</div>
@@ -215,7 +214,6 @@
 					</a>
 					<p class="text">${Space.sname}</p>
 					<p class="text">${Space.saddr1}</p>
-					<p class="text">${Space.saddr2}</p>
 				</div>
 			</c:forEach>
 		</div>
@@ -339,7 +337,6 @@
 	    		  	str+='<img class="img" alt="" src="resources/SpaceInfoImg/'+spacevo.simage1+'"/>';
 	    		  	str+='<p class="text">'+spacevo.sname+'</p>';
 	    		  	str+='<p class="text">'+spacevo.saddr1+'</p>';
-	    		  	str+='<p class="text">'+spacevo.saddr2+'</p>';
 	    		  	str+='</a>';
 	    		  	str+='</div>';
       	  	});
