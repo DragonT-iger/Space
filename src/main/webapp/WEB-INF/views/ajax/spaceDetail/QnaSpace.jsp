@@ -4,7 +4,7 @@
 <!-- function taglib -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
-.box{
+.qna_box{
 margin:20px 0px 0px 0px;
 overflow:hidden;
 }
@@ -15,7 +15,7 @@ overflow:hidden;
 
 }
 .qrlist{
-	background-color:#FFEFD5;
+	background-color:#FFEFFF;
 }
 #qna_qnum{
 	font-size:15px;
@@ -30,6 +30,7 @@ padding:10px 10px 5px 10px;
 	padding:0px 10px 2.5px 10px;
 }
 #qna_title{
+	padding:10px;
 	font-weight:bold;
 	display: inline-block;
 }
@@ -38,7 +39,7 @@ padding:10px 10px 5px 10px;
 }
 
 .user_name{
-	display: inline-block;
+	display: flex;
 	font-weight:bolder;
 	padding:0px 10px 5px 10px;
 }
@@ -49,7 +50,11 @@ padding:10px 10px 5px 10px;
 	margin:0px 0px 10px 0px;
 	
 }
-
+.rewrite_btn{
+	position:relative;
+	top:0px;
+	right:0px;
+}
 
 
 
@@ -86,10 +91,8 @@ padding:10px 10px 5px 10px;
 				<li class="qrlist">
 			</c:if>
 		
-				<div class="box">
-					<div id="qna_qnum">${qna.qnum}. <p class="qd">${qna.qdate}</p>
-				
-					<div class="user_name">${qna.userid}</div>
+				<div class="qna_box">
+					<div id="qna_qnum"><p class="qd">${qna.qdate}</p>
 					<c:if test="${sdvo.userid eq loginUser.userid}">
 						<c:if test="${qna.qgorder eq 0}">
 							<span class="leftq btn btn-primary" onclick="qna_rewrite('${qna.qnum}')">답변 작성하기</span>
@@ -98,15 +101,21 @@ padding:10px 10px 5px 10px;
 							<div onclick="qna_UpdateRewrite()">답변 수정하기</div>
 						</c:if> --%>
 					</c:if>
-						<div>
-						<p id="qna_title">${qna.qtitle}</p>
+					</div>
+					<div class="user_name">
+						<div class="sizes">작성자 :</div>
+						<div class="sizes"> ${qna.userid}</div>	
+					</div>
+					
+					<div>
+						<h3 id="qna_title">${qna.qtitle}</h3>
 					</div>
 					<div>	
-						<p id="qna_content">${qna.qcontent}</p>
+						<p id="qna_content" class="sizes">${qna.qcontent}</p>
 					</div>
 					
 					
-					</div>
+					
 				
 					<div class="leftq btn btn-danger" onclick="delete_qnum(${qna.qnum},'${qna.qpwd}')">삭제</div>
 				</div>

@@ -26,13 +26,6 @@
 	padding:20px;
 }
 
-.review_img {
-	float: left;
-	width: 200px;
-	height: 100%;
-	margin-right: 5%;
-}
-
 .review_delbtn {
 	float: right;
 	margin:0px 10px 10px 0px;
@@ -96,7 +89,10 @@
 	z-index: 0;
 	padding: 0;
 }
-
+.review_img_wrap{
+	display:block;
+	overflow:hidden;
+}
 .review_img_cover {
 	float: left;
 }
@@ -131,7 +127,7 @@
 				<div class="review-profile">
 					<div class="review review-time">${ra.review_date}</div>
 					<div class="review space-name">
-						<a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a>
+						<h3><a href="/space/spaceDetail?snum=${ra.snum}">${ra.sname}</a></h3>
 					</div>
 					<div class="star-ratings">
 						<div class="star-ratings-fill space-x-2 text-lg"
@@ -144,6 +140,7 @@
 					</div>
 
 					<c:if test="${ra.rimage1 ne null or ra.rimage2 ne null}">
+					<div class="review_img_wrap">
 						<div class="review_img_cover">
 							<img class="review_img"
 								src="../resources/SpaceInfoImg/${ra.rimage1}"></img>
@@ -152,19 +149,17 @@
 							<img class="review_img"
 								src="../resources/SpaceInfoImg/${ra.rimage2}"></img>
 						</div>
-					</c:if>
-	
-					
-				
-					<div class="review-review-title">
-					<h3 class="review-content"><b>${ra.rtitle }</b></h3>
 					</div>
-				<div class="review-content-wrap">
-					<p class="review-user">내가 쓴 리뷰</p>
-					<p class="review-content">${ra.rcontent}</p>
-				</div>
-						<button class="review_delbtn btn btn-danger"
-					onclick="del_review('${ra.review_num}')">삭제</button>
+					</c:if>
+					
+					<div class="review-review-title">
+						<h3 class="review-content"><b>${ra.rtitle }</b></h3>
+					</div>
+					<div class="review-content-wrap">
+						<p class="review-user">내가 쓴 리뷰</p>
+						<p class="review-content">${ra.rcontent}</p>
+					</div>
+						<button class="review_delbtn btn btn-danger" onclick="del_review('${ra.review_num}')">삭제</button>
 			</div>
 				
 			</div>

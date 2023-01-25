@@ -31,41 +31,45 @@
   z-index: 0;
   padding: 0;
 }			
-
-.sizes,.leftr{
-	font-size:1px;
-}
 .reviewList{
 	background-color:#fdf5e6;
 }
 .reviewrList{
 	background-color:#FFEFD5;
 }
-.box{
-overflow:hidden;
-padding:10px 10px 5px 10px;
+.review-item{
+	overflow:hidden;
+	width:100%;
+	margin-top:20px;
+	padding:10px 10px 5px 10px;
 }
-
+.review-head{
+	display:flex;
+	position:relative;
+}
+.leftr{
+	position:absolute;
+	right:0px;
+	margin:0px 0px 10px 0px;
+}
 .sizes{
-		font-size:15px;
-font-weight:bolder;
-padding:20px 20px 10px 20px;
+	font-size:15px;
+	font-weight:bolder;
+	padding:20px 5px 10px 5px;
 }
-
-.star{
-padding:0px 0px 20px 20px;
+.review_img{
+	float: left;
 }
-
-.title{
-font-weight:bold;
-	display: inline-block;
-	padding:0px 10px 20px 20px;
+.review_img>img{
+	width: 200px;
+	height: 200px;
+	margin:10px 10px 20px 10px;
 }
-
-.content{
-font-weight:bold;
-
-	padding:0px 10px 20px 20px;
+.review-body{
+	display:flex;
+}
+.review-title{
+	padding:10px;	
 }
 </style>
 
@@ -96,21 +100,12 @@ font-weight:bold;
 			<c:if test="${review.rgorder>0}">
 				<li class="reviewrList">
 			</c:if>
-			
-				<table class="box">
-					<tr>
-						<td class="sizes" >${review.review_num}. &nbsp;&nbsp;&nbsp;${review.review_date}&nbsp;&nbsp;&nbsp;&nbsp${review.userid}</td>
-						<td colspan="3">
-						<c:if test="${sdvo.userid eq loginUser.userid}">
-							<c:if test="${review.rgorder<1}">
-								<span class="leftr btn btn-primary" onclick="review_rewrite()">답변 작성하기</span>
-							</c:if>
-						</c:if>
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="star"colspan="2">
+				<div class="review-item">
+					<div class="review-head">
+						<div class="sizes">
+							${review.review_date}
+						</div>
+						<div class="sizes">
 							<div class="star-ratings">
 								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -119,29 +114,39 @@ font-weight:bold;
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 								</div>
 							</div>
-						</td>
-					
-					</tr>
+						</div>
+						<div class="leftr">
+							<c:if test="${sdvo.userid eq loginUser.userid}">
+								<c:if test="${review.rgorder<1}">
+									<span class="btn btn-primary" onclick="review_rewrite()">답변 작성하기</span>
+								</c:if>
+							</c:if>
+						</div>
+					</div>
+					<div class="review-body">
+						<div class="sizes">작성자 :</div>
+						<div class="sizes"> ${review.userid}</div>		
+					</div>
 					
 					<c:if test="${review.rimage1 ne null or review.rimage2 ne null}">
-					<tr>
-						<td rowspan="5" colspan="3">
-							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage1})"></img>
-						</td>
-						<td rowspan="5" colspan="3">
-							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage2})"></img>
-						</td>
-					</tr>
+						<div class="review-body">
+							<div class="review_img">
+								<img src="/space/resources/SpaceInfoImg/${review.rimage1}"></img>
+							</div>
+							<div class="review_img">
+								<img src="/space/resources/SpaceInfoImg/${review.rimage2}"></img>
+							</div>
+						</div>
 					</c:if>
 
-					<tr>
-						<td class="title"colspan="6">${review.rtitle}</td>
-					</tr>
-					
-					<tr>
-						<td class="content"colspan="6">${review.rcontent}</td>
-					</tr>
-				</table>
+					<div class="review-body">
+						<h3 class="review-title">${review.rtitle}</h3>
+					</div>
+					<div class="review-body">
+						<div class="sizes">${review.rcontent}</div>
+					</div>
+				</div>
+			</div>
 			</li>
 		</c:forEach>
 		</c:if>
@@ -172,9 +177,9 @@ font-weight:bold;
 		</ul>
 	</div>
 	</div>
-</div>
 
-</div>
+
+
 
 <script>
 const review_rewrite=function(qnum){

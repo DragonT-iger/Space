@@ -11,6 +11,17 @@
 	padding: 0px 100px 0px 100px;
 	
 	}
+	.feed-item>td{
+		width:20%;
+		line-height:100%;
+		vertical-align: middle;
+        text-align: center;
+	}
+	.feed-item>td:last-child{
+		width:60%;
+		vertical-align: middle;
+        text-align: left;
+	}
 	
 
 
@@ -80,10 +91,10 @@
 	
 	<c:if test="${fArr ne null or not empty fArr}">
 		<c:forEach var="fb" items="${fArr}">
-		<tr>
+		<tr class="feed-item">
 			<td colspan="1">${fb.sname}</td>
 			<td colspan="1">${fb.r_content}</td>
-			<td>${fb.etc}</td>
+			<td colspan="1">${fb.etc}</td>
 		</tr>
 		</c:forEach>
 	</c:if>
