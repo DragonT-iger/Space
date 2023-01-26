@@ -118,7 +118,7 @@
 						<div class="leftr">
 							<c:if test="${sdvo.userid eq loginUser.userid}">
 								<c:if test="${review.rgorder<1}">
-									<span class="btn btn-primary" onclick="review_rewrite()">답변 작성하기</span>
+									<span class="btn btn-primary" onclick="review_rewrite('${review.review_num}')">답변 작성하기</span>
 								</c:if>
 							</c:if>
 						</div>
@@ -182,16 +182,16 @@
 
 
 <script>
-const review_rewrite=function(qnum){
+const review_rewrite=function(rnum){
 	$.ajax({
 		type:'post',
-		url:'/space/spaceDetail/qnarewrite',
-		data:qnum,
+		url:'/space/spaceDetail/reviewrewrite',
+		data:rnum,
 		cache:false,
 		success:function(res){
 			$('#nav3_re').html("");
 			$('#nav3_re').html(res);
-			$('#qnum').val(qnum);
+			$('#renum').val(rnum);
 		},
 		error:function(err){
 			alert('err: '+err.status);
