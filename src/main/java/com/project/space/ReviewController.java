@@ -208,12 +208,49 @@ public class ReviewController {
 		return "ajax/spaceDetail/spaceD";
 	}
 	
-	@PostMapping("/reviewrewrite")
-	public String boardRewrite(Model m, @ModelAttribute ReviewVO revo) {
+	
+	 @PostMapping("/spaceDetail/reviewrewrite") 
+	 public String ReviewRewrite(Model m, @ModelAttribute ReviewVO revo) { 
+		 log.info("vo: "+revo);
+		 m.addAttribute("renum", revo.getReview_num()); 
+		 m.addAttribute("rtitle", revo.getRtitle()); 
+		 return "ajax/spaceDetail/ReviewRewrite"; 
+	 }
+	 
+	 @PostMapping("/spaceDetail/reviewrewriteEnd") 
+	 public String ReviewRewriteEnd(Model m, HttpServletRequest req, @ModelAttribute ReviewVO revo) { 
 		log.info("vo: "+revo);
-		m.addAttribute("renum", revo.getReview_num());
-		m.addAttribute("rtitle", revo.getRtitle());
-		return "ajax/spaceDetail/spaceD";
-	}
+		
+		HttpSession ses=req.getSession();
+		int snum=(int)ses.getAttribute("snum");
+		log.info(snum);
+		
+		int n=0;
+		String str="",loc="";
+		if("rewrite".equals(revo.getMode())) {  //답변 글쓰기 모드라면
+			ReviewVO CheckTitle=this.reviewService.checkTitle(revo.getReview_num());
+			revo.setRtitle("[RE]"+CheckTitle.getRtitle());
+			revo.setRtnum(CheckTitle.getRtnum());
+			n=reviewService.rewriteReview(revo);
+			str="답변글쓰기 ";
+		}
+		
+		str+=(n>0)? "성공":"실패";
+		loc=(n>0)? "/space/spaceDetail?snum="+snum:"/space/spaceDetail?snum="+snum;
+
+		return util.addMsgLoc(m, str, loc);
+	 }
+	
+//	 @PostMapping("/spaceDetail/reviewrewrite")
+//	public String boardRewrite(Model m, 
+//			@RequestParam(defaultValue="0") int qnum, @RequestParam(defaultValue="") String qtitle) {
+//		log.info("========================qnum: "+qnum+", qtitle: "+qtitle);
+//		
+//		m.addAttribute("qnum", qnum);
+//		m.addAttribute("qtitle", qtitle);
+//		return "ajax/spaceDetail/qnaRewrite";
+//	}
+
+	
 	
 }

@@ -47,5 +47,24 @@
 		where r.userid=#{value} order by r.review_date desc
 	</select>
 	
+	<select id="checkTitle" parameterType="int" resultType="Review">
+		select * from review where review_num=#{value}
+	</select>
+	
+	<select id="rselectGLG" parameterType="int" resultType="Review">
+		select rgroup, rlevel, rgorder from review where review_num=#{value}
+	</select>
+	
+	<update id="rupdateGorder" parameterType="Review">
+		update review set rgorder=rgorder+1 where rgroup=#{rgroup} and rgorder > #{rgorder}
+	</update>
+	
+	<insert id="rewriteReview" parameterType="Review" useGeneratedKeys="true" keyProperty="review_num">
+		<selectKey keyProperty="review_num" resultType="int" order="BEFORE">
+			select review_seq.nextval from dual
+		</selectKey>
+		insert into review(review_num,userid,snum,rtnum,rtitle,rcontent,review_date,rscore,rimage1,rimage2,rgroup,rlevel,rgorder)
+		values(#{review_num},#{userid},#{snum},#{rtnum},#{rtitle},#{rcontent},sysdate,#{rscore},#{rimage1:VARCHAR},#{rimage2:VARCHAR},#{rgroup},#{rlevel},#{rgorder})
+	</insert>
 	
 </mapper>

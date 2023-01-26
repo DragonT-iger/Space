@@ -25,4 +25,10 @@ public interface ReviewMapper {
 	public int getReviewRtnum(int rtnum);
 
 	public List<ReviewVO> getReviewUserid(String userid);
+
+	public ReviewVO checkTitle(int qnum);
+
+	public int rupdateGorder(ReviewVO parent);
+
+	public ReviewVO rselectGLG(int rnum);
 }

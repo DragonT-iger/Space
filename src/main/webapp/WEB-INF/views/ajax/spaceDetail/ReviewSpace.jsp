@@ -31,52 +31,22 @@
   z-index: 0;
   padding: 0;
 }			
+
+.sizes,.leftr{
+	font-size:1px;
+}
 .reviewList{
 	background-color:#fdf5e6;
 }
 .reviewrList{
 	background-color:#FFEFD5;
 }
-.review-item{
-	overflow:hidden;
-	width:100%;
-	margin-top:20px;
-	padding:10px 10px 5px 10px;
-}
-.review-head{
-	display:flex;
-	position:relative;
-}
-.leftr{
-	position:absolute;
-	right:0px;
-	margin:0px 0px 10px 0px;
-}
-.sizes{
-	font-size:15px;
-	font-weight:bolder;
-	padding:20px 5px 10px 5px;
-}
-.review_img{
-	float: left;
-}
-.review_img>img{
-	width: 200px;
-	height: 200px;
-	margin:10px 10px 20px 10px;
-}
-.review-body{
-	display:flex;
-}
-.review-title{
-	padding:10px;	
-}
 </style>
 
 <div id="s_revw">
 <div id="revw_question">
 	<div id="revw_head">
-		<h4 class="fa-solid fa-meteor"> Review
+		<h4>Review
 			<strong>${paging.totalCount}</strong>
 		</h4>
 	</div>
@@ -100,53 +70,61 @@
 			<c:if test="${review.rgorder>0}">
 				<li class="reviewrList">
 			</c:if>
-				<div class="review-item">
-					<div class="review-head">
-						<div class="sizes">
-							${review.review_date}
-						</div>
-						<div class="sizes">
-							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-								</div>
-								<div class="star-ratings-base space-x-2 text-lg">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-								</div>
-							</div>
-						</div>
-						<div class="leftr">
-							<c:if test="${sdvo.userid eq loginUser.userid}">
-								<c:if test="${review.rgorder<1}">
-									<span class="btn btn-primary" onclick="review_rewrite()">답변 작성하기</span>
-								</c:if>
+			
+				<table class="box">
+					<tr>
+						<td class="sizes" colspan="3">${review.review_num}</td>
+						<td colspan="3">
+						<c:if test="${sdvo.userid eq loginUser.userid}">
+							<c:if test="${review.rgorder<1}">
+								<span class="leftr" onclick="review_rewrite('${review.review_num}')">답변 작성하기</span>
 							</c:if>
-						</div>
-					</div>
-					<div class="review-body">
-						<div class="sizes">작성자 :</div>
-						<div class="sizes"> ${review.userid}</div>		
-					</div>
+						</c:if>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2">${review.userid}</td>
+						<td colspan="2">
+							<c:if test="${sdvo.userid ne loginUser.userid}">
+								<div class="star-ratings">
+									<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div>
+									<div class="star-ratings-base space-x-2 text-lg">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${sdvo.userid eq loginUser.userid}">
+								<div>
+									답변완료
+								</div>
+							</c:if>
+						</td>
+						<td colspan="2" class="sizes">${review.review_date}</td>
+					</tr>
+					
 					
 					<c:if test="${review.rimage1 ne null or review.rimage2 ne null}">
-						<div class="review-body">
-							<div class="review_img">
-								<img src="/space/resources/SpaceInfoImg/${review.rimage1}"></img>
-							</div>
-							<div class="review_img">
-								<img src="/space/resources/SpaceInfoImg/${review.rimage2}"></img>
-							</div>
-						</div>
+					<tr>
+						<td rowspan="5" colspan="3">
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage1}"></img>
+						</td>
+						<td rowspan="5" colspan="3">
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage2}"></img>
+						</td>
+					</tr>
 					</c:if>
 
-					<div class="review-body">
-						<h3 class="review-title">${review.rtitle}</h3>
-					</div>
-					<div class="review-body">
-						<div class="sizes">${review.rcontent}</div>
-					</div>
-				</div>
-			</div>
+					<tr>
+						<td colspan="6">${review.rtitle}</td>
+					</tr>
+					
+					<tr>
+						<td colspan="6">${review.rcontent}</td>
+					</tr>
+				</table>
 			</li>
 		</c:forEach>
 		</c:if>
@@ -177,21 +155,22 @@
 		</ul>
 	</div>
 	</div>
+</div>
 
-
-
+</div>
 
 <script>
-const review_rewrite=function(qnum){
+const review_rewrite=function(rnum){
+	//alert(rnum);
 	$.ajax({
 		type:'post',
-		url:'/space/spaceDetail/qnarewrite',
-		data:qnum,
+		url:'/space/spaceDetail/reviewrewrite',
+		data:rnum,
 		cache:false,
 		success:function(res){
 			$('#nav3_re').html("");
 			$('#nav3_re').html(res);
-			$('#qnum').val(qnum);
+			$('#renum').val(rnum);
 		},
 		error:function(err){
 			alert('err: '+err.status);
