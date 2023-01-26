@@ -38,8 +38,8 @@
 			<%-- ${loginUser.hp} --%>
 		</tr>
 		<tr>
-			<td><h5>나의 회원상태</h5></td>
-			<td class="table"><b><c:out value="${loginUser.statusStr}"/></b></td>
+			<td><h5>나의 생년월일</h5></td>
+			<td class="table"><b><c:out value="${loginUser.birth}"/></b></td>
 			<%-- ${loginUser.status} --%>
 		</tr>
 		<tr>

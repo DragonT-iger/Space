@@ -11,10 +11,19 @@
 	padding: 0px 100px 0px 100px;
 	
 	}
-	
-	.search{
-		display:inline-block;
+	.feed-item>td{
+		width:20%;
+		line-height:100%;
+		vertical-align: middle;
+        text-align: center;
 	}
+	.feed-item>td:last-child{
+		width:60%;
+		vertical-align: middle;
+        text-align: left;
+	}
+	
+
 
 </style>
 </head>
@@ -66,8 +75,8 @@
 <table class="table table-condensed table-striped">
 	<thead>
 		<tr>
-			<th>공간명</th>
-			<th>사유</th>
+			<th colspan="1">공간명</th>
+			<th colspan="1">사유</th>
 			<th>피드백</th>
 		</tr>
 	</thead>
@@ -82,10 +91,10 @@
 	
 	<c:if test="${fArr ne null or not empty fArr}">
 		<c:forEach var="fb" items="${fArr}">
-		<tr>
-			<td>${fb.sname}</td>
-			<td>${fb.r_content}</td>
-			<td>${fb.etc}</td>
+		<tr class="feed-item">
+			<td colspan="1">${fb.sname}</td>
+			<td colspan="1">${fb.r_content}</td>
+			<td colspan="1">${fb.etc}</td>
 		</tr>
 		</c:forEach>
 	</c:if>

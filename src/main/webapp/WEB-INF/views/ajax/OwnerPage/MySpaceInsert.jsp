@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <c:import url="/Spacetop" charEncoding="utf-8" />
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -28,8 +27,8 @@
 	                    geocoder.addressSearch(address, (result, status) =>{
 	                        if(status === daum.maps.services.Status.OK){ //다음map api service가 정상호출됫을대
 	                            const { x, y } = result[0];
-								alert(result[0].x);
-								alert(result[0].y);
+								//alert(result[0].x);
+								//alert(result[0].y);
 	                            resolve({ lat: y, lon: x }) //성공시 object객체에 lat에 y값담기고 lon에 x값담김
 	                        }else{
 	                            reject(); //실패
@@ -92,16 +91,33 @@
 	
 </script>
 
+<style>
+			/* The Modal (background) */
+	.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	}
+</style>
 
 
 
 <div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
 	<h1 class="my-5">공간등록, 수정 페이지</h1>
 
-
-
-
-	
 	<form name="sf" id="sf" role="form" action="spaceInsert" method="POST"
 		enctype="multipart/form-data">
 		<!-- 등록유저 누군지 확인  -->
@@ -222,8 +238,6 @@
 						onclick="javascript:CKEDITOR.instances.content.setData('')">다시쓰기</button>
 				</td>
 			</tr>
-			
-			
 
 		</table>
 
@@ -245,7 +259,7 @@
 	</div>
 
 	<script>
-		// Get the modal
+	// Get the modal
 	var modal = document.getElementById("myModal");
 
 	// Get the button that opens the modal
@@ -278,28 +292,6 @@
 	}
 
 	</script>
-
-	<style>
-				/* The Modal (background) */
-		.modal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		}
-
-		/* Modal Content/Box */
-		.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 15% from the top and centered */
-		}
-	</style>
 
 </div>
 <c:import url="/Spacefoot" charEncoding="utf-8" />

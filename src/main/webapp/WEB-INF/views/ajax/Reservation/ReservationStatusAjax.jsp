@@ -5,6 +5,17 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="css_Reservation/res_style.css" /> -->
 
+<style>
+.Body_Calendar{
+
+margin-left:auto;
+margin-right:auto;
+
+
+
+}
+</style>
+
 <div class="bookingCalendar" id="bookingCalendar">
 	<div class="section_inner">
 		<div class="time_title">

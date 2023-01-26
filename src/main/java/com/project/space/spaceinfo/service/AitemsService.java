@@ -126,11 +126,13 @@ public class AitemsService {
 		log.info("arr==>"+arr);
 		
 		List<Space_InfoVO> PRArr = new ArrayList<>(); //추천된 공간리스트
-		//int j = 0;
+		int j = 0;
 		for(Object i : arr) {
-			PRArr.add(sMapper.selectBySnum(Integer.parseInt((String)i)));
-			//log.info(PRArr.get(j));
-			//j++;
+			if(sMapper.selectBySnum(Integer.parseInt((String)i))!=null) {
+				PRArr.add(sMapper.selectBySnum(Integer.parseInt((String)i)));
+				//log.info(PRArr.get(j));
+				//j++;
+			}
 			//sMapper.selectBySnum(Integer.parseInt((String)i));
 		}
 		PRArr = PRArr.stream().distinct().collect(Collectors.toList()); //steram.distinct을 이용해 List의 중복값을 중복제거

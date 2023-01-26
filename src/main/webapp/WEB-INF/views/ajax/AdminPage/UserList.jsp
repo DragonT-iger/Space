@@ -185,7 +185,7 @@
 		$('#'+sel+'Setbtn').html(str);
 	}
 	const userHistoryCheck = function(userid){
-		alert("userid===>"+userid);
+		//alert("userid===>"+userid);
 		let str ="";
 		$.ajax({
 			type:'get',
