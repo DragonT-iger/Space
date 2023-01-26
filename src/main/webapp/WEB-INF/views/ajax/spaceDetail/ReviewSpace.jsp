@@ -77,7 +77,7 @@
 						<td colspan="3">
 						<c:if test="${sdvo.userid eq loginUser.userid}">
 							<c:if test="${review.rgorder<1}">
-								<span class="leftr" onclick="review_rewrite()">답변 작성하기</span>
+								<span class="leftr" onclick="review_rewrite('${review.review_num}')">답변 작성하기</span>
 							</c:if>
 						</c:if>
 						</td>
@@ -86,25 +86,33 @@
 					<tr>
 						<td colspan="2">${review.userid}</td>
 						<td colspan="2">
-							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							<c:if test="${sdvo.userid ne loginUser.userid}">
+								<div class="star-ratings">
+									<div class="star-ratings-fill space-x-2 text-lg" style="width:${w}%">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div>
+									<div class="star-ratings-base space-x-2 text-lg">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div>
 								</div>
-								<div class="star-ratings-base space-x-2 text-lg">
-									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							</c:if>
+							<c:if test="${sdvo.userid eq loginUser.userid}">
+								<div>
+									답변완료
 								</div>
-							</div>
+							</c:if>
 						</td>
 						<td colspan="2" class="sizes">${review.review_date}</td>
 					</tr>
 					
+					
 					<c:if test="${review.rimage1 ne null or review.rimage2 ne null}">
 					<tr>
 						<td rowspan="5" colspan="3">
-							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage1})"></img>
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage1}"></img>
 						</td>
 						<td rowspan="5" colspan="3">
-							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage2})"></img>
+							<img class="review_img" src="../resources/SpaceInfoImg/${review.rimage2}"></img>
 						</td>
 					</tr>
 					</c:if>
@@ -152,16 +160,17 @@
 </div>
 
 <script>
-const review_rewrite=function(qnum){
+const review_rewrite=function(rnum){
+	//alert(rnum);
 	$.ajax({
 		type:'post',
-		url:'/space/spaceDetail/qnarewrite',
-		data:qnum,
+		url:'/space/spaceDetail/reviewrewrite',
+		data:rnum,
 		cache:false,
 		success:function(res){
 			$('#nav3_re').html("");
 			$('#nav3_re').html(res);
-			$('#qnum').val(qnum);
+			$('#renum').val(rnum);
 		},
 		error:function(err){
 			alert('err: '+err.status);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.space.domain.PagingVO;
+import com.project.space.domain.Qna_BoardVO;
 import com.project.space.domain.ReviewVO;
 import com.project.space.review.mapper.ReviewMapper;
 
@@ -57,7 +58,22 @@ public class ReviewServiceImp implements ReviewService {
 
 	@Override
 	public int rewriteReview(ReviewVO rvo) {
-		return 0;
+		ReviewVO parent=this.rselectGLG(rvo.getReview_num());
+		int n=this.rupdateGorder(parent);
+		rvo.setRgroup(parent.getRgroup());
+		rvo.setRlevel(parent.getRlevel());
+		rvo.setRgorder(parent.getRgorder()+1);
+		return this.reviewMapper.rewriteReview(rvo);
+	}
+	
+	@Override
+	public int rupdateGorder(ReviewVO parent) {
+		return this.reviewMapper.rupdateGorder(parent);
+	}
+
+	@Override
+	public ReviewVO rselectGLG(int rnum) {
+		return this.reviewMapper.rselectGLG(rnum);
 	}
 
 	@Override
@@ -68,6 +84,11 @@ public class ReviewServiceImp implements ReviewService {
 	@Override
 	public List<ReviewVO> getReviewUserid(String userid) {
 		return this.reviewMapper.getReviewUserid(userid);
+	}
+
+	@Override
+	public ReviewVO checkTitle(int qnum) {
+		return this.reviewMapper.checkTitle(qnum);
 	}
 
 }

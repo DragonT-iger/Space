@@ -23,7 +23,7 @@ public class ReviewVO {
 	private int rgroup;  //글 그룹
 	private int rlevel; //답변레벨
 	private int rgorder;  //같은 그룹내의 순서
-	
+	private String sname;
 //	private String old_rimage1;  //이전에 업로드했던 파일(물리적파일명)
 //	private String old_rimage2;  //이전에 업로드했던 파일(물리적파일명)
 }

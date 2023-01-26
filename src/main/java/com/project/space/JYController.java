@@ -248,7 +248,7 @@ public class JYController {
 		int ded[]=new int[TimeT.size()];
 		
 		if(TimeT!=null && TimeT.size()!=0) {
-			for(int i=0;i<TimeT.size();i++) {
+			for(int i=0;i<TimeT.size();i++) { 
 				dst[i]=Integer.parseInt(TimeT.get(i).getRtstart().substring(0,2));
 				log.info("db 시작시간 세팅=="+dst);
 				ded[i]=Integer.parseInt(TimeT.get(i).getRtend().substring(0,2));
@@ -271,36 +271,43 @@ public class JYController {
 							}
 							str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
 							loc=(res>0)? "/space/user/MyReservation":"/space/user/pointAdd";
+							m.addAttribute("message", str);
+							m.addAttribute("loc", loc);
+							return "msg";
 							
 						}else {
 							str="이미 예약된 시간입니다";
 							loc="javascript:history.back()";
+							m.addAttribute("message", str);
+							m.addAttribute("loc", loc);
+							return "msg";
 						} //if
 					} //while
 				}else {
 					str="이미 예약된 시간입니다";
 					loc="javascript:history.back()";
+					m.addAttribute("message", str);
+					m.addAttribute("loc", loc);
+					return "msg";
 				} //if
 			} //for
-		}else {
-			int res=this.reservationService.insertBooking(rtvo);  //예약 인서트
-			
-			if(res>0) {
-				int uur=this.reservationService.updateUserRes(rtvo); //예약자 포인트 차감
-				if(uur>0) {
-					PointVO check=new PointVO();
-					Space_InfoVO svo=this.spaceinfoService.selectBySnum(rtvo.getSnum());
-			        check.setUserid(svo.getUserid());
-			        check.setPlusPoint(rtvo.getTotalprice());
-			        int usp=this.reservationService.PlusSpacePoint(check); //호스트 포인트 +
-				}
-				SmsResponseDTO response = smsService.sendSms(messageDto);  //문자 전송
+		}
+		int res=this.reservationService.insertBooking(rtvo);  //예약 인서트
+		
+		if(res>0) {
+			int uur=this.reservationService.updateUserRes(rtvo); //예약자 포인트 차감
+			if(uur>0) {
+				PointVO check=new PointVO();
+				Space_InfoVO svo=this.spaceinfoService.selectBySnum(rtvo.getSnum());
+		        check.setUserid(svo.getUserid());
+		        check.setPlusPoint(rtvo.getTotalprice());
+		        int usp=this.reservationService.PlusSpacePoint(check); //호스트 포인트 +
 			}
-			
-			str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
-			loc=(res>0)? "/space/user/MyReservation":"/space/user/pointAdd";
+			SmsResponseDTO response = smsService.sendSms(messageDto);  //문자 전송
 		}
 		
+		str=(res>0)? "예약이 완료되었습니다":"잔여 포인트를 확인해 주세요";
+		loc=(res>0)? "/space/user/MyReservation":"/space/user/pointAdd";
 		m.addAttribute("message", str);
 		m.addAttribute("loc", loc);
 		return "msg";

@@ -124,8 +124,7 @@
 					</div>
 				</c:if>
 				
-				<div class="review space-name"><a href="/space/spaceDetail?snum=${ra.snum}">${ra.snum}</a></div>
-				<div class="review review-title">예약날짜</div>
+				<div class="review space-name"><a href="/space/spaceDetail?snum=${ra.snum}">${ra.sname}</a></div>
 			</div>
 			
 			<div class="review-content-wrap">
@@ -135,12 +134,6 @@
 				</p>
 			</div>
 
-			<div class="review-reple-wrap">
-				<p class="review-host">댓글</p>
-				<p class="review-reple">
-					${ra.rcontent}
-				</p>
-			</div>
 		</div>
 		</c:forEach>
 		</c:if>

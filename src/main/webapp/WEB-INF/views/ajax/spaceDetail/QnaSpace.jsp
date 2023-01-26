@@ -141,7 +141,7 @@ const qna_write=function(){
 }
 
 const qna_rewrite=function(qnum){
-	alert(qnum);
+	//alert(qnum);
 	$.ajax({
 		type:'post',
 		url:'/space/spaceDetail/qnarewrite',
