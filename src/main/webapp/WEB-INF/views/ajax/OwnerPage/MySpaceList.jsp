@@ -140,7 +140,6 @@
 							${spaceinfo.srule}
 	        			</p>
         			</div>
-        			<div class="space1 myspace myspace-star">O O O O O (평균별점)</div>
         			<button class="class_btn btn btn-primary" onclick="javascript:location.href='MySpaceInsert'">수정</button>
         		</div>
 			

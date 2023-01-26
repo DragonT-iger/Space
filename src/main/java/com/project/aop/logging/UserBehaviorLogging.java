@@ -113,7 +113,7 @@ public class UserBehaviorLogging {
 		try {
 			parameter.put("date", new Date()); //작동시간
 			parameter.put("userid", userid); // 세션에저장된 userid 회원이아닐때는 비회원으로 출력
-			parameter.put("controller", contName); // 실행된 메서드 인터페이스명
+			parameter.put("servicename", contName); // 실행된 인터페이스 파일명
 			parameter.put("methodname", methodName); // 메서드명
 			parameter.put("param", param); //파라미터
 			parameter.put("connectpath", request.getRequestURI()); //이동한 경로
