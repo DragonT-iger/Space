@@ -28,5 +28,7 @@ public interface AdminService {
 	
 	public List<AdminSpaceInquiryVO> todayPopSpace(String date);
 	
-	public List<AdminGraphDataVO> DatabyDate(String date);
+	public List<AdminGraphDataVO> DatabyDate(String data);
+	
+	public List<AdminGraphDataVO> DataByHashTag();
 }

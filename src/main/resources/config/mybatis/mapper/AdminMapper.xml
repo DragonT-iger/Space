@@ -266,14 +266,27 @@ where sdate like '%'||#{value}||'%'
 </select>
 
 <select id="DatabyDate" parameterType="string" resultType="GraphData">
-	select m.searchdate as msearchdate,r.searchdate as rsearchdate, m.joincount , r.rescount from (
+	<if test="data=='joincount'">
+		select TO_CHAR(mdate, 'yyyy/mm/dd') as msearchdate , count(*) as rescount from mem_info group by TO_CHAR(mdate, 'yyyy/mm/dd') order by msearchdate asc
+	</if>
+	<if test="data=='rescount'">
+		select TO_CHAR(rdate, 'yyyy/mm/dd') as rsearchdate , count(*) as rescount from reservation group by TO_CHAR(rdate, 'yyyy/mm/dd') order by rsearchdate asc
+	</if>
+	<!-- select m.searchdate as msearchdate,r.searchdate as rsearchdate, m.joincount , r.rescount from (
 		(select TO_CHAR(mdate, 'yyyy/mm/dd') as searchdate , count(*) as joincount from mem_info group by TO_CHAR(mdate, 'yyyy/mm/dd')) m 
 		full outer join (
 		select TO_CHAR(rdate, 'yyyy/mm/dd') as searchdate , count(*) as rescount from reservation group by TO_CHAR(rdate, 'yyyy/mm/dd')
 		) 
 		r on m.searchdate = r.searchdate)
         group by r.searchdate , m.searchdate, m.joincount, r.rescount
-		order by m.searchdate asc
+		order by m.searchdate asc -->
+</select>
+
+<select id="DataByHashTag" parameterType="string" resultType="GraphData">
+	select count(*) as rescount,h_code,h_name from (
+		select r.rtnum,sh.h_code,sh.h_name from reservation r left outer join 
+		( select s.snum,h.h_code,h.h_name from space_info s left outer join (select * from hashtag) h on s.h_code=h.h_code)
+		sh on r.snum=sh.snum ) group by h_code,h_name
 </select>
 
  <!-- 테스트코드용 매퍼 -->

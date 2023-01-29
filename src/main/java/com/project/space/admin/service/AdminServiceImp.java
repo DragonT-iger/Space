@@ -88,8 +88,14 @@ public class AdminServiceImp implements AdminService{
 	}
 
 	@Override
-	public List<AdminGraphDataVO> DatabyDate(String date) {
+	public List<AdminGraphDataVO> DatabyDate(String data) {
 		
-		return adminMapper.DatabyDate(date);
+		return adminMapper.DatabyDate(data);
+	}
+	
+	@Override
+	public List<AdminGraphDataVO> DataByHashTag(){
+		
+		return adminMapper.DataByHashTag();
 	}
 }

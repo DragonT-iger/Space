@@ -34,6 +34,8 @@
 <div class="container mt-3" id="admin-home">
 	<div class="article graph text-center">
 		<h2 class="">날짜별 예약 횟수 및 가입자 수</h2>
+		<button onclick="databydate('rescount')">날짜별예약횟수</button>
+		<button onclick="databydate('joincount')">날짜별가입자수</button>
 		<div id="graphchart">
 		</div>
 	</div>
@@ -52,15 +54,19 @@
 		<table class="table table-table-bordered" id="todaySpaceInsert">
 		</table>
 	</div>
-	<div class="article">
-		<h2></h2>
+	<div class="article graph text-center">
+		<h2>해시태그별 예약횟수</h2>
+		<div id="DataHashTagChart">
+		</div>
 	</div>
+	
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['line']});
+<script type="text/javascript" src="/space/js_datachart/googleChart.js"></script>
+<script>
+      google.charts.load('current', {'packages':['line','corechart','bar']});
       //google.charts.setOnLoadCallback(drawChart);
-    window.onload = function(){
+    	window.onload = function(){
     	let tjm=`<tr>
 			  			<th>이름</th>
 			  			<th>나이</th>
@@ -129,7 +135,7 @@
 		
 		$.ajax({
 			tpye:'get',
-			url:'databydate',
+			url:'databydate?data=joincount',
 			dataType:'json',
 			cache:false,
 			async : false,
@@ -140,61 +146,65 @@
 					/* [new Date(2023, 0, 1),  2, 5] < Sample array data type */
 					//alert(res.year+"/"+res.month);
 					let date = new Date(res.year , res.month-1 , res.day);
-					console.log("month==>"+(res.month-1));
- 					arr.push([date , res.joincount, res.rescount]);
+					//console.log("month==>"+(res.month-1));
+ 					arr.push([date , res.rescount]);
 					//arr.push([date ,1, 1]);
 					//alert("배열에 닮을값 확인==>"+res.year+","+res.month+","+res.day+","+res.joincount+","+res.rescount);
 				});
 				//console.log("test log ==>"+arr[0]);
-				google.charts.setOnLoadCallback(drawChart(arr));
+				google.charts.setOnLoadCallback(drawLineChart(arr,"joincount"));
 			},
 			error: function(err){
 				alert("err"+err.status);
 			}
 		});
 		
-		function drawChart(res) {
-			  console.log(res);
-		      var data = new google.visualization.DataTable();
-		      data.addColumn('date');
-		      data.addColumn('number', '가입자 수');
-		      data.addColumn('number', '예약 횟수');
-			  //let rows = res;
-			  console.log(res);
-		      /* data.addRows([
-		        [new Date(2023, 0, 1),  2, 5],
-		        [new Date(2023, 0, 2),  1, 6],
-		        [new Date(2023, 0, 3),  4, 7],
-		        [new Date(2023, 0, 4),  6, 8],
-		        [new Date(2023, 0, 5),  3, 6],
-		        [new Date(2023, 0, 6),  8, 3],
-		        [new Date(2023, 0, 7),  7, 2],
-		        [new Date(2023, 0, 8),  1, 9],
-		        [new Date(2023, 0, 9),  6, 4],
-		        [new Date(2023, 0, 10), 2, 3],
-		        [new Date(2023, 0, 11), 5, 7],
-		        [new Date(2023, 0, 12), 6, 8],
-		        [new Date(2023, 0, 13), 4, 6],
-		        [new Date(2023, 0, 14), 4, 2]
-		      ]);  */
-		      data.addRows(res);
-
-		      var options = {
-		        height: 400,
-		        axes: {
-		          x: {
-		            0: {side: 'foot'}
-		          }
-		        }
-		      };
-
-		      var chart = new google.charts.Line(document.getElementById('graphchart'));
-
-		      chart.draw(data, google.charts.Line.convertOptions(options));
-		    }
-		
+		$.ajax({
+			tpye:'get',
+			url:'databyHashTag',
+			dataType:'json',
+			cache:false,
+			success:function(res){
+				let arr = [];
+				$.each(res,function(i,res){
+					arr.push([res.hashTagName , res.rescount]);
+					console.log(res.hashTagName + "/" + res.rescount);
+				});
+				google.charts.setOnLoadCallback(drawColumnsChart(arr));
+			},
+			error: function(err){
+				alert("err"+err.status);
+			}
+		});
 	}
-    
+    function databydate(data){
+    	
+    	$.ajax({
+			tpye:'get',
+			url:'databydate?data='+data,
+			dataType:'json',
+			cache:false,
+			async : false,
+			success: function(res){
+				//alert(JSON.stringify(res));
+				let arr = [];
+				$.each(res,function(i,res){
+					/* [new Date(2023, 0, 1),  2, 5] < Sample array data type */
+					//alert(res.year+"/"+res.month);
+					let date = new Date(res.year , res.month-1 , res.day);
+					//console.log("month==>"+(res.month-1));
+ 					arr.push([date ,res.rescount]);
+					//arr.push([date ,1, 1]);
+					//alert("배열에 닮을값 확인==>"+res.year+","+res.month+","+res.day+","+res.joincount+","+res.rescount);
+				});
+				//console.log("test log ==>"+arr[0]);
+				google.charts.setOnLoadCallback(drawLineChart(arr,data));
+			},
+			error: function(err){
+				alert("err"+err.status);
+			}
+		});
+    }
 </script>
 <%@ include file="/WEB-INF/views/ajax/AdminPage/AdminPageFoot.jsp" %>
 <%-- <c:import url="/AdminPageFoot" charEncoding="utf-8"/> --%>

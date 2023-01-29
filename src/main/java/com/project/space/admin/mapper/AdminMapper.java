@@ -34,7 +34,9 @@ public interface AdminMapper {
 	
 	public List<AdminSpaceInquiryVO> todayPopSpace(String date);
 	
-	public List<AdminGraphDataVO> DatabyDate(String date);
+	public List<AdminGraphDataVO> DatabyDate(String data);
+	
+	public List<AdminGraphDataVO> DataByHashTag();
 	
 	//test용 매퍼
 	int createUserTest(Mem_InfoVO memvo); //member 생성 테스트용

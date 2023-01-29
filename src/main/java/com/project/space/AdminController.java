@@ -80,9 +80,9 @@ public class AdminController {
 	//날짜별 그래프에 필요한 데이터 받아오는 컨트롤러
 	@GetMapping(value="/databydate" , produces = "application/json")
 	@ResponseBody
-	public List<Object> databydate(){
+	public List<Object> databydate(@RequestParam String data){
 		List<Object> result = new ArrayList<>();
-		List<AdminGraphDataVO> map = adminservice.DatabyDate("");
+		List<AdminGraphDataVO> map = adminservice.DatabyDate(data);
 		log.info("DatabyDate==>"+map);
 		
 		for(int i =0;i<map.size();i++) {
@@ -99,20 +99,39 @@ public class AdminController {
 		elements.put("month", newDate[1]);
 		elements.put("day", newDate[2]);
 		
+		/*
 		String joincount = map.get(i).getJoincount();
 		elements.put("joincount", Integer.parseInt(joincount));
-		
+		*/
 		String rescount = map.get(i).getRescount();
 		elements.put("rescount", Integer.parseInt(rescount));
-
 		
+	
 		result.add(elements);
 		log.info("list add!!");
 		}
 		log.info(result);
 		return result;
 	}
-	
+	//해시태그별 예약횟수 조회
+	@GetMapping(value = "databyHashTag" , produces = "application/json")
+	@ResponseBody
+	public List<Object> databyHashTag(){
+		List<Object> result = new ArrayList<>();
+		List<AdminGraphDataVO> map = adminservice.DataByHashTag();
+		
+		for(int i = 0 ; i<map.size(); i++) {
+			Map<String,Object> elements = new HashMap<>();
+			elements.put("hashTagName", map.get(i).getH_name());
+			elements.put("rescount", Integer.parseInt(map.get(i).getRescount()));
+			
+			result.add(elements);
+		}
+		log.info("result==>"+result);
+		log.info("hashname==>"+result.get(0));
+		log.info("rescount==>"+result.get(1));
+		return result;
+	}
 	
 	//===================유저 조회========================
 	@GetMapping("/userlistform")

@@ -361,8 +361,7 @@ public class JYController {
 		String year = date.substring(0,4);
 		String month = date.substring(4,6);
 		String day = date.substring(6,8);
-		//messageDto.setContent(rtvo.getUserid()+"님 "+year+"년 "+month+"월 "+day+"일 "+"날 예약이 취소 되었습니다");
-		messageDto.setContent(rtvo.getUserid()+"님 2023년 01월 27일 "+"날 예약이 취소 되었습니다");
+		messageDto.setContent(rtvo.getUserid()+"님 "+year+"년 "+month+"월 "+day+"일 "+"날 예약이 취소 되었습니다");
 		int res=this.reservationService.deleteBooking(fbvo.getRtnum()); //예약취소 상태 변경
 		if(res>0) {
 			int fb=this.reservationService.insertFeedback(fbvo); //취소사유 피드백
